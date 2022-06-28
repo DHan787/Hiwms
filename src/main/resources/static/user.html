@@ -8,7 +8,7 @@
 <div id="app">
     the test
     <ul>
-        <li v-for="info in liseData">
+        <li v-for="info in info">
             {{info.userId}}
             {{info.userName}}
             {{info.userPassword}}
@@ -17,11 +17,13 @@
     </ul>
 
 </div>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/axios.min.js"></script>
 <script>
     new Vue({
         el: "#app",
         data:{
-            listData:[],
+            info:[],
             formData:{}
         },
         created(){
@@ -32,7 +34,7 @@
             //查询所有
             getAll(){
                 axios.get("http://localhost:8080/users").then(res=>{
-                    this.listData=res.data;
+                    this.info=res.data;
 
                 });
             },
