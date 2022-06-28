@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users-test</title>
+</head>
+<body>
+<div id="app">
+    the test
+    <ul>
+        <li v-for="info in liseData">
+            {{info.userId}}
+            {{info.userName}}
+            {{info.userPassword}}
+            {{info.userRole}}
+        </li>
+    </ul>
+
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+            listData:[],
+            formData:{}
+        },
+        created(){
+            this.getAll();
+        },
+
+        methods:{
+            //查询所有
+            getAll(){
+                axios.get("http://localhost:8080/users").then(res=>{
+                    this.listData=res.data;
+
+                });
+            },
+
+            postsave(){
+
+            }
+        }
+    })
+</script>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/axios.min.js"></script>
+</body>
+</html>
