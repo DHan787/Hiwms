@@ -7,5 +7,5 @@ CREATE TABLE `goods`  (
   PRIMARY KEY (`good_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-INSERT INTO `users` VALUES (2, '水杯', '33*20', 20);
+INSERT INTO `goods` VALUES (2, '水杯','日用', '33*20', 20);
 
