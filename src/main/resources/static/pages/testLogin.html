@@ -18,32 +18,32 @@
     </ul>
     <button type="submit" class="btn btn-default" onclick="login()">登录</button>
     <script>
-        function login(){
-            var username=$("#username").val();  //获取id 密码 进行参数传递
-            var password=$("#password").val();
-            if(password!==''){
-                if(id!==''){
-                    //一下是基本格式
+        function login() {
+            var username = $("#username").val();  //获取id 密码 进行参数传递
+            var password = $("#password").val();
+            if (password !== '') {
+                if (username !== '') {
                     $.ajax({
                         type: 'post',        //请求类型
-                        url: '/root/login',     //要转到的url
-                        data:{"username":id,"password":password},  //传递的参数
+                        url: 'testLogin.html',     //要转到的url
+                        data: {"username": username, "password": password},  //传递的参数
                         success: function (data) {   //返回的data 数据
-                            if(data.flag){
-                                window.location.href=("/manager/managers?state=0")  //这个是成功后的跳转页面
-                            }else {
-                                showMessage(data.message)
+                            if (data) {
+                                showMessage("success")  //这个是成功后的跳转页面
+                            } else {
+                                showMessage("error")
                             }
                         }
                     });
-                }else {
+                } else {
                     showMessage("id不能为空")
                 }
-            }else{
+            } else {
                 showMessage("密码不能为空");
             }
         }
-        function showMessage(message){
+
+        function showMessage(message) {
             $(".error").text(message);   //这个是设置提示信息
         }
     </script>

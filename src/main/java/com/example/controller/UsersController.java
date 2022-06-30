@@ -25,16 +25,21 @@ public class UsersController {
 
     @GetMapping("/{id}")
     public Users getById(@PathVariable int id) {
+        //System.out.println("getbyid");
         return usersService.getById(id);
-
     }
 
-    private boolean loginVerify(String name, String password) {
-        return true;
-    }
-
-    @RequestMapping("/loginTest")
-    public boolean userLogin(@RequestBody Users users) {
-        return loginVerify(users.getUserName(), users.getUserPassword());
+    @PostMapping
+    private boolean login(@RequestBody Users users) {
+        System.out.println(users.getUserName() + users.getUserPassword());
+        List<Users> usersList = usersService.list();
+        System.out.println("database:" + usersList);
+        for (Users value : usersList) {
+            System.out.println("name：" + value.getUserName());
+            if (value.getUserName().equals(users.getUserName()))
+                if (value.getUserPassword().equals(users.getUserPassword()))
+                    return true;
+        }
+        return false;
     }
 }

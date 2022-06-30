@@ -15,7 +15,18 @@
             {{info.userRole}}
         </li>
     </ul>
-
+    <tr>
+        <td>
+            <table>用户名：</table>
+            <input type="text" v-model="formData.userName" >
+        </td>
+        <td>
+            <table>密码：</table>
+            <input type="password" v-model="formData.userPassword">
+        </td>
+        <td>
+            <input type="button" value="登录" v-on:click="submitForm">
+        </td>
 </div>
 <script src="../assets/js/vue.js"></script>
 <script src="../assets/js/axios.min.js"></script>
@@ -39,8 +50,13 @@
                 });
             },
 
-            post(){
-
+            submitForm(){
+                axios.post("http://localhost:8080/users",this.formData).then(rel=>{
+                    if(rel.data){
+                        alert("success")
+                    }else{}
+                        alert("error")
+                })
             }
         }
     })
