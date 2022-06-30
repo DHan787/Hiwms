@@ -76,21 +76,21 @@
 	                    
 	                    <el-card>
 	                        <el-table :data="tableData" stripe style="width: 100%; " >
-	                            <el-table-column prop="number" label="商品编号" width="180">
+	                            <el-table-column prop="goodId" label="商品编号" width="180">
 								</el-table-column>
-	                            <el-table-column prop="name" label="货物名称" width="180">
+	                            <el-table-column prop="goodName" label="货物名称" width="180">
 	                            </el-table-column>
-	                            <el-table-column prop="category" label="类别">
+	                            <el-table-column prop="goodType" label="类别">
 	                            </el-table-column>
-	                            <el-table-column prop="size" label="尺寸">
+	                            <el-table-column prop="goodSize" label="尺寸">
 	                            </el-table-column>
-								<el-table-column prop="value" label="价格">
+								<el-table-column prop="goodValue" label="价格">
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
-	                                <template slot-scope="scope">
+	                                <template slot-scope="scope" v-for="goods in tableData">
 										
 	                                    <el-button type="primary" plain>编辑</el-button>
-	                                    <el-button type="danger" plain>删除</el-button>
+	                                    <el-button type="danger" plain @click="delGoods(goods.goodId)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -112,7 +112,7 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-	                tableData: []
+					tableData: []
 	            }
 	        },
 
@@ -123,10 +123,14 @@
 	        methods: {
 				getAll(){
 					axios.get("http://localhost:8080/goods").then(res=>{
-						console.log("123");
-						console.log(res);
 						this.tableData = res.data ;
-					})
+					});
+				},
+
+				delGoods(goodId) {
+					axios.delete("http://localhost:8080/goods/" + goodId).then(res=>{
+						this.getAll();
+					});
 				}
 	        }
 	    })
