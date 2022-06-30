@@ -8,27 +8,46 @@
 
 </head>
 <body>
-<div id="app">
+<div id="app" class="outerDiv">
     <div class="login">
-        <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="80px">
-            <el-form-item label="用户名" prop="userName">
-
-                <el-input v-model="loginForm.userName" type="text" placeholder="请输入用户名"></el-input>
-
-            </el-form-item>
-            <el-form-item label="密码" prop="userPassword">
-
-                <el-input v-model="loginForm.userPassword" type="password" placeholder="请输入密码"></el-input>
-
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" v-on:click="login">提交</el-button>
-                <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
-                <!-- <el-button type="primary" @click="login">测试</el-button>
-                 -->
-            </el-form-item>
-        </el-form>
+        <div class="loginBody" align="center">
+            <h4>登录</h4>
+            <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="0px">
+                <el-form-item label="" prop="usserName" style="margin-top:10px;">
+                    <el-row>
+                        <el-col :span='2'>
+                            <span class="el-icon-s-custom"></span>
+                        </el-col>
+                        <el-col :span='20'>
+                            <el-input class="inps" placeholder='账号' v-model="loginForm.userName">
+                            </el-input>
+                        </el-col>
+                    </el-row>
+                </el-form-item>
+                <el-form-item label="" prop="userPassword">
+                    <el-row>
+                        <el-col :span='2'>
+                            <span class="el-icon-lock"></span>
+                        </el-col>
+                        <el-col :span='20'>
+                            <el-input class="inps" type="password" placeholder='密码'
+                                      v-model="loginForm.userPassword"></el-input>
+                        </el-col>
+                    </el-row>
+                </el-form-item>
+                <el-form-item style="margin-top:55px;">
+                    <el-button type="primary" round class="submitBtn" v-on:click="login">登录
+                    </el-button>
+                </el-form-item>
+                <div class="unlogin" class="submitBtn">
+                    <router-link :to="{ path: '/forgetpwd'}">
+                        忘记密码?
+                    </router-link>
+                </div>
+            </el-form>
+        </div>
     </div>
+</div>
 </div>
 
 </body>
@@ -43,38 +62,32 @@
         el: '#app',
         data: {
             info: [],
-            loginForm: {},
+            loginForm: {userName:'',
+                userPassword: ''},
         },
         data(){
-            var validateUsername = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入用户名'));
-                } else {
-                    callback();
-                }
-            };
-
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                } else {
-                    callback();
-                }
-            };
-
             return {
                 loginForm: {},
                 loginRules: {
-                    'username': [{
-                        'validator': validateUsername,
-                        'trigger': 'blur'
-                    }],
-                    'password': [{
-                        'validator': validatePass,
-                        'trigger': 'blur'
-                    }]
+                    userName: [{
+                        required: true,
+                        message: '请输入账号',
+                        trigger: 'blur'
 
-                },
+                    },
+                        {
+                            min: 3,
+                            max: 15,
+                            message: '请输入3-15位账号'
+                        }
+                    ],
+                    userPassword: [{
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+
+                    }]
+                }
             };
         },
 
@@ -90,14 +103,22 @@
                 });
             },
             login() {
-                axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
-                    if (rel.data) {
-                        alert("success")
-                        window.location.href = ("admin.html")
-                    } else {
-                        alert("error")
+                if(this.loginForm.userName!==''){
+                    if(this.loginForm.userPassword!==''){
+                        axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
+                            if (rel.data) {
+                                alert("success")
+                                window.location.href = ("admin.html")
+                            } else {
+                                alert("用户名或密码错误")
+                            }
+                        })
+                    }else{
+                        alert("密码为空！")
                     }
-                })
+                }else{
+                    alert("用户名为空！")
+                }
             },
         }
     })
