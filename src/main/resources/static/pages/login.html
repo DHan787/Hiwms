@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../assets/css/login.css" />
+    <link rel="stylesheet" href="../assets/css/element-ui/index.css" />
+
+</head>
+<body>
+<div id="app">
+    <div class="login">
+        <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="80px">
+            <el-form-item label="用户名" prop="name">
+
+                <el-input v-model="loginForm.name" type="text" placeholder="请输入用户名"></el-input>
+
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+
+                <el-input v-model="loginForm.password" type="password" placeholder="请输入密码"></el-input>
+
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+                <!-- <el-button type="primary" @click="login">测试</el-button>
+                 -->
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+
+</body>
+
+
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/css/element-ui/index.js"></script>
+<script src="../assets/js/vue-resource.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+
+        data() {
+            var validateUsername = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入用户名'));
+                } else {
+                    callback();
+                }
+            };
+
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    callback();
+                }
+            };
+
+            return {
+                loginForm: {
+                    name: '',
+                    password: ''
+                },
+                loginRules: {
+                    'username': [{
+                        'validator': validateUsername,
+                        'trigger': 'blur'
+                    }],
+                    'password': [{
+                        'validator': validatePass,
+                        'trigger': 'blur'
+                    }]
+
+                },
+            };
+        },
+
+        created() {
+
+        },
+
+        methods: {
+            submitForm(formName) {
+                this.$refs.loginForm.validate((valid) => {
+                    if (valid) {
+                        this.$http.get('static/a.json').then((res) => {
+                            var list = eval("(" + res.bodyText + ")");
+                            console.log(list);
+                            console.log(this.loginForm.name);
+                            console.log(this.loginForm.password);
+                            if (list[1].userName == this.loginForm.name) {
+                                if (list[2].passWord == this.loginForm.password) {
+                                    alert('账号密码正确');
+                                }else{
+                                    alert('密码错误');
+                                }
+                            }else{
+                                alert('账号错误');
+                            }
+                        })
+                    } else {
+                        alert('账号密码有空');
+                    }
+                })
+            }
+        }
+    })
+</script>
+</html>
