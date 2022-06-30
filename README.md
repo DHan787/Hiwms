@@ -7,4 +7,5 @@
 ## testzls
 ## testymm
 ## 6.30
-* ymm 用户管理的删除 17:54
+* 17:54 ymm 用户管理的删除 
+* 18:17 ymm hxy goods的问题修正 没有import lombok.Data;
