@@ -13,17 +13,28 @@ import java.util.List;
 public class UsersController {
     @Autowired//
     private UsersService usersService;
+
     @GetMapping//访问方式
-    public List<Users> getAll(){
+    public List<Users> getAll() {
         return usersService.list();
     }
-    public boolean update(@RequestBody Users users){
+
+    public boolean update(@RequestBody Users users) {
         return usersService.updateById(users);
     }
+
     @GetMapping("/{id}")
-    public Users getById(@PathVariable int id){
+    public Users getById(@PathVariable int id) {
         return usersService.getById(id);
 
     }
 
+    private boolean loginVerify(String name, String password) {
+        return true;
+    }
+
+    @RequestMapping("/loginTest")
+    public boolean userLogin(@RequestBody Users users) {
+        return loginVerify(users.getUserName(), users.getUserPassword());
+    }
 }
