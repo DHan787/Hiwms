@@ -1,128 +1,151 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="../assets/css/element-ui/index.css">
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
-        <el-header>
-            <div class="logo">汇安智能仓储平台</div>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../assets/css/admin.css">
+		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-header>
+					<div class="logo">汇安智能仓储平台</div>
 
-        </el-header>
+				</el-header>
 
-        <el-container>
-            <!--侧边栏-->
-            <el-aside width="200px">
-                <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;" background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
-                    <el-menu-item index="1">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title">常用</span>
-                    </el-menu-item>
+				<el-container>
+					<!--侧边栏-->
+					<el-aside width="200px">
+						<el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
+							background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
+							<el-menu-item index="1">
+								<i class="el-icon-menu"></i>
+								<span slot="title">常用</span>
+							</el-menu-item>
 
-                    <el-menu-item index="2">
-                        <i class="el-icon-s-help"></i>
-                        <span slot="title">控制台</span>
-                    </el-menu-item>
-                    <el-submenu index="3">
-                        <template slot="title">
-                            <i class="el-icon-view"></i>
-                            <span>业务流</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="3-1">
-                                <i class="el-icon-ice-cream-round"></i>
-                                <span slot="title">用户管理</span>
-                            </el-menu-item>
-                            <el-menu-item index="3-2">
-                                <i class="el-icon-location"></i>
-                                <span slot="title">员工管理</span>
-                            </el-menu-item>
-                            <el-menu-item index="3-3">
-                                <i class="el-icon-trophy"></i>
-                                <span slot="title">仓库管理</span>
-                            </el-menu-item>
-                            <el-menu-item index="3-4">
-                                <i class="el-icon-mouse" ></i>
-                                <span slot="title" @click="goGoods">商品管理</span>
-                            </el-menu-item>
+							<el-menu-item index="2">
+								<i class="el-icon-s-help"></i>
+								<span slot="title">控制台</span>
+							</el-menu-item>
+							<el-submenu index="3">
+								<template slot="title">
+									<i class="el-icon-view"></i>
+									<span>业务流</span>
+								</template>
+								<el-menu-item-group>
+									<el-menu-item index="3-1">
+										<i class="el-icon-ice-cream-round"></i>
+										<span slot="title">用户管理</span>
+									</el-menu-item>
+									<el-menu-item index="3-2">
+										<i class="el-icon-location"></i>
+										<span slot="title">员工管理</span>
+									</el-menu-item>
+									<el-menu-item index="3-3">
+										<i class="el-icon-trophy"></i>
+										<span slot="title">仓库管理</span>
+									</el-menu-item>
+									<el-menu-item index="3-4">
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="goGoods()">商品管理</span>
+									</el-menu-item>
 
-                        </el-menu-item-group>
-                    </el-submenu>
+								</el-menu-item-group>
+							</el-submenu>
 
-                    <el-menu-item index="5">
-                        <i class="el-icon-setting"></i>
-                        <span slot="title">系统设置</span>
-                    </el-menu-item>
-                </el-menu>
-            </el-aside>
-            <!-- 主体 -->
-            <el-main>
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item>首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>业务流</el-breadcrumb-item>
-                    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+							<el-menu-item index="5">
+								<i class="el-icon-setting"></i>
+								<span slot="title">系统设置</span>
+							</el-menu-item>
+						</el-menu>
+					</el-aside>
+					<!-- 主体 -->
+					<el-main>
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item>首页</el-breadcrumb-item>
+							<el-breadcrumb-item>业务流</el-breadcrumb-item>
+							<el-breadcrumb-item>用户管理</el-breadcrumb-item>
 
-                </el-breadcrumb>
-                <el-card class="box-card" style="margin-bottom: 12px;">
-                    <div class="card-container">
-                        <el-image :src="src" class="ava">
-                            <div slot="placeholder" class="image-slot">
-                                加载中<span class="dot">...</span>
-                            </div>
-                        </el-image>
-                        <div class="admin-info">
-                            <h3>早安，管理员，开始您一天的工作吧！</h3>
-                            <div class="weather">
-                                <i class="el-icon-heavy-rain"></i>
-                                <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
-                            </div>
-                        </div>
-                    </div>
-                </el-card>
-                <el-card>
-
-                    <input type="button" value="添加" v-on:click="save()"/>
-                    <el-table :data="datalist" stripe style="width: 100%; " >
-                        <el-table-column prop="userId" label="用户ID" width="180">
-                        </el-table-column>
-                        <el-table-column prop="userName" label="用户姓名" width="180">
-                        </el-table-column>
-                        <el-table-column prop="userPassword" label="用户密码">
-                        </el-table-column>
-                        <el-table-column prop="userRole" label="用户权限">
-                        </el-table-column>
-                        <el-table-column label="操作" width="200" style="display: flex;">
-                            <template slot-scope="scope" v-for="users in datalist">			
-                                <el-button type="primary" plain >编辑</el-button>
-                                <el-button type="danger" plain v-on:click="userdelete(users.userId)">删除</el-button>
-							</template>
-                        </el-table-column>
-                    </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-    <script src="../assets/js/vue.js"></script>
-    <script src="../assets/css/element-ui/index.js"></script>
-    <script src="../assets/js/axios.min.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            data: function () {
-                return {
-                    src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-                    datalist: [],
-                    FormData: {},
-                    /*tableData: [{
+						</el-breadcrumb>
+						<el-card class="box-card" style="margin-bottom: 12px;">
+							<div class="card-container">
+								<el-image :src="src" class="ava">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								<div class="admin-info">
+									<h3>早安，管理员，开始您一天的工作吧！</h3>
+									<div class="weather">
+										<i class="el-icon-heavy-rain"></i>
+										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
+									</div>
+								</div>
+							</div>
+						</el-card>
+						<el-card>
+							<el-table :data="datalist" stripe style="width: 100%; ">
+								<el-table-column prop="userId" label="用户ID" width="180">
+								</el-table-column>
+								<el-table-column prop="userName" label="用户姓名" width="180">
+								</el-table-column>
+								<el-table-column prop="userPassword" label="用户密码">
+								</el-table-column>
+								<el-table-column prop="userRole" label="用户权限">
+								</el-table-column>
+								<el-table-column label="操作" width="200" style="display: flex;">
+									<template slot-scope="scope" v-for="users in datalist">
+										<el-button type="primary" plain v-on:click="userEdit()">编辑</el-button>
+										<el-button type="danger" plain v-on:click="userDelete(users.userId)">
+											删除
+										</el-button>
+									</template>
+								</el-table-column>
+							</el-table>
+							<el-dialog :visible.sync="UserEditVisible">
+								<el-form :model="editForm">
+									<el-form-item label="用户ID">
+										<el-input v-model="editForm.id" :disabled="true"></el-input>
+									</el-form-item>
+									<el-form-item label="用户姓名">
+										<el-input v-model="editForm.name"></el-input>
+									</el-form-item>
+									<el-form-item label="用户密码">
+										<el-input v-model="editForm.price" type="number"></el-input>
+									</el-form-item>
+									<el-form-item label="用户权限">
+										<el-input v-model="editForm.inventory" type="number"></el-input>
+									</el-form-item>
+								</el-form>
+								<div>
+									<el-button @click="closeDialog()">取消</el-button>
+									<el-button type="primary" @click="sumbitEditRow()">确定</el-button>
+								</div>
+							</el-dialog>
+							<div style="text-align: center;">
+								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../assets/js/vue.js"></script>
+	<script src="../assets/css/element-ui/index.js"></script>
+	<script src="../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+					el: '#app',
+					data: function() {
+						return {
+							src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+							UserEditVisible: false,
+							editForm: [],
+							datalist: [],
+							FormData: {},
+							/*tableData: [{
                       date: '2016-05-02',
                       name: '张三',
                       address: ' 西南大学',
@@ -139,41 +162,44 @@
                       ip: "192.168.3.5",
     
                   }]*/
-                }
-            },
-            created() {
-                this.getAll();
-                this.userdelete(userId);
-            },
-            methods: {
-                goGoods() {
-                    window.location.href='/pages/goods.html';
-                },
+						}
+					},
+					created() {
+						this.getAll();
+						this.userDelete(userId);
+						this.userEdit();
+					},
+					methods: {
+						getAll() {
+							axios.get("http://localhost:8080/users").then(res => {
+								this.datalist = res.data;
+							});
+						},
+						userDelete(userId) {
+							        this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+							          confirmButtonText: '确定',
+							          cancelButtonText: '取消',
+							          type: 'warning'
+							        }).then(() => {
+										axios.delete("http://localhost:8080/users/"+userId).then(res => {
+											this.getAll();
+										});
+							          this.$message({
+							            type: 'success',
+							            message: '删除成功!'
+							          });
+							        }).catch(() => {
+							          this.$message({
+							            type: 'info',
+							            message: '已取消删除'
+							          });          
+							        });
+									},
+								userEdit() {
+									this.UserEditVisible = true;
 
-                getAll() {
-                    axios.get("http://localhost:8080/users").then(res => {
-                        this.datalist = res.data;
-                    });
-                },
-                userdelete(userId) {
-                    axios.delete("http://localhost:8080/users/" + userId).then(res => {
-                        this.getAll();
-                    });
-                },
-                // // save(){
-                // //     axios.post("http://localhost:8080/users",this.fromdata).then(rel=>{
-                // //         if(rel.data){
-                // //             alert("增加成功");
-                // //             this.saved();
-                // //             this.getAll();
-                // //         }else{
-                // //             // ....成功信息
-                // //             alert("增加失败");
-                // //
-                // //         }
-                // //     });
-                // },
-            }
-        })
-    </script>
+								}
+							}
+						})
+	</script>
 </html>
