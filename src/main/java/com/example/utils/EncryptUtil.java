@@ -41,7 +41,7 @@ public class EncryptUtil {
      * @throws Exception
      */
     public static void main(String args[]) throws Exception {
-        String str = new String("service");
+        String str = "123456";
         System.out.println("原始：" + str);
         System.out.println("SHA后：" + shaEncode(str));
         //System.out.println(EunmTest.One);
