@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../assets/css/goods.css" >
+		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+	    <div id="app">
+	        <el-container>
+	            <el-header>
+	                <div class="logo">汇安智能仓储平台</div>
+					
+	            </el-header>
+	
+	            <el-container>
+	                <!--侧边栏-->
+	                <el-aside width="200px">
+	                    <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;" background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
+	                        <el-menu-item index="1">
+	                            <i class="el-icon-menu"></i>
+	                            <span slot="title">常用</span>
+	                        </el-menu-item>
+	
+	                        <el-menu-item index="2">
+	                            <i class="el-icon-s-help"></i>
+	                            <span slot="title">控制台</span>
+	                        </el-menu-item>
+	                        <el-submenu index="3">
+	                            <template slot="title">
+	                                <i class="el-icon-view"></i>
+	                                <span>业务流</span>
+	                            </template>
+	                            <el-menu-item-group>
+	                                <el-menu-item index="3-1">
+	                                    <i class="el-icon-ice-cream-round"></i>
+	                                    <span slot="title">用户管理</span>
+	                                </el-menu-item>
+	                                <el-menu-item index="3-2">
+	                                    <i class="el-icon-location"></i>
+	                                    <span slot="title">员工管理</span>
+	                                </el-menu-item>
+	                                <el-menu-item index="3-3">
+	                                    <i class="el-icon-trophy"></i>
+	                                    <span slot="title">仓库管理</span>
+	                                </el-menu-item>
+	                                <el-menu-item index="3-4">
+	                                    <i class="el-icon-mouse"></i>
+	                                    <span slot="title">商品管理</span>
+	                                </el-menu-item>
+	                                
+	                            </el-menu-item-group>
+	                        </el-submenu>
+	                        
+	                        <el-menu-item index="5">
+	                            <i class="el-icon-setting"></i>
+	                            <span slot="title">系统设置</span>
+	                        </el-menu-item>
+	                    </el-menu>
+	                </el-aside>
+	                <!-- 主体 -->
+	                <el-main>
+	                    <el-breadcrumb style="margin-bottom: 12px;">
+	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
+	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
+	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>
+	                        
+	                    </el-breadcrumb>
+	                    
+	                        <div class="card-container">
+	                            <div class="handle-container">
+									<el-button type="primary" plain style="margin:15px 20px;">新增商品</el-button>
+								</div>
+	                        </div>
+	                    
+	                    <el-card>
+	                        <el-table :data="tableData" stripe style="width: 100%; " >
+	                            <el-table-column prop="number" label="商品编号" width="180">
+								</el-table-column>
+	                            <el-table-column prop="name" label="货物名称" width="180">
+	                            </el-table-column>
+	                            <el-table-column prop="category" label="类别">
+	                            </el-table-column>
+	                            <el-table-column prop="size" label="尺寸">
+	                            </el-table-column>
+								<el-table-column prop="value" label="价格">
+								</el-table-column>
+	                            <el-table-column label="操作" width="250" style="display: flex;">
+	                                <template slot-scope="scope">
+										
+	                                    <el-button type="primary" plain>编辑</el-button>
+	                                    <el-button type="danger" plain>删除</el-button>
+	                                </template>
+	                            </el-table-column>
+	                        </el-table>
+	                        <div style="text-align: center;">
+	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+	                        </div>
+	                    </el-card>
+	                </el-main>
+	            </el-container>
+	        </el-container>
+	    </div>
+	</body>
+	<script src="../assets/js/vue.js"></script>
+	<script src="../assets/css/element-ui/index.js"></script>
+	<script src="../assets/js/axios.min.js"></script>
+	
+	<script>
+	    new Vue({
+	        el: '#app',
+	        data: function() {
+	            return {
+	                tableData: []
+	            }
+	        },
+
+			created(){
+				this.getAll();
+			},
+
+	        methods: {
+				getAll(){
+					axios.get("http://localhost:8080/goods").then(res=>{
+						console.log("123");
+						console.log(res);
+						this.tableData = res.data ;
+					})
+				}
+	        }
+	    })
+	</script>
+	</html>
