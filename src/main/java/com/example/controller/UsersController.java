@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/users")//设置路径
 @CrossOrigin//解决跨域问题
 public class UsersController {
-    @Autowired
+    @Autowired//
     private UsersService usersService;
 
     @GetMapping//访问方式
