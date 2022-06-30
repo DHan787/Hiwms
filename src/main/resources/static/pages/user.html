@@ -53,9 +53,10 @@
             submitForm(){
                 axios.post("http://localhost:8080/users",this.formData).then(rel=>{
                     if(rel.data){
-                        alert("success")
-                    }else{}
-                        alert("error")
+                        alert("success");
+                        window.location.href=("admin.html")
+                    }else{alert("用户名或者密码错误")}
+
                 })
             }
         }
