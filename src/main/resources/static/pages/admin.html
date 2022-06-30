@@ -47,7 +47,7 @@
                             </el-menu-item>
                             <el-menu-item index="3-4">
                                 <i class="el-icon-mouse" ></i>
-                                <span slot="title" @click="goGoods()">商品管理</span>
+                                <span slot="title" @click="goGoods">商品管理</span>
                             </el-menu-item>
 
                         </el-menu-item-group>
@@ -146,6 +146,10 @@
                 this.userdelete(userId);
             },
             methods: {
+                goGoods() {
+                    window.location.href='/pages/goods.html';
+                },
+
                 getAll() {
                     axios.get("http://localhost:8080/users").then(res => {
                         this.datalist = res.data;
