@@ -49,7 +49,7 @@ public class UsersController {
      * @param users
      * @return
      */
-    @PostMapping
+    @PostMapping("/login")
     private boolean login(@RequestBody Users users) throws Exception {
         System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
@@ -87,15 +87,18 @@ public class UsersController {
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id){
-        //System.out.println("the id is :"+id);
+        System.out.println("the id is :"+id);
         return usersService.removeById(id);
     }
 
-    @PutMapping
-    public boolean updateUsers(@RequestBody Users users){
-        //System.out.println(users.getUserName());
-        return usersService.updateById(users);
-
+    @PostMapping("/register")
+    public boolean register(@RequestBody Users users){
+        try {
+            users.setUserPassword(EncryptUtil.shaEncode(users.getUserPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usersService.save(users);
     }
 
 }
