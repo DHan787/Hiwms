@@ -7,5 +7,5 @@ import com.example.service.GoodsService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements GoodsService {
+public class GoodsServiceImpl extends ServiceImpl<GoodsDao,Goods> implements GoodsService {
 }

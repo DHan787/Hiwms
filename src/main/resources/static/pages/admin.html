@@ -50,6 +50,10 @@
 										<i class="el-icon-mouse"></i>
 										<span slot="title" @click="goGoods()">商品管理</span>
 									</el-menu-item>
+									<el-menu-item index="3-5">
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="goOrders()">订单管理</span>
+									</el-menu-item>
 
 								</el-menu-item-group>
 							</el-submenu>
@@ -108,7 +112,6 @@
 									<el-form-item label="用户ID">
 										<el-input v-model="editForm.id" :disabled="true"></el-input>
 									</el-form-item>
-
 									<el-form-item label="用户姓名">
 										<el-input v-model="editForm.name"></el-input>
 									</el-form-item>
@@ -122,9 +125,7 @@
 											<el-option label="超市货物员"></el-option>
 										</el-select>
 									</el-form-item>
-
 								</el-form>
-
 								<div>
 									<el-button @click="closeDialog()">取消</el-button>
 									<el-button type="primary" @click="sumbitEditRow()">确定</el-button>
@@ -169,91 +170,64 @@
                       ip: "192.168.3.5",
     
                   }]*/
-				}
-			},
-			created() {
-				this.getAll()
-				this.userDelete(userId)
-				this.userEdit()
-				this.goGoods()
-				this.goUsers()
-			},
-			methods: {
-				getAll() {
-					axios.get("http://localhost:8080/users").then(res => {
-						this.datalist = res.data;
-					});
-				},
-				userDelete(userId) {
-					this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						axios.delete("http://localhost:8080/users/" + userId).then(res => {
-							this.getAll();
-						});
-						this.$message({
-							type: 'success',
-							message: '删除成功!'
-						});
-					}).catch(() => {
-						this.$message({
-							type: 'info',
-							message: '已取消删除'
-						});
-					});
-				},
-				userEdit() {
-					this.UserEditVisible = true;
-				},
-				sumbitEditRow() {
-					var editData = _index;
-					console.log("editData的值" + this.editForm)
-					if (this.editForm.name == '') {
-						alert("用户名不能为空")
-					} else if (this.editForm.password == '') {
-						alert("用户密码不能为空")
-					} else if (this.editForm.role == '') {
-						alert("用户权限不能为空")
-					} else {
-						var paras = new URLSearchParams()
-						paras.append("id", this.editForm.id)
-						paras.append("name", this.editForm.name)
-						paras.append("price", this.editForm.price)
-						paras.append("remark", this.editForm.remark)
-						paras.append("inventory", this.editForm.inventory)
-						axios.post('/test/updateShopById', paras).then((response) => {
-							console.log("修改结果：", response.data.code)
-							if (response.data.code == 0) {
-								alert(response.data.message)
-								this.shopGoods[editData].id = response.data.data.id
-								this.shopGoods[editData].name = response.data.data.name
-								this.shopGoods[editData].remark = response.data.data.remark
-								this.shopGoods[editData].price = response.data.data.price
-								this.shopGoods[editData].inventory = response.data.data.inventory
-							} else {
-								alert(response.data.message)
+						}
+					},
+					created() {
+						this.getAll()
+						this.userDelete(userId)
+						this.userEdit()
+						this.goOrder()
+                        this.goGoods()
+                        this.goUsers()
+					},
+					methods: {
+						goOrders(){
+							window.location.href=("orders.html");
+						},
+						goGoods(){
+							window.location.href=("goods.html");
+						},
+						getAll() {
+							axios.get("http://localhost:8080/users").then(res => {
+								this.datalist = res.data;
+							});
+						},
+                        goUsers(){
+                            window.location.href=("users.html")
+                        },
+						userDelete(userId) {
+							        this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+							          confirmButtonText: '确定',
+							          cancelButtonText: '取消',
+							          type: 'warning'
+							        }).then(() => {
+										axios.delete("http://localhost:8080/users/"+userId).then(res => {
+											this.getAll();
+										});
+							          this.$message({
+							            type: 'success',
+							            message: '删除成功!'
+							          });
+							        }).catch(() => {
+							          this.$message({
+							            type: 'info',
+							            message: '已取消删除'
+							          });
+							        });
+									},
+
+								userEdit() {
+									this.UserEditVisible = true;
+
+								},
+                        closeDialog() {
+                            this.centerDialogVisible = false
+                            this.isAddMembers = false
+                            console.log("editfrom", this.editForm)
+                            console.log("addfrom", this.addForm)
+                        },
+
 							}
-						}).catch((error) => {
-							console.log("失败的原因：" + error)
 						})
-						this.centerDialogVisible = false;
-					}
-				},
-				closeDialog() {
-					this.centerDialogVisible = false
-					this.isAddMembers = false
-					console.log("editfrom", this.editForm)
-					console.log("addfrom", this.addForm)
-				},
-				goGoods(){
-					window.location.href="./goods.html"
-				},
-				goUsers(){
-					window.location.href="./users.html"
-				}
-			}
-		})
 	</script>
 </html>

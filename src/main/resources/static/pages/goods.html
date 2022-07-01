@@ -45,10 +45,14 @@
 	                                    <i class="el-icon-trophy"></i>
 	                                    <span slot="title">仓库管理</span>
 	                                </el-menu-item>
-	                                <el-menu-item index="3-4">
-	                                    <i class="el-icon-mouse"></i>
-	                                    <span slot="title">商品管理</span>
-	                                </el-menu-item>
+									<el-menu-item index="3-4">
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="goGoods()">商品管理</span>
+									</el-menu-item>
+									<el-menu-item index="3-5">
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="goOrders()">订单管理</span>
+									</el-menu-item>
 	                                
 	                            </el-menu-item-group>
 	                        </el-submenu>
@@ -150,6 +154,12 @@
 			},
 
 	        methods: {
+				goOrders(){
+					window.location.href=("orders.html");
+				},
+				goGoods(){
+					window.location.href=("goods.html");
+				},
 				getAll(){
 					axios.get("http://localhost:8080/goods").then(res=>{
 						this.tableData = res.data ;
