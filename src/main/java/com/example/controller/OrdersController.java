@@ -20,8 +20,8 @@ public class OrdersController {
      */
     @GetMapping//访问方式
     public List<Orders> getAll() {
-        System.out.println(ordersService.list());
-        System.out.println("used");
+        //System.out.println(ordersService.list());
+        //System.out.println("used");
         return ordersService.list();
     }
 

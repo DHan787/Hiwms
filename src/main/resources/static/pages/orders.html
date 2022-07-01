@@ -79,34 +79,36 @@
 
                         <el-dialog title="新建订单" :visible.sync="addFormVisible">
                             <el-form :model="form" ref="form">
-                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
+                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="orderType">
                                     <el-radio-group v-model="form.orderType">
-                                        <el-radio border label="入库" value="1"/>入库</el-radio>
-                                        <el-radio border label="出库" value="2"/>出库</el-radio>
+                                        <el-radio border label="1" value="1"/>入库</el-radio>
+                                        <el-radio border label="2" value="2"/>出库</el-radio>
                                     </el-radio-group>
                                 </el-form-item>
-                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="goodSize">
+                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="orderStartTime">
                                     <div class="block">
                                         <el-date-picker
                                                 v-model="form.orderStartTime"
                                                 type="datetime"
-                                                placeholder="选择日期时间">
+                                                placeholder="选择日期时间"
+                                                value-format="yyyy-mm-dd hh:mm:ss">
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
-                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="goodSize">
+                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="orderEndTime">
                                     <div class="block">
                                         <el-date-picker
                                                 v-model="form.orderEndTime"
                                                 type="datetime"
-                                                placeholder="选择日期时间">
+                                                placeholder="选择日期时间"
+                                                value-format="yyyy-mm-dd hh:mm:ss">
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
-                                <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="goodValue">
+                                <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="orderInit">
                                     <el-input v-model="form.orderInit" autocomplete="off"></el-input>
                                 </el-form-item>
-                                <el-form-item label="订单操作员" :label-width="formLabelWidth" prop="goodValue">
+                                <el-form-item label="订单操作员" :label-width="formLabelWidth" prop="orderOperator">
                                     <el-input v-model="form.orderOperator" autocomplete="off"></el-input>
                                 </el-form-item>
                             </el-form>
@@ -132,6 +134,8 @@
                         <el-table-column prop="orderInit" label="订单创建人">
                         </el-table-column>
                         <el-table-column prop="orderOperator" label="订单操作员">
+                        </el-table-column>
+                        <el-table-column prop="orderStatus" label="订单状态">
                         </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="orders in tableData">
