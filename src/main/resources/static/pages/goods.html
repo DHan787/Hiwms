@@ -45,14 +45,10 @@
 	                                    <i class="el-icon-trophy"></i>
 	                                    <span slot="title">仓库管理</span>
 	                                </el-menu-item>
-									<el-menu-item index="3-4">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="goGoods()">商品管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-5">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="goOrders()">订单管理</span>
-									</el-menu-item>
+	                                <el-menu-item index="3-4">
+	                                    <i class="el-icon-mouse"></i>
+	                                    <span slot="title">商品管理</span>
+	                                </el-menu-item>
 	                                
 	                            </el-menu-item-group>
 	                        </el-submenu>
@@ -68,14 +64,15 @@
 	                    <el-breadcrumb style="margin-bottom: 12px;">
 	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
 	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
-	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>   
+	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>
+	                        
 	                    </el-breadcrumb>
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addFormVisible = true">新增商品</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick">新增商品</el-button>
 									
-									<el-dialog title="新增货物" :visible.sync="addFormVisible">
+									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
 									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
 									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
@@ -91,8 +88,9 @@
 										</el-form-item>
 									  </el-form>
 									  <div slot="footer" class="dialog-footer">
-									    <el-button @click="addFormVisible = false">取 消</el-button>
-									    <el-button type="primary" @click="addGoods">确 定</el-button>
+									    <el-button @click="dialogFormVisible = false">取 消</el-button>
+									    <el-button v-if="isAdd" type="primary" @click="addGoods">确 定</el-button>
+										<el-button  v-else type="primary" @click="updateGoodsById">更 新</el-button>
 									  </div>
 									</el-dialog>
 
@@ -113,7 +111,8 @@
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="goods in tableData">
-	                                    <el-button type="primary" plain>编辑</el-button>
+										
+	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
 	                                    <el-button type="danger" plain @click="removeGoodsById(goods.goodId)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
@@ -137,14 +136,16 @@
 	        data: function() {
 	            return {
 					tableData: [],
-					addFormVisible: false,
+					dialogFormVisible: false,
+					dialogFormTitle: "",
 					form: {
 						name: '',
 						type: '',
 						size: '',
 						value: ''
 					},
-					formLabelWidth: '120px'
+					formLabelWidth: '120px',
+					isAdd: false
 					
 	            }
 	        },
@@ -154,12 +155,6 @@
 			},
 
 	        methods: {
-				goOrders(){
-					window.location.href=("orders.html");
-				},
-				goGoods(){
-					window.location.href=("goods.html");
-				},
 				getAll(){
 					axios.get("http://localhost:8080/goods").then(res=>{
 						this.tableData = res.data ;
@@ -187,6 +182,13 @@
 					});
 				},
 				
+				addClick() {
+						this.dialogFormVisible = true;
+						this.dialogFormTitle = "新增货物";
+						this.isAdd = true;
+						this.form = {};
+				},
+				
 				addGoods() {
 					axios.post("http://localhost:8080/goods",this.form).then(rel=>{
 						if(rel.data){
@@ -195,18 +197,51 @@
 								message: '新增成功!'
 							});
 							this.getAll();
-							this.addFormVisible = false;
-							this.$refs.form.resetFields();
+							this.dialogFormVisible = false;
+							
 						}else{
 							this.$message({
 								type: 'info',
 								message: '新增失败'
 							});
 						}
+						this.$refs.form.resetFields();
 					})
+				},
+				
+				editClick(index,row) {
+					this.dialogFormVisible = true;
+					this.dialogFormTitle = "修改货物";
+					this.isAdd = false;
+					this.form = Object.assign({},row);
+					this.form.index = index;				
+				},
+				
+				editGoods() {
+					//this.$set(tableName,talbeIndex,data)
+					this.$set(this.tableData,this.form.index,{name:this.form.name,type:this.form.type,size:this.form.size,value:this.form.value});
 					
+				},
+				
+				updateGoodsById() {
+					axios.put("http://localhost:8080/goods",this.form).then(rel=>{
+						if(rel.data){
+							this.$message({
+								type: 'success',
+								message: '修改成功!'
+							});
+							this.getAll();
+							this.dialogFormVisible = false;
+							
+						}else{
+							this.$message({
+								type: 'info',
+								message: '修改失败'
+							});
+						}
+						this.$refs.form.resetFields();
+					})
 				}
-
 	        }
 	    })
 	</script>
