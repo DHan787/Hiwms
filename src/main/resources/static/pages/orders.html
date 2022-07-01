@@ -35,19 +35,19 @@
                         <el-menu-item-group>
                             <el-menu-item index="3-1">
                                 <i class="el-icon-ice-cream-round"></i>
-                                <span slot="title">用户管理</span>
+                                <span slot="title" @click="goUsers()">用户管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-2">
                                 <i class="el-icon-location"></i>
-                                <span slot="title">员工管理</span>
+                                <span slot="title" @click="goUsers()">员工管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-3">
                                 <i class="el-icon-trophy"></i>
-                                <span slot="title">仓库管理</span>
+                                <span slot="title" @click="goVirehouse()">仓库管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-4">
                                 <i class="el-icon-mouse"></i>
-                                <span slot="title" @click="goGoods()">商品管理</span>
+                                <span slot="title" @click="goGoods()">货品管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-5">
                                 <i class="el-icon-mouse"></i>
@@ -68,7 +68,7 @@
                 <el-breadcrumb style="margin-bottom: 12px;">
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
                     <el-breadcrumb-item>业务流</el-breadcrumb-item>
-                    <el-breadcrumb-item>货品管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
                 </el-breadcrumb>
 
@@ -79,47 +79,37 @@
 
                         <el-dialog title="新建订单" :visible.sync="addFormVisible">
                             <el-form :model="form" ref="form">
-                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
+                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="orderType">
                                     <el-radio-group v-model="form.orderType">
-                                        <el-radio border label="入库" value="1"/>入库</el-radio>
-                                        <el-radio border label="出库" value="2"/>出库</el-radio>
+                                        <el-radio border label="1" value="1"/>入库</el-radio>
+                                        <el-radio border label="2" value="2"/>出库</el-radio>
                                     </el-radio-group>
                                 </el-form-item>
-                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="goodSize">
+                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="orderStartTime">
                                     <div class="block">
                                         <el-date-picker
                                                 v-model="form.orderStartTime"
                                                 type="datetime"
-                                                placeholder="选择日期时间">
+                                                placeholder="选择日期时间"
+                                                value-format="yyyy-mm-dd hh:mm:ss">
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
-                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="goodSize">
+                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="orderEndTime">
                                     <div class="block">
                                         <el-date-picker
                                                 v-model="form.orderEndTime"
                                                 type="datetime"
-                                                placeholder="选择日期时间">
+                                                placeholder="选择日期时间"
+                                                value-format="yyyy-mm-dd hh:mm:ss">
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
-                                <el-form-item label="订单创建人">
-                                    <el-select v-model="form.orderInit"  :label-width="formLabelWidth" prop="goodValue" placeholder="请选择订单创建人">
-                                        <el-option label="货物员1" value="shanghai"></el-option>
-                                        <el-option label="货物员2" value="beijing"></el-option>
-                                        <el-option label="货物员3" value="beijing"></el-option>
-                                        <el-option label="货物员4" value="beijing"></el-option>
-                                        <el-option label="货物员5" value="beijing"></el-option>
-                                    </el-select>
+                                <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="orderInit">
+                                    <el-input v-model="form.orderInit" autocomplete="off"></el-input>
                                 </el-form-item>
-                                <el-form-item label="订单操作员">
-                                    <el-select v-model="form.orderOperator"  :label-width="formLabelWidth" prop="goodValue" placeholder="请选择订单操作员">
-                                        <el-option label="操作员1" value="shanghai"></el-option>
-                                        <el-option label="操作员2" value="beijing"></el-option>
-                                        <el-option label="操作员3" value="beijing"></el-option>
-                                        <el-option label="操作员4" value="beijing"></el-option>
-                                        <el-option label="操作员5" value="beijing"></el-option>
-                                    </el-select>
+                                <el-form-item label="订单操作员" :label-width="formLabelWidth" prop="orderOperator">
+                                    <el-input v-model="form.orderOperator" autocomplete="off"></el-input>
                                 </el-form-item>
                             </el-form>
                             <div slot="footer" class="dialog-footer">
@@ -144,6 +134,8 @@
                         <el-table-column prop="orderInit" label="订单创建人">
                         </el-table-column>
                         <el-table-column prop="orderOperator" label="订单操作员">
+                        </el-table-column>
+                        <el-table-column prop="orderStatus" label="订单状态">
                         </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="orders in tableData">
@@ -191,11 +183,17 @@
         },
 
         methods: {
+            goUsers(){
+                window.location.href=("users.html");
+            },
             goOrders(){
                 window.location.href=("orders.html");
             },
             goGoods(){
                 window.location.href=("goods.html");
+            },
+            goVirehouse(){
+                window.location.href=("virehouse.html");
             },
             getAll(){
                 axios.get("http://localhost:8080/orders").then(res=>{

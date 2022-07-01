@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../assets/css/goods.css" >
 		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
-		<title></title>
+		<title>仓库</title>
 	</head>
 	<body>
 	    <div id="app">
@@ -67,17 +67,17 @@
 	                    <el-breadcrumb style="margin-bottom: 12px;">
 	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
 	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
-	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>
+	                        <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
 	                        
 	                    </el-breadcrumb>
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增商品</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick">新增仓库</el-button>
 									
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
-									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
+									    <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="goodName">
 									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
 									    </el-form-item>
 									    <el-form-item label="类别" :label-width="formLabelWidth" prop="goodType">
@@ -102,9 +102,9 @@
 	                    
 	                    <el-card>
 	                        <el-table :data="tableData" stripe style="width: 100%; " >
-	                            <el-table-column prop="goodId" label="商品编号" width="180">
+	                            <el-table-column prop="goodId" label="仓库编号" width="180">
 								</el-table-column>
-	                            <el-table-column prop="goodName" label="货物名称" width="180">
+	                            <el-table-column prop="goodName" label="仓库名称" width="180">
 	                            </el-table-column>
 	                            <el-table-column prop="goodType" label="类别">
 	                            </el-table-column>
@@ -237,6 +237,7 @@
 					this.$set(this.tableData,this.form.index,{name:this.form.name,type:this.form.type,size:this.form.size,value:this.form.value});
 					
 				},
+				
 				updateGoodsById() {
 					axios.put("http://localhost:8080/goods",this.form).then(rel=>{
 						if(rel.data){
