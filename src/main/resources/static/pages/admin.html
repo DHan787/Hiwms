@@ -124,11 +124,6 @@
 					},
 					created() {
 						this.getAll()
-						this.userDelete(userId)
-						this.userEdit()
-						this.goOrder()
-                        this.goGoods()
-                        this.goUsers()
 					},
 					methods: {
 						goOrders(){
@@ -137,6 +132,9 @@
 						goGoods(){
 							window.location.href=("goods.html");
 						},
+                        goUsers(){
+                            window.location.href=("users.html");
+                        },
 						getAll() {
 							axios.get("http://localhost:8080/users").then(res => {
 								this.datalist = res.data;

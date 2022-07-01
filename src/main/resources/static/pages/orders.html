@@ -35,19 +35,19 @@
                         <el-menu-item-group>
                             <el-menu-item index="3-1">
                                 <i class="el-icon-ice-cream-round"></i>
-                                <span slot="title">用户管理</span>
+                                <span slot="title" @click="goUsers()">用户管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-2">
                                 <i class="el-icon-location"></i>
-                                <span slot="title">员工管理</span>
+                                <span slot="title" @click="goUsers()">员工管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-3">
                                 <i class="el-icon-trophy"></i>
-                                <span slot="title">仓库管理</span>
+                                <span slot="title" @click="goVirehouse()">仓库管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-4">
                                 <i class="el-icon-mouse"></i>
-                                <span slot="title" @click="goGoods()">商品管理</span>
+                                <span slot="title" @click="goGoods()">货品管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-5">
                                 <i class="el-icon-mouse"></i>
@@ -68,7 +68,7 @@
                 <el-breadcrumb style="margin-bottom: 12px;">
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
                     <el-breadcrumb-item>业务流</el-breadcrumb-item>
-                    <el-breadcrumb-item>货品管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
                 </el-breadcrumb>
 
@@ -183,11 +183,17 @@
         },
 
         methods: {
+            goUsers(){
+                window.location.href=("users.html");
+            },
             goOrders(){
                 window.location.href=("orders.html");
             },
             goGoods(){
                 window.location.href=("goods.html");
+            },
+            goVirehouse(){
+                window.location.href=("virehouse.html");
             },
             getAll(){
                 axios.get("http://localhost:8080/orders").then(res=>{

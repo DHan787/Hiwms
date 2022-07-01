@@ -12,8 +12,10 @@
     <div class="login">
         <div class="loginBody" align="center">
             <h4>登录</h4>
+
+
             <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-width="0px">
-                <el-form-item label="" prop="usserName" style="margin-top:10px;">
+                <el-form-item label="" prop="userName" style="margin-top:10px;">
                     <el-row>
                         <el-col :span='2'>
                             <span class="el-icon-s-custom"></span>
@@ -24,6 +26,8 @@
                         </el-col>
                     </el-row>
                 </el-form-item>
+
+
                 <el-form-item label="" prop="userPassword">
                     <el-row>
                         <el-col :span='2'>
@@ -35,7 +39,22 @@
                         </el-col>
                     </el-row>
                 </el-form-item>
-                <el-form-item style="margin-top:55px;">
+
+                <el-form-item label="" prop="code" style="margin-top:10px;">
+                    <el-row>
+                        <el-col :span='2'>
+                            <span class="el-icon-info"></span>
+                        </el-col>
+                        <el-col :span='20'>
+                            <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input">
+                            </el-input>
+                        </el-col>
+                    </el-row>
+                </el-form-item>
+
+                <canvas id="myCanvas" width="100" height="40" title="看不清，更换验证码"></canvas>
+
+                <el-form-item style="margin-top:5px;">
                     <el-button type="primary" round class="submitBtn" v-on:click="login">登录
                     </el-button>
                 </el-form-item>
@@ -73,7 +92,6 @@
                         required: true,
                         message: '请输入账号',
                         trigger: 'blur'
-
                     },
                         {
                             min: 3,
@@ -85,7 +103,11 @@
                         required: true,
                         message: '请输入密码',
                         trigger: 'blur'
-
+                    }],
+                    code:[{
+                        required: true,
+                        message: '请输入验证码',
+                        trigger: 'blur'
                     }]
                 }
             };
@@ -112,5 +134,116 @@
             },
         }
     })
+</script>
+<script>
+    class Verification {
+        constructor() {
+
+            this.input = document.querySelector('#input')
+            this.submitBtn = document.querySelector('.submitBtn')
+            this.canvas = document.getElementById('myCanvas')
+            this.ctx = this.canvas.getContext('2d')
+
+            this.width = this.canvas.width
+            this.height = this.canvas.height
+
+            this.code = ''
+
+            this.charArr = this.getCharArr()
+
+            this.canvas.addEventListener('click', () => this.init())
+            this.submitBtn.addEventListener('click', () => this.check())
+            this.input.addEventListener('keydown', (e) => {
+
+                if (e.keyCode === 13) {
+                    this.check()
+                }
+            })
+            this.init()
+        }
+
+        init() {
+            this.clear()
+            this.drawText()
+            this.drawLine()
+            this.drawDot()
+        }
+        // 检测验证码是否符合???
+        check() {
+            if (this.code === this.input.value.trim().toLowerCase()) {
+                alert('提交成功！')
+            } else {
+                alert('验证码错误！')
+            }
+            this.input.value = ''
+            this.init()
+        }
+
+        getCharArr() {
+            let charArr = []
+            for (let i = 0; i < 10; i++) {
+                charArr.push(i)
+            }
+            for (let i = 65; i < 123; i++) {
+
+                if (i < 91 || i > 96) {
+                    charArr.push(String.fromCharCode(i))
+                }
+            }
+            return charArr
+        }
+
+        clear() {
+            this.ctx.clearRect(0, 0, this.width, this.height)
+        }
+
+        drawText() {
+            const length = this.charArr.length
+            this.ctx.font = 'bold 25px 宋体'
+            this.code = ''
+            for (let i = 0; i < 4; i++) {
+                this.ctx.beginPath()
+                let index = Math.floor(Math.random() * length)
+                this.code += this.charArr[index].toString().toLowerCase()
+                let x = i * 20 + 15
+                let y = 24 + Math.random() * 5
+                let angle = Math.random() * - 0.5
+                this.ctx.translate(x, y)
+                this.ctx.rotate(angle)
+                this.ctx.fillStyle = this.getRandomColor()
+                this.ctx.fillText(this.charArr[index], 0, 0)
+                this.ctx.rotate(-angle)
+                this.ctx.translate(-x, -y)
+            }
+        }
+
+        drawLine() {
+            for (let i = 0; i < 4; i++) {
+                this.ctx.beginPath()
+                this.ctx.moveTo(Math.random() * this.width, Math.random() * this.height)
+                this.ctx.lineTo(Math.random() * this.width, Math.random() * this.height)
+                this.ctx.strokeStyle = this.getRandomColor()
+                this.ctx.stroke()
+            }
+        }
+
+        drawDot() {
+            for (let i = 0; i < 20; i++) {
+                this.ctx.beginPath()
+                this.ctx.arc(Math.random() * this.width, Math.random() * this.height, 1, 0, 2 * Math.PI)
+                this.ctx.fillStyle = this.getRandomColor()
+                this.ctx.fill()
+            }
+        }
+
+        getRandomColor() {
+            let r = Math.floor(Math.random() * 256)
+            let g = Math.floor(Math.random() * 256)
+            let b = Math.floor(Math.random() * 256)
+            return `rgb(${r},${g},${b})`
+        }
+    }
+
+    new Verification()
 </script>
 </html>
