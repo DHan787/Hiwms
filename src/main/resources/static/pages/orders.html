@@ -2,7 +2,7 @@
 <html lang="">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../assets/css/goods.css" >
+    <link rel="stylesheet" href="../assets/css/orders.css" >
     <link rel="stylesheet" href="../assets/css/element-ui/index.css">
     <title></title>
 </head>
@@ -78,15 +78,12 @@
 
                         <el-dialog title="新建订单" :visible.sync="addFormVisible">
                             <el-form :model="form" ref="form">
-                                <el-form-item label="订单类型":label-width="formLabelWidth" prop="goodType">
-                                    <el-select v-model="form.orderType" placeholder="请选择订单类型">
-                                        <el-option label="入库" value="1" />
-                                        <el-option label="出库" value="2" />
-                                    </el-select>
+                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
+                                    <el-radio-group v-model="form.orderType">
+                                        <el-radio border label="入库" value="1"/>入库</el-radio>
+                                        <el-radio border label="出库" value="2"/>出库</el-radio>
+                                    </el-radio-group>
                                 </el-form-item>
-                                <!--<el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
-                                    <el-input v-model="form.orderType" autocomplete="off"></el-input>
-                                </el-form-item>-->
                                 <el-form-item label="订单开始时间" :label-width="formLabelWidth" prop="goodSize">
                                     <el-input v-model="form.orderStartTime" autocomplete="off"></el-input>
                                 </el-form-item>
@@ -152,12 +149,12 @@
                 tableData: [],
                 addFormVisible: false,
                 form: {
-                    Id: '',
-                    type: '',
-                    startTime: '',
-                    endTime: '',
-                    init:'',
-                    operator:''
+                    orderID: '',
+                    orderType: '1',
+                    orderStartTime: '',
+                    orderEndTime: '',
+                    orderInit:'',
+                    orderOperator:''
                 },
                 formLabelWidth: '120px'
 
