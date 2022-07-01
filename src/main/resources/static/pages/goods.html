@@ -70,7 +70,29 @@
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-									<el-button type="primary" plain style="margin:15px 20px;">新增商品</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addFormVisible = true">新增商品</el-button>
+									
+									<el-dialog title="新增货物" :visible.sync="addFormVisible">
+									  <el-form :model="form" ref="form">
+									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
+									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
+									    </el-form-item>
+									    <el-form-item label="类别" :label-width="formLabelWidth" prop="goodType">
+											<el-input v-model="form.goodType" autocomplete="off"></el-input>
+									    </el-form-item>
+										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodSize">
+										  <el-input v-model="form.goodSize" autocomplete="off"></el-input>
+										</el-form-item>
+										<el-form-item label="价格" :label-width="formLabelWidth" prop="goodValue">
+										  <el-input v-model="form.goodValue" autocomplete="off"></el-input>
+										</el-form-item>
+									  </el-form>
+									  <div slot="footer" class="dialog-footer">
+									    <el-button @click="addFormVisible = false">取 消</el-button>
+									    <el-button type="primary" @click="addGoods">确 定</el-button>
+									  </div>
+									</el-dialog>
+
 								</div>
 	                        </div>
 	                    
@@ -90,7 +112,7 @@
 	                                <template slot-scope="scope" v-for="goods in tableData">
 										
 	                                    <el-button type="primary" plain>编辑</el-button>
-	                                    <el-button type="danger" plain @click="delGoods(goods.goodId)">删除</el-button>
+	                                    <el-button type="danger" plain @click="removeGoodsById(goods.goodId)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -112,7 +134,16 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-					tableData: []
+					tableData: [],
+					addFormVisible: false,
+					form: {
+						name: '',
+						type: '',
+						size: '',
+						value: ''
+					},
+					formLabelWidth: '120px'
+					
 	            }
 	        },
 
@@ -127,11 +158,47 @@
 					});
 				},
 
-				delGoods(goodId) {
-					axios.delete("http://localhost:8080/goods/" + goodId).then(res=>{
-						this.getAll();
+				removeGoodsById(goodId) {
+					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						axios.delete("http://localhost:8080/goods/" + goodId).then(res=> {
+							this.getAll();
+						});
+						this.$message({
+							type: 'success',
+							message: '删除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
 					});
+				},
+				
+				addGoods() {
+					axios.post("http://localhost:8080/goods",this.form).then(rel=>{
+						if(rel.data){
+							this.$message({
+								type: 'success',
+								message: '新增成功!'
+							});
+							this.getAll();
+							this.addFormVisible = false;
+							this.$refs.form.resetFields();
+						}else{
+							this.$message({
+								type: 'info',
+								message: '新增失败'
+							});
+						}
+					})
+					
 				}
+
 	        }
 	    })
 	</script>
