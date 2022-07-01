@@ -18,6 +18,7 @@
             佛祖保佑       永无BUG
 
 
+# 延伸阅读
 # ！！请把每次commit内容书写在本文档！！
 ## testhxy-2
 ## testwlx
@@ -44,6 +45,7 @@
 * 订单类型 zls
 * 订单创建时间和订单结束时间 zls
 * 实现修改功能；解决了界面输入中文乱码的问题 hxy 16:32
+* 订单操作员和订单创建人 下拉框 zls
 * user界面新增用户的密码加密 hj
 * users 删除debug hj
 * 注意mapping的地址和axios 的URL "http://localhost:8080/users/" + userId 对应为 "http://localhost:8080/users/{id}

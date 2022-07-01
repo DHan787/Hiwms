@@ -103,11 +103,23 @@
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
-                                <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="goodValue">
-                                    <el-input v-model="form.orderInit" autocomplete="off"></el-input>
+                                <el-form-item label="订单创建人">
+                                    <el-select v-model="form.orderInit"  :label-width="formLabelWidth" prop="goodValue" placeholder="请选择订单创建人">
+                                        <el-option label="货物员1" value="shanghai"></el-option>
+                                        <el-option label="货物员2" value="beijing"></el-option>
+                                        <el-option label="货物员3" value="beijing"></el-option>
+                                        <el-option label="货物员4" value="beijing"></el-option>
+                                        <el-option label="货物员5" value="beijing"></el-option>
+                                    </el-select>
                                 </el-form-item>
-                                <el-form-item label="订单操作员" :label-width="formLabelWidth" prop="goodValue">
-                                    <el-input v-model="form.orderOperator" autocomplete="off"></el-input>
+                                <el-form-item label="订单操作员">
+                                    <el-select v-model="form.orderOperator"  :label-width="formLabelWidth" prop="goodValue" placeholder="请选择订单操作员">
+                                        <el-option label="操作员1" value="shanghai"></el-option>
+                                        <el-option label="操作员2" value="beijing"></el-option>
+                                        <el-option label="操作员3" value="beijing"></el-option>
+                                        <el-option label="操作员4" value="beijing"></el-option>
+                                        <el-option label="操作员5" value="beijing"></el-option>
+                                    </el-select>
                                 </el-form-item>
                             </el-form>
                             <div slot="footer" class="dialog-footer">
