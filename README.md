@@ -51,3 +51,5 @@
 * users 删除debug hj
 * 注意mapping的地址和axios 的URL "http://localhost:8080/users/" + userId 对应为 "http://localhost:8080/users/{id}
 * 完成新建订单（时间选择，订单类型选择）hj
+* 简陋的页面跳转 
+  仓库页面的建立（复制的货品页面 只改了文本部分）zls
