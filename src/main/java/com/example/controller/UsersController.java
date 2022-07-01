@@ -70,6 +70,11 @@ public class UsersController {
      */
     @PostMapping("/save")
     public boolean saveUsers(@RequestBody Users users){
+        try {
+            users.setUserPassword(EncryptUtil.shaEncode(users.getUserPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return usersService.save(users);
     }
 
