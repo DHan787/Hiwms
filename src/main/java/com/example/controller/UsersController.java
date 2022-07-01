@@ -101,4 +101,10 @@ public class UsersController {
         return usersService.save(users);
     }
 
+    @PutMapping
+    public boolean updateUsers(@RequestBody Users users){
+        System.out.println(users.getUserName());
+        return usersService.updateById(users);
+    }
+
 }
