@@ -78,9 +78,15 @@
 
                         <el-dialog title="新建订单" :visible.sync="addFormVisible">
                             <el-form :model="form" ref="form">
-                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
-                                    <el-input v-model="form.orderType" autocomplete="off"></el-input>
+                                <el-form-item label="订单类型":label-width="formLabelWidth" prop="goodType">
+                                    <el-select v-model="form.orderType" placeholder="请选择订单类型">
+                                        <el-option label="入库" value="1" />
+                                        <el-option label="出库" value="2" />
+                                    </el-select>
                                 </el-form-item>
+                                <!--<el-form-item label="订单类型" :label-width="formLabelWidth" prop="goodType">
+                                    <el-input v-model="form.orderType" autocomplete="off"></el-input>
+                                </el-form-item>-->
                                 <el-form-item label="订单开始时间" :label-width="formLabelWidth" prop="goodSize">
                                     <el-input v-model="form.orderStartTime" autocomplete="off"></el-input>
                                 </el-form-item>
@@ -107,7 +113,7 @@
                     <el-table :data="tableData" stripe style="width: 100%; " >
                         <el-table-column prop="orderID" label="订单编号" width="180">
                         </el-table-column>
-                        <el-table-column prop="orderType" label="订单类别" width="180">
+                        <el-table-column prop="orderType" label="订单类型" width="180">
                         </el-table-column>
                         <el-table-column prop="orderStartTime" label="订单开始时间">
                         </el-table-column>
