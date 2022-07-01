@@ -45,5 +45,9 @@
 * 订单类型 zls
 * 订单创建时间和订单结束时间 zls
 * 实现修改功能；解决了界面输入中文乱码的问题 hxy 16:32
+* 订单操作员和订单创建人 下拉框 zls
 * user界面新增用户的密码加密 hj
 * Login界面添加验证码功能 wlx
+* users 删除debug hj
+* 注意mapping的地址和axios 的URL "http://localhost:8080/users/" + userId 对应为 "http://localhost:8080/users/{id}
+* 完成新建订单（时间选择，订单类型选择）hj
