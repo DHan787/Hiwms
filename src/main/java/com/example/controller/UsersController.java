@@ -87,8 +87,15 @@ public class UsersController {
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id){
-        System.out.println("the id is :"+id);
+        //System.out.println("the id is :"+id);
         return usersService.removeById(id);
+    }
+
+    @PutMapping
+    public boolean updateUsers(@RequestBody Users users){
+        //System.out.println(users.getUserName());
+        return usersService.updateById(users);
+
     }
 
 

@@ -70,7 +70,7 @@
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick">新增商品</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增商品</el-button>
 									
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
@@ -222,7 +222,6 @@
 					this.$set(this.tableData,this.form.index,{name:this.form.name,type:this.form.type,size:this.form.size,value:this.form.value});
 					
 				},
-				
 				updateGoodsById() {
 					axios.put("http://localhost:8080/goods",this.form).then(rel=>{
 						if(rel.data){

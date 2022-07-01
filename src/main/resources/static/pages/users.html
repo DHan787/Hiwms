@@ -1,203 +1,245 @@
 <!DOCTYPE html>
 <html lang="">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/goods.css" >
-		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
-		<title></title>
-	</head>
-	<body>
-	    <div id="app">
-	        <el-container>
-	            <el-header>
-	                <div class="logo">汇安智能仓储平台</div>
-					
-	            </el-header>
-	
-	            <el-container>
-	                <!--侧边栏-->
-	                <el-aside width="200px">
-	                    <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;" background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
-	                        <el-menu-item index="1">
-	                            <i class="el-icon-menu"></i>
-	                            <span slot="title">常用</span>
-	                        </el-menu-item>
-	
-	                        <el-menu-item index="2">
-	                            <i class="el-icon-s-help"></i>
-	                            <span slot="title">控制台</span>
-	                        </el-menu-item>
-	                        <el-submenu index="3">
-	                            <template slot="title">
-	                                <i class="el-icon-view"></i>
-	                                <span>业务流</span>
-	                            </template>
-	                            <el-menu-item-group>
-	                                <el-menu-item index="3-1">
-	                                    <i class="el-icon-ice-cream-round"></i>
-	                                    <span slot="title">用户管理</span>
-	                                </el-menu-item>
-	                                <el-menu-item index="3-2">
-	                                    <i class="el-icon-location"></i>
-	                                    <span slot="title">员工管理</span>
-	                                </el-menu-item>
-	                                <el-menu-item index="3-3">
-	                                    <i class="el-icon-trophy"></i>
-	                                    <span slot="title">仓库管理</span>
-	                                </el-menu-item>
-	                                <el-menu-item index="3-4">
-	                                    <i class="el-icon-mouse"></i>
-	                                    <span slot="title">商品管理</span>
-	                                </el-menu-item>
-	                                
-	                            </el-menu-item-group>
-	                        </el-submenu>
-	                        
-	                        <el-menu-item index="5">
-	                            <i class="el-icon-setting"></i>
-	                            <span slot="title">系统设置</span>
-	                        </el-menu-item>
-	                    </el-menu>
-	                </el-aside>
-	                <!-- 主体 -->
-	                <el-main>
-	                    <el-breadcrumb style="margin-bottom: 12px;">
-	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
-	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
-	                        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-	                        
-	                    </el-breadcrumb>
-	                    
-	                        <div class="card-container">
-	                            <div class="handle-container">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addFormVisible = true">新增用户</el-button>
-									
-									<el-dialog title="新增用户" :visible.sync="addFormVisible">
-									  <el-form :model="form" ref="form">
-									    <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
-									      <el-input v-model="form.userId" autocomplete="off" :disabled="true"></el-input>
-									    </el-form-item>
-									    <el-form-item label="用户名称" :label-width="formLabelWidth" prop="userName">
-											<el-input v-model="form.userName" autocomplete="off"></el-input>
-									    </el-form-item>
-										<el-form-item label="用户密码" :label-width="formLabelWidth" prop="userPassword">
-										  <el-input v-model="form.userPassword" autocomplete="off"></el-input>
-										</el-form-item>
-										<el-form-item label="用户权限" :label-width="formLabelWidth" prop="userRole">
-										  <el-input v-model="form.userRole" autocomplete="off"></el-input>
-										</el-form-item>
-									  </el-form>
-									  <div slot="footer" class="dialog-footer">
-									    <el-button @click="addFormVisible = false">取 消</el-button>
-									    <el-button type="primary" @click="addUsers">确 定</el-button>
-									  </div>
-									</el-dialog>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/css/goods.css" >
+    <link rel="stylesheet" href="../assets/css/element-ui/index.css">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>
+            <div class="logo">汇安智能仓储平台</div>
 
-								</div>
-	                        </div>
-	                    
-	                    <el-card>
-	                        <el-table :data="datalist" stripe style="width: 100%; " >
-	                            <el-table-column prop="userId" label="用户ID" width="180">
-								</el-table-column>
-	                            <el-table-column prop="userName" label="用户名称" width="180">
-	                            </el-table-column>
-	                            <el-table-column prop="userPassword" label="用户密码">
-	                            </el-table-column>
-	                            <el-table-column prop="userRole" label="用户权限">
-	                            </el-table-column>
-	                            <el-table-column label="操作" width="250" style="display: flex;">
-	                                <template slot-scope="scope" v-for="users in datalist">
-										
-	                                    <el-button type="primary" plain>编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeUsersById(users.userId)">删除</el-button>
-	                                </template>
-	                            </el-table-column>
-	                        </el-table>
-	                        <div style="text-align: center;">
-	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-	                        </div>
-	                    </el-card>
-	                </el-main>
-	            </el-container>
-	        </el-container>
-	    </div>
-	</body>
-	<script src="../assets/js/vue.js"></script>
-	<script src="../assets/css/element-ui/index.js"></script>
-	<script src="../assets/js/axios.min.js"></script>
-	
-	<script>
-	    new Vue({
-	        el: '#app',
-	        data: function() {
-	            return {
-					datalist: [],
-					addFormVisible: false,
-					form: {
-						name: '',
-						type: '',
-						size: '',
-						value: ''
-					},
-					formLabelWidth: '120px'
-					
-	            }
-	        },
+        </el-header>
 
-			created(){
-				this.getAll()
-			},
+        <el-container>
+            <!--侧边栏-->
+            <el-aside width="200px">
+                <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;" background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
+                    <el-menu-item index="1">
+                        <i class="el-icon-menu"></i>
+                        <span slot="title">常用</span>
+                    </el-menu-item>
 
-	        methods: {
-				getAll() {
-					axios.get("http://localhost:8080/users").then(res => {
-						this.datalist = res.data;
-					});
-				},
+                    <el-menu-item index="2">
+                        <i class="el-icon-s-help"></i>
+                        <span slot="title">控制台</span>
+                    </el-menu-item>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-view"></i>
+                            <span>业务流</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1">
+                                <i class="el-icon-ice-cream-round"></i>
+                                <span slot="title">用户管理</span>
+                            </el-menu-item>
+                            <el-menu-item index="3-2">
+                                <i class="el-icon-location"></i>
+                                <span slot="title">员工管理</span>
+                            </el-menu-item>
+                            <el-menu-item index="3-3">
+                                <i class="el-icon-trophy"></i>
+                                <span slot="title">仓库管理</span>
+                            </el-menu-item>
+                            <el-menu-item index="3-4">
+                                <i class="el-icon-mouse"></i>
+                                <span slot="title">商品管理</span>
+                            </el-menu-item>
 
-				removeUsersById(userId) {
-					this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						axios.delete("http://localhost:8080/users/" + userId).then(res=> {
-							this.getAll();
-						});
-						this.$message({
-							type: 'success',
-							message: '删除成功!'
-						});
-					}).catch(() => {
-						this.$message({
-							type: 'info',
-							message: '已取消删除'
-						});
-					});
-				},
-				
-				addUsers() {
-					axios.post("http://localhost:8080/users/save",this.form).then(rel=>{
-						if(rel.data){
-							this.$message({
-								type: 'success',
-								message: '新增成功!'
-							});
-							this.getAll();
-							this.addFormVisible = false;
-							this.$refs.form.resetFields();
-						}else{
-							this.$message({
-								type: 'info',
-								message: '新增失败'
-							});
-						}
-					})
-					
-				}
+                        </el-menu-item-group>
+                    </el-submenu>
 
-	        }
-	    })
-	</script>
-	</html>
+                    <el-menu-item index="5">
+                        <i class="el-icon-setting"></i>
+                        <span slot="title">系统设置</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-aside>
+            <!-- 主体 -->
+            <el-main>
+                <el-breadcrumb style="margin-bottom: 12px;">
+                    <el-breadcrumb-item>首页</el-breadcrumb-item>
+                    <el-breadcrumb-item>业务流</el-breadcrumb-item>
+                    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+
+                </el-breadcrumb>
+
+                <div class="card-container">
+                    <div class="handle-container">
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
+
+                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+                            <el-form :model="form" ref="form">
+                                <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
+                                    <el-input v-model="form.userId" autocomplete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="用户名称" :label-width="formLabelWidth" prop="userName">
+                                    <el-input v-model="form.userName" autocomplete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="用户密码" :label-width="formLabelWidth" prop="userPassword">
+                                    <el-input v-model="form.userPassword" autocomplete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="用户权限" :label-width="formLabelWidth" prop="userRole">
+                                    <el-input v-model="form.userRole" autocomplete="off"></el-input>
+                                </el-form-item>
+                            </el-form>
+                            <div slot="footer" class="dialog-footer">
+                                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                                <el-button v-if="isAdd" type="primary" @click="addUsers">确 定</el-button>
+                                <el-button  v-else type="primary" @click="updateUsersById">更 新</el-button>
+                            </div>
+                        </el-dialog>
+
+                    </div>
+                </div>
+
+                <el-card>
+                    <el-table :data="tableData" stripe style="width: 100%; " >
+                        <el-table-column prop="userId" label="用户ID" width="180">
+                        </el-table-column>
+                        <el-table-column prop="userName" label="用户名称" width="180">
+                        </el-table-column>
+                        <el-table-column prop="userPassword" label="用户密码">
+                        </el-table-column>
+                        <el-table-column prop="userRole" label="用户权限">
+                        </el-table-column>
+                        <el-table-column label="操作" width="250" style="display: flex;">
+                            <template slot-scope="scope" v-for="users in tableData">
+
+                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
+                                <el-button type="danger" plain @click="removeUsersById(users.userId)">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <div style="text-align: center;">
+                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+                    </div>
+                </el-card>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/css/element-ui/index.js"></script>
+<script src="../assets/js/axios.min.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                tableData: [],
+                dialogFormVisible: false,
+                dialogFormTitle: "",
+                form: {
+                    id: '',
+                    name: '',
+                    password: '',
+                    role: ''
+                },
+                formLabelWidth: '120px',
+                isAdd: false
+
+            }
+        },
+
+        created(){
+            this.getAll();
+        },
+
+        methods: {
+            getAll(){
+                axios.get("http://localhost:8080/users").then(res=>{
+                    this.tableData = res.data ;
+                });
+            },
+
+            removeUsersById(userId) {
+                this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios.delete("http://localhost:8080/users/" + userId).then(res=> {
+                        this.getAll();
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+
+            addClick() {
+                this.dialogFormVisible = true;
+                this.dialogFormTitle = "新增货物";
+                this.isAdd = true;
+                this.form = {};
+            },
+
+            addUsers() {
+                axios.post("http://localhost:8080/users/save",this.form).then(rel=>{
+                    if(rel.data){
+                        this.$message({
+                            type: 'success',
+                            message: '新增成功!'
+                        });
+                        this.getAll();
+                        this.dialogFormVisible = false;
+
+                    }else{
+                        this.$message({
+                            type: 'info',
+                            message: '新增失败'
+                        });
+                    }
+                    this.$refs.form.resetFields();
+                })
+            },
+
+            editClick(index,row) {
+                this.dialogFormVisible = true;
+                this.dialogFormTitle = "修改用户信息";
+                this.isAdd = false;
+                this.form = Object.assign({},row);
+                this.form.index = index;
+            },
+
+            editUsers() {
+                //this.$set(tableName,talbeIndex,data)
+                this.$set(this.tableData,this.form.index,{name:this.form.id,type:this.form.name,size:this.form.password,value:this.form.role});
+
+            },
+            updateUsersById() {
+                axios.put("http://localhost:8080/users",this.form).then(rel=>{
+                    if(rel.data){
+                        this.$message({
+                            type: 'success',
+                            message: '修改成功!'
+                        });
+                        this.getAll();
+                        this.dialogFormVisible = false;
+
+                    }else{
+                        this.$message({
+                            type: 'info',
+                            message: '修改失败'
+                        });
+                    }
+                    this.$refs.form.resetFields();
+                })
+            }
+        }
+    })
+</script>
+</html>
