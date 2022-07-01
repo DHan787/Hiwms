@@ -49,7 +49,7 @@ public class UsersController {
      * @param users
      * @return
      */
-    @PostMapping
+    @PostMapping("/login")
     private boolean login(@RequestBody Users users) throws Exception {
         System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
@@ -91,5 +91,14 @@ public class UsersController {
         return usersService.removeById(id);
     }
 
+    @PostMapping("/register")
+    public boolean register(@RequestBody Users users){
+        try {
+            users.setUserPassword(EncryptUtil.shaEncode(users.getUserPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usersService.save(users);
+    }
 
 }

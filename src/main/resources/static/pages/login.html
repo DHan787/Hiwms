@@ -91,21 +91,11 @@
             };
         },
 
-        created() {
-            this.getAll();
-
-        },
-
         methods: {
-            getAll() {
-                axios.get("http://localhost:8080/users").then(res => {
-                    this.info = res.data;
-                });
-            },
             login() {
                 if(this.loginForm.userName!==''){
                     if(this.loginForm.userPassword!==''){
-                        axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
+                        axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
                             if (rel.data) {
                                 alert("success")
                                 window.location.href = ("admin.html")
