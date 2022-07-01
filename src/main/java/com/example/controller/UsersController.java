@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.utils.EncryptUtil;
 
+import java.lang.management.OperatingSystemMXBean;
 import java.util.List;
 
 @Slf4j
@@ -70,6 +71,11 @@ public class UsersController {
      */
     @PostMapping("/save")
     public boolean saveUsers(@RequestBody Users users){
+        try {
+            users.setUserPassword(EncryptUtil.shaEncode(users.getUserPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return usersService.save(users);
     }
 
@@ -81,6 +87,7 @@ public class UsersController {
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id){
+        System.out.println("the id is :"+id);
         return usersService.removeById(id);
     }
 
