@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.domain.Goods;
-import com.example.domain.Users;
 import com.example.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class GoodsController {
     @GetMapping//访问方式
     public List<Goods> getAll() {
         //log.info("goods获取的数据，{}",goodsService.list());
-        System.out.println("used");
+        //System.out.println("used");
         return goodsService.list();
     }
 
@@ -56,7 +55,7 @@ public class GoodsController {
      */
     @PostMapping
     public boolean saveGoods(@RequestBody Goods goods){
-
+        System.out.println("save!");
         return goodsService.save(goods);
     }
 
