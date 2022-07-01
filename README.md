@@ -18,17 +18,13 @@
             佛祖保佑       永无BUG
 
 
-# 延伸阅读
 # ！！请把每次commit内容书写在本文档！！
-## testhxy-2
-## testwlx
-## testzls
-## testymm
+# commit内容
 ## 6.30
-* 17:54 用户管理的删除 
-* 18:17 goods的问题修正 没有import lombok.Data;
-* 21:04 二次确认是否删除
-* 21：45 数据库使用sha加密
+* 用户的删除 
+* goods的问题修正 没有import lombok.Data;
+* 二次确认是否删除
+* 数据库使用sha加密
 > 手动加密密码方法：
 > 1. 找utils包里的EncryptUtil类
 > 2. 找到main函数，将str赋值为你的密码
@@ -53,4 +49,4 @@
 * 完成新建订单（时间选择，订单类型选择）hj
 * 简陋的页面跳转 
   仓库页面的建立（复制的货品页面 只改了文本部分）zls
-* user界面的增删改实现 ymm
+* 用户界面的增删改实现 ymm
