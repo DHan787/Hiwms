@@ -72,6 +72,7 @@
 
                 </el-breadcrumb>
 
+                <!--新建订单区域-->
                 <div class="card-container">
                     <div class="handle-container">
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addFormVisible = true">新建订单</el-button>
@@ -84,11 +85,23 @@
                                         <el-radio border label="出库" value="2"/>出库</el-radio>
                                     </el-radio-group>
                                 </el-form-item>
-                                <el-form-item label="订单开始时间" :label-width="formLabelWidth" prop="goodSize">
-                                    <el-input v-model="form.orderStartTime" autocomplete="off"></el-input>
+                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="goodSize">
+                                    <div class="block">
+                                        <el-date-picker
+                                                v-model="form.orderStartTime"
+                                                type="datetime"
+                                                placeholder="选择日期时间">
+                                        </el-date-picker>
+                                    </div>
                                 </el-form-item>
-                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="goodValue">
-                                    <el-input v-model="form.orderEndTime" autocomplete="off"></el-input>
+                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="goodSize">
+                                    <div class="block">
+                                        <el-date-picker
+                                                v-model="form.orderEndTime"
+                                                type="datetime"
+                                                placeholder="选择日期时间">
+                                        </el-date-picker>
+                                    </div>
                                 </el-form-item>
                                 <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="goodValue">
                                     <el-input v-model="form.orderInit" autocomplete="off"></el-input>
@@ -105,7 +118,7 @@
 
                     </div>
                 </div>
-
+                <!--表单区域-->
                 <el-card>
                     <el-table :data="tableData" stripe style="width: 100%; " >
                         <el-table-column prop="orderID" label="订单编号" width="180">
