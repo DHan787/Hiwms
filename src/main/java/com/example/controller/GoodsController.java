@@ -49,4 +49,15 @@ public class GoodsController {
 
     }
 
+    /**
+     * 保存用户
+     * @param goods
+     * @return
+     */
+    @PostMapping
+    public boolean saveGoods(@RequestBody Goods goods){
+
+        return goodsService.save(goods);
+    }
+
 }
