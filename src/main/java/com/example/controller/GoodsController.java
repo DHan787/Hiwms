@@ -60,4 +60,10 @@ public class GoodsController {
         return goodsService.save(goods);
     }
 
+
+    @PutMapping
+    public boolean updateGoods(@RequestBody Goods goods){
+        return goodsService.updateById(goods);
+    }
+
 }
