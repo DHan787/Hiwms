@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.domain.Goods;
 import com.example.domain.Users;
 import com.example.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +63,16 @@ public class UsersController {
         return false;
     }
 
+    /**
+     * 保存用户
+     * @param users
+     * @return
+     */
+    @PostMapping("/save")
+    public boolean saveUsers(@RequestBody Users users){
+        return usersService.save(users);
+    }
+
 
     /**
      * 删除用户
@@ -72,5 +83,6 @@ public class UsersController {
     public boolean delete(@PathVariable int id){
         return usersService.removeById(id);
     }
+
 
 }

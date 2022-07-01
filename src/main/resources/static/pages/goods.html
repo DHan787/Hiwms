@@ -64,8 +64,7 @@
 	                    <el-breadcrumb style="margin-bottom: 12px;">
 	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
 	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
-	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>
-	                        
+	                        <el-breadcrumb-item>货品管理</el-breadcrumb-item>   
 	                    </el-breadcrumb>
 	                    
 	                        <div class="card-container">
@@ -110,7 +109,6 @@
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="goods in tableData">
-										
 	                                    <el-button type="primary" plain>编辑</el-button>
 	                                    <el-button type="danger" plain @click="removeGoodsById(goods.goodId)">删除</el-button>
 	                                </template>
