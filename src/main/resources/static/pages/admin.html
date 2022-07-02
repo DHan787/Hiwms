@@ -36,7 +36,7 @@
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
 										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="goUsers()">用户管理</span>
+										<span slot="title" @click="openUrl('/pages/users.html')">用户管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-2">
 										<i class="el-icon-location"></i>
@@ -48,11 +48,11 @@
 									</el-menu-item>
 									<el-menu-item index="3-4">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="goGoods()">商品管理</span>
+										<span slot="title" @click="openUrl('/pages/goods.html')">商品管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-5">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="goOrders()">订单管理</span>
+										<span slot="title" @click="openUrl('/pages/orders.html')">订单管理</span>
 									</el-menu-item>
 
 								</el-menu-item-group>
@@ -64,9 +64,13 @@
 							</el-menu-item>
 						</el-menu>
 					</el-aside>
+
+
+
 					<!-- 主体 -->
 					<el-main>
-						<el-breadcrumb style="margin-bottom: 12px;">
+						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"  frameborder="0" scrolling="no"></iframe>
+						<!-- <el-breadcrumb style="margin-bottom: 12px;">
 							<el-breadcrumb-item>首页</el-breadcrumb-item>
 						</el-breadcrumb>
 						<el-card class="box-card" style="margin-bottom: 12px;">
@@ -84,7 +88,7 @@
 									</div>
 								</div>
 							</div>
-						</el-card>
+						</el-card> -->
 					</el-main>
 				</el-container>
 			</el-container>
@@ -98,81 +102,30 @@
 			el: '#app',
 			data: function() {
 				return {
-					src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
 					UserEditVisible: false,
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					/*tableData: [{
-                      date: '2016-05-02',
-                      name: '张三',
-                      address: ' 西南大学',
-                      ip: "192.168.3.2"
-                  }, {
-                      date: '2016-05-04',
-                      name: '李四',
-                      address: '天生路',
-                      ip: "192.168.3.4"
-                  }, {
-                      date: '2016-05-01',
-                      name: '王五',
-                      address: '天生丽街',
-                      ip: "192.168.3.5",
-    
-                  }]*/
-						}
-					},
-					created() {
-						this.getAll()
-					},
-					methods: {
-						goOrders(){
-							window.location.href=("orders.html");
-						},
-						goGoods(){
-							window.location.href=("goods.html");
-						},
-                        goUsers(){
-                            window.location.href=("users.html");
-                        },
-						getAll() {
-							axios.get("http://localhost:8080/users").then(res => {
-								this.datalist = res.data;
-							});
-						},
-						userDelete(userId) {
-							        this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
-							          confirmButtonText: '确定',
-							          cancelButtonText: '取消',
-							          type: 'warning'
-							        }).then(() => {
-										axios.delete("http://localhost:8080/users/"+userId).then(res => {
-											this.getAll();
-										});
-							          this.$message({
-							            type: 'success',
-							            message: '删除成功!'
-							          });
-							        }).catch(() => {
-							          this.$message({
-							            type: 'info',
-							            message: '已取消删除'
-							          });          
-							        });
-									},
+					iframeUrl: '/pages/index.html'
+				}
+			},
+			created() {
+				
+			},
+			methods: {
+				adjustIframe() {
+					var ifm= document.getElementById("bi_iframe");
+					ifm.height=document.documentElement.clientHeight;
+					ifm.width=document.documentElement.clientWidth;
+				},
 
-								userEdit() {
-									this.UserEditVisible = true;
+				openUrl(url) {
 
-								},
-                        closeDialog() {
-                            this.centerDialogVisible = false
-                            this.isAddMembers = false
-                            console.log("editfrom", this.editForm)
-                            console.log("addfrom", this.addForm)
-                        },
-
-							}
-						})
+					this.iframeUrl = url;
+				}
+				
+			}
+		})
 	</script>
 </html>
