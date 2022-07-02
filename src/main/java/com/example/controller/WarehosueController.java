@@ -50,13 +50,13 @@ public class WarehosueController {
 
     /**
      * 保存用户
-     * @param goods
+     * @param warehouse
      * @return
      */
     @PostMapping
-    public boolean saveWarehouse(@RequestBody Warehouse goods){
+    public boolean saveWarehouse(@RequestBody Warehouse warehouse){
         System.out.println("save!");
-        return warehouseService.save(goods);
+        return warehouseService.save(warehouse);
     }
 
 
