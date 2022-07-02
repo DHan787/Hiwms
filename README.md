@@ -50,8 +50,6 @@
 * 简陋的页面跳转 
   仓库页面的建立（复制的货品页面 只改了文本部分）zls
 * 用户界面的增删改实现 ymm
-* 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
-* idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
 
 
 ## 7.2
@@ -61,4 +59,5 @@
 * 登录界面完善（还有一个小小的BUG）WLX
 * 所有查询按钮 所有页面中的增加和编辑方法 所有按钮的icon zls
 * 操作员页面 ymm 注意前端prop里的内容一定要和实体类中的名字一致！
-* 
+* 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
+* idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
