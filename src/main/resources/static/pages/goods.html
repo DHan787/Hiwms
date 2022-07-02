@@ -64,7 +64,7 @@
 	                                <template slot-scope="scope" v-for="goods in tableData">
 										
 	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeGoodsById(goods.goodId)">删除</el-button>
+	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index,scope.row)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -90,6 +90,7 @@
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					form: {
+						id: '',
 						name: '',
 						type: '',
 						size: '',
@@ -112,13 +113,20 @@
 					});
 				},
 
-				removeGoodsById(goodId) {
+				removeGoodsById(index,row) {
+					//this.form.index = index;
+					var id = this.tableData[index].goodId;
+					//console.log(this.form);
+					//console.log(this.tableData[index].goodId);
+					//console.log(this.form.id);
 					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
 						type: 'warning'
 					}).then(() => {
-						axios.delete("http://localhost:8080/goods/" + goodId).then(res=> {
+						this.form.index = index;
+						console.log(this.form.id);
+						axios.delete("http://localhost:8080/goods/" + id).then(res=> {
 							this.getAll();
 						});
 						this.$message({
