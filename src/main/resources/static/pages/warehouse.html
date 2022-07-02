@@ -109,7 +109,7 @@
 
 	        methods: {
 				getAll(){
-					axios.get("http://192.168.4.18/warehouse").then(res=>{
+					axios.get("http://localhost:8080/warehouse").then(res=>{
 						this.tableData = res.data ;
 					});
 				},
@@ -120,7 +120,7 @@
 						cancelButtonText: '取消',
 						type: 'warning'
 					}).then(() => {
-						axios.delete("http://192.168.4.18/warehouse/" + goodId).then(res=> {
+						axios.delete("http://localhost:8080/warehouse/" + warehouseId).then(res=> {
 							this.getAll();
 						});
 						this.$message({
@@ -142,8 +142,8 @@
 						this.form = {};
 				},
 				
-				addGoods() {
-					axios.post("http://192.168.4.18/warehouse",this.form).then(rel=>{
+				addWarehouse() {
+					axios.post("http://localhost:8080/warehouse",this.form).then(rel=>{
 						if(rel.data){
 							this.$message({
 								type: 'success',
@@ -164,7 +164,7 @@
 				
 				editClick(index,row) {
 					this.dialogFormVisible = true;
-					this.dialogFormTitle = "修改货物";
+					this.dialogFormTitle = "修改仓库";
 					this.isAdd = false;
 					this.form = Object.assign({},row);
 					this.form.index = index;				
@@ -177,7 +177,7 @@
 				},
 				
 				updateWarehouseById() {
-					axios.put("http://192.168.4.18/warehouse",this.form).then(rel=>{
+					axios.put("http://localhost:8080/warehouse",this.form).then(rel=>{
 						if(rel.data){
 							this.$message({
 								type: 'success',

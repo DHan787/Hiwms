@@ -25,7 +25,6 @@
                         <el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询用户</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
 
-
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
@@ -192,7 +191,7 @@
                     }
                     this.$refs.form.resetFields();
                 })
-            },
+            }
         }
     })
 </script>
