@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/axios.min.js"></script>
     <title>Users-test</title>
 </head>
 <body>
 <div id="app">
     the test
     <ul>
-        <li v-for="info in info">
-            {{info.userId}}
-            {{info.userName}}
-            {{info.userPassword}}
-            {{info.userRole}}
-        </li>
+        {{info.userName}}
     </ul>
     <tr>
         <td>
@@ -28,13 +25,11 @@
             <input type="button" value="登录" v-on:click="submitForm">
         </td>
 </div>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/js/axios.min.js"></script>
 <script>
     new Vue({
         el: "#app",
         data:{
-            info:[],
+            info:{},
             formData:{}
         },
         created(){
@@ -44,8 +39,10 @@
         methods:{
             //查询所有
             getAll(){
-                axios.get("http://localhost:8080/users").then(res=>{
+                axios.get("http://localhost:8080/usersDetail").then(res=>{
+                    console.log(res.data.userName);
                     this.info=res.data;
+                    console.log(this.info)
 
                 });
             },
@@ -62,7 +59,5 @@
         }
     })
 </script>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/js/axios.min.js"></script>
 </body>
 </html>

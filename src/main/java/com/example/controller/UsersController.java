@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.domain.Goods;
 import com.example.domain.Users;
 import com.example.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.utils.EncryptUtil;
 
-import java.lang.management.OperatingSystemMXBean;
 import java.util.List;
 
 @Slf4j
