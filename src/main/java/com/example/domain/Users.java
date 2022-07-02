@@ -12,5 +12,4 @@ public class Users {
     private String userName;
     private String userPassword;
     private Integer userRole;
-
 }

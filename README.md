@@ -50,3 +50,6 @@
 * 简陋的页面跳转 
   仓库页面的建立（复制的货品页面 只改了文本部分）zls
 * 用户界面的增删改实现 ymm
+* 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
+* idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
+

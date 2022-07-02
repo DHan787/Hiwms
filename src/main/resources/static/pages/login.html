@@ -82,7 +82,8 @@
         data: {
             info: [],
             loginForm: {userName:'',
-                userPassword: ''},
+                userPassword: '',
+                code:''},
         },
         data(){
             return {
@@ -128,7 +129,7 @@
                 if(this.loginForm.userName!==''){
                     if(this.loginForm.userPassword!==''){
                         if(this.loginForm.code!==''){
-                            if(this.code == this.input.value.trim().toLowerCase()) {
+                            if(this.code === this.input.value.trim().toLowerCase()) {
                                 axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
                                     if (rel.data) {
                                         alert("success")
