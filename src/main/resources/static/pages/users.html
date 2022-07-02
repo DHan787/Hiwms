@@ -165,12 +165,6 @@
                 this.form = Object.assign({},row);
                 this.form.index = index;
             },
-
-            editUsers() {
-                //this.$set(tableName,talbeIndex,data)
-                this.$set(this.tableData,this.form.index,{name:this.form.id,type:this.form.name,size:this.form.password,value:this.form.role});
-
-            },
             updateUsersById() {
                 axios.put("http://localhost:8080/users",this.form).then(rel=>{
                     if(rel.data){
