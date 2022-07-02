@@ -158,18 +158,6 @@
 			},
 
 	        methods: {
-				goUsers(){
-					window.location.href=("users.html");
-				},
-				goOrders(){
-					window.location.href=("orders.html");
-				},
-				goGoods(){
-					window.location.href=("goods.html");
-				},
-				goWarehouse(){
-					window.location.href=("warehouse.html");
-				},
 				getAll(){
 					axios.get("http://localhost:8080/goods").then(res=>{
 						this.tableData = res.data ;

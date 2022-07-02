@@ -36,7 +36,7 @@
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
 										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="openUrl('/pages/users.html')">用户管理</span>
+										<span slot="title" @click="openUrl('./users.html')">用户管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-2">
 										<i class="el-icon-location"></i>
@@ -48,11 +48,11 @@
 									</el-menu-item>
 									<el-menu-item index="3-4">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('/pages/goods.html')">商品管理</span>
+										<span slot="title" @click="openUrl('./goods.html')">商品管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-5">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('/pages/orders.html')">订单管理</span>
+										<span slot="title" @click="openUrl('./orders.html')">订单管理</span>
 									</el-menu-item>
 
 								</el-menu-item-group>
@@ -104,7 +104,7 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					iframeUrl: '/pages/index.html'
+					iframeUrl: './index.html'
 				}
 			},
 			created() {
