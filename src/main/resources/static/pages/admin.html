@@ -36,23 +36,19 @@
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
 										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="openUrl('/pages/users.html')">用户管理</span>
+										<span slot="title" @click="openUrl('./users.html')">用户管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-2">
-										<i class="el-icon-location"></i>
-										<span slot="title">员工管理</span>
+										<i class="el-icon-trophy"></i>
+										<span slot="title" @click="openUrl('./warehouse.html')">仓库管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-3">
-										<i class="el-icon-trophy"></i>
-										<span slot="title">仓库管理</span>
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="openUrl('./goods.html')">货品管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-4">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('/pages/goods.html')">商品管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-5">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('/pages/orders.html')">订单管理</span>
+										<span slot="title" @click="openUrl('./orders.html')">订单管理</span>
 									</el-menu-item>
 
 								</el-menu-item-group>
@@ -70,25 +66,6 @@
 					<!-- 主体 -->
 					<el-main>
 						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"  frameborder="0" scrolling="no"></iframe>
-						<!-- <el-breadcrumb style="margin-bottom: 12px;">
-							<el-breadcrumb-item>首页</el-breadcrumb-item>
-						</el-breadcrumb>
-						<el-card class="box-card" style="margin-bottom: 12px;">
-							<div class="card-container">
-								<el-image :src="src" class="ava">
-									<div slot="placeholder" class="image-slot">
-										加载中<span class="dot">...</span>
-									</div>
-								</el-image>
-								<div class="admin-info">
-									<h3>早安，管理员，开始您一天的工作吧！</h3>
-									<div class="weather">
-										<i class="el-icon-heavy-rain"></i>
-										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
-									</div>
-								</div>
-							</div>
-						</el-card> -->
 					</el-main>
 				</el-container>
 			</el-container>
@@ -107,7 +84,7 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					iframeUrl: '/pages/index.html'
+					iframeUrl: './index.html'
 				}
 			},
 			created() {
