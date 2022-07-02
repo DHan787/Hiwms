@@ -61,8 +61,8 @@ public class WarehosueController {
 
 
     @PutMapping
-    public boolean updateWarehouse(@RequestBody Warehouse goods){
-        System.out.println(goods.getWarehouseName());
-        return warehouseService.updateById(goods);
+    public boolean updateWarehouse(@RequestBody Warehouse warehouse){
+        System.out.println(warehouse.getWarehouseName());
+        return warehouseService.updateById(warehouse);
     }
 }

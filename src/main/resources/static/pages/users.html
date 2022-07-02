@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" xmlns="">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/css/goods.css" >
@@ -21,6 +21,8 @@
 
                 <div class="card-container">
                     <div class="handle-container">
+
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询用户</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
 
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -61,8 +63,8 @@
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="users in tableData">
 
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
-                                <el-button type="danger" plain @click="removeUsersById(users.userId)">删除</el-button>
+                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
+                                <el-button type="danger" plain @click="removeUsersById(users.userId)" icon="el-icon-delete">删除</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -168,7 +170,7 @@
 
             editUsers() {
                 //this.$set(tableName,talbeIndex,data)
-                this.$set(this.tableData,this.form.index,{name:this.form.id,type:this.form.name,size:this.form.password,value:this.form.role});
+                this.$set(this.tableData,this.form.index,{id:this.form.id,name:this.form.name,password:this.form.password,role:this.form.role});
 
             },
             updateUsersById() {
