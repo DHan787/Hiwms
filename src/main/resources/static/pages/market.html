@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../assets/css/admin.css">
 		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
-		<title></title>
+		<title>超市货物员</title>
 	</head>
 	<body>
 		<div id="app">
@@ -29,32 +29,11 @@
 								<span slot="title">控制台</span>
 							</el-menu-item>
 							<el-submenu index="3">
-								<template slot="title">
-									<i class="el-icon-view"></i>
-									<span>业务流</span>
-								</template>
 								<el-menu-item-group>
-									<el-menu-item index="3-1">
-										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="goUsers()">用户管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-2">
-										<i class="el-icon-location"></i>
-										<span slot="title">员工管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-3">
-										<i class="el-icon-trophy"></i>
-										<span slot="title">仓库管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-4">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="goGoods()">商品管理</span>
-									</el-menu-item>
 									<el-menu-item index="3-5">
 										<i class="el-icon-mouse"></i>
 										<span slot="title" @click="goOrders()">订单管理</span>
 									</el-menu-item>
-
 								</el-menu-item-group>
 							</el-submenu>
 
@@ -77,7 +56,7 @@
 									</div>
 								</el-image>
 								<div class="admin-info">
-									<h3>早安，管理员，开始您一天的工作吧！</h3>
+									<h3>早安，超市货物员，开始您一天的工作吧！</h3>
 									<div class="weather">
 										<i class="el-icon-heavy-rain"></i>
 										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
@@ -103,23 +82,6 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					/*tableData: [{
-                      date: '2016-05-02',
-                      name: '张三',
-                      address: ' 西南大学',
-                      ip: "192.168.3.2"
-                  }, {
-                      date: '2016-05-04',
-                      name: '李四',
-                      address: '天生路',
-                      ip: "192.168.3.4"
-                  }, {
-                      date: '2016-05-01',
-                      name: '王五',
-                      address: '天生丽街',
-                      ip: "192.168.3.5",
-    
-                  }]*/
 						}
 					},
 					created() {
