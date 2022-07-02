@@ -61,4 +61,6 @@
 * 操作员页面 ymm 注意前端prop里的内容一定要和实体类中的名字一致！
 * 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
 * idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
+* 修正用户删除错误 ymm feat hxy
 * 修改了删除只能删最后一个的bug hxy 17:30
+* 用户删除修复 ymm feat hxy
