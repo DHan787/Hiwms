@@ -35,21 +35,14 @@
 								</template>
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
-										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="openUrl('./users.html')">用户管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-2">
-										<i class="el-icon-trophy"></i>
-										<span slot="title" @click="openUrl('./warehouse.html')">仓库管理</span>
-									</el-menu-item>
-									<el-menu-item index="3-3">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('./goods.html')">货物管理</span>
+										<i class="el-icon-download"></i>
+										<span slot="title" @click="openUrl('./stock-in.html')">入库信息</span>
 									</el-menu-item>
 									<el-menu-item index="3-4">
-										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('./orders.html')">订单管理</span>
+										<i class="el-icon-upload2"></i>
+										<span slot="title" @click="openUrl('./stock-out.html')">出库信息</span>
 									</el-menu-item>
+
 
 								</el-menu-item-group>
 							</el-submenu>
@@ -60,9 +53,6 @@
 							</el-menu-item>
 						</el-menu>
 					</el-aside>
-
-
-
 					<!-- 主体 -->
 					<el-main>
 						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"  frameborder="0" scrolling="no"></iframe>
@@ -88,7 +78,7 @@
 				}
 			},
 			created() {
-				
+
 			},
 			methods: {
 				adjustIframe() {
@@ -101,7 +91,7 @@
 
 					this.iframeUrl = url;
 				}
-				
+
 			}
 		})
 	</script>

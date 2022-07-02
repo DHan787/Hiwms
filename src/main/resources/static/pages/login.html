@@ -46,7 +46,7 @@
                             <span class="el-icon-info"></span>
                         </el-col>
                         <el-col :span='20'>
-                            <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input">
+                            <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input" ref="getValue" />
                             </el-input>
                         </el-col>
                     </el-row>
@@ -83,7 +83,7 @@
             info: [],
             loginForm: {userName:'',
                 userPassword: '',
-                code:''},
+            code:''},
         },
         data(){
             return {
@@ -126,35 +126,37 @@
                 });
             },
             login() {
-                if(this.loginForm.userName!==''){
-                    if(this.loginForm.userPassword!==''){
-                        if(this.loginForm.code!==''){
-                            if(this.code === this.input.value.trim().toLowerCase()) {
-                                axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
-                                    if (rel.data) {
-                                        alert("success")
-                                        window.location.href = ("admin.html")
-                                    } else {
-                                        alert("用户名或密码错误")
-                                    }
-                                })
-                            }else{
-                                alert("验证码错误!")
-                            }
-                        }else{
-                            alert("验证码为空！")
-                        }
-                    }else{
-                        alert("密码为空！")
-                    }
-                }else{
-                    alert("用户名为空！")
-                }
+                 if(this.loginForm.userName!==''){
+                     if(this.loginForm.userPassword!==''){
+                         if(this.loginForm.code!==''){
+                             if(code === this.$refs.getValue.value.toLowerCase()) {
+                                 axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
+                                     if (rel.data) {
+                                         alert("success")
+                                         window.location.href = ("admin.html")
+                                     } else {
+                                         alert("用户名或密码错误")
+                                     }
+                                 })
+                             }else{
+                                 alert("验证码错误!")
+                             }
+                         }else{
+                             alert("验证码为空！")
+                         }
+                     }else{
+                         alert("密码为空！")
+                     }
+                 }else{
+                     alert("用户名为空！")
+                 }
             },
         }
     })
 </script>
+
 <script>
+    var code = '';
     class Verification {
         constructor() {
 
@@ -166,19 +168,12 @@
             this.width = this.canvas.width
             this.height = this.canvas.height
 
-            this.code = ''
+            // this.code = ''
 
             this.charArr = this.getCharArr()
 
             this.canvas.addEventListener('click', () => this.init())
-            this.submitBtn.addEventListener('click', () => this.check())
-            this.input.addEventListener('keydown', (e) => {
 
-                if (e.keyCode === 13) {
-                    this.check()
-                }
-            })
-            this.init()
         }
 
         init() {
@@ -187,7 +182,7 @@
             this.drawLine()
             this.drawDot()
         }
-        // 检测验证码是否符合??? 原来有check的东西
+        // 检测验证码是否符合???
 
 
         getCharArr() {
@@ -211,11 +206,11 @@
         drawText() {
             const length = this.charArr.length
             this.ctx.font = 'bold 25px 宋体'
-            this.code = ''
+            code = ''
             for (let i = 0; i < 4; i++) {
                 this.ctx.beginPath()
                 let index = Math.floor(Math.random() * length)
-                this.code += this.charArr[index].toString().toLowerCase()
+                code += this.charArr[index].toString().toLowerCase()
                 let x = i * 20 + 15
                 let y = 24 + Math.random() * 5
                 let angle = Math.random() * - 0.5
