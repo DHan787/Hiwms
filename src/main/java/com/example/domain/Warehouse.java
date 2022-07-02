@@ -11,9 +11,9 @@ public class Warehouse {
     @TableId("warehouse_id")
     private Integer warehouseId;
     private String warehouseName;
+    private String warehouseLocation;
     private String warehouseType;
     private String warehouseSize;
-    private Double warehouseValue;
     public Integer getWarehouseId() {
         return warehouseId;
     }

@@ -21,14 +21,12 @@
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-
-									<el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询仓库</el-button>
 									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增仓库</el-button>
-
+									
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
 									    <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
-									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
+									      <el-input v-model="form.warehouseName" autocomplete="off"></el-input>
 									    </el-form-item>
 										  <el-form-item label="仓库位置" :label-width="formLabelWidth" prop="warehouseLocation">
 											  <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
@@ -65,8 +63,9 @@
 	                            </el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="warehouse in tableData">
-	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeWarehouseById(goods.goodId)" icon="el-icon-delete">删除</el-button>
+										
+	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
+	                                    <el-button type="danger" plain @click="removeWarehouseById(warehouse.warehouseId)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -115,7 +114,7 @@
 				},
 
 				removeWarehouseById(warehouseId) {
-					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
+					this.$confirm('此操作将永久删除仓库, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
 						type: 'warning'
