@@ -98,28 +98,7 @@
 			el: '#app',
 			data: function() {
 				return {
-					src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-					UserEditVisible: false,
-					editForm: [],
-					datalist: [],
-					FormData: {},
-					/*tableData: [{
-                      date: '2016-05-02',
-                      name: '张三',
-                      address: ' 西南大学',
-                      ip: "192.168.3.2"
-                  }, {
-                      date: '2016-05-04',
-                      name: '李四',
-                      address: '天生路',
-                      ip: "192.168.3.4"
-                  }, {
-                      date: '2016-05-01',
-                      name: '王五',
-                      address: '天生丽街',
-                      ip: "192.168.3.5",
-    
-                  }]*/
+					src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
 						}
 					},
 					created() {
@@ -139,39 +118,7 @@
 							axios.get("http://localhost:8080/users").then(res => {
 								this.datalist = res.data;
 							});
-						},
-						userDelete(userId) {
-							        this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
-							          confirmButtonText: '确定',
-							          cancelButtonText: '取消',
-							          type: 'warning'
-							        }).then(() => {
-										axios.delete("http://localhost:8080/users/"+userId).then(res => {
-											this.getAll();
-										});
-							          this.$message({
-							            type: 'success',
-							            message: '删除成功!'
-							          });
-							        }).catch(() => {
-							          this.$message({
-							            type: 'info',
-							            message: '已取消删除'
-							          });          
-							        });
-									},
-
-								userEdit() {
-									this.UserEditVisible = true;
-
-								},
-                        closeDialog() {
-                            this.centerDialogVisible = false
-                            this.isAddMembers = false
-                            console.log("editfrom", this.editForm)
-                            console.log("addfrom", this.addForm)
-                        },
-
+						}
 							}
 						})
 	</script>
