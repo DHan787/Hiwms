@@ -43,7 +43,7 @@
                             </el-menu-item>
                             <el-menu-item index="3-3">
                                 <i class="el-icon-trophy"></i>
-                                <span slot="title" @click="goVirehouse()">仓库管理</span>
+                                <span slot="title" @click="goWarehouse()">仓库管理</span>
                             </el-menu-item>
                             <el-menu-item index="3-4">
                                 <i class="el-icon-mouse"></i>
@@ -192,8 +192,8 @@
             goGoods(){
                 window.location.href=("goods.html");
             },
-            goVirehouse(){
-                window.location.href=("virehouse.html");
+            goWarehouse(){
+                window.location.href=("warehouse.html");
             },
             getAll(){
                 axios.get("http://localhost:8080/orders").then(res=>{
