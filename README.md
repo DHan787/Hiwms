@@ -61,3 +61,4 @@
 * 操作员页面 ymm 注意前端prop里的内容一定要和实体类中的名字一致！
 * 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
 * idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
+* 更正删除功能 hxy 修改所有编辑删除 zls

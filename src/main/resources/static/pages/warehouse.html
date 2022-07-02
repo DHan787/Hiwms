@@ -65,7 +65,7 @@
 	                                <template slot-scope="scope" v-for="warehouse in tableData">
 										
 	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeWarehouseById(warehouse.warehouseId)">删除</el-button>
+	                                    <el-button type="danger" plain @click="removeWarehouseById(scope.$index)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -113,13 +113,14 @@
 					});
 				},
 
-				removeWarehouseById(warehouseId) {
+				removeWarehouseById(index) {
+					var id = this.tableData[index].warehouseId;
 					this.$confirm('此操作将永久删除仓库, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
 						type: 'warning'
 					}).then(() => {
-						axios.delete("http://localhost:8080/warehouse/" + warehouseId).then(res=> {
+						axios.delete("http://localhost:8080/warehouse/" + id).then(res=> {
 							this.getAll();
 						});
 						this.$message({
@@ -168,12 +169,7 @@
 					this.form = Object.assign({},row);
 					this.form.index = index;				
 				},
-				
-				editWarehouse() {
-					//this.$set(tableName,talbeIndex,data)
-					this.$set(this.tableData,this.form.index,{name:this.form.name,location:this.form.location,type:this.form.type,size:this.form.size});
-					
-				},
+
 				
 				updateWarehouseById() {
 					axios.put("http://localhost:8080/warehouse",this.form).then(rel=>{
