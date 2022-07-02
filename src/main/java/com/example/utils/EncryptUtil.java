@@ -41,10 +41,11 @@ public class EncryptUtil {
      * @throws Exception
      */
     public static void main(String args[]) throws Exception {
-        String str = "123456";
+        String str = "123456"; //123456的密文7c4a8d09ca3762af61e59520943dc26494f8941b
         System.out.println("原始：" + str);
         System.out.println("SHA后：" + shaEncode(str));
         //System.out.println(EunmTest.One);
+
     }
 
 
