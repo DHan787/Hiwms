@@ -13,4 +13,15 @@ public class Warehouse {
     private String warehouseType;
     private String warehouseSize;
     private Double warehouseValue;
+    public Integer getwarehouseId() {
+        return warehouseId;
+    }
+
+    public String getWarehouseName() {
+        return warehouseName;
+    }
+
+    public String getWarehouseType() {
+        return warehouseType;
+    }
 }

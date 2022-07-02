@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.domain.Warehouse;
 import com.example.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,13 @@ public class WarehosueController {
 
     /**
      * 保存用户
-     * @param goods
+     * @param warehouse
      * @return
      */
     @PostMapping
-    public boolean saveWarehouse(@RequestBody Warehouse goods){
+    public boolean saveWarehouse(@RequestBody Warehouse warehouse){
         System.out.println("save!");
-        return warehouseService.save(goods);
+        return warehouseService.save(warehouse);
     }
 
 
