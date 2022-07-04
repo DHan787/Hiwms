@@ -69,3 +69,4 @@
 * StockIn StockOut 的save功能 hj
 * good->goods 部分查询代码 zls
 * stock-in-apply.html 实现前端 ymm
+* 完成货物员的入库申请 ymm
