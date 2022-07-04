@@ -9,50 +9,50 @@ import lombok.Data;
 @Data
 public class Goods {
 
-    @TableId("good_id")
-    private Integer goodId;
-    private String goodName;
-    private String goodType;
-    private String goodSize;
-    private Double goodValue;
+    @TableId("goods_id")
+    private Integer goodsId;
+    private String goodsName;
+    private String goodsType;
+    private String goodsSize;
+    private Double goodsValue;
 
-    public Integer getGoodId() {
-        return goodId;
+    public Integer getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodId(Integer goodId) {
-        this.goodId = goodId;
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getGoodName() {
-        return goodName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getGoodType() {
-        return goodType;
+    public String getGoodsType() {
+        return goodsType;
     }
 
-    public void setGoodType(String goodType) {
-        this.goodType = goodType;
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 
-    public String getGoodSize() {
-        return goodSize;
+    public String getGoodsSize() {
+        return goodsSize;
     }
 
-    public void setGoodSize(String goodSize) {
-        this.goodSize = goodSize;
+    public void setGoodsSize(String goodsSize) {
+        this.goodsSize = goodsSize;
     }
 
-    public Double getGoodValue() {
-        return goodValue;
+    public Double getGoodsValue() {
+        return goodsValue;
     }
 
-    public void setGoodValue(Double goodValue) {
-        this.goodValue = goodValue;
+    public void setGoodsValue(Double goodsValue) {
+        this.goodsValue = goodsValue;
     }
 }
