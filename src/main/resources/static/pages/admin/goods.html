@@ -45,6 +45,13 @@
 									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
 										</el-row>
 
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getAllGoodsBtn" icon="el-icon-search">查询所有货物</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsId" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsIdBtn" icon="el-icon-search">id查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsName" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsNameBtn" icon="el-icon-search">货物名称查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsType" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsTypeBtn" icon="el-icon-search">货物类别查询</el-button>-->
 
 									<el-table :data="tableData1" stripe style="width: 100%; " >
 										<el-table-column prop="goodsId" label="货物编号" width="180">
@@ -100,7 +107,7 @@
 
 	                    
 	                    <el-card>
-	                        <el-table :data="showData" stripe style="width: 100%; " >
+	                        <el-table :data="tableData2" stripe style="width: 100%; " >
 	                            <el-table-column prop="goodsId" label="货物编号" width="180">
 								</el-table-column>
 	                            <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -120,12 +127,7 @@
 	                            </el-table-column>
 	                        </el-table>
 	                        <div style="text-align: center;">
-	                            <el-pagination background layout="prev, pager, next"
-											   :total="100"
-											   :current-change="pager"
-								>
-
-								</el-pagination>
+	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
 	                        </div>
 	                    </el-card>
 	                </el-main>
@@ -153,7 +155,9 @@
 	            return {
 					tableData1:[],
 					inputName:'',
+					inputId:null,
 					typeOption:[
+						{lable:'类别0',value:'全部'},
 						{lable:'类别1',value:'水果'},
 						{lable:'类别2',value:'蔬菜'},
 					],
@@ -162,13 +166,14 @@
 					pager:1,
 					allData:[],
 					showData:[],
+					inputType:'',
+
 					tableData2: [],
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					form: {
 						name: '',
 						type: '',
-						number:'',
 						size: '',
 						value: ''
 					},

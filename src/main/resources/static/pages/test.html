@@ -22,10 +22,6 @@
             <input type="password" v-model="formData.goodsNumber">
         </td>
         <td>
-            <table>所属订单：</table>
-            <input type="number" v-model="formData.orderId">
-        </td>
-        <td>
             <input type="button" value="提交" v-on:click="submitForm">
         </td>
 </div>
@@ -50,7 +46,7 @@
             },
 
             submitForm(){
-                axios.post("http://localhost:8080/orders/init"+ this.formData.orderId).then(rel=>{
+                axios.post("http://localhost:8080/stockIn/save", this.formData).then(rel=>{
                     if(rel.data){
                         alert(rel.data);
                         // window.location.href=("admin.html")

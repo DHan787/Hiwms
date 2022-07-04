@@ -24,6 +24,7 @@ public class UsersController {
     @GetMapping//访问方式
     public List<Users> getAll() {
         //log.info("users获取的数据，{}",usersService.list());
+        //System.out.println(usersService.list());
         return usersService.list();
     }
 
