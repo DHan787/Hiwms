@@ -64,7 +64,7 @@
                             <template slot-scope="scope" v-for="users in tableData">
 
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-                                <el-button type="danger" plain @click="removeUsersById(users.userId)" icon="el-icon-delete">删除</el-button>
+                                <el-button type="danger" plain @click="removeUsersById(scope.$index)" icon="el-icon-delete">删除</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -112,13 +112,14 @@
                 });
             },
 
-            removeUsersById(userId) {
+            removeUsersById(index) {
+                var id = this.tableData[index].userId;
                 this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    axios.delete("http://localhost:8080/users/" + userId).then(res=> {
+                    axios.delete("http://localhost:8080/users/" + id).then(res=> {
                         this.getAll();
                     });
                     this.$message({

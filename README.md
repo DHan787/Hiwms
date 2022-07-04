@@ -62,3 +62,4 @@
 * 添加uesrInfo表及相关类，添加userDetail类，连结user类和userInfo类到userDetail
 * idGenerator跟据userInfo 的 alter time 和 userid产生 userDetail id hj
 * 修改了删除只能删最后一个的bug hxy 17:30
+* 更正删除功能 hxy 修改所有编辑删除 zls

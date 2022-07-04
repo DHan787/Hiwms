@@ -26,7 +26,7 @@
                             <el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询订单</el-button>
                             <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增订单</el-button>
 
-                        <el-dialog title="dialogFormTitle" :visible.sync="addFormVisible">
+                        <el-dialog title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <el-form-item label="订单类型" :label-width="formLabelWidth" prop="orderType">
                                     <el-radio-group v-model="form.orderType">
@@ -90,7 +90,7 @@
                             <template slot-scope="scope" v-for="orders in tableData">
 
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-                                <el-button type="danger" plain @click="removeOrdersById(orders.orderId)" icon="el-icon-delete">删除</el-button>
+                                <el-button type="danger" plain @click="removeOrdersById(scope.$index)" icon="el-icon-delete">删除</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -113,7 +113,7 @@
         data: function() {
             return {
                 tableData: [],
-                addFormVisible: false,
+                dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
                     orderID: '',
@@ -139,13 +139,14 @@
                 });
             },
 
-            removeOrdersById(orderId) {
+            removeOrdersById(index) {
+                var id = this.tableData[index].orderId;
                 this.$confirm('此操作将永久删除订单, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    axios.delete("http://localhost:8080/orders/" +orderId).then(res=> {
+                    axios.delete("http://localhost:8080/orders/" +id).then(res=> {
                         this.getAll();
                     });
                     this.$message({
@@ -192,11 +193,7 @@
                 this.form.index = index;
             },
 
-            editOrders() {
-                //this.$set(tableName,talbeIndex,data)
-                this.$set(this.tableData,this.form.index,{orderID:this.form.orderID,orderType:this.form.orderType,orderStartTime:this.form.orderStartTime,orderEndTime:this.form.orderEndTime,orderInit:this.form.orderInit,orderOperator:this.form.orderEndTime});
 
-            },
             updateOrdersById() {
                 axios.put("http://localhost:8080/orders",this.form).then(rel=>{
                     if(rel.data){
