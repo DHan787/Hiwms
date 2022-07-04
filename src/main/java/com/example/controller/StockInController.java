@@ -45,7 +45,6 @@ public class StockInController {
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn){
         stockIn.setOrderId(ordersController.initOrdersIn());
-
         return stockInService.save(stockIn);
     }
 
