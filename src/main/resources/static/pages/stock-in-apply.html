@@ -93,10 +93,9 @@
 					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
 							console.log('name:' + this.tableDataSelections[i].goodsName);
-							var name = this.tableDataSelections[i];
+							var item = this.tableDataSelections[i];
 							console.log('number:' + this.tableDataSelections[i].goodsNumber);
-							var number = this.tableDataSelections[i];
-							axios.post("http://localhost:8080/stockin/save",name).then(res=> {
+							axios.post("http://localhost:8080/stockin/save",item).then(res=> {
 							this.getAll();
 						});
 						}
