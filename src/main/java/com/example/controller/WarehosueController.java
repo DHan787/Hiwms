@@ -21,7 +21,7 @@ public class WarehosueController {
      */
     @GetMapping//访问方式
     public List<Warehouse> getAll() {
-        //log.info("goods获取的数据，{}",goodsService.list());
+        log.info("warehouse获取的数据，{}",warehouseService.list());
         //System.out.println("used");
         return warehouseService.list();
     }

@@ -38,6 +38,10 @@
 										<i class="el-icon-mouse"></i>
 										<span slot="title" @click="openUrl('../admin/orders.html')">订单管理</span>
 									</el-menu-item>
+									<el-menu-item index="3">
+										<i class="el-icon-upload"></i>
+										<span slot="title" @click="openUrl('./stock-apply.html')">出入库申请</span>
+									</el-menu-item>
 								</el-menu-item-group>
 							</el-submenu>
 
@@ -49,7 +53,8 @@
 					</el-aside>
 					<!-- 主体 -->
 					<el-main>
-						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"  frameborder="0" scrolling="no"></iframe>
+						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
+							frameborder="0" scrolling="no"></iframe>
 					</el-main>
 				</el-container>
 			</el-container>
@@ -69,60 +74,60 @@
 					datalist: [],
 					FormData: {},
 					iframeUrl: './index.html'
-						}
-					},
-					created() {
-						this.getAll()
-					},
-					methods: {
-						adjustIframe() {
-							var ifm= document.getElementById("bi_iframe");
-							ifm.height=document.documentElement.clientHeight;
-							ifm.width=document.documentElement.clientWidth;
-						},
+				}
+			},
+			created() {
+				this.getAll()
+			},
+			methods: {
+				adjustIframe() {
+					var ifm = document.getElementById("bi_iframe");
+					ifm.height = document.documentElement.clientHeight;
+					ifm.width = document.documentElement.clientWidth;
+				},
 
-						openUrl(url) {
+				openUrl(url) {
 
-							this.iframeUrl = url;
-						},
-						getAll() {
-							axios.get("http://localhost:8080/users").then(res => {
-								this.datalist = res.data;
-							});
-						},
-						userDelete(userId) {
-							        this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
-							          confirmButtonText: '确定',
-							          cancelButtonText: '取消',
-							          type: 'warning'
-							        }).then(() => {
-										axios.delete("http://localhost:8080/users/"+userId).then(res => {
-											this.getAll();
-										});
-							          this.$message({
-							            type: 'success',
-							            message: '删除成功!'
-							          });
-							        }).catch(() => {
-							          this.$message({
-							            type: 'info',
-							            message: '已取消删除'
-							          });          
-							        });
-									},
+					this.iframeUrl = url;
+				},
+				getAll() {
+					axios.get("http://localhost:8080/users").then(res => {
+						this.datalist = res.data;
+					});
+				},
+				userDelete(userId) {
+					this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						axios.delete("http://localhost:8080/users/" + userId).then(res => {
+							this.getAll();
+						});
+						this.$message({
+							type: 'success',
+							message: '删除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
+					});
+				},
 
-								userEdit() {
-									this.UserEditVisible = true;
+				userEdit() {
+					this.UserEditVisible = true;
 
-								},
-                        closeDialog() {
-                            this.centerDialogVisible = false
-                            this.isAddMembers = false
-                            console.log("editfrom", this.editForm)
-                            console.log("addfrom", this.addForm)
-                        },
+				},
+				closeDialog() {
+					this.centerDialogVisible = false
+					this.isAddMembers = false
+					console.log("editfrom", this.editForm)
+					console.log("addfrom", this.addForm)
+				},
 
-							}
-						})
+			}
+		})
 	</script>
 </html>
