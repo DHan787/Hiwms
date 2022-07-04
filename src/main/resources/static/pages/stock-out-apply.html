@@ -2,7 +2,7 @@
 <html lang="">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/goods.css">
+		<link rel="stylesheet" href="../assets/css/orders.css">
 		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
 		<title></title>
 	</head>
@@ -15,33 +15,36 @@
 						<el-breadcrumb style="margin-bottom: 12px;">
 							<el-breadcrumb-item>首页</el-breadcrumb-item>
 							<el-breadcrumb-item>业务流</el-breadcrumb-item>
-							<el-breadcrumb-item>入库信息</el-breadcrumb-item>
+							<el-breadcrumb-item>出库申请</el-breadcrumb-item>
 						</el-breadcrumb>
-
+						<!--表单区域-->
 						<el-card>
 							<el-table :data="tableData" stripe style="width: 100%; ">
-								<el-table-column prop="stockId" label="入库编号">
+								<el-table-column type="selection" width="60"></el-table-column>
+								<el-table-column prop="goodId" label="货物编号" width="180">
 								</el-table-column>
-								<el-table-column prop="goodsName" label="货品名称">
+								<el-table-column prop="goodName" label="货物名称" width="180">
 								</el-table-column>
-								<el-table-column prop="goodsNumber" label="货品数量">
+								<el-table-column prop="goodType" label="类别">
 								</el-table-column>
-								<el-table-column prop="warehouseId" label="库房编号">
+								<el-table-column prop="goodSize" label="尺寸">
 								</el-table-column>
-								<el-table-column prop="shelfId" label="货架编号">
+								<el-table-column prop="goodValue" label="价格">
 								</el-table-column>
-								<el-table-column prop="stockStatus" label="入库状态">
-								</el-table-column>
-								<el-table-column label="操作" width="250" style="display: flex;">
-									<template slot-scope="scope" v-for="stockin in tableData">
-										<el-button type="primary" plain @click="editClick(scope.$index,scope.row)">详情
-										</el-button>
+								<el-table-column label="出库数量">
+									<template slot-scope="scope">
+										<el-input v-model="scope.row.goodNumber" placeholder="出库数量">
+										</el-input>
 									</template>
 								</el-table-column>
 							</el-table>
 							<div style="text-align: center;">
 								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
 							</div>
+						</el-card>
+						<el-card style="text-align: center;">
+							<el-button type="primary" plain @click="removeGoodsById(scope.$index)"
+								icon="el-icon-upload2">出库</el-button>
 						</el-card>
 					</el-main>
 				</el-container>
@@ -58,18 +61,8 @@
 			data: function() {
 				return {
 					tableData: [],
-					dialogFormVisible: false,
-					dialogFormTitle: "",
-					form: {
-						id: '',
-						name: '',
-						number: '',
-						warehouseid: '',
-						shelfid: '',
-						staus: ''
-					},
-					formLabelWidth: '120px',
-					isAdd: false
+					seen: false,
+					multipleSelection: [],
 				}
 			},
 
@@ -79,10 +72,10 @@
 
 			methods: {
 				getAll() {
-					axios.get("http://localhost:8080/stockin").then(res => {
+					axios.get("http://localhost:8080/goods").then(res => {
 						this.tableData = res.data;
 					});
-				}
+				},
 			}
 		})
 	</script>

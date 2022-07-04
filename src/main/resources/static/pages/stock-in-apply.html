@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../assets/css/orders.css">
+		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-container>
+					<!-- 主体 -->
+					<el-main>
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item>首页</el-breadcrumb-item>
+							<el-breadcrumb-item>业务流</el-breadcrumb-item>
+							<el-breadcrumb-item>入库申请</el-breadcrumb-item>
+						</el-breadcrumb>
+						<!--表单区域-->
+						<el-card>
+							<el-table :data="tableData" stripe style="width: 100%; " @select="selectCall" ref="multipleTable">
+								<el-table-column type="selection" width="60"></el-table-column>
+								<el-table-column prop="goodId" label="货物编号" width="180">
+								</el-table-column>
+								<el-table-column prop="goodName" label="货物名称" width="180">
+								</el-table-column>
+								<el-table-column prop="goodType" label="类别">
+								</el-table-column>
+								<el-table-column prop="goodSize" label="尺寸">
+								</el-table-column>
+								<el-table-column prop="goodValue" label="价格">
+								</el-table-column>
+								<el-table-column label="入库数量">
+									<template slot-scope="scope">
+										<el-input v-model="scope.row.goodNumber" placeholder="入库数量">
+										</el-input>
+									</template>
+								</el-table-column>
+							</el-table>	
+							<div style="text-align: center;">
+								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+							</div>
+						</el-card>
+						<el-card style="text-align: center;">
+							<el-button type="primary" plain @click="apply"
+								icon="el-icon-download">申请入库</el-button>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../assets/js/vue.js"></script>
+	<script src="../assets/css/element-ui/index.js"></script>
+	<script src="../assets/js/axios.min.js"></script>
+
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					tableData: [],
+					multipleSelection: [],
+					selectRows: [],
+					selectTotal: 0
+				}
+			},
+
+			created() {
+				this.getAll();
+			},
+
+			methods: {
+				getAll() {
+					axios.get("http://localhost:8080/goods").then(res => {
+						this.tableData = res.data;
+					});
+				},
+				selectCall(selection,row){
+					this.selectRows = row;
+					this.selectTotal = selection.length;
+					console.log(row);
+					console.log(selection.length);
+				}
+			}
+		})
+	</script>
+</html>
