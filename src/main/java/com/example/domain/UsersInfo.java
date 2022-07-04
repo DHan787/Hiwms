@@ -7,9 +7,8 @@ import lombok.Data;
 
 @Data
 @TableName("users_info")
-public class UsersInfo {
+public class UsersInfo{
     @TableId("users_Info_id")
-//    用户信息ID
     private Long usersInfoId;
 //    用户电话号码
     private Long usersInfoTele;
@@ -20,9 +19,14 @@ public class UsersInfo {
 //    用户信息修改时间
     private Long usersInfoAltTime;
 
-
-    public void setUsersInfoId(Long usersInfo_id) {
-        this.usersInfoId = usersInfo_id;
+    @Override
+    public String toString() {
+        return "UsersInfo{" +
+                "usersInfoId=" + usersInfoId +
+                ", usersInfoTele=" + usersInfoTele +
+                ", usersInfoLocation='" + usersInfoLocation + '\'' +
+                ", usersInfoRetailer='" + usersInfoRetailer + '\'' +
+                ", usersInfoAltTime=" + usersInfoAltTime +
+                '}';
     }
-
 }

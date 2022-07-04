@@ -1,7 +1,12 @@
 package com.example.controller;
 
 import com.example.domain.Users;
+import com.example.domain.UsersDetail;
+import com.example.domain.UsersInfo;
+import com.example.service.UsersDetailService;
+import com.example.service.UsersInfoService;
 import com.example.service.UsersService;
+import com.example.utils.idGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,10 @@ import java.util.List;
 public class UsersController {
     @Autowired//
     private UsersService usersService;
+
+    @Autowired
+    private UsersInfoService usersInfoService;
+
 
     /**
      * 获得用户表
@@ -75,6 +84,7 @@ public class UsersController {
     public boolean saveUsers(@RequestBody Users users){
         try {
             users.setUserPassword(EncryptUtil.shaEncode(users.getUserPassword()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,9 +100,15 @@ public class UsersController {
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id){
         System.out.println("the id is :"+id);
+        usersInfoService.removeById(id);
         return usersService.removeById(id);
     }
 
+    /**
+     * 注册
+     * @param users
+     * @return if success
+     */
     @PostMapping("/register")
     public boolean register(@RequestBody Users users){
         try {
@@ -103,6 +119,11 @@ public class UsersController {
         return usersService.save(users);
     }
 
+    /**
+     * 更新用户
+     * @param users
+     * @return if success
+     */
     @PutMapping
     public boolean updateUsers(@RequestBody Users users){
         System.out.println(users.getUserName());

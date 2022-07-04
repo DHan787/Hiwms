@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.domain.StockIn;
+
 import com.example.domain.StockOut;
 import com.example.service.StockOutService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,11 @@ public class StockOutController {
     @Autowired
     private StockOutService stockOutService;
 
+    OrdersController ordersController;
+
+    public StockOutController(OrdersController ordersController) {
+        this.ordersController = ordersController;
+    }
     /**
      * 获取全部入库信息
      * @return
@@ -35,7 +40,6 @@ public class StockOutController {
      */
     @PostMapping("/save")
     public boolean saveStockOut(@RequestBody StockOut stockOut){
-        OrdersController ordersController = new OrdersController();
         stockOut.setStockId(ordersController.initOrders(2)); //type = 2 入库
         return stockOutService.save(stockOut);
     }
