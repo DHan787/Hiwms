@@ -69,4 +69,5 @@
 * StockIn StockOut 的save功能 hj
 * good->goods 部分查询代码 zls
 * number删掉 zls
+* 修正goods页面的问题 zls
 
