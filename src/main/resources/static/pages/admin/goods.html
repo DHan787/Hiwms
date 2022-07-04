@@ -33,6 +33,9 @@
 									    <el-form-item label="类别" :label-width="formLabelWidth" prop="goodType">
 											<el-input v-model="form.goodType" autocomplete="off"></el-input>
 									    </el-form-item>
+										  <el-form-item label="数量" :label-width="formLabelWidth" prop="goodType">
+											  <el-input v-model="form.goodNumber" autocomplete="off"></el-input>
+										  </el-form-item>
 										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodSize">
 										  <el-input v-model="form.goodSize" autocomplete="off"></el-input>
 										</el-form-item>
@@ -58,6 +61,8 @@
 	                            </el-table-column>
 	                            <el-table-column prop="goodType" label="类别">
 	                            </el-table-column>
+								<el-table-column prop="goodNumber" label="数量">
+								</el-table-column>
 	                            <el-table-column prop="goodSize" label="尺寸">
 	                            </el-table-column>
 								<el-table-column prop="goodValue" label="价格">
@@ -94,6 +99,7 @@
 					form: {
 						name: '',
 						type: '',
+						number:'',
 						size: '',
 						value: ''
 					},

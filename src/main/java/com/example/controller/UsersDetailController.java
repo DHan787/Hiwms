@@ -25,20 +25,18 @@ public class UsersDetailController {
 
     @Autowired
     UsersDetailService usersDetailService;
-    private UsersInfoService usersInfoService;
-    private UsersController usersController;
-    private Users users;
-
     @Autowired
+    private UsersInfoService usersInfoService;
+    @Autowired
+    private UsersController usersController;
+    @Autowired
+
     private  UsersService usersService;
 
    @Autowired
    UsersDao usersDao;
     @Autowired
    UsersInfoDao usersInfoDao;
-    private void getinfo(){
-
-    }
 
 
     @GetMapping//访问方式
@@ -77,7 +75,7 @@ public class UsersDetailController {
                 }
             }
         }
-        System.out.println(usersDetail.toString());
+//        System.out.println(usersDetail.toString());
         return usersDetail;
     }
 }
