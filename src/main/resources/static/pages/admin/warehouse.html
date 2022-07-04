@@ -2,48 +2,47 @@
 <html lang="">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/goods.css" >
-		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
-		<title></title>
+		<link rel="stylesheet" href="../../assets/css/warehouse.css" >
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<title>仓库</title>
 	</head>
 	<body>
 	    <div id="app">
 	        <el-container>
-	             <el-container>
+	            <el-container>
 	                <!-- 主体 -->
 	                <el-main>
 	                    <el-breadcrumb style="margin-bottom: 12px;">
 	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
 	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
-	                        <el-breadcrumb-item>货物管理</el-breadcrumb-item>
+	                        <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
 	                        
 	                    </el-breadcrumb>
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-
-									<el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询货物</el-button>
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增仓库</el-button>
 									
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
-									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
-									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
+									    <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
+									      <el-input v-model="form.warehouseName" autocomplete="off"></el-input>
 									    </el-form-item>
-									    <el-form-item label="类别" :label-width="formLabelWidth" prop="goodType">
-											<el-input v-model="form.goodType" autocomplete="off"></el-input>
+										  <el-form-item label="仓库位置" :label-width="formLabelWidth" prop="warehouseLocation">
+											  <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
+										  </el-form-item>
+									    <el-form-item label="类别" :label-width="formLabelWidth" prop="warehouseType">
+											<el-input v-model="form.warehouseType" autocomplete="off"></el-input>
 									    </el-form-item>
-										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodSize">
-										  <el-input v-model="form.goodSize" autocomplete="off"></el-input>
+										<el-form-item label="大小" :label-width="formLabelWidth" prop="warehouseSize">
+										  <el-input v-model="form.warehouseSize" autocomplete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="价格" :label-width="formLabelWidth" prop="goodValue">
-										  <el-input v-model="form.goodValue" autocomplete="off"></el-input>
-										</el-form-item>
+
 									  </el-form>
 									  <div slot="footer" class="dialog-footer">
 									    <el-button @click="dialogFormVisible = false">取 消</el-button>
-									    <el-button v-if="isAdd" type="primary" @click="addGoods">确 定</el-button>
-										<el-button  v-else type="primary" @click="updateGoodsById">更 新</el-button>
+									    <el-button v-if="isAdd" type="primary" @click="addWarehouse">确 定</el-button>
+										<el-button  v-else type="primary" @click="updateWarehouseById">更 新</el-button>
 									  </div>
 									</el-dialog>
 
@@ -52,21 +51,21 @@
 	                    
 	                    <el-card>
 	                        <el-table :data="tableData" stripe style="width: 100%; " >
-	                            <el-table-column prop="goodId" label="货物编号" width="180">
+	                            <el-table-column prop="warehouseId" label="仓库编号" width="180">
 								</el-table-column>
-	                            <el-table-column prop="goodName" label="货物名称" width="180">
+	                            <el-table-column prop="warehouseName" label="仓库名称" width="180">
 	                            </el-table-column>
-	                            <el-table-column prop="goodType" label="类别">
-	                            </el-table-column>
-	                            <el-table-column prop="goodSize" label="尺寸">
-	                            </el-table-column>
-								<el-table-column prop="goodValue" label="价格">
+								<el-table-column prop="warehouseLocation" label="仓库位置">
 								</el-table-column>
+	                            <el-table-column prop="warehouseType" label="类别">
+	                            </el-table-column>
+	                            <el-table-column prop="warehouseSize" label="大小">
+	                            </el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
-	                                <template slot-scope="scope" v-for="goods in tableData">
+	                                <template slot-scope="scope" v-for="warehouse in tableData">
 										
-	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
+	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
+	                                    <el-button type="danger" plain @click="removeWarehouseById(scope.$index)">删除</el-button>
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
@@ -79,9 +78,9 @@
 	        </el-container>
 	    </div>
 	</body>
-	<script src="../assets/js/vue.js"></script>
-	<script src="../assets/css/element-ui/index.js"></script>
-	<script src="../assets/js/axios.min.js"></script>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 	
 	<script>
 	    new Vue({
@@ -93,9 +92,9 @@
 					dialogFormTitle: "",
 					form: {
 						name: '',
+						location: '',
 						type: '',
-						size: '',
-						value: ''
+						size: ''
 					},
 					formLabelWidth: '120px',
 					isAdd: false
@@ -109,19 +108,19 @@
 
 	        methods: {
 				getAll(){
-					axios.get("http://localhost:8080/goods").then(res=>{
+					axios.get("http://localhost:8080/warehouse").then(res=>{
 						this.tableData = res.data ;
 					});
 				},
 
-				removeGoodsById(index) {
-					var id = this.tableData[index].goodId;
-					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
+				removeWarehouseById(index) {
+					var id = this.tableData[index].warehouseId;
+					this.$confirm('此操作将永久删除仓库, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
 						type: 'warning'
 					}).then(() => {
-						axios.delete("http://localhost:8080/goods/" + id).then(res=> {
+						axios.delete("http://localhost:8080/warehouse/" + id).then(res=> {
 							this.getAll();
 						});
 						this.$message({
@@ -138,13 +137,13 @@
 				
 				addClick() {
 						this.dialogFormVisible = true;
-						this.dialogFormTitle = "新增货物";
+						this.dialogFormTitle = "新增仓库";
 						this.isAdd = true;
 						this.form = {};
 				},
 				
-				addGoods() {
-					axios.post("http://localhost:8080/goods",this.form).then(rel=>{
+				addWarehouse() {
+					axios.post("http://localhost:8080/warehouse",this.form).then(rel=>{
 						if(rel.data){
 							this.$message({
 								type: 'success',
@@ -165,14 +164,15 @@
 				
 				editClick(index,row) {
 					this.dialogFormVisible = true;
-					this.dialogFormTitle = "修改货物";
+					this.dialogFormTitle = "修改仓库";
 					this.isAdd = false;
 					this.form = Object.assign({},row);
 					this.form.index = index;				
 				},
 
-				updateGoodsById() {
-					axios.put("http://localhost:8080/goods",this.form).then(rel=>{
+				
+				updateWarehouseById() {
+					axios.put("http://localhost:8080/warehouse",this.form).then(rel=>{
 						if(rel.data){
 							this.$message({
 								type: 'success',
