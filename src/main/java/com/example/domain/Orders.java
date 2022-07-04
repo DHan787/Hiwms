@@ -23,4 +23,11 @@ public class Orders {
     //订单操作员ID
     private Integer orderOperator;
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public Integer getOrderInit() {
+        return orderInit;
+    }
 }

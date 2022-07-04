@@ -1,12 +1,14 @@
 package com.example.controller;
 
-import com.example.domain.Goods;
+
 import com.example.domain.Orders;
 import com.example.service.OrdersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/orders")
