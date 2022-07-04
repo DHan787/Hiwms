@@ -66,3 +66,4 @@
 
 ## 7.4
 * 添加吉祥物
+* StockIn StockOut 的save功能 hj
