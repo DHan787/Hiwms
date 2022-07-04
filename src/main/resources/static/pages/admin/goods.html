@@ -26,12 +26,12 @@
 										<el-row>
 											<el-col :span='12'>
 												<el-form-item label="货物名称">
-													<el-input v-model="inputName" clearable placeholder="请输⼊名称" style="width:200px"><!-- clearable 输⼊框可清除属性 --></el-input>
+													<el-input v-model="inputName" clearable placeholder="请输⼊货物名称" style="width:200px"><!-- clearable 输⼊框可清除属性 --></el-input>
 												</el-form-item>
 											</el-col>
 											<el-col :span='12'>
 												<el-form-item label="货物类别">
-													<el-select v-model="value" clearable>
+													<el-select v-model="inputType" clearable  filterable placeholder="请选择类别">
 														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>
 													</el-select>
 												</el-form-item>
@@ -39,37 +39,20 @@
 										</el-row>
 									</el-form>
 								</div>
-
 										<el-row :span="8" align="right">
 									<el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询货物</el-button>
 									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
 										</el-row>
 
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getAllGoodsBtn" icon="el-icon-search">查询所有货物</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsId" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsIdBtn" icon="el-icon-search">id查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsName" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsNameBtn" icon="el-icon-search">货物名称查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsType" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsTypeBtn" icon="el-icon-search">货物类别查询</el-button>-->
 
-									<el-table :data="tableData1" stripe style="width: 100%; " >
-										<el-table-column prop="goodsId" label="货物编号" width="180">
-										</el-table-column>
-										<el-table-column prop="goodsName" label="货物名称" width="180">
-										</el-table-column>
-										<el-table-column prop="goodsType" label="类别">
-										</el-table-column>
-										<el-table-column prop="goodsSize" label="尺寸">
-										</el-table-column>
-										<el-table-column prop="goodsValue" label="价格">
-										</el-table-column>
-										<el-table-column label="操作" width="250" style="display: flex;">
-											<template slot-scope="scope" v-for="goods in tableData1">
-
-												<el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-												<el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
-											</template>
-										</el-table-column>
-									</el-table>
-									<div style="text-align: center;">
-										<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-									</div>
-
-
+<!--								<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>-->
 							</div>
 
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -139,11 +122,13 @@
 	            return {
 					tableData1:[],
 					inputName:'',
+					inputId:null,
 					typeOption:[
+						{lable:'类别0',value:'全部'},
 						{lable:'类别1',value:'水果'},
 						{lable:'类别2',value:'蔬菜'},
 					],
-					value:0,
+					inputType:'',
 
 					tableData2: [],
 					dialogFormVisible: false,
@@ -151,7 +136,6 @@
 					form: {
 						name: '',
 						type: '',
-						number:'',
 						size: '',
 						value: ''
 					},
@@ -171,66 +155,8 @@
 						this.tableData2 = res.data ;
 					});
 				},
-
 				<!--搜索-->
-				getGoodsId() {
-					this.$axios.get('http://127.0.0.1:9091/getall').then(result => {
-						this.tableData1 = this.tableData2 = result.data
-					}).catch(err => {
-						console.log(err)
-					})
-				},
-				searchGoodsId(keywords) {
-					return this.tableData2.filter(item =>{
-						if(item.goodsId === keywords) {
-							return item
-						}
-					})
-				},
-				searchGoodsName(keywords) {
-					return this.tableData2.filter(item =>{
-						if(item.goodsName.includes(keywords)){
-							return item
-						}
-					})
-				},
-				searchType(keywords) {
-					return this.tableData2.filter(item =>{
-						if(item.type.includes(keywords)){
-							return item
-						}
-					})
-				},
-				numberToType(num){
-					return num===1?'水果':'蔬菜'
-				},
 
-			 	created() {
-				this.getGoodsId()
-				},
-				watch:{
-					inputId: function(val) {
-						if(val === ''){
-							this.tableData1 = this.tableData2
-						}else{
-							this.tableData1 = this.searchId(val)
-						}
-					},
-					inputName: function(val) {
-						if(val === ''){
-							this.tableData1 = this.tableData2
-						}else{
-							this.tableData1 = this.searchName(val)
-						}
-					},
-					value: function(val) {
-						if(val === 0){
-							this.tableData1 = this.tableData2
-						}else{
-							this.tableData1 = this.searchType(this.numberToType(val))
-						}
-					}
-				},
 
 
                 <!--删除-->

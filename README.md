@@ -71,5 +71,7 @@
 * number删掉 zls
 * 订单自动生成 hj
 * stock-in-apply.html 实现前端 ymm
-* 完成货物员的入库申请（缺订单号生成） ymm
-* 完成货物员的出库申请（缺订单号生成） ymm
+* 完成货物员的入库申请 ymm
+* 修正goods页面的问题 zls
+* Stockin 完成 hj
+* 完成货物员的出入库申请（缺订单号生成） ymm
