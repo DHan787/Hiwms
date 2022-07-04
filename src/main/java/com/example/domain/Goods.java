@@ -9,58 +9,51 @@ import lombok.Data;
 @Data
 public class Goods {
 
-    @TableId("good_id")
-    private Integer goodId;
-    private String goodName;
-    private String goodType;
-    private String goodNumber;
-    private String goodSize;
-    private Double goodValue;
+    @TableId("goods_id")
+    private Integer goodsId;
+    private String goodsName;
+    private String goodsType;
+    private String goodsSize;
+    private Double goodsValue;
 
-    public Integer getGoodId() {
-        return goodId;
+    public Integer getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodId(Integer goodId) {
-        this.goodId = goodId;
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public String getGoodName() {
-        return goodName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getGoodType() {
-        return goodType;
+    public String getGoodsType() {
+        return goodsType;
     }
 
-    public void setGoodType(String goodType) {
-        this.goodType = goodType;
-    }
-    public String getGoodNumber(){
-        return goodNumber;
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 
-    public void setGoodNumber(String goodNumber) {
-        this.goodNumber = goodNumber;
+
+    public String getGoodsSize() {
+        return goodsSize;
     }
 
-    public String getGoodSize() {
-        return goodSize;
+    public void setGoodsSize(String goodsSize) {
+        this.goodsSize = goodsSize;
     }
 
-    public void setGoodSize(String goodSize) {
-        this.goodSize = goodSize;
+    public Double getGoodsValue() {
+        return goodsValue;
     }
 
-    public Double getGoodValue() {
-        return goodValue;
-    }
-
-    public void setGoodValue(Double goodValue) {
-        this.goodValue = goodValue;
+    public void setGoodsValue(Double goodsValue) {
+        this.goodsValue = goodsValue;
     }
 }

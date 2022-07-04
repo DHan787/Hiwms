@@ -50,6 +50,10 @@
 										<i class="el-icon-mouse"></i>
 										<span slot="title" @click="openUrl('../admin/orders.html')">订单管理</span>
 									</el-menu-item>
+									<el-menu-item index="3-5">
+										<i class="el-icon-mouse"></i>
+										<span slot="title" @click="openUrl('../admin/inventory.html')">库存管理</span>
+									</el-menu-item>
 
 								</el-menu-item-group>
 							</el-submenu>
@@ -65,7 +69,8 @@
 
 					<!-- 主体 -->
 					<el-main>
-						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"  frameborder="0" scrolling="no"></iframe>
+						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
+							frameborder="0" scrolling="no"></iframe>
 					</el-main>
 				</el-container>
 			</el-container>
@@ -88,20 +93,20 @@
 				}
 			},
 			created() {
-				
+
 			},
 			methods: {
 				adjustIframe() {
-					var ifm= document.getElementById("bi_iframe");
-					ifm.height=document.documentElement.clientHeight;
-					ifm.width=document.documentElement.clientWidth;
+					var ifm = document.getElementById("bi_iframe");
+					ifm.height = document.documentElement.clientHeight;
+					ifm.width = document.documentElement.clientWidth;
 				},
 
 				openUrl(url) {
 
 					this.iframeUrl = url;
 				}
-				
+
 			}
 		})
 	</script>

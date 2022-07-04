@@ -21,7 +21,7 @@ public class WarehosueController {
      */
     @GetMapping//访问方式
     public List<Warehouse> getAll() {
-        //log.info("goods获取的数据，{}",goodsService.list());
+        log.info("warehouse获取的数据，{}",warehouseService.list());
         //System.out.println("used");
         return warehouseService.list();
     }
@@ -59,7 +59,11 @@ public class WarehosueController {
         return warehouseService.save(warehouse);
     }
 
-
+    /**
+     * 更新仓库信息
+     * @param warehouse
+     * @return if success
+     */
     @PutMapping
     public boolean updateWarehouse(@RequestBody Warehouse warehouse){
         System.out.println(warehouse.getWarehouseName());

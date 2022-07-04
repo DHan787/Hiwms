@@ -21,26 +21,56 @@
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
-
+									<!--查询表单-->
+									<el-form>
+										<el-row>
+											<el-col :span='12'>
+												<el-form-item label="货物名称">
+													<el-input v-model="inputName" clearable placeholder="请输⼊货物名称" style="width:200px"><!-- clearable 输⼊框可清除属性 --></el-input>
+												</el-form-item>
+											</el-col>
+											<el-col :span='12'>
+												<el-form-item label="货物类别">
+													<el-select v-model="inputType" clearable  filterable placeholder="请选择类别">
+														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>
+													</el-select>
+												</el-form-item>
+											</el-col>
+										</el-row>
+									</el-form>
+								</div>
+										<el-row :span="8" align="right">
 									<el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询货物</el-button>
 									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
-									
+										</el-row>
+
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getAllGoodsBtn" icon="el-icon-search">查询所有货物</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsId" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsIdBtn" icon="el-icon-search">id查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsName" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsNameBtn" icon="el-icon-search">货物名称查询</el-button>-->
+<!--										<el-input v-model="GoodsForm.goodsType" style="width:100px"></el-input>-->
+<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsTypeBtn" icon="el-icon-search">货物类别查询</el-button>-->
+
+<!--								<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>-->
+							</div>
+
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
-									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
-									      <el-input v-model="form.goodName" autocomplete="off"></el-input>
+									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodsName">
+									      <el-input v-model="form.goodsName" autocomplete="off"></el-input>
 									    </el-form-item>
-									    <el-form-item label="类别" :label-width="formLabelWidth" prop="goodType">
-											<el-input v-model="form.goodType" autocomplete="off"></el-input>
-									    </el-form-item>
-										  <el-form-item label="数量" :label-width="formLabelWidth" prop="goodType">
-											  <el-input v-model="form.goodNumber" autocomplete="off"></el-input>
+										  <el-form-item label="货物类型" :label-width="formLabelWidth" prop="goodsType">
+											  <el-select v-model="form.goodsType" placeholder="请选择货物类型">
+												  <el-option label="水果" value="1"></el-option>
+												  <el-option label="蔬菜" value="2"></el-option>
+											  </el-select>
 										  </el-form-item>
-										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodSize">
-										  <el-input v-model="form.goodSize" autocomplete="off"></el-input>
+										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodsSize">
+										  <el-input v-model="form.goodsSize" autocomplete="off"></el-input>
 										</el-form-item>
-										<el-form-item label="价格" :label-width="formLabelWidth" prop="goodValue">
-										  <el-input v-model="form.goodValue" autocomplete="off"></el-input>
+										<el-form-item label="价格" :label-width="formLabelWidth" prop="goodsValue">
+										  <el-input v-model="form.goodsValue" autocomplete="off"></el-input>
 										</el-form-item>
 									  </el-form>
 									  <div slot="footer" class="dialog-footer">
@@ -50,25 +80,22 @@
 									  </div>
 									</el-dialog>
 
-								</div>
-	                        </div>
+
 	                    
 	                    <el-card>
-	                        <el-table :data="tableData" stripe style="width: 100%; " >
-	                            <el-table-column prop="goodId" label="货物编号" width="180">
+	                        <el-table :data="tableData2" stripe style="width: 100%; " >
+	                            <el-table-column prop="goodsId" label="货物编号" width="180">
 								</el-table-column>
-	                            <el-table-column prop="goodName" label="货物名称" width="180">
+	                            <el-table-column prop="goodsName" label="货物名称" width="180">
 	                            </el-table-column>
-	                            <el-table-column prop="goodType" label="类别">
+	                            <el-table-column prop="goodsType" label="类别">
 	                            </el-table-column>
-								<el-table-column prop="goodNumber" label="数量">
+	                            <el-table-column prop="goodsSize" label="尺寸">
 								</el-table-column>
-	                            <el-table-column prop="goodSize" label="尺寸">
-	                            </el-table-column>
-								<el-table-column prop="goodValue" label="价格">
+								<el-table-column prop="goodsValue" label="价格">
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
-	                                <template slot-scope="scope" v-for="goods in tableData">
+	                                <template slot-scope="scope" v-for="goods in tableData2">
 										
 	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
 	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
@@ -93,13 +120,22 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-					tableData: [],
+					tableData1:[],
+					inputName:'',
+					inputId:null,
+					typeOption:[
+						{lable:'类别0',value:'全部'},
+						{lable:'类别1',value:'水果'},
+						{lable:'类别2',value:'蔬菜'},
+					],
+					inputType:'',
+
+					tableData2: [],
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					form: {
 						name: '',
 						type: '',
-						number:'',
 						size: '',
 						value: ''
 					},
@@ -116,12 +152,16 @@
 	        methods: {
 				getAll(){
 					axios.get("http://localhost:8080/goods").then(res=>{
-						this.tableData = res.data ;
+						this.tableData2 = res.data ;
 					});
 				},
+				<!--搜索-->
 
+
+
+                <!--删除-->
 				removeGoodsById(index) {
-					var id = this.tableData[index].goodId;
+					var id = this.tableData[index].goodsId;
 					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',

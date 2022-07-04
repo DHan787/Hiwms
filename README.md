@@ -65,5 +65,13 @@
 * 更正删除功能 hxy 修改所有编辑删除 zls
 
 ## 7.4
-* 添加吉祥物
+* 添加吉祥物 hj
 * StockIn StockOut 的save功能 hj
+* good->goods 部分查询代码 zls
+* number删掉 zls
+* 订单自动生成 hj
+* stock-in-apply.html 实现前端 ymm
+* 完成货物员的入库申请 ymm
+* 修正goods页面的问题 zls
+* Stockin 完成 hj
+* stockOut 完成 StockIn 和 StockOut 优化整合 hj

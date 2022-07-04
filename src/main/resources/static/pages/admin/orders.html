@@ -39,7 +39,7 @@
                                                 v-model="form.orderStartTime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
-                                                value-format="yyyy-mm-dd hh:mm:ss">
+                                                value-format="yyyy-MM-dd HH:mm:ss">
                                         </el-date-picker>
                                     </div>
                                 </el-form-item>
@@ -71,7 +71,7 @@
                 <!--表单区域-->
                 <el-card>
                     <el-table :data="tableData" stripe style="width: 100%; " >
-                        <el-table-column prop="orderID" label="订单编号" width="180">
+                        <el-table-column prop="orderId" label="订单编号" width="180">
                         </el-table-column>
                         <el-table-column prop="orderType" label="订单类型" width="180">
                         </el-table-column>
@@ -116,7 +116,7 @@
                 dialogFormTitle: "",
                 form: {
                     orderID: '',
-                    orderType: '1',
+                    orderType: '',
                     orderStartTime: '',
                     orderEndTime: '',
                     orderInit:'',

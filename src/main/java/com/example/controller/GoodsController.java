@@ -59,10 +59,14 @@ public class GoodsController {
         return goodsService.save(goods);
     }
 
-
+    /**
+     *更新商品信息
+     * @param goods 商品对象
+     * @return if success
+     */
     @PutMapping
     public boolean updateGoods(@RequestBody Goods goods){
-        System.out.println(goods.getGoodName());
+        System.out.println(goods.getGoodsName());
         return goodsService.updateById(goods);
     }
 

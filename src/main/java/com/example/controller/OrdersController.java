@@ -7,7 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.SimpleTimeZone;
+
 @Slf4j
 @CrossOrigin
 @RestController
@@ -56,7 +60,28 @@ public class OrdersController {
      */
     @PostMapping
     public boolean saveOrders(@RequestBody Orders orders){
-        //System.out.println("order save!");
+        System.out.println("order save!");
         return ordersService.save(orders);
+    }
+
+
+    /**
+     * 自动生成订单
+     * @param type 订单类型
+     * @return 生成的订单id
+     */
+    public Integer initOrders(int type) {
+        System.out.println(type);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(dateFormat.format(date));
+        Orders orders = new Orders();
+        orders.setOrderStartTime(dateFormat.format(date));
+        orders.setOrderType(type);
+        orders.setOrderStatus(type*10);
+        //设置订单发起人ID 默认为11 需要后续实现
+        orders.setOrderInit(11);
+        ordersService.save(orders);
+        return orders.getOrderId();
     }
 }
