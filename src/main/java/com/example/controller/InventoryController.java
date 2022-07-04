@@ -17,13 +17,11 @@ public class InventoryController {
     private InventoryService inventoryService;
 
     /**
-     * 获取全部货品
+     * 获取全部库存
      * @return
      */
     @GetMapping//访问方式
     public List<Inventory> getAll() {
-        //log.info("goods获取的数据，{}",goodsService.list());
-        //System.out.println("used");
         return inventoryService.list();
     }
 
@@ -39,7 +37,7 @@ public class InventoryController {
     }
 
     /**
-     * 删除货物
+     * 删除库存
      * @param id
      * @return
      */
@@ -51,7 +49,7 @@ public class InventoryController {
     }
 
     /**
-     * 保存用户
+     * 保存库存
      * @param inventory
      * @return
      */
