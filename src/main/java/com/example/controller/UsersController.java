@@ -45,10 +45,13 @@ public class UsersController {
     /**
      * 登录
      * @param users
-     * @return
+     * @return 0 登录失败
+     *          1 登录为管理员
+     *          2 登录为货物员
+     *          3 登录为操作员
      */
     @PostMapping("/login")
-    private boolean login(@RequestBody Users users) throws Exception {
+    private Integer login(@RequestBody Users users) throws Exception {
         System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
         System.out.println("database:" + usersList);
@@ -57,9 +60,9 @@ public class UsersController {
            System.out.println(EncryptUtil.shaEncode(users.getUserPassword()));
             if (value.getUserName().equals(users.getUserName()))
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword())))
-                    return true;
+                    return value.getUserRole();
         }
-        return false;
+        return 0;
     }
 
     /**
