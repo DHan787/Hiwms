@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsersDetailServiceImpl extends ServiceImpl<UsersDetailDao,UsersDetail> implements UsersDetailService {
+
+
+
+
 }

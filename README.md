@@ -75,3 +75,5 @@
 * 修正goods页面的问题 zls
 * goods模糊查询bug zls
 
+* Stockin 完成 hj
+* stockOut 完成 StockIn 和 StockOut 优化整合 hj

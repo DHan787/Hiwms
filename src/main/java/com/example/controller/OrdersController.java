@@ -64,12 +64,13 @@ public class OrdersController {
         return ordersService.save(orders);
     }
 
+
     /**
-     * 初始化订单 需完善
+     * 自动生成订单
      * @param type 订单类型
-     * @return 订单id
+     * @return 生成的订单id
      */
-    public Integer initOrders(int type){
+    public Integer initOrders(int type) {
         System.out.println(type);
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
