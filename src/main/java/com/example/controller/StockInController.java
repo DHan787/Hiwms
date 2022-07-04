@@ -21,11 +21,6 @@ public class StockInController {
     @Autowired
     private StockInService stockInService;
 
-    private OrdersController ordersController;
-
-    public StockInController(OrdersController ordersController) {
-        this.ordersController = ordersController;
-    }
 
     /**
      * 获取全部入库信息
@@ -44,7 +39,8 @@ public class StockInController {
      */
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn){
-        stockIn.setOrderId(ordersController.initOrdersIn());
+        OrdersController ordersController = new OrdersController();
+        stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
         return stockInService.save(stockIn);
     }
 

@@ -74,4 +74,5 @@
 * 完成货物员的入库申请 ymm
 * 修正goods页面的问题 zls
 * Stockin 完成 hj
-* 完成货物员的出入库申请（缺订单号生成） ymm
+* 完成入库申请订单号前端对接 ymm
+* stockOut 完成 StockIn 和 StockOut 优化整合 hj

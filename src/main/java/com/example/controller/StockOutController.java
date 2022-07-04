@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/stockout")
+@RequestMapping("/stockOut")
 public class StockOutController {
 
     @Autowired
@@ -31,12 +31,12 @@ public class StockOutController {
     /**
      *
      * @param stockOut
-     * @param id orderId
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockOut(@RequestBody StockOut stockOut, Integer id){
-        stockOut.setStockId(id);
+    public boolean saveStockOut(@RequestBody StockOut stockOut){
+        OrdersController ordersController = new OrdersController();
+        stockOut.setStockId(ordersController.initOrders(2)); //type = 2 入库
         return stockOutService.save(stockOut);
     }
 
