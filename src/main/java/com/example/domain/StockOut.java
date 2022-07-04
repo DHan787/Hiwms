@@ -8,11 +8,12 @@ import lombok.Data;
 @Data
 public class StockOut {
     @TableId("stock_id")
+//    库存id
     private Integer stockId;
+//    库存名称
     private String goodsName;
+//    库存数量
     private Integer goodsNumber;
-    private Integer warehouseId;
-    private Integer shelfId;
-    private String stockStatus;
-
+//    所属订单id
+    private Integer orderId;
 }

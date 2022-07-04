@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/goods.css" >
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+	    <div id="app">
+	        <el-container>
+	             <el-container>
+	                <!-- 主体 -->
+	                <el-main>
+	                    <el-breadcrumb style="margin-bottom: 12px;">
+	                        <el-breadcrumb-item>首页</el-breadcrumb-item>
+	                        <el-breadcrumb-item>业务流</el-breadcrumb-item>
+	                        <el-breadcrumb-item>货物管理</el-breadcrumb-item>
+	                        
+	                    </el-breadcrumb>
+	                    
+	                        <div class="card-container">
+	                            <div class="handle-container">
+									<!--查询表单-->
+									<el-form>
+										<el-row>
+											<el-col :span='12'>
+												<el-form-item label="货物名称">
+													<el-input v-model="inputName" clearable placeholder="请输⼊名称" style="width:200px"><!-- clearable 输⼊框可清除属性 --></el-input>
+												</el-form-item>
+											</el-col>
+											<el-col :span='12'>
+												<el-form-item label="货物类别">
+													<el-select v-model="value" clearable>
+														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>
+													</el-select>
+												</el-form-item>
+											</el-col>
+										</el-row>
+									</el-form>
+								</div>
+
+										<el-row :span="8" align="right">
+									<el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询货物</el-button>
+									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
+										</el-row>
+
+
+									<el-table :data="tableData1" stripe style="width: 100%; " >
+										<el-table-column prop="goodsId" label="货物编号" width="180">
+										</el-table-column>
+										<el-table-column prop="goodsName" label="货物名称" width="180">
+										</el-table-column>
+										<el-table-column prop="goodsType" label="类别">
+										</el-table-column>
+										<el-table-column prop="goodsSize" label="尺寸">
+										</el-table-column>
+										<el-table-column prop="goodsValue" label="价格">
+										</el-table-column>
+										<el-table-column label="操作" width="250" style="display: flex;">
+											<template slot-scope="scope" v-for="goods in tableData1">
+
+												<el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
+												<el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
+											</template>
+										</el-table-column>
+									</el-table>
+									<div style="text-align: center;">
+										<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+									</div>
+
+
+							</div>
+
+									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+									  <el-form :model="form" ref="form">
+									    <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodsName">
+									      <el-input v-model="form.goodsName" autocomplete="off"></el-input>
+									    </el-form-item>
+										  <el-form-item label="货物类型" :label-width="formLabelWidth" prop="goodsType">
+											  <el-select v-model="form.goodsType" placeholder="请选择货物类型">
+												  <el-option label="水果" value="1"></el-option>
+												  <el-option label="蔬菜" value="2"></el-option>
+											  </el-select>
+										  </el-form-item>
+										<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodsSize">
+										  <el-input v-model="form.goodsSize" autocomplete="off"></el-input>
+										</el-form-item>
+										<el-form-item label="价格" :label-width="formLabelWidth" prop="goodsValue">
+										  <el-input v-model="form.goodsValue" autocomplete="off"></el-input>
+										</el-form-item>
+									  </el-form>
+									  <div slot="footer" class="dialog-footer">
+									    <el-button @click="dialogFormVisible = false">取 消</el-button>
+									    <el-button v-if="isAdd" type="primary" @click="addGoods">确 定</el-button>
+										<el-button  v-else type="primary" @click="updateGoodsById">更 新</el-button>
+									  </div>
+									</el-dialog>
+
+
+	                    
+	                    <el-card>
+	                        <el-table :data="tableData2" stripe style="width: 100%; " >
+	                            <el-table-column prop="goodsId" label="货物编号" width="180">
+								</el-table-column>
+	                            <el-table-column prop="goodsName" label="货物名称" width="180">
+	                            </el-table-column>
+	                            <el-table-column prop="goodsType" label="类别">
+	                            </el-table-column>
+	                            <el-table-column prop="goodsSize" label="尺寸">
+								<el-table-column prop="goodsNumber" label="数量">
+								</el-table-column>
+								<el-table-column prop="goodsValue" label="价格">
+								</el-table-column>
+	                            <el-table-column label="操作" width="250" style="display: flex;">
+	                                <template slot-scope="scope" v-for="goods in tableData2">
+										
+	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
+	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
+	                                </template>
+	                            </el-table-column>
+	                        </el-table>
+	                        <div style="text-align: center;">
+	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+	                        </div>
+	                    </el-card>
+	                </el-main>
+	            </el-container>
+	        </el-container>
+	    </div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
+	
+	<script>
+	    new Vue({
+	        el: '#app',
+	        data: function() {
+	            return {
+					tableData1:[],
+					inputName:'',
+					typeOption:[
+						{lable:'类别1',value:'水果'},
+						{lable:'类别2',value:'蔬菜'},
+					],
+					value:0,
+
+					tableData2: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					form: {
+						name: '',
+						type: '',
+						number:'',
+						size: '',
+						value: ''
+					},
+					formLabelWidth: '120px',
+					isAdd: false
+					
+	            }
+	        },
+
+			created(){
+				this.getAll();
+			},
+
+	        methods: {
+				getAll(){
+					axios.get("http://localhost:8080/goods").then(res=>{
+						this.tableData2 = res.data ;
+					});
+				},
+
+				<!--搜索-->
+				getGoodsId() {
+					this.$axios.get('http://127.0.0.1:9091/getall').then(result => {
+						this.tableData1 = this.tableData2 = result.data
+					}).catch(err => {
+						console.log(err)
+					})
+				},
+				searchGoodsId(keywords) {
+					return this.tableData2.filter(item =>{
+						if(item.goodsId === keywords) {
+							return item
+						}
+					})
+				},
+				searchGoodsName(keywords) {
+					return this.tableData2.filter(item =>{
+						if(item.goodsName.includes(keywords)){
+							return item
+						}
+					})
+				},
+				searchType(keywords) {
+					return this.tableData2.filter(item =>{
+						if(item.type.includes(keywords)){
+							return item
+						}
+					})
+				},
+				numberToType(num){
+					return num===1?'水果':'蔬菜'
+				},
+
+			 	created() {
+				this.getGoodsId()
+				},
+				watch:{
+					inputId: function(val) {
+						if(val === ''){
+							this.tableData1 = this.tableData2
+						}else{
+							this.tableData1 = this.searchId(val)
+						}
+					},
+					inputName: function(val) {
+						if(val === ''){
+							this.tableData1 = this.tableData2
+						}else{
+							this.tableData1 = this.searchName(val)
+						}
+					},
+					value: function(val) {
+						if(val === 0){
+							this.tableData1 = this.tableData2
+						}else{
+							this.tableData1 = this.searchType(this.numberToType(val))
+						}
+					}
+				},
+
+
+                <!--删除-->
+				removeGoodsById(index) {
+					var id = this.tableData[index].goodsId;
+					this.$confirm('此操作将永久删除货物, 是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						axios.delete("http://localhost:8080/goods/" + id).then(res=> {
+							this.getAll();
+						});
+						this.$message({
+							type: 'success',
+							message: '删除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
+					});
+				},
+				
+				addClick() {
+						this.dialogFormVisible = true;
+						this.dialogFormTitle = "新增货物";
+						this.isAdd = true;
+						this.form = {};
+				},
+				
+				addGoods() {
+					axios.post("http://localhost:8080/goods",this.form).then(rel=>{
+						if(rel.data){
+							this.$message({
+								type: 'success',
+								message: '新增成功!'
+							});
+							this.getAll();
+							this.dialogFormVisible = false;
+							
+						}else{
+							this.$message({
+								type: 'info',
+								message: '新增失败'
+							});
+						}
+						this.$refs.form.resetFields();
+					})
+				},
+				
+				editClick(index,row) {
+					this.dialogFormVisible = true;
+					this.dialogFormTitle = "修改货物";
+					this.isAdd = false;
+					this.form = Object.assign({},row);
+					this.form.index = index;				
+				},
+
+				updateGoodsById() {
+					axios.put("http://localhost:8080/goods",this.form).then(rel=>{
+						if(rel.data){
+							this.$message({
+								type: 'success',
+								message: '修改成功!'
+							});
+							this.getAll();
+							this.dialogFormVisible = false;
+							
+						}else{
+							this.$message({
+								type: 'info',
+								message: '修改失败'
+							});
+						}
+						this.$refs.form.resetFields();
+					})
+				}
+	        }
+	    })
+	</script>
+	</html>

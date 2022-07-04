@@ -1,84 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<script src="../assets/js/vue.js"></script>
-		<script src="../assets/js/axios.min.js"></script>
-		<title>Users-test</title>
-	</head>
-	<body>
-		<div id="demo">
-			<el-table :data="tableData" border stripe style="width: 100%;">
-			        <el-table-column prop="name" label="姓名">
-			          <template slot-scope="scope">
-			            <el-input v-if="scope.row.edit" v-model="scope.row.name" placeholder="姓名"></el-input>
-			            <span v-else>{{scope.row.name}}</span>
-			          </template>
-			        </el-table-column>
-			        <el-table-column prop="sex" label="性别">
-			          <template slot-scope="scope">
-			            <el-select v-if="scope.row.edit" v-model="scope.row.sex" placeholder="请选择">
-			              <el-option label="男" value="1">男</el-option>
-			              <el-option label="女" value="2">女</el-option>
-			            </el-select>
-			            <span v-else>
-			              <p v-if="scope.row.sex==1">男</p>
-			              <p v-if="scope.row.sex==2">女</p>
-			            </span>
-			          </template>
-			        </el-table-column>
-			        <el-table-column label="操作">
-			          <template slot-scope="scope">
-			            <el-button v-if="scope.row.edit" type="text" size="medium" @click="confirmAdd(scope.row)">
-			              <i class="el-icon-check" aria-hidden="true"></i>
-			            </el-button>
-			            <div v-else>
-			              <el-button type="text" size="medium" @click="editData(scope.row)">
-			                <i class="el-icon-edit" aria-hidden="true"></i>
-			              </el-button>
-			              <el-button type="text" size="medium" @click="deleteData(scope.row,scope.$index)">
-			                <i class="el-icon-delete" aria-hidden="true"></i>
-			              </el-button>
-			            </div>
-			          </template>
-			        </el-table-column>
-			      </el-table>
-			      <el-button type="text" @click="addData">添加数据</el-button>
-			      <el-divider></el-divider>
-			      <el-button @click="submitData">提交 </el-button>
-		</div>
-		<script>
-			  export default {
-			    name: "demo",
-			    data() {
-			      return {
-			        tableData: [],
-			      }
-			    },
-			    methods: {
-			      //添加
-			      addData() {
-			        this.tableData.push({
-			          edit: true,
-			        });
-			      },
-			      //确认添加
-			      confirmAdd(row) {
-			        row.edit = false;
-			      },
-			      //修改
-			      editData(row) {
-			        row.edit = true;
-			      },
-			      //删除
-			      deleteData(row, index) {
-			        this.tableData.splice(index, 1);
-			      },
-			      submitData() {
-			        alert(JSON.stringify(this.tableData))
-			      }
-			    }
-			  }
-		</script>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/axios.min.js"></script>
+    <title>Users-test</title>
+</head>
+<body>
+<div id="app">
+    the test
+    <ul>
+        {{info.goodsName}}
+    </ul>
+    <tr>
+        <td>
+            <table>商品名：</table>
+            <input type="text" v-model="formData.goodsName" >
+        </td>
+        <td>
+            <table>商品数量：</table>
+            <input type="password" v-model="formData.goodsNumber">
+        </td>
+        <td>
+            <table>所属订单：</table>
+            <input type="number" v-model="formData.orderId">
+        </td>
+        <td>
+            <input type="button" value="提交" v-on:click="submitForm">
+        </td>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data:{
+            info:{},
+            formData:{}
+        },
+        created(){
+            this.getAll();
+        },
+
+        methods:{
+            //查询所有
+            getAll(){
+                axios.get("http://localhost:8080/stockin").then(res=>{
+                    this.info=res.data;
+                    console.log(this.info)
+                });
+            },
+
+            submitForm(){
+                axios.post("http://localhost:8080/stockin/save",this.formData,this.formData.orderId).then(rel=>{
+                    if(rel.data){
+                        alert("success");
+                        // window.location.href=("admin.html")
+                    }else{alert("error")}
+
+                })
+            }
+        }
+    })
+</script>
+</body>
 </html>

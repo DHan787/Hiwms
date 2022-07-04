@@ -130,12 +130,17 @@
                      if(this.loginForm.userPassword!==''){
                          if(this.loginForm.code!==''){
                              if(code === this.$refs.getValue.value.toLowerCase()) {
-                                 axios.post("http://localhost:8080/users", this.loginForm).then(rel => {
-                                     if (rel.data) {
-                                         alert("success")
-                                         window.location.href = ("admin.html")
-                                     } else {
-                                         alert("用户名或密码错误")
+                                 axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
+                                     console.log(rel.data);
+                                     if (rel.data === 1) {
+                                         alert("欢迎你！管理员")
+                                         window.location.href = ("index/admin.html")
+                                     } else if(rel.data === 2){
+                                         alert("欢迎你！货物员")
+                                         window.location.href = ("index/market.html")
+                                     }else if(rel.data === 3){
+                                         window.location.href = ("index/operator.html")
+                                         alert("欢迎你！操作员")
                                      }
                                  })
                              }else{
