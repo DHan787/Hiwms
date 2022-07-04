@@ -50,11 +50,11 @@
             },
 
             submitForm(){
-                axios.post("http://localhost:8080/stockin/save",this.formData,this.formData.orderId).then(rel=>{
+                axios.post("http://localhost:8080/orders/init"+ this.formData.orderId).then(rel=>{
                     if(rel.data){
-                        alert("success");
+                        alert(rel.data);
                         // window.location.href=("admin.html")
-                    }else{alert("error")}
+                    }else{alert(rel.data)}
 
                 })
             }
