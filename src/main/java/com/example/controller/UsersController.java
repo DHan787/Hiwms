@@ -52,15 +52,15 @@ public class UsersController {
      */
     @PostMapping("/login")
     private Integer login(@RequestBody Users users) throws Exception {
-        System.out.println(users.getUserName() + users.getUserPassword());
+//        System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
-        System.out.println("database:" + usersList);
+//        System.out.println("database:" + usersList);
         for (Users value : usersList) {
-           System.out.println("name：" + value.getUserName());
-           System.out.println(EncryptUtil.shaEncode(users.getUserPassword()));
             if (value.getUserName().equals(users.getUserName()))
-                if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword())))
+                if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
+//                    System.out.println("role is:" + value.getUserRole());
                     return value.getUserRole();
+                }
         }
         return 0;
     }
