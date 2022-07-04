@@ -21,10 +21,16 @@ public class StockInController {
     @Autowired
     private StockInService stockInService;
 
+    public StockInController(OrdersController ordersController) {
+        this.ordersController = ordersController;
+    }
+
+    OrdersController ordersController;
+
 
     /**
      * 获取全部入库信息
-     * @return
+     * @return list
      */
     @GetMapping//访问方式
     public List<StockIn> getAll() {
@@ -39,7 +45,6 @@ public class StockInController {
      */
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn){
-        OrdersController ordersController = new OrdersController();
         stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
         return stockInService.save(stockIn);
     }
