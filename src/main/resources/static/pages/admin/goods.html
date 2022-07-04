@@ -100,7 +100,7 @@
 
 	                    
 	                    <el-card>
-	                        <el-table :data="tableData2" stripe style="width: 100%; " >
+	                        <el-table :data="showData" stripe style="width: 100%; " >
 	                            <el-table-column prop="goodsId" label="货物编号" width="180">
 								</el-table-column>
 	                            <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -120,7 +120,12 @@
 	                            </el-table-column>
 	                        </el-table>
 	                        <div style="text-align: center;">
-	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+	                            <el-pagination background layout="prev, pager, next"
+											   :total="100"
+											   :current-change="pager"
+								>
+
+								</el-pagination>
 	                        </div>
 	                    </el-card>
 	                </el-main>
@@ -135,6 +140,15 @@
 	<script>
 	    new Vue({
 	        el: '#app',
+			watch:{
+	        	allData(){
+	        			this.showData=this.allData().slice((this.pager-1)*this.pageLength,this.pager*this.pageLength);
+				}	,
+				pager(){
+					this.showData=this.allData().slice((this.pager-1)*this.pageLength,this.pager*this.pageLength);
+
+				}
+			},
 	        data: function() {
 	            return {
 					tableData1:[],
@@ -144,7 +158,10 @@
 						{lable:'类别2',value:'蔬菜'},
 					],
 					value:0,
-
+					pageLength:5,
+					pager:1,
+					allData:[],
+					showData:[],
 					tableData2: [],
 					dialogFormVisible: false,
 					dialogFormTitle: "",
@@ -167,6 +184,10 @@
 
 	        methods: {
 				getAll(){
+					axios.get("http://localhost:8080/goods").then(res=>{
+						console.log(res);
+						this.allData=res.data;
+					})
 					axios.get("http://localhost:8080/goods").then(res=>{
 						this.tableData2 = res.data ;
 					});
