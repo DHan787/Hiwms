@@ -89,7 +89,7 @@
 							//console.log('name:' + this.tableDataSelections[i].goodsName);
 							item = this.tableDataSelections[i];
 							//console.log('number:' + this.tableDataSelections[i].goodsNumber);
-							axios.post("http://localhost:8080/stockout/save",item).then(res=> {
+							axios.post("http://localhost:8080/stockOut/save",item).then(res=> {
 								if(res.data){
 										this.$message({
 											type: 'success',
