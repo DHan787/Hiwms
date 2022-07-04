@@ -108,13 +108,12 @@
 	                            <el-table-column prop="goodsType" label="类别">
 	                            </el-table-column>
 	                            <el-table-column prop="goodsSize" label="尺寸">
-                                </el-table-column>
-								<el-table-column prop="goodsNumber" label="数量">
 								</el-table-column>
 								<el-table-column prop="goodsValue" label="价格">
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="goods in tableData2">
+										
 	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
 	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
 	                                </template>
@@ -265,7 +264,6 @@
 				},
 				
 				addGoods() {
-					console.log(this.form);
 					axios.post("http://localhost:8080/goods",this.form).then(rel=>{
 						if(rel.data){
 							this.$message({
