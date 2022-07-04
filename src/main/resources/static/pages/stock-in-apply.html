@@ -72,6 +72,7 @@
 				selectCall(val) {
 					this.tableDataSelections = val;
 					console.log(val);
+					//console.log(tableDataSelections);
 				},
 				apply() {
 					console.log(this.tableDataSelections);
@@ -87,7 +88,7 @@
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
 							//console.log('name:' + this.tableDataSelections[i].goodsName);
 							item = this.tableDataSelections[i];
-							//console.log('number:' + this.tableDataSelections[i].goodsNumber);
+							//console.log('item:' + this.tableDataSelections[i]);
 							axios.post("http://localhost:8080/stockIn/save",item).then(res=> {
 								if(res.data){
 										this.$message({

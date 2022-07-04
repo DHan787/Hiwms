@@ -39,8 +39,8 @@ public class StockInController {
      */
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn){
-        OrdersController ordersController = new OrdersController();
-        stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
+        //OrdersController ordersController = new OrdersController();
+        //stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
         return stockInService.save(stockIn);
     }
 
