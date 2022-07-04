@@ -65,4 +65,7 @@
 * 更正删除功能 hxy 修改所有编辑删除 zls
 
 ## 7.4
-* 添加吉祥物
+* 添加吉祥物 hj
+* StockIn StockOut 的save功能 hj
+* good->goods 部分查询代码 zls
+

@@ -62,7 +62,7 @@ public class GoodsController {
 
     @PutMapping
     public boolean updateGoods(@RequestBody Goods goods){
-        System.out.println(goods.getGoodName());
+        System.out.println(goods.getGoodsName());
         return goodsService.updateById(goods);
     }
 
