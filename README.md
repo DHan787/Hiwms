@@ -68,4 +68,5 @@
 * 添加吉祥物 hj
 * StockIn StockOut 的save功能 hj
 * good->goods 部分查询代码 zls
+* number删掉 zls
 * 订单自动生成 hj
