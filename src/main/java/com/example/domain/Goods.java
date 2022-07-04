@@ -13,6 +13,7 @@ public class Goods {
     private Integer goodsId;
     private String goodsName;
     private String goodsType;
+    private String goodsNumber;
     private String goodsSize;
     private Double goodsValue;
 
@@ -38,6 +39,13 @@ public class Goods {
 
     public void setGoodsType(String goodsType) {
         this.goodsType = goodsType;
+    }
+    public String getGoodsNumber(){
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(String goodsNumber) {
+        this.goodsNumber = goodsNumber;
     }
 
     public String getGoodsSize() {

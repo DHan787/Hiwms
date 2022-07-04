@@ -2,8 +2,8 @@
 <html lang="">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/goods.css" >
-		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
+		<link rel="stylesheet" href="../../assets/css/goods.css" >
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
 		<title></title>
 	</head>
 	<body>
@@ -108,7 +108,8 @@
 	                            <el-table-column prop="goodsType" label="类别">
 	                            </el-table-column>
 	                            <el-table-column prop="goodsSize" label="尺寸">
-	                            </el-table-column>
+								<el-table-column prop="goodsNumber" label="数量">
+								</el-table-column>
 								<el-table-column prop="goodsValue" label="价格">
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
@@ -119,16 +120,18 @@
 	                                </template>
 	                            </el-table-column>
 	                        </el-table>
-
+	                        <div style="text-align: center;">
+	                            <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+	                        </div>
 	                    </el-card>
 	                </el-main>
 	            </el-container>
 	        </el-container>
 	    </div>
 	</body>
-	<script src="../assets/js/vue.js"></script>
-	<script src="../assets/css/element-ui/index.js"></script>
-	<script src="../assets/js/axios.min.js"></script>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 	
 	<script>
 	    new Vue({
@@ -149,6 +152,7 @@
 					form: {
 						name: '',
 						type: '',
+						number:'',
 						size: '',
 						value: ''
 					},

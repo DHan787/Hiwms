@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/admin.css">
-		<link rel="stylesheet" href="../assets/css/element-ui/index.css">
+		<link rel="stylesheet" href="../../assets/css/admin.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
 		<title></title>
 	</head>
 	<body>
@@ -36,19 +36,19 @@
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
 										<i class="el-icon-ice-cream-round"></i>
-										<span slot="title" @click="openUrl('./users.html')">用户管理</span>
+										<span slot="title" @click="openUrl('../admin/users.html')">用户管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-2">
 										<i class="el-icon-trophy"></i>
-										<span slot="title" @click="openUrl('./warehouse.html')">仓库管理</span>
+										<span slot="title" @click="openUrl('../admin/warehouse.html')">仓库管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-3">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('./goods.html')">货物管理</span>
+										<span slot="title" @click="openUrl('../admin/goods.html')">货物管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-4">
 										<i class="el-icon-mouse"></i>
-										<span slot="title" @click="openUrl('./orders.html')">订单管理</span>
+										<span slot="title" @click="openUrl('../admin/orders.html')">订单管理</span>
 									</el-menu-item>
 
 								</el-menu-item-group>
@@ -71,9 +71,9 @@
 			</el-container>
 		</div>
 	</body>
-	<script src="../assets/js/vue.js"></script>
-	<script src="../assets/css/element-ui/index.js"></script>
-	<script src="../assets/js/axios.min.js"></script>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 	<script>
 		new Vue({
 			el: '#app',

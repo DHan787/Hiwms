@@ -2,8 +2,8 @@
 <html lang="">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../assets/css/orders.css" >
-    <link rel="stylesheet" href="../assets/css/element-ui/index.css">
+    <link rel="stylesheet" href="../../assets/css/orders.css" >
+    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <title></title>
 </head>
 <body>
@@ -23,7 +23,6 @@
                 <div class="card-container">
                     <div class="handle-container">
 
-                            <el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询订单</el-button>
                             <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增订单</el-button>
 
                         <el-dialog title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -62,8 +61,8 @@
                                 </el-form-item>
                             </el-form>
                             <div slot="footer" class="dialog-footer">
-                                <el-button @click="addFormVisible = false">取 消</el-button>
-                                <el-button type="primary" @click="addOrders">确 定</el-button>
+                                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                                <el-button v-if="isAdd" type="primary" @click="addOrders">确 定</el-button>
                             </div>
                         </el-dialog>
 
@@ -103,9 +102,9 @@
     </el-container>
 </div>
 </body>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/css/element-ui/index.js"></script>
-<script src="../assets/js/axios.min.js"></script>
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/css/element-ui/index.js"></script>
+<script src="../../assets/js/axios.min.js"></script>
 
 <script>
     new Vue({

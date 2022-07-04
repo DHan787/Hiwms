@@ -10,19 +10,23 @@
 <div id="app">
     the test
     <ul>
-        {{info.userName}}
+        {{info.goodsName}}
     </ul>
     <tr>
         <td>
-            <table>用户名：</table>
-            <input type="text" v-model="formData.userName" >
+            <table>商品名：</table>
+            <input type="text" v-model="formData.goodsName" >
         </td>
         <td>
-            <table>密码：</table>
-            <input type="password" v-model="formData.userPassword">
+            <table>商品数量：</table>
+            <input type="password" v-model="formData.goodsNumber">
         </td>
         <td>
-            <input type="button" value="登录" v-on:click="submitForm">
+            <table>所属订单：</table>
+            <input type="number" v-model="formData.orderId">
+        </td>
+        <td>
+            <input type="button" value="提交" v-on:click="submitForm">
         </td>
 </div>
 <script>
@@ -39,20 +43,18 @@
         methods:{
             //查询所有
             getAll(){
-                axios.get("http://localhost:8080/usersDetail").then(res=>{
-                    console.log(res.data.userName);
+                axios.get("http://localhost:8080/stockin").then(res=>{
                     this.info=res.data;
                     console.log(this.info)
-
                 });
             },
 
             submitForm(){
-                axios.post("http://localhost:8080/users",this.formData).then(rel=>{
+                axios.post("http://localhost:8080/stockin/save",this.formData,this.formData.orderId).then(rel=>{
                     if(rel.data){
                         alert("success");
-                        window.location.href=("admin.html")
-                    }else{alert("用户名或者密码错误")}
+                        // window.location.href=("admin.html")
+                    }else{alert("error")}
 
                 })
             }
