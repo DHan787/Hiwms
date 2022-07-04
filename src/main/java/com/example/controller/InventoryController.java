@@ -59,7 +59,11 @@ public class InventoryController {
         return inventoryService.save(inventory);
     }
 
-
+    /**
+     * 更新库存
+     * @param inventory
+     * @return if success
+     */
     @PutMapping
     public boolean updateInventory(@RequestBody Inventory inventory){
 

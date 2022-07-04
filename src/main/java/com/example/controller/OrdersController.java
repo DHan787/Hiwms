@@ -65,7 +65,11 @@ public class OrdersController {
     }
 
 
-
+    /**
+     * 自动生成订单
+     * @param type 订单类型
+     * @return 生成的订单id
+     */
     public Integer initOrders(int type) {
         System.out.println(type);
         Date date = new Date();

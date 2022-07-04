@@ -59,7 +59,11 @@ public class WarehosueController {
         return warehouseService.save(warehouse);
     }
 
-
+    /**
+     * 更新仓库信息
+     * @param warehouse
+     * @return if success
+     */
     @PutMapping
     public boolean updateWarehouse(@RequestBody Warehouse warehouse){
         System.out.println(warehouse.getWarehouseName());

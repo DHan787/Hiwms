@@ -93,6 +93,11 @@ public class UsersController {
         return usersService.removeById(id);
     }
 
+    /**
+     * 注册
+     * @param users
+     * @return if success
+     */
     @PostMapping("/register")
     public boolean register(@RequestBody Users users){
         try {
@@ -103,6 +108,11 @@ public class UsersController {
         return usersService.save(users);
     }
 
+    /**
+     * 更新用户
+     * @param users
+     * @return if success
+     */
     @PutMapping
     public boolean updateUsers(@RequestBody Users users){
         System.out.println(users.getUserName());
