@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dao.GoodsDao;
 import com.example.domain.Goods;
 import com.example.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
@@ -66,4 +67,10 @@ public class GoodsController {
         return goodsService.updateById(goods);
     }
 
+    //模糊查询
+    @GetMapping("/like")
+    public List<Goods> getAllList(@RequestParam String goodsName){
+        System.out.println(goodsName);
+        return GoodsDao.selectPagesLike("%"+goodsName+"%");
+    }
 }

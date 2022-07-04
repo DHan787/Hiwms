@@ -73,4 +73,5 @@
 * stock-in-apply.html 实现前端 ymm
 * 完成货物员的入库申请 ymm
 * 修正goods页面的问题 zls
+* goods模糊查询bug zls
 
