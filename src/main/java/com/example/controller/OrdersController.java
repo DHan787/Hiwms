@@ -1,6 +1,8 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dao.OrdersDao;
 import com.example.domain.Orders;
 import com.example.service.OrdersService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,9 @@ import java.util.SimpleTimeZone;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
+
+    @Autowired
+    private OrdersDao ordersDao;
 
     /**
      * 获取订单表
@@ -109,9 +114,10 @@ public class OrdersController {
         return ordersService.updateById(orders);
     }
 
+
     @GetMapping("/getByType")
-    public List<Orders> getByType(int orderType){
-        List<Orders> oriOrders = ordersService.list();
+    public List<Orders> getByType(@RequestParam Integer orderType){
+        /*List<Orders> oriOrders = ordersService.list();
         List<Orders> targetOrders = null;
         for (Orders ori:oriOrders
              ) {
@@ -119,6 +125,10 @@ public class OrdersController {
                 targetOrders.add(ori);
             }
         }
-        return targetOrders;
+        return targetOrders;*/
+        QueryWrapper<Orders> wrapper = new QueryWrapper<>();
+        wrapper.eq("order_type",orderType);
+        List<Orders> orders = ordersDao.selectList(wrapper);
+        return orders;
     }
 }

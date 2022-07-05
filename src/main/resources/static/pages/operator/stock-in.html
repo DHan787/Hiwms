@@ -24,20 +24,13 @@
                         <!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
                         <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
  -->
-                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-						
+                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">						
 							<el-table :data="gridData">
 							    <el-table-column property="stockId" label="库存id" width="150"></el-table-column>
-							    <el-table-column property="goodsNmae" label="货品名称" width="200"></el-table-column>
+							    <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
 							    <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
 							  </el-table>
 							
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button v-if="isAdd" type="primary" @click="addUsers()">确 定</el-button>
-                                <el-button  v-else type="primary" @click="updateUsersById()">更 新</el-button>
-                            
-							</div>
                         </el-dialog>
 
                     </div>
@@ -65,8 +58,8 @@
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="orders in tableData">
                 
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">查看详情</el-button>
-                                <el-button type="success" plain @click="removeOrdersById(scope.$index)" icon="el-icon-delete">入库</el-button>
+                                <el-button type="primary" plain @click="viewClick(scope.$index,scope.row)" icon="el-icon-edit">查看详情</el-button>
+                                <el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -92,8 +85,7 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "查看订单详情",
                 gridData: [],
-                formLabelWidth: '120px',
-				orderType: "1"
+				orderType: ''
             }
         },
 
@@ -103,9 +95,25 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/orders/getByType", this.orderType).then(res=>{
+				//console.log("orderType:{}",orderType);
+                axios.get("http://localhost:8080/orders/getByType?orderType=1").then(res=>{
                     this.tableData = res.data ;
+					/*console.log(this.tableData);*/
                 });
+            },
+			
+			viewClick(index,row) {
+				this.dialogFormVisible = true;
+                var orderId = this.tableData[index].orderId;
+                axios.get("http://localhost:8080/stockIn/getByOrderId?orderId="+orderId).then(res=>{
+                    this.gridData = res.data ;
+                    console.log(this.gridData);
+                });
+			},
+
+            handleStockIn(index) {
+                console.log(this.gridData);
+                console.log(this.gridData[index].goodsName);
             }
         }
     })

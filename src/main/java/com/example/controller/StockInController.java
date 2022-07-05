@@ -62,7 +62,7 @@ public class StockInController {
     public List<StockIn> getByOrderId(@RequestParam Integer orderId){
 
         QueryWrapper<StockIn> wrapper = new QueryWrapper<>();
-        wrapper.eq("orderId",orderId);
+        wrapper.eq("order_id",orderId);
         List<StockIn> stockIns = stockInDao.selectList(wrapper);
         return stockIns;
     }
