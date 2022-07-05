@@ -22,29 +22,34 @@
                 <div class="card-container">
                     <div class="handle-container">
 
-                        <el-button type="primary" plain style="margin:15px 20px;" @click="doQuery" icon="el-icon-search">查询用户</el-button>
-                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
-
+                        <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button>
+                        <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
+ -->
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
-                                <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
+                                <!-- <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
                                     <el-input v-model="form.userId" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="用户名称" :label-width="formLabelWidth" prop="userName">
+                                </el-form-item> -->
+                                <!-- <el-form-item label="用户姓名" :label-width="formLabelWidth" prop="userName">
                                     <el-input v-model="form.userName" autocomplete="off"></el-input>
+                                </el-form-item> -->
+                                <el-form-item label="用户电话号" :label-width="formLabelWidth" prop="userTele">
+                                    <el-input v-model="form.userTele" autocomplete="off"></el-input>
                                 </el-form-item>
-                                <el-form-item label="用户密码" :label-width="formLabelWidth" prop="userPassword">
-                                    <el-input v-model="form.userPassword" autocomplete="off"></el-input>
+                                <el-form-item label="用户地址" :label-width="formLabelWidth" prop="userLocation">
+                                    <el-input v-model="form.userLocation" autocomplete="off"></el-input>
                                 </el-form-item>
-                                <el-form-item label="用户权限" :label-width="formLabelWidth" prop="userRole">
-                                    <el-input v-model="form.userRole" autocomplete="off"></el-input>
-                                </el-form-item>
+								<el-form-item label="用户商家名" :label-width="formLabelWidth" prop="userRetailer">
+								    <el-input v-model="form.userRetailer" autocomplete="off"></el-input>
+								</el-form-item>
+
                             </el-form>
                             <div slot="footer" class="dialog-footer">
                                 <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button v-if="isAdd" type="primary" @click="addUsers">确 定</el-button>
-                                <el-button  v-else type="primary" @click="updateUsersById">更 新</el-button>
-                            </div>
+                                <el-button v-if="isAdd" type="primary" @click="addUsers()">确 定</el-button>
+                                <el-button  v-else type="primary" @click="updateUsersById()">更 新</el-button>
+                            
+							</div>
                         </el-dialog>
 
                     </div>
@@ -54,14 +59,19 @@
                     <el-table :data="tableData" stripe style="width: 100%; " >
                         <el-table-column prop="userId" label="用户ID" width="180">
                         </el-table-column>
-                        <el-table-column prop="userName" label="用户名称" width="180">
+                        <el-table-column prop="userName" label="用户姓名" width="180">
                         </el-table-column>
-                        <el-table-column prop="userPassword" label="用户密码">
+                        <el-table-column prop="userTele" label="用户电话号">
+                        </el-table-column>
+                        <el-table-column prop="userLocation" label="用户地址">
+                        </el-table-column>
+                        <el-table-column prop="userRetailer" label="用户商家名">
                         </el-table-column>
                         <el-table-column prop="userRole" label="用户权限">
                         </el-table-column>
+						
                         <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="users in tableData">
+                            <template slot-scope="scope">
 
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
                                 <el-button type="danger" plain @click="removeUsersById(scope.$index)" icon="el-icon-delete">删除</el-button>
@@ -90,13 +100,17 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
-                    id: '',
+                    userId: '',
                     name: '',
-                    password: '',
-                    role: ''
+                    userTele: '',
+                    userLocation: '',
+                    userRetailer: ''
+
                 },
                 formLabelWidth: '120px',
-                isAdd: false
+                isAdd: false,
+				
+				altTime: ''
 
             }
         },
@@ -107,13 +121,15 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/users").then(res=>{
+                axios.get("http://localhost:8080/usersDetail").then(res=>{
+                    console.log("here is userdetail");
                     this.tableData = res.data ;
                 });
             },
 
             removeUsersById(index) {
                 var id = this.tableData[index].userId;
+				console.log("id");
                 this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -138,11 +154,12 @@
                 this.dialogFormVisible = true;
                 this.dialogFormTitle = "新增用户";
                 this.isAdd = true;
-                this.form = {};
+                this.userId = this.tableData[index].userId;
             },
 
-            addUsers() {
-                axios.post("http://localhost:8080/users/save",this.form).then(rel=>{
+            /* addUsers(index) {
+                var id = this.tableData[index].userId;
+                axios.post("http://localhost:8080/usersInfo/save",{params: {userInfo: this.form,userId: id}}).then(rel=>{
                     if(rel.data){
                         this.$message({
                             type: 'success',
@@ -159,23 +176,24 @@
                     }
                     this.$refs.form.resetFields();
                 })
-            },
+            }, */
 
             editClick(index,row) {
                 this.dialogFormVisible = true;
                 this.dialogFormTitle = "修改用户信息";
                 this.isAdd = false;
                 this.form = Object.assign({},row);
-                this.form.index = index;
+                this.altTime = this.tableData[index].usersInfoAltTime;
+				console.log(this.altTime);
             },
 
-            editUsers() {
-                //this.$set(tableName,talbeIndex,data)
-                this.$set(this.tableData,this.form.index,{id:this.form.id,name:this.form.name,password:this.form.password,role:this.form.role});
-
-            },
             updateUsersById() {
-                axios.put("http://localhost:8080/users",this.form).then(rel=>{
+				console.log("here is update");
+				console.log(this.form.userId);
+				/* var altTime = this.tableData[index].usersInfoAltTime; */
+				console.log(this.form.usersInfoAltTime);
+                axios.put("http://localhost:8080/usersInfo?userId="+this.form.userId+"&usersInfoAltTime="+this.form.usersInfoAltTime, this.form).then(rel=>{
+
                     if(rel.data){
                         this.$message({
                             type: 'success',

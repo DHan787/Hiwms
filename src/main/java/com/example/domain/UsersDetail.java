@@ -10,6 +10,8 @@ public class UsersDetail {
     private String userLocation;
     private String userRetailer;
     private String userRole;
+    //    用户信息修改时间
+    private Long usersInfoAltTime;
 
     public Integer getUserId() {
         return userId;

@@ -19,22 +19,17 @@
 						</el-breadcrumb>
 						<!--表单区域-->
 						<el-card>
-							<el-table :data="tableData" stripe style="width: 100%; ">
+							<!--复选框列-->
+							<el-table :data="tableData" stripe style="width: 100%; " @selection-change="selectCall"
+								ref="multipleTable">
 								<el-table-column type="selection" width="60"></el-table-column>
-								<el-table-column prop="goodId" label="货物编号" width="180">
+								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
-								<el-table-column prop="goodName" label="货物名称" width="180">
-								</el-table-column>
-								<el-table-column prop="goodType" label="类别">
-								</el-table-column>
-								<el-table-column prop="goodSize" label="尺寸">
-								</el-table-column>
-								<el-table-column prop="goodValue" label="价格">
+								<el-table-column prop="goodsNumber" label="货品数量" width="180">
 								</el-table-column>
 								<el-table-column label="出库数量">
 									<template slot-scope="scope">
-										<el-input v-model="scope.row.goodNumber" placeholder="出库数量">
-										</el-input>
+										<el-input-number v-model="scope.row.goodsNumber" :min="1" :max="1000" label="出库数量"></el-input-number>
 									</template>
 								</el-table-column>
 							</el-table>
@@ -43,8 +38,7 @@
 							</div>
 						</el-card>
 						<el-card style="text-align: center;">
-							<el-button type="primary" plain @click="removeGoodsById(scope.$index)"
-								icon="el-icon-upload2">出库</el-button>
+							<el-button type="primary" plain @click="apply" icon="el-icon-download">申请出库</el-button>
 						</el-card>
 					</el-main>
 				</el-container>
@@ -61,8 +55,9 @@
 			data: function() {
 				return {
 					tableData: [],
-					seen: false,
-					multipleSelection: [],
+					tableDataSelections: [],
+					selectRows: [],
+					selectTotal: 0
 				}
 			},
 
@@ -76,6 +71,51 @@
 						this.tableData = res.data;
 					});
 				},
+				selectCall(val) {
+					this.tableDataSelections = val;
+					console.log(val);
+				},
+				apply() {
+					console.log(this.tableDataSelections);
+					console.log(this.tableDataSelections.length);
+					var size = this.tableDataSelections.length;
+					var item;
+					if (size < 1) { //至少选择一个货物
+						this.$confirm('请选择至少一个选项！', '提示', {
+							confirmButtonText: '确定',
+							type: 'warning'
+						})
+					} else {
+						for (var i = 0; i < this.tableDataSelections.length; i++) {
+							if ((this.tableDataSelections[i].goodsNumber) < 1) { //数量不能为0
+								this.$confirm('出库数量不能为0！', '提示', {
+									confirmButtonText: '确定',
+									type: 'warning'
+								})
+							}else{
+							//console.log('name:' + this.tableDataSelections[i].goodsName);
+							//console.log("tableDataSelections[i]: " + this.tableDataSelections[i]);
+							//console.log('number:' + this.tableDataSelections[i].goodsNumber);
+							item = this.tableDataSelections[i];
+							axios.post("http://localhost:8080/stockOut/save",item).then(res=> {
+								if(res.data){
+										this.$message({
+											type: 'success',
+											message: '出库成功!'
+										});
+										this.getAll();										
+									}else{
+										this.$message({
+											type: 'info',
+											message: '出库失败'
+										});
+									}
+								})
+								}
+						}
+						
+					}
+				}
 			}
 		})
 	</script>

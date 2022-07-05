@@ -24,12 +24,8 @@
                         </el-table-column>
                         <el-table-column prop="goodsName" label="货品名称">
                         </el-table-column>
-                        <el-table-column prop="goodsNumber" label="货品数量">
+                        <el-table-column prop="goodsNumber" label="入库数量">
                         </el-table-column>
-                        <el-table-column prop="warehouseId" label="库房编号">
-                        </el-table-column>
-						<el-table-column prop="shelfId" label="货架编号">
-						</el-table-column>
 						<el-table-column prop="stockStatus" label="入库状态">
 						</el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
@@ -78,7 +74,7 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/stockin").then(res=>{
+                axios.get("http://localhost:8080/stockIn").then(res=>{
                     this.tableData = res.data ;
                 });
             }

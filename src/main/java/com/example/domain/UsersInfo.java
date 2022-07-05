@@ -7,22 +7,26 @@ import lombok.Data;
 
 @Data
 @TableName("users_info")
-public class UsersInfo {
+public class UsersInfo{
     @TableId("users_Info_id")
-//    用户信息ID
     private Long usersInfoId;
 //    用户电话号码
-    private Long usersInfoTele;
+    private Long userTele;
 //    用户地址
-    private String usersInfoLocation;
+    private String userLocation;
 //    用户商家名
-    private String usersInfoRetailer;
+    private String userRetailer;
 //    用户信息修改时间
-    private Long usersInfoAltTime;
+    private Long userAltTime;
 
-
-    public void setUsersInfoId(Long usersInfo_id) {
-        this.usersInfoId = usersInfo_id;
+    @Override
+    public String toString() {
+        return "UsersInfo{" +
+                "usersInfoId=" + usersInfoId +
+                ", userTele=" + userTele +
+                ", userLocation='" + userLocation + '\'' +
+                ", userRetailer='" + userRetailer + '\'' +
+                ", userAltTime=" + userAltTime +
+                '}';
     }
-
 }

@@ -54,15 +54,19 @@ public class InventoryController {
      * @return
      */
     @PostMapping
-    public boolean saveInwentory(@RequestBody Inventory inventory){
-        System.out.println("save!");
+    public boolean saveInventory(@RequestBody Inventory inventory){
+//        System.out.println("save!");
+//        System.out.println(inventory);
         return inventoryService.save(inventory);
     }
 
-
+    /**
+     * 更新库存
+     * @param inventory
+     * @return if success
+     */
     @PutMapping
     public boolean updateInventory(@RequestBody Inventory inventory){
-
         return inventoryService.updateById(inventory);
     }
 }

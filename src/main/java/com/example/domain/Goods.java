@@ -15,6 +15,7 @@ public class Goods {
     private String goodsType;
     private String goodsSize;
     private Double goodsValue;
+    private Integer goodsNumber;
 
     public Integer getGoodsId() {
         return goodsId;

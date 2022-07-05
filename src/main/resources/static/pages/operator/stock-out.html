@@ -26,12 +26,6 @@
                         </el-table-column>
                         <el-table-column prop="goodsNumber" label="货品数量">
                         </el-table-column>
-                        <el-table-column prop="warehouseId" label="库房编号">
-                        </el-table-column>
-						<el-table-column prop="shelfId" label="货架编号">
-						</el-table-column>
-						<el-table-column prop="stockStatus" label="出库状态">
-						</el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="stockout in tableData">
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">详情</el-button>
@@ -78,7 +72,7 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/stockout").then(res=>{
+                axios.get("http://localhost:8080/stockOut").then(res=>{
                     this.tableData = res.data ;
                 });
             }

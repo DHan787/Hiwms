@@ -73,6 +73,24 @@
 * stock-in-apply.html 实现前端 ymm
 * 完成货物员的入库申请 ymm
 * 修正goods页面的问题 zls
+* goods模糊查询bug zls
 * Stockin 完成 hj
+* 完成入库申请订单号前端对接 ymm
+> > 一点提示： 前端调用接口的时候一定要注意大小写、单复数，名字不要写错
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
 * 个人中心页面跳转
+
+## 7.5
+* 提示出入库数量不能为零 ymm
+* goods名称的模糊查询 zls
+* 用户详情显示存在bug hxy
+* inventory页面 下拉菜单 ymm
+* 用户详情显示bug完成修复 hj
+* 用户详情的查看、编辑、删除完成 hxy
+* 用户详情编辑完成；用户详情显示存在bug hxy
+* Detail debug order添加update hj
+* getByType hj
+* orders页面 设置操作员、显示出入库状态 ymm
+* 拦截器V1.0 hj
+* orders页面 完成确认订单 ymm
+* 指名操作员，管理员确认订单debug

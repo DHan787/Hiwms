@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.utils.idGenerator;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -40,11 +42,11 @@ public class UsersDetailController {
 
 
     @GetMapping//访问方式
-    public UsersDetail getAll() {
+    public List<UsersDetail> getAll() {
 
-        List<Users> usersList = usersDao.selectList(null);
+        List<Users> usersList =usersDao.selectList(null);
 
-        List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
+        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList,usersInfoList);
     }
@@ -52,26 +54,39 @@ public class UsersDetailController {
     /**
      * 装配用户详情
      */
-    public UsersDetail setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-         UsersDetail usersDetail = new UsersDetail();
+    public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
+         List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
-                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()) == info.getUsersInfoId()) {
+//                System.out.println("time is :" + info.getUsersInfoAltTime());
+//                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
+                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
+                    UsersDetail usersDetail = new UsersDetail();
+                    System.out.println(value.getUserName());
+//                   System.out.println(info.getUsersInfoId());
+//                   System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()));
                     usersDetail.setUserId(value.getUserId());
                     usersDetail.setUserName(value.getUserName());
-                    usersDetail.setUserLocation(info.getUsersInfoLocation());
-                    usersDetail.setUserTele(info.getUsersInfoTele());
-                    usersDetail.setUserRetailer(info.getUsersInfoRetailer());
+                    usersDetail.setUserLocation(info.getUserLocation());
+                    usersDetail.setUserTele(info.getUserTele());
+                    usersDetail.setUserRetailer(info.getUserRetailer());
+
+                   // long timeMillis = System.currentTimeMillis();
+                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
+
                     if (value.getUserRole() == 1) {
                         usersDetail.setUserRole("管理员");
                     } else {
                         usersDetail.setUserRole("用户");
                     }
+
+                    usersDetailsList.add(usersDetail);
                 }
+
             }
         }
 //        System.out.println(usersDetail.toString());
-        return usersDetail;
+        return usersDetailsList;
     }
 }
