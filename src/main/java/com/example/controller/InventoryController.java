@@ -66,7 +66,6 @@ public class InventoryController {
      */
     @PutMapping
     public boolean updateInventory(@RequestBody Inventory inventory){
-
         return inventoryService.updateById(inventory);
     }
 }

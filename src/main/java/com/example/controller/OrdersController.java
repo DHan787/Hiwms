@@ -90,6 +90,7 @@ public class OrdersController {
      * @param orders 实体
      * @return if success
      */
+    @PostMapping("/update")
     public boolean updatebyId(@RequestBody Orders orders){
         return ordersService.updateById(orders);
     }
