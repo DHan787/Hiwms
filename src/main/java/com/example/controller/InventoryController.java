@@ -1,9 +1,9 @@
 package com.example.controller;
 
 
-import com.example.dao.GoodsDao;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.dao.InventoryDao;
-import com.example.domain.Goods;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,7 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
+
     @Autowired
     private InventoryDao inventoryDao;
 
@@ -72,13 +73,32 @@ public class InventoryController {
      */
     @PutMapping
     public boolean updateInventory(@RequestBody Inventory inventory){
+
         return inventoryService.updateById(inventory);
     }
 
-    //模糊查询
-    @GetMapping("/like")
-    public List<Inventory> getAllList(@RequestParam String inventoryId,@RequestParam String goodsName){
-        System.out.println(inventoryId+goodsName);
-        return inventoryDao.selectInventory("%"+inventoryId+"%","%"+goodsName+"%");
+    /**
+     * 入库-根据入库订单表stockin更新库存
+     * @param goodsName
+     * @param goodsNumber
+     * @return
+     */
+    @PutMapping("/stockIn")
+    public int updateStockIn(@RequestParam String goodsName,@RequestParam String goodsNumber){
+        QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("goods_name",goodsName); //根据货物名称查询到该条记录
+        Inventory inventory = inventoryService.getOne(queryWrapper);
+
+        Integer inventoryNumber = Integer.parseInt(inventory.getGoodsNumber()); //将string类型的库存数转换为整型
+        log.info("之前的库存数：",inventoryNumber);
+        Integer inventoryNumberNew =  inventoryNumber + Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
+        log.info("入库后的库存数：",inventoryNumberNew);
+        String goodsNumberNew = String.valueOf(inventoryNumberNew); //将现在的库存数（整型）转换为字符串
+
+        UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();  //更新
+        updateWrapper.eq("goods_name",goodsName).set("goods_number",goodsNumberNew);
+        return inventoryDao.update(null,updateWrapper);
     }
+
+
 }

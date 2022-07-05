@@ -74,6 +74,7 @@
 * 完成货物员的入库申请 ymm
 * 修正goods页面的问题 zls
 * goods模糊查询bug zls
+
 * Stockin 完成 hj
 * 完成入库申请订单号前端对接 ymm
 > > 一点提示： 前端调用接口的时候一定要注意大小写、单复数，名字不要写错
@@ -114,3 +115,9 @@
 * 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
 * UsersDetail的getById hj
 * 返回主页功能 wlx
+* UsersDetail的getById debug 拦截器 disable hj
+* orders和inventory的二次渲染 ymm
+* 修正方法名 zls
+* 恢复被覆盖掉的正版搜索内容 zls
+* StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录
+* users 查询的debug UsersDetailController 添加 getByIds hj

@@ -17,6 +17,51 @@
 							<el-breadcrumb-item>业务流</el-breadcrumb-item>
 							<el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
+						</el-breadcrumb>
+						<!--表格区域-->
+						<el-card>
+							<el-table :data="tableData" stripe style="width: 100%;">
+								<el-table-column prop="orderId" label="订单编号" width="80">
+								</el-table-column>
+								<el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
+								</el-table-column>
+								<el-table-column prop="orderStartTime" label="订单开始时间">
+								</el-table-column>
+								<el-table-column prop="orderEndTime" label=订单结束时间>
+								</el-table-column>
+								<el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
+								</el-table-column>
+								<el-table-column prop="orderOperator" label="订单操作员" :min="1">
+									<template slot-scope="scope">
+										<el-select v-model="scope.row.orderOperator" placeholder="请选择操作员">
+											<el-option v-for="users in options" :label="users.userName" :value="users.userId" :key="users.userId">
+											</el-option>
+										</el-select>
+									</template>
+								</el-table-column>
+								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
+								</el-table-column>
+								<el-table-column label="操作" width="250" style="display: flex;">
+									<template slot-scope="scope" v-for="orders in tableData">
+										<el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
+											icon="el-icon-edit">确认订单</el-button>
+										<el-button type="danger" plain @click="removeOrdersById(scope.$index)"
+											icon="el-icon-delete">删除</el-button>
+									</template>
+								</el-table-column>
+							</el-table>
+							<div style="text-align: center;">
+								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
                 </el-breadcrumb>
 
                 <!--新建订单区域-->
@@ -83,34 +128,32 @@
 <script src="../../assets/css/element-ui/index.js"></script>
 <script src="../../assets/js/axios.min.js"></script>
 
-<script>
-    new Vue({
-        el: '#app',
-        data: function() {
-            return {
-                tableData: [],
-                ordersId:"",
-                options:[],//下拉框中的数据
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                form: {
-                    orderID: '',
-                    orderType: '',
-                    orderStartTime: '',
-                    orderEndTime: '',
-                    orderInit:'',
-                    orderOperator:''
-                },
-                formLabelWidth: '120px',
-            }
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					tableData: {},
+					options:[],//下拉框中的数据
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					form: {
+						orderID: '',
+						orderType: '',
+						orderStartTime: '',
+						orderEndTime: '',
+						orderInit: '',
+						orderOperator: ''
+					},
+					formLabelWidth: '120px',
+					
+				}
         },
-
 			created() {
 				this.getAll()
                 this.getOperatorName()
 
 			},
-
 			methods: {
 				getAll() {
 					axios.get("http://localhost:8080/orders").then(res => {

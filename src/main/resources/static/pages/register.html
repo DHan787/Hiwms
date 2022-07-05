@@ -1,89 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="../assets/css/login.css"/>
-    <link rel="stylesheet" href="../assets/css/element-ui/index.css"/>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../assets/css/login.css" />
+		<link rel="stylesheet" href="../assets/css/element-ui/index.css" />
 
 
-</head>
-<div id="app" class="outerDiv">
-    <div class="login">
-        <div class="loginBody" align="center">
-            <h4>注册</h4>
-            <el-form :model="registerForm" ref="registerForm" label-width="0px">
-                <el-form-item label="" prop="userName" style="margin-top:10px;">
-                    <el-row>
-                        <el-col :span='2'>
-                            <span class="el-icon-s-custom"></span>
-                        </el-col>
-                        <el-col :span='20'>
-                            <el-input class="inps" placeholder='账号' v-model="registerForm.userName">
-                            </el-input>
-                        </el-col>
-                    </el-row>
-                </el-form-item>
-                <el-form-item label="" prop="userPassword">
-                    <el-row>
-                        <el-col :span='2'>
-                            <span class="el-icon-lock"></span>
-                        </el-col>
-                        <el-col :span='20'>
-                            <el-input class="inps" type="userPassword" placeholder='密码'
-                                      v-model="registerForm.userPassword"></el-input>
-                        </el-col>
-                    </el-row>
-                </el-form-item>
-                <el-form-item style="margin-top:100px;">
-                    <el-button type="primary" round class="submitBtn" v-on:click="register">注册
-                    </el-button>
-                </el-form-item>
-            </el-form>
-        </div>
-    </div>
-</div>
-<script src="../assets/js/vue.js"></script>
-<script src="../assets/css/element-ui/index.js"></script>
-<script src="../assets/js/vue-resource.js"></script>
-<script src="../assets/js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            info: [],
-            registerForm: {
-                userName: '',
-                userPassword: ''
-            },
-        },
-        data(){
-            return {
-                registerForm: {},
-            }
-        },
+	</head>
+	<div id="app" class="outerDiv">
+		<div class="login">
+			<div class="loginBody" align="center">
+				<h4>注册</h4>
+				<el-form :model="registerForm" ref="registerForm" label-width="0px">
+					<el-form-item label="" prop="userName" style="margin-top:10px;">
+						<el-row>
+							<el-col :span='2'>
+								<span class="el-icon-s-custom"></span>
+							</el-col>
+							<el-col :span='20'>
+								<el-input class="inps" placeholder='账号' v-model="registerForm.userName">
+								</el-input>
+							</el-col>
+						</el-row>
+					</el-form-item>
+					<el-form-item label="" prop="userPassword">
+						<el-row>
+							<el-col :span='2'>
+								<span class="el-icon-lock"></span>
+							</el-col>
+							<el-col :span='20'>
+								<el-input class="inps" type="userPassword" placeholder='密码'
+									v-model="registerForm.userPassword"></el-input>
+							</el-col>
+						</el-row>
+					</el-form-item>
+					<el-form-item style="margin-top:100px;">
+						<el-button type="primary" round class="submitBtn" v-on:click="register">注册
+						</el-button>
+					</el-form-item>
+				</el-form>
+			</div>
+		</div>
+	</div>
+	<script src="../assets/js/vue.js"></script>
+	<script src="../assets/css/element-ui/index.js"></script>
+	<script src="../assets/js/vue-resource.js"></script>
+	<script src="../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				info: [],
+				registerForm: {
+					userName: '',
+					userPassword: ''
+				},
+			},
+			data() {
+				return {
+					registerForm: {},
+				}
+			},
 
-        methods: {
-            register() {
-                if (this.registerForm.userName !== '') {
-                    if (this.registerForm.userPassword !== '')
-                        axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
-                            if (rel.data) {
-                                this.$message({
-                                    type: 'success',
-                                    message: '新增成功!'
-                                });
-                                window.location.href=("login.html")
-                            } else {
-                                this.$message({
-                                    type: 'info',
-                                    message: '新增失败'
-                                });
-                            }
-                        })
-                }
-            }
-        }
-    })
-</script>
+			methods: {
+				register() {
+					if (this.registerForm.userName !== '') {
+						if (this.registerForm.userPassword !== '')
+							axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
+								if (rel.data) {
+									this.$message({
+										type: 'success',
+										message: '新增成功!'
+									});
+									window.location.href = ("login.html")
+								} else {
+									this.$message({
+										type: 'info',
+										message: '新增失败'
+									});
+								}
+							})
+					}
+				}
+			}
+		})
+	</script>
 </html>

@@ -6,17 +6,8 @@
     <link rel="stylesheet" href="../assets/css/login.css"/>
     <link rel="stylesheet" href="../assets/css/element-ui/index.css"/>
 
-
 </head>
 <body>
-<section>
-<!-- 背景颜色 -->
-    <div class="color"></div>
-    <div class="color"></div>
-    <div class="color"></div>
-
-
-<div class="container">
 <div id="app" class="outerDiv">
     <div class="login">
         <div class="loginBody" align="center">
@@ -56,7 +47,6 @@
                         </el-col>
                         <el-col :span='20'>
                             <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input" ref="getValue" />
-                            </el-input>
                         </el-col>
                     </el-row>
                 </el-form-item>
@@ -76,8 +66,8 @@
         </div>
     </div>
 </div>
-</div>
-</section>
+
+
 </body>
 
 
@@ -266,5 +256,4 @@
 
     new Verification()
 </script>
-
 </html>

@@ -1,6 +1,8 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dao.OrdersDao;
 import com.example.dao.GoodsDao;
 import com.example.dao.OrdersDao;
 import com.example.domain.Goods;
@@ -115,17 +117,18 @@ public class OrdersController {
         return ordersService.updateById(orders);
     }
 
+    /**
+     * 根据订单类型获取订单 1-入库 2-出库
+     * @param orderType
+     * @return
+     */
     @GetMapping("/getByType")
-    public List<Orders> getByType(int orderType){
-        List<Orders> oriOrders = ordersService.list();
-        List<Orders> targetOrders = null;
-        for (Orders ori:oriOrders
-             ) {
-            if(ori.getOrderType() == orderType){
-                targetOrders.add(ori);
-            }
-        }
-        return targetOrders;
+    public List<Orders> getByType(@RequestParam Integer orderType){
+        QueryWrapper<Orders> wrapper = new QueryWrapper<>();
+        wrapper.eq("order_type",orderType);
+        wrapper.eq("order_status",11);
+        List<Orders> orders = ordersDao.selectList(wrapper);
+        return orders;
     }
 
     //模糊查询
