@@ -30,7 +30,12 @@
                                 <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
                                 <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
                             </el-table>
-                            <el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
+							<div slot="footer" class="dialog-footer">
+							
+								<el-button @click="dialogFormVisible = false">取 消</el-button>
+								<el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
+							</div>
+                            
                         </el-dialog>
 
                     </div>
@@ -84,7 +89,8 @@
                 tableData: [],
                 dialogFormVisible: false,
                 dialogFormTitle: "查看订单详情",
-                gridData: []
+                gridData: [],
+                tableIndex: ''
             }
         },
 
@@ -106,6 +112,7 @@
             viewClick(index) {
                 this.dialogFormVisible = true;
                 var orderId = this.tableData[index].orderId;
+                this.tableIndex = index;
                 axios.get("http://localhost:8080/stockOut/getByOrderId?orderId="+orderId).then(res=>{
                     this.gridData = res.data ;
                     console.log(this.gridData);
@@ -113,26 +120,56 @@
             },
 
             handleStockOut() {
+                var stockId = this.gridData[0].stockId;
                 var goodsName = this.gridData[0].goodsName;
                 var goodsNumber = this.gridData[0].goodsNumber;
                 console.log(goodsNumber);
+                console.log("handleStockIn中的index",this.tableIndex);
+                <!--出库，更新库存-->
                 axios.put("http://localhost:8080/inventory/stockOut?goodsName="+goodsName+"&goodsNumber="+goodsNumber).then(res=>{
-                    if(res.data){
+                    if (res.data) {
+                        // console.log(this.tableData[index]);
                         this.$message({
                             type: 'success',
-                            message: '出库成功!'
+                            message: '商品库存修改成功!'
                         });
                         this.getAll();
                         this.dialogFormVisible = false;
-
-                    }else{
+                    } else {
                         this.$message({
                             type: 'info',
-                            message: '出库失败'
+                            message: '商品库存修改失败'
                         });
                     }
-                })
-            },
+
+                });
+                console.log("tabledata",this.tableData[this.tableIndex]);
+                <!--出库，修改订单状态（出库中-已出库）-->
+                axios.post("http://localhost:8080/orders/check", this.tableData[this.tableIndex]).then(res => {
+                    if (res.data) {
+                        // console.log(this.tableData[index]);
+                        this.$message({
+                            type: 'success',
+                            message: '订单状态修改成功!'
+                        });
+                        this.getAll();
+                    } else {
+                        this.$message({
+                            type: 'info',
+                            message: '订单状态修改失败'
+                        });
+                    }
+                    this.getAll();
+                    this.dialogFormVisible = false;
+                });
+                <!--出库，删除出库申请记录-->
+                console.log("stockId为：",stockId);
+                axios.delete("http://localhost:8080/stockOut/" + stockId).then(res=> {
+                    this.getAll();
+                });
+
+            }
+    },
 
             formatStatus(row) {
                 switch (row.orderStatus) {
@@ -168,7 +205,7 @@
                     return "未知"
                 }
             }
-        }
+
     })
 </script>
 </html>

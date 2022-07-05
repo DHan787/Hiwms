@@ -1,10 +1,8 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.UsersDao;
-import com.example.domain.Inventory;
-import com.example.domain.Users;
-import com.example.domain.UsersDetail;
-import com.example.domain.UsersInfo;
+import com.example.domain.*;
 import com.example.service.UsersDetailService;
 import com.example.service.UsersInfoService;
 import com.example.service.UsersService;
@@ -136,5 +134,18 @@ public class UsersController {
     public boolean updateUsers(@RequestBody Users users){
         System.out.println(users.getUserName());
         return usersService.updateById(users);
+    }
+
+    /**
+     * 根据用户类型获取订单 1-管理员 2-货物员 3-操作员
+     * @param userRole
+     * @return
+     */
+    @GetMapping("/getByRole")
+    public List<Users> getByRole(@RequestParam Integer userRole){
+        QueryWrapper<Users> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_role",userRole);
+        List<Users> users = usersDao.selectList(wrapper);
+        return users;
     }
 }
