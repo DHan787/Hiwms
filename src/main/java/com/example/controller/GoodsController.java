@@ -76,6 +76,6 @@ public class GoodsController {
     @GetMapping("/like")
     public List<Goods> getAllList(@RequestParam String goodsName){
         System.out.println(goodsName);
-        return goodsDao.selectPagesLike("%"+goodsName+"%");
+        return goodsDao.selectGoodsName("%"+goodsName+"%");
     }
 }

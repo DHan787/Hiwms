@@ -92,4 +92,9 @@
 * orders页面 设置操作员、显示出入库状态 ymm
 * 拦截器V1.0 hj
 * orders页面 完成确认订单 ymm
+* 指名操作员，管理员确认订单debug
+* 所有页面的文本框的模糊查询 zls
+* 修正users页面 zls
+* 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
+* UsersDetail的getById hj
 * orders和inventory的二次渲染 ymm
