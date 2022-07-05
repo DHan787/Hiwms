@@ -14,9 +14,7 @@ import java.util.List;
 public interface GoodsDao extends BaseMapper<Goods> {
     //模糊查询
     @Select("select * from goods where goods_name like #{goodsName}")
-    static List<Goods> selectPagesLike(@Param("goodsName") String goodsName) {
-        return null;
-    }
+     List<Goods> selectPagesLike(@Param("goodsName") String goodsName);
 
     //查询有多少数据
     @Select("select count(*) from goods")

@@ -25,8 +25,8 @@
 									<el-form :model="search">
 										<el-row>
 											<el-col :span='12'>
-												<el-form-item label="货物名称">
-													<el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px"><!-- clearable 输⼊框可清除属性 --></el-input>
+												<el-form-item >
+													<el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
 												</el-form-item>
 											</el-col>
 <!--											<el-col :span='12'>-->
@@ -120,7 +120,8 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-					tableData: [],
+	            	listData:[],
+					tableData: {},
 					goodsName:"",
 					dialogFormVisible: false,
 					dialogFormTitle: "",
@@ -148,7 +149,9 @@
 				},
 				<!--模糊查询-->
 				like(){
+					console.log(1);
 					axios.get("http://localhost:8080/goods/like?goodsName="+this.goodsName).then(res=>{
+						console.log(res);
 						this.tableData = res.data ;
 					});
 				},

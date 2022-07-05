@@ -77,3 +77,6 @@
 
 * Stockin 完成 hj
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
+
+## 7.5
+* goods名称的模糊查询 zls

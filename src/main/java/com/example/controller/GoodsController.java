@@ -15,7 +15,8 @@ import java.util.List;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
-
+    @Autowired
+    private GoodsDao goodsDao;
     /**
      * 获取全部货品
      * @return
@@ -75,6 +76,6 @@ public class GoodsController {
     @GetMapping("/like")
     public List<Goods> getAllList(@RequestParam String goodsName){
         System.out.println(goodsName);
-        return GoodsDao.selectPagesLike("%"+goodsName+"%");
+        return goodsDao.selectPagesLike("%"+goodsName+"%");
     }
 }
