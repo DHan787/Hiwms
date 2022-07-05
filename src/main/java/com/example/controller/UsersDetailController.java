@@ -9,11 +9,10 @@ import com.example.domain.UsersInfo;
 import com.example.service.UsersDetailService;
 import com.example.service.UsersInfoService;
 import com.example.service.UsersService;
+import com.example.utils.idGenerator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.utils.idGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ public class UsersDetailController {
      * 装配用户详情
      */
     public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-         List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
+         List<UsersDetail> usersDetailsList = new ArrayList<>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
@@ -96,6 +95,20 @@ public class UsersDetailController {
         queryWrapper.eq("userId",id);
         List<Users> usersList =usersDao.selectList(queryWrapper);
 
+        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+        //log.info("users获取的数据，{}",usersService.list());
+        return this.setUsersDetail(usersList,usersInfoList);
+    }
+
+    /**
+     * 模糊查询
+     * @param userId
+     * @param userName
+     * @return usersDetail
+     */
+    @GetMapping("/like")
+    public List<UsersDetail> getByIds(@RequestParam String userId, @RequestParam String userName){
+        List<Users> usersList = usersDao.selectUsers("%"+userId+"%","%"+userName+"%");
         List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList,usersInfoList);
