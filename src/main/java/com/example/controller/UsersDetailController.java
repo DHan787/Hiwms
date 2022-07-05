@@ -55,7 +55,7 @@ public class UsersDetailController {
      * 装配用户详情
      */
     public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-         UsersDetail usersDetail = new UsersDetail();
+
          List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
@@ -63,6 +63,7 @@ public class UsersDetailController {
 //                System.out.println("time is :" + info.getUsersInfoAltTime());
 //                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
                 if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
+                    UsersDetail usersDetail = new UsersDetail();
 //                    System.out.println("id:" + value.getUserId() + "time:" + info.getUsersInfoAltTime());
 //                    System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
                     usersDetail.setUserId(value.getUserId());
