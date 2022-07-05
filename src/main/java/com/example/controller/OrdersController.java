@@ -111,10 +111,15 @@ public class OrdersController {
      */
     @PostMapping("/update")
     public boolean updatebyId(@RequestBody Orders orders){
+
         return ordersService.updateById(orders);
     }
 
-
+    /**
+     * 根据订单类型获取订单 1-入库 2-出库
+     * @param orderType
+     * @return
+     */
     @GetMapping("/getByType")
     public List<Orders> getByType(@RequestParam Integer orderType){
         /*List<Orders> oriOrders = ordersService.list();
