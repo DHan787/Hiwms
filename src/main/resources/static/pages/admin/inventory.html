@@ -22,14 +22,13 @@
                 <div class="card-container">
                     <div class="handle-container">
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增商品库存</el-button>
-
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
-                                    <el-input v-model="form.goodName" autocomplete="off" placeholder="请输入货物名称"></el-input>
+                                    <el-input v-model="form.goodsName" autocomplete="off" placeholder="请输入货物名称"></el-input>
                                 </el-form-item>
                                 <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber" placeholder="请输入货物数量">
-									<el-input-number v-model="form.goodNumber" :min="1" :max="1000" label="入库数量">
+									<el-input-number v-model="form.goodsNumber" :min="1" :max="1000" label="入库数量">
 									</el-input-number>
                                 </el-form-item>
 								<el-form-item label="仓库名称" :label-width="formLabelWidth">
@@ -59,9 +58,9 @@
                     <el-table :data="tableData" stripe style="width: 100%; " >
                         <el-table-column prop="inventoryId" label="商品编号" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodName" label="货物名称" width="180">
+                        <el-table-column prop="goodsName" label="货物名称" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodNumber" label="货物数量">
+                        <el-table-column prop="goodsNumber" label="货物数量">
                         </el-table-column>
                         <el-table-column prop="warehouseName" label="仓库名称">
                         </el-table-column>

@@ -56,6 +56,7 @@ public class InventoryController {
     @PostMapping
     public boolean saveInventory(@RequestBody Inventory inventory){
 //        System.out.println("save!");
+//        System.out.println(inventory);
         return inventoryService.save(inventory);
     }
 
