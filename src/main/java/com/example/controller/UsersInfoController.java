@@ -81,20 +81,19 @@ public class UsersInfoController {
     /**
      * 删除用户信息
      * @param userId
-     * @param usersInfoAltTime
-     * @return
+     * @return if success
      */
     @DeleteMapping()
-    public boolean deleteUserInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime){
-        //System.out.println("the userId is :"+userId);
-        log.info("the userId is:{}",userId);
-        log.info("the usersInfoAltTime is:{}",usersInfoAltTime);
-        UsersInfo usersInfo = new UsersInfo();
-        usersInfo.setUserAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-        log.info("the UsersInfoId is:{}",usersInfo.getUsersInfoId());
+    public boolean deleteUserInfo(@RequestParam Integer userId){
 
-        return usersInfoService.removeById(usersInfo.getUsersInfoId());
+        long id = userId;
+        List<UsersInfo> usersInfoList = usersInfoService.list();
+        for (UsersInfo value : usersInfoList
+             ) {
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime()))
+                id = value.getUsersInfoId();
+        }
+        return usersInfoService.removeById(id);
     }
 
 

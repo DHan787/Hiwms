@@ -175,7 +175,7 @@
                         this.getAll();
                     });
 
-                    axios.delete("http://localhost:8080/usersInfo?userId="+id+"&userInfoAltTime="+userInfoAltTime).then(res=>{
+                    axios.delete("http://localhost:8080/usersInfo?userId="+id).then(res=>{
                         this.getAll();
                     })
                     this.$message({
