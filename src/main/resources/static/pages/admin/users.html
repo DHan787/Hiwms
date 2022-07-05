@@ -147,7 +147,7 @@
                 });
             },
             like(){
-                axios.get("http://localhost:8080/users/like?userId="+this.userId+"&userName="+this.userName).then(res=>{
+                axios.get("http://localhost:8080/usersDetail/like?userId="+this.userId+"&userName="+this.userName).then(res=>{
 
                     console.log(res);
                     this.tableData = res.data;

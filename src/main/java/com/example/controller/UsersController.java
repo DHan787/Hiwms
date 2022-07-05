@@ -107,7 +107,7 @@ public class UsersController {
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id){
         System.out.println("the id is :"+id);
-        usersInfoService.removeById(id);
+        usersInfoService.removeById(id);  //有bug，记得改 前端要传alttime，这里再生成infoId，再删除
         return usersService.removeById(id);
     }
 
@@ -135,12 +135,5 @@ public class UsersController {
     public boolean updateUsers(@RequestBody Users users){
         System.out.println(users.getUserName());
         return usersService.updateById(users);
-    }
-
-    //模糊查询
-    @GetMapping("/like")
-    public List<Users> getAllList(@RequestParam String userId, @RequestParam String userName){
-        System.out.println(userId+userName);
-        return usersDao.selectUsers("%"+userId+"%","%"+userName+"%");
     }
 }
