@@ -106,5 +106,6 @@
 * 恢复被覆盖掉的正版搜索内容 zls
 * StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录 hxy
 * users 查询的debug UsersDetailController 添加 getByIds hj
+* 分页器 zls
 * 退出登录功能 wlx
 * StockOut前后端完成 （但因出库订单有bug，没有进行测试）hxy
