@@ -84,4 +84,13 @@ public class OrdersController {
         ordersService.save(orders);
         return orders.getOrderId();
     }
+
+    /**
+     * 更新信息
+     * @param orders 实体
+     * @return if success
+     */
+    public boolean updatebyId(@RequestBody Orders orders){
+        return ordersService.updateById(orders);
+    }
 }

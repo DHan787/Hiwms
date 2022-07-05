@@ -83,3 +83,4 @@
 * 提示出入库数量不能为零 ymm
 * goods名称的模糊查询 zls
 * 用户详情编辑完成；用户详情显示存在bug hxy
+* Detail debug order添加update hj
