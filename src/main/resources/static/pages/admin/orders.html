@@ -97,7 +97,7 @@
         el: '#app',
         data: function() {
             return {
-                tableData: [],
+                tableData: {},
                 ordersId:"",
                 options:[],//下拉框中的数据
                 dialogFormVisible: false,
@@ -124,14 +124,13 @@
 			},
 
 			methods: {
-				getAll() {
+				getAll(){
 					axios.get("http://localhost:8080/orders").then(res => {
 						this.tableData = res.data;
 					});
 				},
                 <!--模糊查询-->
                 like(){
-                    console.log(1);
                     axios.get("http://localhost:8080/orders/like?ordersId="+this.ordersId).then(res=>{
                         console.log(res);
                         this.tableData = res.data ;

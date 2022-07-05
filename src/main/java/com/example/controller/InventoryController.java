@@ -4,6 +4,7 @@ package com.example.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.dao.InventoryDao;
+import com.example.domain.Goods;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,13 @@ public class InventoryController {
     public Inventory getById(@PathVariable int id) {
 
         return inventoryService.getById(id);
+    }
+
+    //模糊查询
+    @GetMapping("/like")
+    public List<Inventory> getAllList(@RequestParam String inventoryId,@RequestParam String goodsName){
+        System.out.println(inventoryId+goodsName);
+        return inventoryDao.selectInventory("%"+inventoryId+"%","%"+goodsName+"%");
     }
 
     /**
