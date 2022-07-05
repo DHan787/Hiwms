@@ -123,10 +123,10 @@ public class OrdersController {
      * @return
      */
     @GetMapping("/getByType")
-    public List<Orders> getByType(@RequestParam Integer orderType){
+    public List<Orders> getByType(@RequestParam Integer orderType,@RequestParam Integer orderStatus){
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
         wrapper.eq("order_type",orderType);
-        wrapper.eq("order_status",11);
+        wrapper.eq("order_status",orderStatus);
         List<Orders> orders = ordersDao.selectList(wrapper);
         return orders;
     }
