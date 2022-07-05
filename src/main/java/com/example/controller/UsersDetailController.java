@@ -55,24 +55,25 @@ public class UsersDetailController {
      * 装配用户详情
      */
     public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-         UsersDetail usersDetail = new UsersDetail();
          List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
 //                System.out.println("time is :" + info.getUsersInfoAltTime());
 //                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
-                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()) == info.getUsersInfoId()) {
-//                    System.out.println("id:" + value.getUserId() + "time:" + info.getUsersInfoAltTime());
-//                    System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
+                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
+                    UsersDetail usersDetail = new UsersDetail();
+                    System.out.println(value.getUserName());
+//                   System.out.println(info.getUsersInfoId());
+//                   System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()));
                     usersDetail.setUserId(value.getUserId());
                     usersDetail.setUserName(value.getUserName());
-                    usersDetail.setUserLocation(info.getUsersInfoLocation());
-                    usersDetail.setUserTele(info.getUsersInfoTele());
-                    usersDetail.setUserRetailer(info.getUsersInfoRetailer());
+                    usersDetail.setUserLocation(info.getUserLocation());
+                    usersDetail.setUserTele(info.getUserTele());
+                    usersDetail.setUserRetailer(info.getUserRetailer());
 
                    // long timeMillis = System.currentTimeMillis();
-                     usersDetail.setUsersInfoAltTime(info.getUsersInfoAltTime());
+                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
 
                     if (value.getUserRole() == 1) {
                         usersDetail.setUserRole("管理员");

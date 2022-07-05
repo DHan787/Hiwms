@@ -75,7 +75,7 @@ public class OrdersController {
      * @return 生成的订单id
      */
     public Integer initOrders(int type) {
-        System.out.println(type);
+        //System.out.println(type);
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println(dateFormat.format(date));
@@ -87,6 +87,45 @@ public class OrdersController {
         orders.setOrderInit(11);
         ordersService.save(orders);
         return orders.getOrderId();
+    }
+
+    /**
+     * 订单结束
+     * @param orders 订单实体
+     * @return if success
+     */
+    public boolean endOrders(Orders orders){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(dateFormat.format(date));
+        orders.setOrderEndTime(dateFormat.format(date));
+        orders.setOrderStatus(orders.getOrderStatus()+1);
+        return ordersService.updateById(orders);
+    }
+
+    /**
+     * 更新信息
+     * @param orders 实体
+     * @return if success
+     */
+    @PostMapping("/check")
+    public boolean checkById(@RequestBody Orders orders){
+        orders.setOrderStatus(orders.getOrderStatus()+1);
+        System.out.println(orders);
+        return ordersService.updateById(orders);
+    }
+
+    @GetMapping("/getByType")
+    public List<Orders> getByType(int orderType){
+        List<Orders> oriOrders = ordersService.list();
+        List<Orders> targetOrders = null;
+        for (Orders ori:oriOrders
+             ) {
+            if(ori.getOrderType() == orderType){
+                targetOrders.add(ori);
+            }
+        }
+        return targetOrders;
     }
 
     //模糊查询

@@ -24,10 +24,11 @@
 								<el-table-column type="selection" width="60"></el-table-column>
 								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
+								<el-table-column prop="goodsNumber" label="货品数量" width="180">
+								</el-table-column>
 								<el-table-column label="入库数量">
 									<template slot-scope="scope">
-										<el-input v-model="scope.row.goodsNumber" placeholder="入库数量">
-										</el-input>
+										<el-input-number v-model="scope.row.goodsNumber" :min="1" :max="1000" label="入库数量"></el-input-number>
 									</template>
 								</el-table-column>
 							</el-table>
@@ -79,32 +80,39 @@
 					console.log(this.tableDataSelections.length);
 					var size = this.tableDataSelections.length;
 					var item;
-					if (size < 1) {//判断至少选择一个
+					if (size < 1) { //至少选择一个货物
 						this.$confirm('请选择至少一个选项！', '提示', {
 							confirmButtonText: '确定',
 							type: 'warning'
 						})
-					} else {//循环读取数据
+					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							//console.log('name:' + this.tableDataSelections[i].goodsName);
-							item = this.tableDataSelections[i];
-							//console.log('item:' + this.tableDataSelections[i]);
-							axios.post("http://localhost:8080/stockIn/save",item).then(res=> {
-								if(res.data){
+							if ((this.tableDataSelections[i].goodsNumber) < 1) { //数量不能为0
+								this.$confirm('入库数量不能为零！', '提示', {
+									confirmButtonText: '确定',
+									type: 'warning'
+								})
+							} else {
+								//console.log('name:' + this.tableDataSelections[i].goodsName);
+								item = this.tableDataSelections[i];
+								//console.log('number:' + this.tableDataSelections[i].goodsNumber);
+								axios.post("http://localhost:8080/stockIn/save", item).then(res => {
+									if (res.data) {
 										this.$message({
 											type: 'success',
 											message: '入库成功!'
 										});
-										this.getAll();										
-									}else{
+										this.getAll();
+									} else {
 										this.$message({
 											type: 'info',
 											message: '入库失败'
 										});
 									}
 								})
+							}
 						}
-						
+
 					}
 				}
 			}

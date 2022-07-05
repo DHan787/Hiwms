@@ -42,7 +42,6 @@
                     </div>
                     <el-row :span="8" align="right">
                         <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
-                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
                     </el-row>
 
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -72,6 +71,7 @@
 							</div>
                         </el-dialog>
 
+                    </div>
                 </div>
 
                 <el-card>
@@ -121,7 +121,7 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
-                    id: '',
+                    userId: '',
                     name: '',
                     userTele: '',
                     userLocation: '',
@@ -130,7 +130,7 @@
                 },
                 formLabelWidth: '120px',
                 isAdd: false,
-				userId: '',
+
 				altTime: ''
 
             }
@@ -157,6 +157,7 @@
 
             removeUsersById(index) {
                 var id = this.tableData[index].userId;
+				console.log("id");
                 this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -219,7 +220,8 @@
 				console.log(this.form.userId);
 				/* var altTime = this.tableData[index].usersInfoAltTime; */
 				console.log(this.form.usersInfoAltTime);
-                axios.put("http://localhost:8080/usersInfo",{usersInfo: this.form,},{params: {userId: this.form.userId, usersInfoAltTime: this.form.usersInfoAltTime}}).then(rel=>{
+                axios.put("http://localhost:8080/usersInfo?userId="+this.form.userId+"&usersInfoAltTime="+this.form.usersInfoAltTime, this.form).then(rel=>{
+
                     if(rel.data){
                         this.$message({
                             type: 'success',

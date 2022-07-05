@@ -82,5 +82,17 @@
 
 
 ## 7.5
+* 提示出入库数量不能为零 ymm
 * goods名称的模糊查询 zls
+* 用户详情显示存在bug hxy
+* inventory页面 下拉菜单 ymm
+* 用户详情显示bug完成修复 hj
+* 用户详情的查看、编辑、删除完成 hxy
+* 用户详情编辑完成；用户详情显示存在bug hxy
+* Detail debug order添加update hj
+* getByType hj
+* orders页面 设置操作员、显示出入库状态 ymm
+* 拦截器V1.0 hj
+* orders页面 完成确认订单 ymm
+* 指名操作员，管理员确认订单debug
 * 所有页面的文本框的模糊查询 zls

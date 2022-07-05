@@ -39,12 +39,11 @@ public class StockInController {
     }
 
     /**
-     *
      * @param stockIn 对象
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockIn(@RequestBody StockIn stockIn){
+    public boolean saveStockIn(@RequestBody StockIn stockIn) {
         stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
         return stockInService.save(stockIn);
     }

@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.domain.Users;
 import com.example.domain.UsersInfo;
 import com.example.service.UsersInfoService;
+import com.example.service.UsersService;
 import com.example.utils.EncryptUtil;
 import com.example.utils.idGenerator;
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +54,8 @@ public class UsersInfoController {
         try {
 
             long timeMillis = System.currentTimeMillis();
-            usersInfo.setUsersInfoAltTime(timeMillis);
-            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
+            usersInfo.setUserAltTime(timeMillis);
+            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,27 +66,38 @@ public class UsersInfoController {
     /**
      * 更新用户信息
      * @param usersInfo
-     * @return
+     * @return if success
      */
     @PutMapping
-    public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo, @RequestParam Integer userId, @RequestParam Long usersInfoAltTime){
+    public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime,@RequestBody UsersInfo usersInfo){
 
-        log.info(usersInfo.toString());
-        /*long timeMillis = System.currentTimeMillis();
-        usersInfo.setUsersInfoAltTime(timeMillis);*/
-        log.info("UsersInfoAltTime1,{}",usersInfoAltTime);
-        log.info("userId1,{}",userId);
-        usersInfo.setUsersInfoAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
-        log.info("userInfoId1,{}",usersInfo.getUsersInfoId());
-        boolean result =  usersInfoService.updateById(usersInfo);
-        //log.info("userInfoLocation,{}",usersInfo.getUsersInfoLocation());
-        long timeMillis = System.currentTimeMillis();
-        usersInfo.setUsersInfoAltTime(timeMillis);
-        log.info("UsersInfoAltTime2,{}",usersInfo.getUsersInfoAltTime());
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
-        log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
-        return result;
+        //得到UserInfoId
+        usersInfo.setUserAltTime(usersInfoAltTime);
+        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        //根据UserInfoId进行UserInfo其他字段的更新
+        //设置
+//        long timeMillis = System.currentTimeMillis();
+//        log.info("timeMillis{}",timeMillis);
+        //usersInfo.setUserAltTime(timeMillis);
+        //log.info("UsersInfoAltTime2,{}",usersInfo.getUserAltTime());
+        //usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        //log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
+        //log.info("userId{}",userId);
+        return usersInfoService.updateById(usersInfo);
+    }
+
+    /**
+     *
+     * @param userId id
+     * @param usersInfo info
+     * @return if success
+     */
+    @PostMapping("/init")
+    public boolean intiUserInfo(@RequestParam Integer userId,@RequestBody UsersInfo usersInfo){
+        long timeMills = System.currentTimeMillis();
+        usersInfo.setUserAltTime(timeMills);
+        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        return usersInfoService.save(usersInfo);
     }
 
 }
