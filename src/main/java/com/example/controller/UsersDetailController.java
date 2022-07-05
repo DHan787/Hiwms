@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.UsersDao;
 import com.example.dao.UsersInfoDao;
 import com.example.domain.Users;
@@ -10,10 +11,7 @@ import com.example.service.UsersInfoService;
 import com.example.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.utils.idGenerator;
 
 import java.util.ArrayList;
@@ -89,4 +87,15 @@ public class UsersDetailController {
 //        System.out.println(usersDetail.toString());
         return usersDetailsList;
     }
+    @GetMapping("/{id}")
+    public List<UsersDetail> getById(@PathVariable int id){
+        QueryWrapper<Object> queryWrapper =new QueryWrapper<>();
+        queryWrapper.eq("userId",id);
+        List<Users> usersList =usersDao.selectList(null);
+
+        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+        //log.info("users获取的数据，{}",usersService.list());
+        return this.setUsersDetail(usersList,usersInfoList);
+    }
+
 }
