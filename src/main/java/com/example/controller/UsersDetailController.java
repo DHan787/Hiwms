@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.UsersDao;
 import com.example.dao.UsersInfoDao;
 import com.example.domain.Users;
@@ -88,4 +89,16 @@ public class UsersDetailController {
 //        System.out.println(usersDetail.toString());
         return usersDetailsList;
     }
+    @GetMapping("/{id}")
+    public List<UsersDetail> getById(@PathVariable int id){
+        System.out.println("getDetail");
+        QueryWrapper<Users> queryWrapper =new QueryWrapper<>();
+        queryWrapper.eq("userId",id);
+        List<Users> usersList =usersDao.selectList(queryWrapper);
+
+        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+        //log.info("users获取的数据，{}",usersService.list());
+        return this.setUsersDetail(usersList,usersInfoList);
+    }
+
 }
