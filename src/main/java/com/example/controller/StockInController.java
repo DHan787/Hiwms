@@ -68,4 +68,17 @@ public class StockInController {
     }
 
 
+    /**
+     * 删除入库申请记录
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable int id){
+
+        return stockInService.removeById(id);
+
+    }
+
+
 }

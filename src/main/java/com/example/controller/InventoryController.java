@@ -85,16 +85,16 @@ public class InventoryController {
      */
     @PutMapping("/stockIn")
     public int updateStockIn(@RequestParam String goodsName,@RequestParam String goodsNumber){
-        log.info("goodsName为{}",goodsName);
-        log.info("goodsNumber为{}",goodsNumber);
         QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("goods_name",goodsName); //根据货物名称查询到该条记录
         Inventory inventory = inventoryService.getOne(queryWrapper);
+
         Integer inventoryNumber = Integer.parseInt(inventory.getGoodsNumber()); //将string类型的库存数转换为整型
         log.info("之前的库存数：",inventoryNumber);
         Integer inventoryNumberNew =  inventoryNumber + Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
         log.info("入库后的库存数：",inventoryNumberNew);
         String goodsNumberNew = String.valueOf(inventoryNumberNew); //将现在的库存数（整型）转换为字符串
+
         UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();  //更新
         updateWrapper.eq("goods_name",goodsName).set("goods_number",goodsNumberNew);
         return inventoryDao.update(null,updateWrapper);

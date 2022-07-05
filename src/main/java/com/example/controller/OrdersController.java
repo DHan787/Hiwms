@@ -124,17 +124,9 @@ public class OrdersController {
      */
     @GetMapping("/getByType")
     public List<Orders> getByType(@RequestParam Integer orderType){
-        /*List<Orders> oriOrders = ordersService.list();
-        List<Orders> targetOrders = null;
-        for (Orders ori:oriOrders
-             ) {
-            if(ori.getOrderType() == orderType){
-                targetOrders.add(ori);
-            }
-        }
-        return targetOrders;*/
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
         wrapper.eq("order_type",orderType);
+        wrapper.eq("order_status",11);
         List<Orders> orders = ordersDao.selectList(wrapper);
         return orders;
     }

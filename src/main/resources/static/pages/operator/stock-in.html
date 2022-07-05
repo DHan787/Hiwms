@@ -85,8 +85,9 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "查看订单详情",
                 gridData: [],
-
-				orderType: ''
+                tableIndex: '',
+				orderType: '',
+                orderStatus: ''
             }
         },
 
@@ -108,6 +109,8 @@
 			viewClick(index) {
 				this.dialogFormVisible = true;
                 var orderId = this.tableData[index].orderId;
+                this.tableIndex = index;
+                console.log("viewClick中的index",this.tableIndex);
                 axios.get("http://localhost:8080/stockIn/getByOrderId?orderId="+orderId).then(res=>{
                     this.gridData = res.data ;
                     console.log(this.gridData);
@@ -115,9 +118,12 @@
 			},
 
             handleStockIn() {
+                var stockId = this.gridData[0].stockId;
                 var goodsName = this.gridData[0].goodsName;
                 var goodsNumber = this.gridData[0].goodsNumber;
                 console.log(goodsNumber);
+                console.log("handleStockIn中的index",this.tableIndex);
+                <!--入库，更新库存-->
                 axios.put("http://localhost:8080/inventory/stockIn?goodsName="+goodsName+"&goodsNumber="+goodsNumber).then(res=>{
                     if(res.data){
                         this.$message({
@@ -133,10 +139,35 @@
                             message: '入库失败'
                         });
                     }
-                })
+                });
+                console.log("tabledata",this.tableData[this.tableIndex]);
+                <!--入库，修改订单状态（入库中-已入库）-->
+                axios.post("http://localhost:8080/orders/check", this.tableData[this.tableIndex]).then(res => {
+                    if (res.data) {
+                        // console.log(this.tableData[index]);
+                        this.$message({
+                            type: 'success',
+                            message: '订单修改成功!'
+                        });
+                        this.getAll();
+                    } else {
+                        this.$message({
+                            type: 'info',
+                            message: '订单修改失败'
+                        });
+                    }
+                });
+                <!--入库，删除入入库申请记录-->
+                console.log("stockId为：",stockId);
+                axios.delete("http://localhost:8080/stockIn/" + stockId).then(res=> {
+                    this.getAll();
+                });
+
             },
 
             formatStatus(row) {
+                this.orderStatus = row.orderStatus;
+                console.log("订单状态：",this.orderStatus);
                 switch (row.orderStatus) {
                     case 10:
                         return "未入库"
