@@ -31,7 +31,7 @@
 								</el-table-column>
 								<el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
 								</el-table-column>
-								<el-table-column prop="orderOperator" label="订单操作员">
+								<el-table-column prop="orderOperator" label="订单操作员" :min="1">
 									<template slot-scope="scope">
 										<el-select v-model="scope.row.orderOperator" placeholder="请选择操作员">
 											<el-option v-for="users in options" :label="users.userName" :value="users.userId" :key="users.userId">
@@ -68,7 +68,7 @@
 			el: '#app',
 			data: function() {
 				return {
-					tableData: [],
+					tableData: {},
 					options:[],//下拉框中的数据
 					dialogFormVisible: false,
 					dialogFormTitle: "",
@@ -103,20 +103,22 @@
 					});
 				},
 				checkClick(index,row) {
-					axios.post("http://localhost:8080/orders/update", this.tableData[index]).then(res => {
-						if (res.data) {
-							this.$message({
-								type: 'success',
-								message: '修改成功!'
-							});
-							this.getAll();
-						} else {
-							this.$message({
-								type: 'info',
-								message: '修改失败'
-							});
-						}
+						axios.post("http://localhost:8080/orders/update", this.tableData[index]).then(res => {
+												if (res.data) {
+													this.$message({
+														type: 'success',
+														message: '修改成功!'
+													});
+													this.getAll();
+												} else {
+													this.$message({
+														type: 'info',
+														message: '修改失败'
+													});
+												}
+											
 					})
+					
 				},
 				formatStatus(row) {
 					switch (row.orderStatus) {

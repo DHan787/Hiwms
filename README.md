@@ -92,3 +92,4 @@
 * orders页面 设置操作员、显示出入库状态 ymm
 * 拦截器V1.0 hj
 * orders页面 完成确认订单 ymm
+* orders和inventory的二次渲染 ymm
