@@ -101,23 +101,25 @@
 
 
 
-							<!-- 分页器 -->
-							<div class="block" style="text-align: center;">
-								<el-pagination align='center' @size-change="handleSizeChange"
-									@current-change="handleCurrentChange" :current-page="currentPage"
-									:page-sizes="[1,5,10,20]" :page-size="pageSize"
-									layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-								</el-pagination>
-							</div>
-						</el-card>
-					</el-main>
-				</el-container>
-			</el-container>
-		</div>
-	</body>
-	<script src="../../assets/js/vue.js"></script>
-	<script src="../../assets/css/element-ui/index.js"></script>
-	<script src="../../assets/js/axios.min.js"></script>
+                    <!-- 分页器 -->
+                    <div class="block" style="text-align: center;">
+                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="[1,5,10,20]"
+                                       :page-size="pageSize"
+                                       layout="total, sizes, prev, pager, next, jumper"
+                                       :total="tableData.length">
+                        </el-pagination>
+                    </div>
+                </el-card>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/css/element-ui/index.js"></script>
+<script src="../../assets/js/axios.min.js"></script>
 
 	<script>
 		new Vue({
@@ -148,7 +150,7 @@
 
 			created() {
 				this.getAll()
-				this.getOperatorName()
+                this.getOperatorName()
 
 			},
 
@@ -182,14 +184,11 @@
 				checkClick(index, row) {
 					axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
 						if (res.data) {
-							//this.row.isCheck = false;
 							// console.log(this.tableData[index]);
 							this.$message({
 								type: 'success',
 								message: '确认订单成功!'
 							});
-							//this.$ref['tableButton' + index].disabled = true;
-							//this.row.seen = true;
 							this.getAll();
 						} else {
 							this.$message({

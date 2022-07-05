@@ -110,3 +110,6 @@
 * 退出登录功能 wlx
 * StockOut前后端完成 （但因出库订单有bug，没有进行测试）hxy
 * orders页面能看见订单详情 ymm
+* 更正订单和库存页面搜索功能的bug 
+  修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
+* userInfo的delete的部分代码，存在bug hxy
