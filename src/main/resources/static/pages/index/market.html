@@ -10,6 +10,18 @@
 		<div id="app">
 			<el-container>
 				<el-header>
+					<div class="head">
+						<el-row class="demo-avatar demo-basic">
+							<el-col :span="12">
+								<div class="demo-basic--circle">
+									<div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
+									<div class="block" v-for="size in sizeList" :key="size">
+										<el-avatar :size="size" :src="circleUrl"></el-avatar>
+									</div>
+								</div>
+							</el-col>
+						</el-row>
+					</div>
 					<div class="logo">汇安智能仓储平台</div>
 
 				</el-header>
