@@ -74,10 +74,12 @@
 * 完成货物员的入库申请 ymm
 * 修正goods页面的问题 zls
 * goods模糊查询bug zls
+
 * Stockin 完成 hj
 * 完成入库申请订单号前端对接 ymm
 > > 一点提示： 前端调用接口的时候一定要注意大小写、单复数，名字不要写错
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
+* 个人中心页面跳转
 
 ## 7.5
 * 提示出入库数量不能为零 ymm
@@ -97,4 +99,7 @@
 * 修正users页面 zls
 * 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
 * UsersDetail的getById hj
+* UsersDetail的getById debug 拦截器 disable hj
 * orders和inventory的二次渲染 ymm
+* 修正方法名 zls
+* 恢复被覆盖掉的正版搜索内容 zls

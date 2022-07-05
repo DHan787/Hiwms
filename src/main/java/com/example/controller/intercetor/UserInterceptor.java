@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) throws Exception{
-        Users users = (Users)request.getSession().getAttribute("users");
-        if(users!=null){
-            System.out.println("放行");
-            return true;
-        }
-        response.sendRedirect("static/pages/login.html");
-        System.out.println("拦截成功");
-        return false;
+//        Users users = (Users)request.getSession().getAttribute("users");
+//        if(users!=null){
+//            System.out.println("放行");
+//            return true;
+//        }
+//        response.sendRedirect("static/pages/login.html");
+//        System.out.println("拦截成功");
+//        return false;
+        return true;
     }
 }
