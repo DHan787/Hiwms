@@ -114,3 +114,5 @@
   修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
 * userInfo的delete的部分代码，存在bug hxy
 * stock-in和stock-out的出入库按钮位置修改 ymm
+* 🍺 出入库、订单生成整个流程的完成 hxy & ymm 
+
