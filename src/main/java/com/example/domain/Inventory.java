@@ -12,7 +12,7 @@ public class Inventory {
     private String goodsName;
     private String goodsNumber;
     private String warehouseName;
-    private String warehouseLocation;
+
 
     public Integer getInventoryId() {
         return inventoryId;
@@ -30,9 +30,6 @@ public class Inventory {
         return warehouseName;
     }
 
-    public String getWarehouseLocation() {
-        return warehouseLocation;
-    }
 
     public void setGoodsNumber(String goodsNumber) {
         this.goodsNumber = goodsNumber;
@@ -40,10 +37,6 @@ public class Inventory {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
-    }
-
-    public void setWarehouseLocation(String warehouseLocation) {
-        this.warehouseLocation = warehouseLocation;
     }
 
     public void setWarehouseName(String warehouseName) {
