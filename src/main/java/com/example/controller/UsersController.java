@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.utils.EncryptUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -61,7 +63,7 @@ public class UsersController {
      *          3 登录为操作员
      */
     @PostMapping("/login")
-    private Integer login(@RequestBody Users users) throws Exception {
+    private Integer login(@RequestBody Users users, HttpServletRequest request) throws Exception {
 //        System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
 //        System.out.println("database:" + usersList);
@@ -69,6 +71,7 @@ public class UsersController {
             if (value.getUserName().equals(users.getUserName()))
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
 //                    System.out.println("role is:" + value.getUserRole());
+                    request.getSession().setAttribute("users",value.getUserRole());
                     return value.getUserRole();
                 }
         }
