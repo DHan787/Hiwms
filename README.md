@@ -110,3 +110,5 @@
 * users 查询的debug UsersDetailController 添加 getByIds hj
 * 分页器 zls
 * 退出登录功能 wlx
+* 更正订单和库存页面搜索功能的bug 
+  修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls

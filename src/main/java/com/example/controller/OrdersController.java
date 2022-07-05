@@ -133,7 +133,7 @@ public class OrdersController {
 
     //模糊查询
     @GetMapping("/like")
-    public List<Orders> getAllList(@RequestParam Integer ordersId){
+    public List<Orders> getAllList(@RequestParam String ordersId){
         System.out.println(ordersId);
         return ordersDao.selectOrdersId("%"+ordersId+"%");
     }
