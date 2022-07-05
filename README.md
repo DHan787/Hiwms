@@ -100,4 +100,6 @@
 * UsersDetail的getById hj
 * UsersDetail的getById debug 拦截器 disable hj
 * 修正方法名 zls
+* 恢复被覆盖掉的正版搜索内容 zls
+* StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录
 * users 查询的debug UsersDetailController 添加 getByIds hj
