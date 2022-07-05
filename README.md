@@ -81,6 +81,8 @@
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
 * 个人中心页面跳转
 
+
+
 ## 7.5
 * 提示出入库数量不能为零 ymm
 * goods名称的模糊查询 zls
@@ -106,4 +108,5 @@
 * 恢复被覆盖掉的正版搜索内容 zls
 * StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录
 * users 查询的debug UsersDetailController 添加 getByIds hj
-*分页器 zls
+* 分页器 zls
+* 退出登录功能 wlx
