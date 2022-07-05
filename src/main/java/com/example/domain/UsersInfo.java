@@ -11,22 +11,22 @@ public class UsersInfo{
     @TableId("users_Info_id")
     private Long usersInfoId;
 //    用户电话号码
-    private Long usersInfoTele;
+    private Long userTele;
 //    用户地址
-    private String usersInfoLocation;
+    private String userLocation;
 //    用户商家名
-    private String usersInfoRetailer;
+    private String userRetailer;
 //    用户信息修改时间
-    private Long usersInfoAltTime;
+    private Long userAltTime;
 
     @Override
     public String toString() {
         return "UsersInfo{" +
                 "usersInfoId=" + usersInfoId +
-                ", usersInfoTele=" + usersInfoTele +
-                ", usersInfoLocation='" + usersInfoLocation + '\'' +
-                ", usersInfoRetailer='" + usersInfoRetailer + '\'' +
-                ", usersInfoAltTime=" + usersInfoAltTime +
+                ", userTele=" + userTele +
+                ", userLocation='" + userLocation + '\'' +
+                ", userRetailer='" + userRetailer + '\'' +
+                ", userAltTime=" + userAltTime +
                 '}';
     }
 }
