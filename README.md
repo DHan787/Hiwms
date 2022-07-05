@@ -78,6 +78,7 @@
 * 完成入库申请订单号前端对接 ymm
 > > 一点提示： 前端调用接口的时候一定要注意大小写、单复数，名字不要写错
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
+* 个人中心页面跳转
 
 ## 7.5
 * 提示出入库数量不能为零 ymm
@@ -90,3 +91,9 @@
 * Detail debug order添加update hj
 * getByType hj
 * orders页面 设置操作员、显示出入库状态 ymm
+* 拦截器V1.0 hj
+* orders页面 完成确认订单 ymm
+* 指名操作员，管理员确认订单debug
+* 所有页面的文本框的模糊查询 zls
+* 修正users页面 zls
+* 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。

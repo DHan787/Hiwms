@@ -49,3 +49,8 @@
         .cell {
             display: flex;
         }
+
+        .head {
+            float: right;
+            margin-top: 5px;
+        }

@@ -3,6 +3,9 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.OrdersDao;
+import com.example.dao.GoodsDao;
+import com.example.dao.OrdersDao;
+import com.example.domain.Goods;
 import com.example.domain.Orders;
 import com.example.service.OrdersService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +24,8 @@ import java.util.SimpleTimeZone;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
-
     @Autowired
     private OrdersDao ordersDao;
-
     /**
      * 获取订单表
      * @return
@@ -109,9 +110,10 @@ public class OrdersController {
      * @param orders 实体
      * @return if success
      */
-    @PostMapping("/update")
-    public boolean updatebyId(@RequestBody Orders orders){
-
+    @PostMapping("/check")
+    public boolean checkById(@RequestBody Orders orders){
+        orders.setOrderStatus(orders.getOrderStatus()+1);
+        System.out.println(orders);
         return ordersService.updateById(orders);
     }
 
@@ -135,5 +137,12 @@ public class OrdersController {
         wrapper.eq("order_type",orderType);
         List<Orders> orders = ordersDao.selectList(wrapper);
         return orders;
+    }
+
+    //模糊查询
+    @GetMapping("/like")
+    public List<Orders> getAllList(@RequestParam Integer ordersId){
+        System.out.println(ordersId);
+        return ordersDao.selectOrdersId("%"+ordersId+"%");
     }
 }
