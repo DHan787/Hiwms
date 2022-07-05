@@ -102,24 +102,15 @@
 						this.options = res.data;
 					});
 				},
-				checkClick(index, row) {
-					this.dialogFormVisible = true;
-					this.dialogFormTitle = "修改订单信息";
-					this.isAdd = false;
-					this.form = Object.assign({}, row);
-					this.form.index = index;
-				},
-
-				updateOrdersById() {
-					axios.put("http://localhost:8080/orders", this.form).then(rel => {
-						if (rel.data) {
+				checkClick(index,row) {
+					
+					axios.put("http://localhost:8080/orders/update", this.form).then(res => {
+						if (res.data) {
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
 							this.getAll();
-							this.dialogFormVisible = false;
-
 						} else {
 							this.$message({
 								type: 'info',
