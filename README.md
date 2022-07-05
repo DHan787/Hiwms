@@ -97,4 +97,8 @@
 * 所有页面的文本框的模糊查询 zls
 * 修正users页面 zls
 * 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
+* UsersDetail的getById hj
+* UsersDetail的getById debug 拦截器 disable hj
+* 修正方法名 zls
+* 恢复被覆盖掉的正版搜索内容 zls
 * StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录

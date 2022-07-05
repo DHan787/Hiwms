@@ -141,6 +141,6 @@ public class UsersController {
     @GetMapping("/like")
     public List<Users> getAllList(@RequestParam String userId, @RequestParam String userName){
         System.out.println(userId+userName);
-        return usersDao.selectInventory("%"+userId+"%","%"+userName+"%");
+        return usersDao.selectUsers("%"+userId+"%","%"+userName+"%");
     }
 }
