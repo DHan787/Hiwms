@@ -109,3 +109,4 @@
 * 分页器 zls
 * 退出登录功能 wlx
 * StockOut前后端完成 （但因出库订单有bug，没有进行测试）hxy
+* orders页面能看见订单详情 ymm
