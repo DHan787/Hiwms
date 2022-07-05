@@ -83,5 +83,6 @@
 * 提示出入库数量不能为零 ymm
 * goods名称的模糊查询 zls
 * 用户详情显示存在bug hxy
+* inventory页面 下拉菜单 ymm
 * 用户详情显示bug完成修复 hj
 * 用户详情的查看、编辑、删除完成 hxy

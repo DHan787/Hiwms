@@ -26,18 +26,23 @@
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
-                                    <el-input v-model="form.goodName" autocomplete="off"></el-input>
+                                    <el-input v-model="form.goodName" autocomplete="off" placeholder="请输入货物名称"></el-input>
                                 </el-form-item>
-                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber">
-                                    <el-input v-model="form.goodNumber" autocomplete="off"></el-input>
+                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber" placeholder="请输入货物数量">
+									<el-input-number v-model="form.goodNumber" :min="1" :max="1000" label="入库数量">
+									</el-input-number>
                                 </el-form-item>
-                                <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
-                                    <el-input v-model="form.warehouseName" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="储存位置" :label-width="formLabelWidth" prop="warehouseLocation">
-                                    <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
-                                </el-form-item>
-
+								<el-form-item label="仓库名称" :label-width="formLabelWidth">
+								    <el-select v-model="form.warehouseName" placeholder="请选择仓库名称">
+								      <el-option label="冷冻1" value="1"></el-option>
+								      <el-option label="冷冻2" value="2"></el-option>
+									  <el-option label="日用1" value="3"></el-option>
+									  <el-option label="果蔬1" value="4"></el-option>
+									  <el-option label="家电1" value="5"></el-option>
+									  <el-option label="零食1" value="6"></el-option>
+									  <el-option label="零食2" value="7"></el-option>
+								    </el-select>
+								  </el-form-item>
 
                             </el-form>
                             <div slot="footer" class="dialog-footer">
@@ -60,11 +65,8 @@
                         </el-table-column>
                         <el-table-column prop="warehouseName" label="仓库名称">
                         </el-table-column>
-                        <el-table-column prop="warehouseLocation" label="储存位置">
-                        </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="inventory in tableData">
-
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
                                 <el-button type="danger" plain @click="removeInventoryById(scope.$index)">删除</el-button>
                             </template>
