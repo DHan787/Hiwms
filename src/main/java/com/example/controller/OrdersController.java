@@ -126,7 +126,7 @@ public class OrdersController {
     public List<Orders> getByType(@RequestParam Integer orderType){
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
         wrapper.eq("order_type",orderType);
-        wrapper.eq("order_status",11);
+        wrapper.eq("order_status",21);
         List<Orders> orders = ordersDao.selectList(wrapper);
         return orders;
     }

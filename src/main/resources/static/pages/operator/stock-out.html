@@ -8,27 +8,58 @@
 </head>
 <body>
 <div id="app">
-	<el-container>
-	    <el-container>
+    <el-container>
+        <el-container>
             <!-- 主体 -->
             <el-main>
                 <el-breadcrumb style="margin-bottom: 12px;">
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
                     <el-breadcrumb-item>业务流</el-breadcrumb-item>
-                    <el-breadcrumb-item>入库信息</el-breadcrumb-item>
+                    <el-breadcrumb-item>出库信息</el-breadcrumb-item>
                 </el-breadcrumb>
 
+                <div class="card-container">
+                    <div class="handle-container">
+
+                        <!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
+                        <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
+ -->
+                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+                            <el-table :data="gridData">
+                                <el-table-column property="stockId" label="库存id" width="150"></el-table-column>
+                                <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
+                                <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
+                            </el-table>
+                            <el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-delete">出库</el-button>
+                        </el-dialog>
+
+                    </div>
+                </div>
+
+
+
+                <!--表单区域-->
                 <el-card>
                     <el-table :data="tableData" stripe style="width: 100%; " >
-                        <el-table-column prop="stockId" label="出库编号">
+                        <el-table-column prop="orderId" label="订单编号" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodsName" label="货品名称">
+
+                        <el-table-column prop="orderStartTime" label="订单开始时间">
                         </el-table-column>
-                        <el-table-column prop="goodsNumber" label="货品数量">
+                        <el-table-column prop="orderEndTime" label=订单结束时间>
+                        </el-table-column>
+
+                        <el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
+                        </el-table-column>
+                        <el-table-column prop="orderOperator" label="订单操作员">
+                        </el-table-column>
+                        <el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
                         </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="stockout in tableData">
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">详情</el-button>
+                            <template slot-scope="scope" v-for="orders in tableData">
+
+                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-edit">查看详情</el-button>
+                                <!--<el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>-->
                             </template>
                         </el-table-column>
                     </el-table>
@@ -52,17 +83,8 @@
             return {
                 tableData: [],
                 dialogFormVisible: false,
-                dialogFormTitle: "",
-                form: {
-                    id: '',
-                    name: '',
-                    number: '',
-					warehouseid: '',
-					shelfid: '',
-                    staus: ''
-                },
-                formLabelWidth: '120px',
-                isAdd: false
+                dialogFormTitle: "查看订单详情",
+                gridData: []
             }
         },
 
@@ -72,9 +94,79 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/stockOut").then(res=>{
+                //console.log("orderType:{}",orderType);
+                axios.get("http://localhost:8080/orders/getByType?orderType=2").then(res=>{
                     this.tableData = res.data ;
+                    /*console.log(this.tableData);*/
                 });
+            },
+
+
+
+            viewClick(index) {
+                this.dialogFormVisible = true;
+                var orderId = this.tableData[index].orderId;
+                axios.get("http://localhost:8080/stockOut/getByOrderId?orderId="+orderId).then(res=>{
+                    this.gridData = res.data ;
+                    console.log(this.gridData);
+                });
+            },
+
+            handleStockOut() {
+                var goodsName = this.gridData[0].goodsName;
+                var goodsNumber = this.gridData[0].goodsNumber;
+                console.log(goodsNumber);
+                axios.put("http://localhost:8080/inventory/stockOut?goodsName="+goodsName+"&goodsNumber="+goodsNumber).then(res=>{
+                    if(res.data){
+                        this.$message({
+                            type: 'success',
+                            message: '出库成功!'
+                        });
+                        this.getAll();
+                        this.dialogFormVisible = false;
+
+                    }else{
+                        this.$message({
+                            type: 'info',
+                            message: '出库失败'
+                        });
+                    }
+                })
+            },
+
+            formatStatus(row) {
+                switch (row.orderStatus) {
+                    case 10:
+                        return "未入库"
+                        break
+                    case 11:
+                        return "入库中"
+                        break
+                    case 12:
+                        return "已入库"
+                        break
+                    case 20:
+                        return "未出库"
+                        break
+                    case 21:
+                        return "出库中"
+                        break
+                    case 12:
+                        return "已出库"
+                        break
+                    default:
+                        return "未知"
+                        break
+                }
+            },
+
+            formatInit(row){
+                if(row.orderInit === 11){
+                    return "管理员Anna"
+                }
+                else{
+                    return "未知"
+                }
             }
         }
     })
