@@ -53,8 +53,8 @@ public class UsersInfoController {
         try {
 
             long timeMillis = System.currentTimeMillis();
-            usersInfo.setUsersInfoAltTime(timeMillis);
-            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
+            usersInfo.setUserAltTime(timeMillis);
+            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,23 +68,21 @@ public class UsersInfoController {
      * @return
      */
     @PutMapping
-    public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo, @RequestParam Integer userId, @RequestParam Long usersInfoAltTime){
+    public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime,@RequestBody UsersInfo usersInfo){
 
-        log.info(usersInfo.toString());
-        /*long timeMillis = System.currentTimeMillis();
-        usersInfo.setUsersInfoAltTime(timeMillis);*/
-        log.info("UsersInfoAltTime1,{}",usersInfoAltTime);
-        log.info("userId1,{}",userId);
-        usersInfo.setUsersInfoAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
-        log.info("userInfoId1,{}",usersInfo.getUsersInfoId());
+        //得到UserInfoId
+        usersInfo.setUserAltTime(usersInfoAltTime);
+        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        //根据UserInfoId进行UserInfo其他字段的更新
         boolean result =  usersInfoService.updateById(usersInfo);
-        //log.info("userInfoLocation,{}",usersInfo.getUsersInfoLocation());
+        //设置
         long timeMillis = System.currentTimeMillis();
-        usersInfo.setUsersInfoAltTime(timeMillis);
-        log.info("UsersInfoAltTime2,{}",usersInfo.getUsersInfoAltTime());
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUsersInfoAltTime()));
-        log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
+        log.info("timeMillis{}",timeMillis);
+        //usersInfo.setUserAltTime(timeMillis);
+        //log.info("UsersInfoAltTime2,{}",usersInfo.getUserAltTime());
+        //usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        //log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
+        //log.info("userId{}",userId);
         return result;
     }
 

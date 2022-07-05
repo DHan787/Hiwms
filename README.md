@@ -75,3 +75,6 @@
 * 修正goods页面的问题 zls
 * Stockin 完成 hj
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
+
+## 7.5
+* 用户详情编辑完成；用户详情显示存在bug hxy
