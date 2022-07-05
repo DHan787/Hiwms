@@ -74,7 +74,7 @@
 											icon="el-icon-edit" v-if="seen">确认订单</el-button> -->
 										<el-button :ref="'tableButton' + scope.$index" type="primary" plain
 											 icon="el-icon-edit"
-											@click='scope.row.isCheck = true' :disabled="scope.row.isCheck">确认订单</el-button>
+											@click="checkClick">确认订单</el-button>
 										<el-button type="primary" plain @click="viewClick(scope.$index)"
 											icon="el-icon-info">详情</el-button>
 									</template>
