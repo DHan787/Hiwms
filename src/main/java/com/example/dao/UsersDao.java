@@ -16,7 +16,7 @@ import java.util.List;
 public interface UsersDao extends BaseMapper<Users> {
     //模糊查询
     @Select("select * from users where userId like #{userId} and user_name like #{userName}")
-    List<Users> selectInventory(@Param("userId") String userId, @Param("userName") String userName);
+    List<Users> selectUsers(@Param("userId") String userId, @Param("userName") String userName);
 
     //查询有多少数据
     @Select("select count(*) from users")
