@@ -98,3 +98,4 @@
 * 修正users页面 zls
 * 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
 * UsersDetail的getById hj
+* UsersDetail的getById debug 拦截器 disable hj

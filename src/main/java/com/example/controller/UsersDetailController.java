@@ -89,9 +89,10 @@ public class UsersDetailController {
     }
     @GetMapping("/{id}")
     public List<UsersDetail> getById(@PathVariable int id){
-        QueryWrapper<Object> queryWrapper =new QueryWrapper<>();
+        System.out.println("getDetail");
+        QueryWrapper<Users> queryWrapper =new QueryWrapper<>();
         queryWrapper.eq("userId",id);
-        List<Users> usersList =usersDao.selectList(null);
+        List<Users> usersList =usersDao.selectList(queryWrapper);
 
         List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
