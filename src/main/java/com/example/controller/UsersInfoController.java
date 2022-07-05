@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.domain.Users;
 import com.example.domain.UsersInfo;
 import com.example.service.UsersInfoService;
+import com.example.service.UsersService;
 import com.example.utils.EncryptUtil;
 import com.example.utils.idGenerator;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +66,7 @@ public class UsersInfoController {
     /**
      * 更新用户信息
      * @param usersInfo
-     * @return
+     * @return if success
      */
     @PutMapping
     public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime,@RequestBody UsersInfo usersInfo){
@@ -74,16 +75,29 @@ public class UsersInfoController {
         usersInfo.setUserAltTime(usersInfoAltTime);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
         //根据UserInfoId进行UserInfo其他字段的更新
-        boolean result =  usersInfoService.updateById(usersInfo);
         //设置
-        long timeMillis = System.currentTimeMillis();
-        log.info("timeMillis{}",timeMillis);
+//        long timeMillis = System.currentTimeMillis();
+//        log.info("timeMillis{}",timeMillis);
         //usersInfo.setUserAltTime(timeMillis);
         //log.info("UsersInfoAltTime2,{}",usersInfo.getUserAltTime());
         //usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
         //log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
         //log.info("userId{}",userId);
-        return result;
+        return usersInfoService.updateById(usersInfo);
+    }
+
+    /**
+     *
+     * @param userId id
+     * @param usersInfo info
+     * @return if success
+     */
+    @PostMapping("/init")
+    public boolean intiUserInfo(@RequestParam Integer userId,@RequestBody UsersInfo usersInfo){
+        long timeMills = System.currentTimeMillis();
+        usersInfo.setUserAltTime(timeMills);
+        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        return usersInfoService.save(usersInfo);
     }
 
 }
