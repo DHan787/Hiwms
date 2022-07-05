@@ -9,8 +9,8 @@ import lombok.Data;
 public class Inventory {
     @TableId("inventory_id")
     private Integer inventoryId;
-    private String goodName;
-    private String goodNumber;
+    private String goodsName;
+    private String goodsNumber;
     private String warehouseName;
     private String warehouseLocation;
 
@@ -18,12 +18,12 @@ public class Inventory {
         return inventoryId;
     }
 
-    public String getGoodName() {
-        return goodName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public String getGoodNumber() {
-        return goodNumber;
+    public String getGoodsNumber() {
+        return goodsNumber;
     }
 
     public String getWarehouseName() {
@@ -34,12 +34,12 @@ public class Inventory {
         return warehouseLocation;
     }
 
-    public void setGoodNumber(String goodNumber) {
-        this.goodNumber = goodNumber;
+    public void setGoodsNumber(String goodsNumber) {
+        this.goodsNumber = goodsNumber;
     }
 
-    public void setGoodName(String goodName) {
-        this.goodName = goodName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public void setWarehouseLocation(String warehouseLocation) {
