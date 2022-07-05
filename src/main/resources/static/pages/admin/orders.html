@@ -148,35 +148,12 @@
 					formLabelWidth: '120px',
 					
 				}
-			},
-<script>
-    new Vue({
-        el: '#app',
-        data: function() {
-            return {
-                tableData: [],
-                ordersId:"",
-                options:[],//下拉框中的数据
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                form: {
-                    orderID: '',
-                    orderType: '',
-                    orderStartTime: '',
-                    orderEndTime: '',
-                    orderInit:'',
-                    orderOperator:''
-                },
-                formLabelWidth: '120px',
-            }
         },
-
 			created() {
 				this.getAll()
                 this.getOperatorName()
 
 			},
-
 			methods: {
 				getAll() {
 					axios.get("http://localhost:8080/orders").then(res => {

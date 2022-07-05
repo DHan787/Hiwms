@@ -21,8 +21,25 @@
 
 						<div class="card-container">
 							<div class="handle-container">
-								<el-button type="primary" plain style="margin:15px 20px;" @click="addClick"
-									icon="el-icon-plus">新增商品库存</el-button>
+                                <div class="handle-container">
+                                    <!--查询表单-->
+                                    <el-form :model="search">
+                                        <el-row>
+                                            <el-col :span='12'>
+                                                <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号" style="width:200px;line-height:68px"></el-input><!-- clearable 输⼊框可清除属性 -->
+                                            </el-col>
+                                            <el-col :span='12'>
+                                                <el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px;line-height:68px"></el-input>
+                                            </el-col>
+                                        </el-row>
+                                    </el-form>
+                                </div>
+                                    <el-row :span="8" align="right">
+                                        <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
+                                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增库存</el-button>
+                                    </el-row>
+
+
 								<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									<el-form :model="form" ref="form">
 										<el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodsName">
@@ -50,71 +67,8 @@
 										<el-button v-else type="primary" @click="updateInventoryById">更 新</el-button>
 									</div>
 								</el-dialog>
-                <div class="card-container">
-                    <div class="handle-container">
-                        <!--查询表单-->
-                        <el-form :model="search">
-                            <el-row>
-                                <el-col :span='12'>
-                                        <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号" style="width:200px;line-height:68px"></el-input><!-- clearable 输⼊框可清除属性 -->
-                                </el-col>
-                                <el-col :span='12'>
-                                    <el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px;line-height:68px"></el-input>
-                                </el-col>
-                                <!--											<el-col :span='12'>-->
-                                <!--												<el-form-item label="货物类别">-->
-                                <!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
-                                <!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
-                                <!--													</el-select>-->
-                                <!--												</el-form-item>-->
-                                <!--											</el-col>-->
-                            </el-row>
-                        </el-form>
-                    </div>
-                    <el-row :span="8" align="right">
-                        <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
-                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增库存</el-button>
-                    </el-row>
-
-                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-                            <el-form :model="form" ref="form">
-                                <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goods_Name">
-                                    <el-input v-model="form.goodsName" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodsNumber">
-                                    <el-input v-model="form.goodsNumber" autocomplete="off"></el-input>
-                                <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
-                                    <el-input v-model="form.goodsName" autocomplete="off" placeholder="请输入货物名称"></el-input>
-                                </el-form-item>
-                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber" placeholder="请输入货物数量">
-									<el-input-number v-model="form.goodsNumber" :min="1" :max="1000" label="入库数量">
-									</el-input-number>
-                                </el-form-item>
-								<el-form-item label="仓库名称" :label-width="formLabelWidth">
-								    <el-select v-model="form.warehouseName" placeholder="请选择仓库名称">
-								      <el-option label="冷冻1" value="1"></el-option>
-								      <el-option label="冷冻2" value="2"></el-option>
-									  <el-option label="日用1" value="3"></el-option>
-									  <el-option label="果蔬1" value="4"></el-option>
-									  <el-option label="家电1" value="5"></el-option>
-									  <el-option label="零食1" value="6"></el-option>
-									  <el-option label="零食2" value="7"></el-option>
-								    </el-select>
-								  </el-form-item>
-
-                            </el-form>
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button v-if="isAdd" type="primary" @click="addInventory">确 定</el-button>
-                                <el-button  v-else type="primary" @click="updateInventoryById">更 新</el-button>
-                            </div>
-                        </el-dialog>
-
-							</div>
 						</div>
-
                 </div>
-
 						<el-card>
 							<el-table :data="tableData" stripe style="width: 100%; ">
 								<el-table-column prop="inventoryId" label="商品编号" width="180">
@@ -143,224 +97,166 @@
 			</el-container>
 		</div>
 	</body>
-	<script src="../../assets/js/vue.js"></script>
-	<script src="../../assets/css/element-ui/index.js"></script>
-	<script src="../../assets/js/axios.min.js"></script>
-                <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%; " >
-                        <el-table-column prop="inventoryId" label="库存编号" width="180">
-                        </el-table-column>
-                        <el-table-column prop="goodsName" label="货物名称" width="180">
-                        </el-table-column>
-                        <el-table-column prop="goodsNumber" label="货物数量">
-                        </el-table-column>
-                        <el-table-column prop="warehouseName" label="仓库名称">
-                        </el-table-column>
-                        <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="inventory in tableData">
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
-                                <el-button type="danger" plain @click="removeInventoryById(scope.$index)">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
 <script src="../../assets/js/vue.js"></script>
 <script src="../../assets/css/element-ui/index.js"></script>
 <script src="../../assets/js/axios.min.js"></script>
 
 	<script>
 		new Vue({
-			el: '#app',
-			data: function() {
-				return {
-					tableData: {},
-					options: [],
-					dialogFormVisible: false,
-					dialogFormTitle: "",
-					form: {
-						id: '',
-						goodname: '',
-						number: '',
-						warehousename: '',
-						location: ''
-					},
-					formLabelWidth: '120px',
-					isAdd: false
+            el: '#app',
+            data: function () {
+                return {
+                    tableData: {},
+                    options: [],
+                    dialogFormVisible: false,
+                    dialogFormTitle: "",
+                    form: {
+                        id: '',
+                        goodname: '',
+                        number: '',
+                        warehousename: '',
+                        location: ''
+                    },
+                    formLabelWidth: '120px',
+                    isAdd: false
 
-				}
-			},
-
-			created() {
-				this.getAll()
-				this.getWarehouseName()
-			},
-
-			methods: {
-				getAll() {
-					axios.get("http://localhost:8080/inventory").then(res => {
-						this.tableData = res.data;
-					});
-				},
-				getWarehouseName() {
-					axios.get("http://localhost:8080/warehouse").then(res => {
-						this.options = res.data;
-					});
-				},
-				formatName(row) { //二次渲染表格
-					switch (row.warehouseName) {
-						case "109":
-							return "冷冻1"
-							break
-						case "110":
-							return "冷冻2"
-							break
-						case "113":
-							return "果蔬1"
-							break
-						case "114":
-							return "果蔬2"
-							break
-						case "115":
-							return "果蔬3"
-							break
-						case "116":
-							return "电器1"
-							break
-						case "117":
-							return "电器2"
-							break
-						case "118":
-							return "零食1"
-							break
-						case "119":
-							return "饮料1"
-							break
-						default:
-							return "未知"
-							break
-					}
-				},
-				removeInventoryById(index) {
-					var id = this.tableData[index].inventoryId;
-					this.$confirm('此操作将永久删除该库存, 是否继续?', '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						axios.delete("http://localhost:8080/inventory/" + id).then(res => {
-							this.getAll();
-						});
-						this.$message({
-							type: 'success',
-							message: '删除成功!'
-						});
-					}).catch(() => {
-						this.$message({
-							type: 'info',
-							message: '已取消删除'
-						});
-					});
-				},
-        methods: {
-            getAll(){
-                axios.get("http://localhost:8080/inventory").then(res=>{
-                    this.tableData = res.data ;
-                });
-            },
-            like(){
-                axios.get("http://localhost:8080/inventory/like?inventoryId="+this.inventoryId+"&goodsName="+this.goodsName).then(res=>{
-
-                       console.log(res);
-                    this.tableData = res.data;
-                });
+                }
             },
 
-            removeInventoryById(index) {
-                var id = this.tableData[index].inventoryId;
-                this.$confirm('此操作将永久删除该库存, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    axios.delete("http://localhost:8080/inventory/" +id).then(res=> {
-                        this.getAll();
-                    });
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消删除'
-                    });
-                });
+            created() {
+                this.getAll()
+                this.getWarehouseName()
             },
 
-				addClick() {
-					this.dialogFormVisible = true;
-					this.dialogFormTitle = "新增库存";
-					this.isAdd = true;
-					this.form = {};
-				},
+            methods: {
+                getAll() {
+                    axios.get("http://localhost:8080/inventory").then(res => {
+                        this.tableData = res.data;
+                    });
+                },
+                getWarehouseName() {
+                    axios.get("http://localhost:8080/warehouse").then(res => {
+                        this.options = res.data;
+                    });
+                },
+                formatName(row) { //二次渲染表格
+                    switch (row.warehouseName) {
+                        case "109":
+                            return "冷冻1"
+                            break
+                        case "110":
+                            return "冷冻2"
+                            break
+                        case "113":
+                            return "果蔬1"
+                            break
+                        case "114":
+                            return "果蔬2"
+                            break
+                        case "115":
+                            return "果蔬3"
+                            break
+                        case "116":
+                            return "电器1"
+                            break
+                        case "117":
+                            return "电器2"
+                            break
+                        case "118":
+                            return "零食1"
+                            break
+                        case "119":
+                            return "饮料1"
+                            break
+                        default:
+                            return "未知"
+                            break
+                    }
+                },
+                removeInventoryById(index) {
+                    var id = this.tableData[index].inventoryId;
+                    this.$confirm('此操作将永久删除该库存, 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        axios.delete("http://localhost:8080/inventory/" + id).then(res => {
+                            this.getAll();
+                        });
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消删除'
+                        });
+                    });
+                },
+                like() {
+                    axios.get("http://localhost:8080/inventory/like?inventoryId=" + this.inventoryId + "&goodsName=" + this.goodsName).then(res => {
 
-				addInventory() {
-					axios.post("http://localhost:8080/inventory", this.form).then(rel => {
-						if (rel.data) {
-							this.$message({
-								type: 'success',
-								message: '新增成功!'
-							});
-							this.getAll();
-							this.dialogFormVisible = false;
+                        console.log(res);
+                        this.tableData = res.data;
+                    });
+                },
+                addClick() {
+                    this.dialogFormVisible = true;
+                    this.dialogFormTitle = "新增库存";
+                    this.isAdd = true;
+                    this.form = {};
+                },
+                addInventory() {
+                    axios.post("http://localhost:8080/inventory", this.form).then(rel => {
+                        if (rel.data) {
+                            this.$message({
+                                type: 'success',
+                                message: '新增成功!'
+                            });
+                            this.getAll();
+                            this.dialogFormVisible = false;
 
-						} else {
-							this.$message({
-								type: 'info',
-								message: '新增失败'
-							});
-						}
-						this.$refs.form.resetFields();
-					})
-				},
+                        } else {
+                            this.$message({
+                                type: 'info',
+                                message: '新增失败'
+                            });
+                        }
+                        this.$refs.form.resetFields();
+                    })
+                },
 
-				editClick(index, row) {
-					this.dialogFormVisible = true;
-					this.dialogFormTitle = "修改库存";
-					this.isAdd = false;
-					this.form = Object.assign({}, row);
-					this.form.index = index;
-				},
+                editClick(index, row) {
+                    this.dialogFormVisible = true;
+                    this.dialogFormTitle = "修改库存";
+                    this.isAdd = false;
+                    this.form = Object.assign({}, row);
+                    this.form.index = index;
+                },
+                updateInventoryById() {
+                    axios.put("http://localhost:8080/inventory", this.form).then(rel => {
+                        if (rel.data) {
+                            this.$message({
+                                type: 'success',
+                                message: '修改成功!'
+                            });
+                            this.getAll();
+                            this.dialogFormVisible = false;
+
+                        } else {
+                            this.$message({
+                                type: 'info',
+                                message: '修改失败'
+                            });
+                        }
+                        this.$refs.form.resetFields();
+                    })
+                }
+            }
+        })
 
 
-				updateInventoryById() {
-					axios.put("http://localhost:8080/inventory", this.form).then(rel => {
-						if (rel.data) {
-							this.$message({
-								type: 'success',
-								message: '修改成功!'
-							});
-							this.getAll();
-							this.dialogFormVisible = false;
 
-						} else {
-							this.$message({
-								type: 'info',
-								message: '修改失败'
-							});
-						}
-						this.$refs.form.resetFields();
-					})
-				}
-			}
-		})
 	</script>
 </html>
