@@ -21,7 +21,28 @@
 	                    
 	                        <div class="card-container">
 	                            <div class="handle-container">
+									<!--查询表单-->
+									<el-form :model="search">
+										<el-row>
+											<el-col :span='12'>
+												<el-form-item >
+													<el-input v-model="warehouseName" clearable placeholder="请输⼊仓库名称" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
+												</el-form-item>
+											</el-col>
+											<!--											<el-col :span='12'>-->
+											<!--												<el-form-item label="货物类别">-->
+											<!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
+											<!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
+											<!--													</el-select>-->
+											<!--												</el-form-item>-->
+											<!--											</el-col>-->
+										</el-row>
+									</el-form>
+								</div>
+								<el-row :span="8" align="right">
+									<el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询仓库</el-button>
 									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增仓库</el-button>
+								</el-row>
 									
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
 									  <el-form :model="form" ref="form">
@@ -46,7 +67,6 @@
 									  </div>
 									</el-dialog>
 
-								</div>
 	                        </div>
 	                    
 	                    <el-card>
@@ -87,7 +107,8 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-					tableData: [],
+					tableData: {},
+					warehouseName:"",
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					form: {
@@ -109,6 +130,12 @@
 	        methods: {
 				getAll(){
 					axios.get("http://localhost:8080/warehouse").then(res=>{
+						this.tableData = res.data ;
+					});
+				},
+				<!--模糊查询-->
+				like(){
+					axios.get("http://localhost:8080/warehouse/like?warehouseName="+this.warehouseName).then(res=>{
 						this.tableData = res.data ;
 					});
 				},

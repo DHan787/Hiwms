@@ -120,7 +120,6 @@
 	        el: '#app',
 	        data: function() {
 	            return {
-	            	listData:[],
 					tableData: {},
 					goodsName:"",
 					dialogFormVisible: false,
@@ -149,9 +148,7 @@
 				},
 				<!--模糊查询-->
 				like(){
-					console.log(1);
 					axios.get("http://localhost:8080/goods/like?goodsName="+this.goodsName).then(res=>{
-						console.log(res);
 						this.tableData = res.data ;
 					});
 				},

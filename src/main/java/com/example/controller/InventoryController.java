@@ -1,6 +1,9 @@
 package com.example.controller;
 
 
+import com.example.dao.GoodsDao;
+import com.example.dao.InventoryDao;
+import com.example.domain.Goods;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +18,8 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
+    @Autowired
+    private InventoryDao inventoryDao;
 
     /**
      * 获取全部库存
@@ -68,5 +73,12 @@ public class InventoryController {
     public boolean updateInventory(@RequestBody Inventory inventory){
 
         return inventoryService.updateById(inventory);
+    }
+
+    //模糊查询
+    @GetMapping("/like")
+    public List<Inventory> getAllList(@RequestParam String inventoryId,@RequestParam String goodsName){
+        System.out.println(inventoryId+goodsName);
+        return inventoryDao.selectInventory("%"+inventoryId+"%","%"+goodsName+"%");
     }
 }

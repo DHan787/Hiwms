@@ -22,8 +22,21 @@
                 <!--新建订单区域-->
                 <div class="card-container">
                     <div class="handle-container">
-
+                        <!--查询表单-->
+                        <el-form :model="search">
+                            <el-row>
+                                <el-col :span='12'>
+                                    <el-form-item >
+                                        <el-input v-model="ordersId" clearable placeholder="请输⼊订单编号" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+                    </div>
+                        <el-row :span="8" align="right">
+                            <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询订单</el-button>
                             <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增订单</el-button>
+                        </el-row>
 
                         <el-dialog title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
@@ -67,7 +80,6 @@
                         </el-dialog>
 
                     </div>
-                </div>
                 <!--表单区域-->
                 <el-card>
                     <el-table :data="tableData" stripe style="width: 100%; " >
@@ -111,7 +123,8 @@
         el: '#app',
         data: function() {
             return {
-                tableData: [],
+                tableData: {},
+                ordersId:"",
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
@@ -134,6 +147,15 @@
         methods: {
             getAll(){
                 axios.get("http://localhost:8080/orders").then(res=>{
+                    this.tableData = res.data ;
+                });
+            },
+
+            <!--模糊查询-->
+            like(){
+                console.log(1);
+                axios.get("http://localhost:8080/orders/like?ordersId="+this.ordersId).then(res=>{
+                    console.log(res);
                     this.tableData = res.data ;
                 });
             },
