@@ -20,7 +20,7 @@
 						</el-breadcrumb>
 						<!--表格区域-->
 						<el-card>
-							<el-table :data="tableData" stripe style="width: 100%; ">
+							<el-table :data="tableData" stripe style="width: 100%;">
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
@@ -34,7 +34,7 @@
 								<el-table-column prop="orderOperator" label="订单操作员">
 									<template slot-scope="scope">
 										<el-select v-model="scope.row.orderOperator" placeholder="请选择操作员">
-											<el-option v-for="users in options" :label="users.userName" :value="users.userId">
+											<el-option v-for="users in options" :label="users.userName" :value="users.userId" :key="users.userId">
 											</el-option>
 										</el-select>
 									</template>
@@ -103,8 +103,7 @@
 					});
 				},
 				checkClick(index,row) {
-					
-					axios.put("http://localhost:8080/orders/update", this.form).then(res => {
+					axios.post("http://localhost:8080/orders/update", this.tableData[index]).then(res => {
 						if (res.data) {
 							this.$message({
 								type: 'success',
@@ -117,7 +116,6 @@
 								message: '修改失败'
 							});
 						}
-						this.$refs.form.resetFields();
 					})
 				},
 				formatStatus(row) {

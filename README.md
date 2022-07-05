@@ -90,3 +90,4 @@
 * Detail debug order添加update hj
 * getByType hj
 * orders页面 设置操作员、显示出入库状态 ymm
+* orders页面 确认订单 ymm
