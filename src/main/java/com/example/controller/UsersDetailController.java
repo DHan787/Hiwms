@@ -9,11 +9,9 @@ import com.example.service.UsersDetailService;
 import com.example.service.UsersInfoService;
 import com.example.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.utils.idGenerator;
 
 import java.util.ArrayList;
@@ -50,6 +48,7 @@ public class UsersDetailController {
         //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList,usersInfoList);
     }
+
 
     /**
      * 装配用户详情
