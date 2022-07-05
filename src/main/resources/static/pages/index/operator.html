@@ -21,7 +21,7 @@
 							background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
 							<el-menu-item index="1">
 								<i class="el-icon-menu"></i>
-								<span slot="title">常用</span>
+								<span slot="title" @click="openUrl('./index.html')">主页</span>
 							</el-menu-item>
 
 							<el-menu-item index="2">
@@ -51,6 +51,14 @@
 								<i class="el-icon-setting"></i>
 								<span slot="title">系统设置</span>
 							</el-menu-item>
+
+							<a href="../login.html">
+								<el-menu-item index="6">
+									<i class="el-icon-warning-outline" ></i>
+									<span slot="title" >退出登录</span>
+								</el-menu-item>
+							</a>
+
 						</el-menu>
 					</el-aside>
 					<!-- 主体 -->
