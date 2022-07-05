@@ -18,7 +18,7 @@
 						</el-breadcrumb>
 						<el-card class="box-card" style="margin-bottom: 12px;">
 							<div class="card-container">
-								<el-image :src="src" class="ava">
+								<el-image :src="src1" class="ava">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
@@ -31,6 +31,37 @@
 									</div>
 								</div>
 							</div>
+							<h1 align="center" class="word">常用功能</h1>
+							<div><a href="../admin/users.html"> <el-image :src="src2" class="users" >
+								<div slot="placeholder" class="image-slot">
+									加载中<span class="dot">...</span>
+								</div>
+							</el-image>
+							</a>
+
+								<a href="../admin/orders.html"> <el-image :src="src3" class="orders" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								</a>
+							</div>
+							<div>
+								<a href="../admin/goods.html"> <el-image :src="src4" class="goods" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+
+								</el-image>
+								</a>
+								<a href="../admin/warehouse.html"> <el-image :src="src5" class="warehouse" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								</a>
+							</div>
+
 						</el-card>
 					</el-main>
 				</el-container>
@@ -43,13 +74,22 @@
 	<script>
 		new Vue({
 			el: '#app',
-			data: function() {
+			data: function () {
 				return {
-					src: '../../assets/pics/head.jpg',
+					src1: '../../assets/pics/head.jpg',
+					src2: '../../assets/pics/users.jpg',
+					src3:'../../assets/pics/orders.jpg',
+					src4: '../../assets/pics/goods.jpg',
+					src5: '../../assets/pics/warehouse.jpg',
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					formLabelWidth: '120px',
+					isAdd: false
 				}
 			},
 			created() {
-				
+
 			},
 			methods: {
 				
