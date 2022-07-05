@@ -48,7 +48,10 @@ public class StockOutController {
      */
     @PostMapping("/save")
     public boolean saveStockOut(@RequestBody StockOut stockOut){
-        stockOut.setStockId(ordersController.initOrders(2)); //type = 2 入库
+//        System.out.println(stockOut);
+//        System.out.println("out");
+        stockOut.setOrderId(ordersController.initOrders(2)); //type = 2 入库
+//        System.out.println(stockOut);
         return stockOutService.save(stockOut);
     }
 
