@@ -193,6 +193,7 @@
 				/* var altTime = this.tableData[index].usersInfoAltTime; */
 				console.log(this.form.usersInfoAltTime);
                 axios.put("http://localhost:8080/usersInfo?userId="+this.form.userId+"&usersInfoAltTime="+this.form.usersInfoAltTime, this.form).then(rel=>{
+
                     if(rel.data){
                         this.$message({
                             type: 'success',

@@ -57,10 +57,10 @@ public class UsersDetailController {
     public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
          List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
         for (Users value : usersList) {
-//            System.out.println("id is :" + value.getUserId());
+            System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
-//                System.out.println("info id is:"+info.getUsersInfoId());
-//                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()));
+//                System.out.println("time is :" + info.getUsersInfoAltTime());
+//                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
                 if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
                     UsersDetail usersDetail = new UsersDetail();
                     System.out.println(value.getUserName());
@@ -71,19 +71,22 @@ public class UsersDetailController {
                     usersDetail.setUserLocation(info.getUserLocation());
                     usersDetail.setUserTele(info.getUserTele());
                     usersDetail.setUserRetailer(info.getUserRetailer());
-                    usersDetail.setUsersInfoAltTime(info.getUserAltTime());
+
+                   // long timeMillis = System.currentTimeMillis();
+                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
+
                     if (value.getUserRole() == 1) {
                         usersDetail.setUserRole("管理员");
-                    } else if(value.getUserRole() == 2) {
-                        usersDetail.setUserRole("货物员");
-                    }else{
-                        usersDetail.setUserRole("操作员");
+                    } else {
+                        usersDetail.setUserRole("用户");
                     }
+
                     usersDetailsList.add(usersDetail);
                 }
 
             }
         }
+//        System.out.println(usersDetail.toString());
         return usersDetailsList;
     }
 }
