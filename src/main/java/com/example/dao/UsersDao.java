@@ -1,8 +1,6 @@
 package com.example.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.domain.Goods;
-import com.example.domain.Inventory;
 import com.example.domain.Users;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

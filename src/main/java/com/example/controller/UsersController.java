@@ -136,11 +136,4 @@ public class UsersController {
         System.out.println(users.getUserName());
         return usersService.updateById(users);
     }
-
-    //模糊查询
-    @GetMapping("/like")
-    public List<Users> getAllList(@RequestParam String userId, @RequestParam String userName){
-        System.out.println(userId+userName);
-        return usersDao.selectUsers("%"+userId+"%","%"+userName+"%");
-    }
 }
