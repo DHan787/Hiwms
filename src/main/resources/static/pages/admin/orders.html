@@ -103,8 +103,9 @@
 					});
 				},
 				checkClick(index,row) {
-					axios.post("http://localhost:8080/orders/update", this.tableData[index]).then(res => {
+					axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
 						if (res.data) {
+							// console.log(this.tableData[index]);
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
