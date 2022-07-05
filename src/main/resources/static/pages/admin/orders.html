@@ -1,218 +1,223 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/orders.css" >
-    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
-        <el-container>
-            <!-- 主体 -->
-            <el-main>
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item>首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>业务流</el-breadcrumb-item>
-                    <el-breadcrumb-item>订单管理</el-breadcrumb-item>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/orders.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-container>
+					<!-- 主体 -->
+					<el-main>
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item>首页</el-breadcrumb-item>
+							<el-breadcrumb-item>业务流</el-breadcrumb-item>
+							<el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
-                </el-breadcrumb>
+						</el-breadcrumb>
 
-                <!--新建订单区域-->
-                <div class="card-container">
-                    <div class="handle-container">
+						<!--新建订单区域-->
+						<div class="card-container">
+							<div class="handle-container">
 
-                            <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增订单</el-button>
+								<el-button type="primary" plain style="margin:15px 20px;" @click="addClick"
+									icon="el-icon-plus">新增订单</el-button>
 
-                        <el-dialog title="dialogFormTitle" :visible.sync="dialogFormVisible">
-                            <el-form :model="form" ref="form">
-                                <el-form-item label="订单类型" :label-width="formLabelWidth" prop="orderType">
-                                    <el-radio-group v-model="form.orderType">
-                                        <el-radio border label="1" value="1"/>入库</el-radio>
-                                        <el-radio border label="2" value="2"/>出库</el-radio>
-                                    </el-radio-group>
-                                </el-form-item>
-                                <el-form-item label="订单创建时间" :label-width="formLabelWidth" prop="orderStartTime">
-                                    <div class="block">
-                                        <el-date-picker
-                                                v-model="form.orderStartTime"
-                                                type="datetime"
-                                                placeholder="选择日期时间"
-                                                value-format="yyyy-MM-dd HH:mm:ss">
-                                        </el-date-picker>
-                                    </div>
-                                </el-form-item>
-                                <el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="orderEndTime">
-                                    <div class="block">
-                                        <el-date-picker
-                                                v-model="form.orderEndTime"
-                                                type="datetime"
-                                                placeholder="选择日期时间"
-                                                value-format="yyyy-mm-dd hh:mm:ss">
-                                        </el-date-picker>
-                                    </div>
-                                </el-form-item>
-                                <el-form-item label="订单创建人" :label-width="formLabelWidth" prop="orderInit">
-                                    <el-input v-model="form.orderInit" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="订单操作员" :label-width="formLabelWidth" prop="orderOperator">
-                                    <el-input v-model="form.orderOperator" autocomplete="off"></el-input>
-                                </el-form-item>
-                            </el-form>
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button v-if="isAdd" type="primary" @click="addOrders">确 定</el-button>
-                            </div>
-                        </el-dialog>
+								<el-dialog title="dialogFormTitle" :visible.sync="dialogFormVisible">
+									<el-form :model="form" ref="form">
+										<el-form-item label="订单类型" :label-width="formLabelWidth" prop="orderType">
+											<el-radio-group v-model="form.orderType">
+												<el-radio border label="1" value="1" />入库</el-radio>
+												<el-radio border label="2" value="2" />出库</el-radio>
+											</el-radio-group>
+										</el-form-item>
+										<el-form-item label="订单创建时间" :label-width="formLabelWidth"
+											prop="orderStartTime">
+											<div class="block">
+												<el-date-picker v-model="form.orderStartTime" type="datetime"
+													placeholder="选择日期时间" value-format="yyyy-MM-dd HH:mm:ss">
+												</el-date-picker>
+											</div>
+										</el-form-item>
+										<el-form-item label="订单结束时间" :label-width="formLabelWidth" prop="orderEndTime">
+											<div class="block">
+												<el-date-picker v-model="form.orderEndTime" type="datetime"
+													placeholder="选择日期时间" value-format="yyyy-mm-dd hh:mm:ss">
+												</el-date-picker>
+											</div>
+										</el-form-item>
+										<el-form-item label="订单创建人" :label-width="formLabelWidth" prop="orderInit">
+											<el-input v-model="form.orderInit" autocomplete="off"></el-input>
+										</el-form-item>
+										<el-form-item label="订单操作员" :label-width="formLabelWidth" prop="orderOperator">
+											<el-input v-model="form.orderOperator" autocomplete="off"></el-input>
+										</el-form-item>
+									</el-form>
+									<div slot="footer" class="dialog-footer">
+										<el-button @click="dialogFormVisible = false">取 消</el-button>
+										<el-button v-if="isAdd" type="primary" @click="addOrders">确 定</el-button>
+									</div>
+								</el-dialog>
 
-                    </div>
-                </div>
-                <!--表单区域-->
-                <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%; " >
-                        <el-table-column prop="orderId" label="订单编号" width="180">
-                        </el-table-column>
-                        <el-table-column prop="orderType" label="订单类型" width="180">
-                        </el-table-column>
-                        <el-table-column prop="orderStartTime" label="订单开始时间">
-                        </el-table-column>
-                        <el-table-column prop="orderEndTime" label=订单结束时间>
-                        </el-table-column>
-                        <el-table-column prop="orderInit" label="订单创建人">
-                        </el-table-column>
-                        <el-table-column prop="orderOperator" label="订单操作员">
-                        </el-table-column>
-                        <el-table-column prop="orderStatus" label="订单状态">
-                        </el-table-column>
-                        <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="orders in tableData">
+							</div>
+						</div>
+						<!--表单区域-->
+						<el-card>
+							<el-table :data="tableData" stripe style="width: 100%; ">
+								<el-table-column prop="orderId" label="订单编号" width="180">
+								</el-table-column>
+								<el-table-column prop="orderType" label="订单类型" width="180" :formatter="formatType">
+								</el-table-column>
+								<el-table-column prop="orderStartTime" label="订单开始时间">
+								</el-table-column>
+								<el-table-column prop="orderEndTime" label=订单结束时间>
+								</el-table-column>
+								<el-table-column prop="orderInit" label="订单创建人">
+								</el-table-column>
+								<el-table-column prop="orderOperator" label="订单操作员">
+								</el-table-column>
+								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
+								</el-table-column>
+								<el-table-column label="操作" width="250" style="display: flex;">
+									<template slot-scope="scope" v-for="orders in tableData">
 
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
-                                <el-button type="danger" plain @click="removeOrdersById(scope.$index)" icon="el-icon-delete">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
+										<el-button type="primary" plain @click="editClick(scope.$index,scope.row)"
+											icon="el-icon-edit">编辑</el-button>
+										<el-button type="danger" plain @click="removeOrdersById(scope.$index)"
+											icon="el-icon-delete">删除</el-button>
+									</template>
+								</el-table-column>
+							</el-table>
+							<div style="text-align: center;">
+								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 
-<script>
-    new Vue({
-        el: '#app',
-        data: function() {
-            return {
-                tableData: [],
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                form: {
-                    orderID: '',
-                    orderType: '',
-                    orderStartTime: '',
-                    orderEndTime: '',
-                    orderInit:'',
-                    orderOperator:''
-                },
-                formLabelWidth: '120px',
-                isAdd: false
-            }
-        },
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					form: {
+						orderID: '',
+						orderType: '',
+						orderStartTime: '',
+						orderEndTime: '',
+						orderInit: '',
+						orderOperator: ''
+					},
+					formLabelWidth: '120px',
+					isAdd: false
+				}
+			},
 
-        created(){
-            this.getAll();
-        },
+			created() {
+				this.getAll();
+			},
 
-        methods: {
-            getAll(){
-                axios.get("http://localhost:8080/orders").then(res=>{
-                    this.tableData = res.data ;
-                });
-            },
+			methods: {
+				getAll() {
+					axios.get("http://localhost:8080/orders").then(res => {
+						this.tableData = res.data;
+					});
+				},
 
-            removeOrdersById(index) {
-                var id = this.tableData[index].orderId;
-                this.$confirm('此操作将永久删除订单, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    axios.delete("http://localhost:8080/orders/" +id).then(res=> {
-                        this.getAll();
-                    });
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消删除'
-                    });
-                });
-            },
-            addClick() {
-                this.dialogFormVisible = true;
-                this.dialogFormTitle = "新增订单";
-                this.isAdd = true;
-                this.form = {};
-            },
-            addOrders() {
-                axios.post("http://localhost:8080/orders",this.form).then(rel=>{
-                    if(rel.data){
-                        this.$message({
-                            type: 'success',
-                            message: '新增成功!'
-                        });
-                        this.getAll();
-                        this.addFormVisible = false;
-                        this.$refs.form.resetFields();
-                    }else{
-                        this.$message({
-                            type: 'info',
-                            message: '新增失败'
-                        });
-                    }
-                })
+				removeOrdersById(index) {
+					var id = this.tableData[index].orderId;
+					this.$confirm('此操作将永久删除订单, 是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						axios.delete("http://localhost:8080/orders/" + id).then(res => {
+							this.getAll();
+						});
+						this.$message({
+							type: 'success',
+							message: '删除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
+					});
+				},
+				addClick() {
+					this.dialogFormVisible = true;
+					this.dialogFormTitle = "新增订单";
+					this.isAdd = true;
+					this.form = {};
+				},
+				addOrders() {
+					axios.post("http://localhost:8080/orders", this.form).then(rel => {
+						if (rel.data) {
+							this.$message({
+								type: 'success',
+								message: '新增成功!'
+							});
+							this.getAll();
+							this.addFormVisible = false;
+							this.$refs.form.resetFields();
+						} else {
+							this.$message({
+								type: 'info',
+								message: '新增失败'
+							});
+						}
+					})
 
-            },
-            editClick(index,row) {
-                this.dialogFormVisible = true;
-                this.dialogFormTitle = "修改订单信息";
-                this.isAdd = false;
-                this.form = Object.assign({},row);
-                this.form.index = index;
-            },
+				},
+				editClick(index, row) {
+					this.dialogFormVisible = true;
+					this.dialogFormTitle = "修改订单信息";
+					this.isAdd = false;
+					this.form = Object.assign({}, row);
+					this.form.index = index;
+				},
 
 
-            updateOrdersById() {
-                axios.put("http://localhost:8080/orders",this.form).then(rel=>{
-                    if(rel.data){
-                        this.$message({
-                            type: 'success',
-                            message: '修改成功!'
-                        });
-                        this.getAll();
-                        this.dialogFormVisible = false;
+				updateOrdersById() {
+					axios.put("http://localhost:8080/orders", this.form).then(rel => {
+						if (rel.data) {
+							this.$message({
+								type: 'success',
+								message: '修改成功!'
+							});
+							this.getAll();
+							this.dialogFormVisible = false;
 
-                    }else{
-                        this.$message({
-                            type: 'info',
-                            message: '修改失败'
-                        });
-                    }
-                    this.$refs.form.resetFields();
-                })
-            },
-        }
-    })
-</script>
+						} else {
+							this.$message({
+								type: 'info',
+								message: '修改失败'
+							});
+						}
+						this.$refs.form.resetFields();
+					})
+				},
+				formatStatus(row) {
+					return row.orderStatus === 10 ? "未入库" : row.orderStatus === 11 ? "入库中" : "未填写";
+				},
+				formatType(row) {
+					return row.orderType === 1 ? "入库" : row.orderStatus === 2 ? "出库" : "未填写";
+				},
+
+			}
+		})
+	</script>
 </html>
