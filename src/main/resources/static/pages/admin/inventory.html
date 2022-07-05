@@ -22,7 +22,6 @@
                 <div class="card-container">
                     <div class="handle-container">
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增商品库存</el-button>
-
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodName">
@@ -59,9 +58,9 @@
                     <el-table :data="tableData" stripe style="width: 100%; " >
                         <el-table-column prop="inventoryId" label="商品编号" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodName" label="货物名称" width="180">
+                        <el-table-column prop="goodsName" label="货物名称" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodNumber" label="货物数量">
+                        <el-table-column prop="goodsNumber" label="货物数量">
                         </el-table-column>
                         <el-table-column prop="warehouseName" label="仓库名称">
                         </el-table-column>

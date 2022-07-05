@@ -88,3 +88,4 @@
 * 用户详情的查看、编辑、删除完成 hxy
 * 用户详情编辑完成；用户详情显示存在bug hxy
 * Detail debug order添加update hj
+* orders页面 设置操作员、显示出入库状态 ymm
