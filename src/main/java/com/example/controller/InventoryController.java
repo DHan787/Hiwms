@@ -54,8 +54,8 @@ public class InventoryController {
      * @return
      */
     @PostMapping
-    public boolean saveInwentory(@RequestBody Inventory inventory){
-        System.out.println("save!");
+    public boolean saveInventory(@RequestBody Inventory inventory){
+//        System.out.println("save!");
         return inventoryService.save(inventory);
     }
 
@@ -66,7 +66,6 @@ public class InventoryController {
      */
     @PutMapping
     public boolean updateInventory(@RequestBody Inventory inventory){
-
         return inventoryService.updateById(inventory);
     }
 }

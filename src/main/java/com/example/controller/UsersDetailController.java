@@ -55,7 +55,6 @@ public class UsersDetailController {
      * 装配用户详情
      */
     public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-
          List<UsersDetail> usersDetailsList = new ArrayList<UsersDetail>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
@@ -64,8 +63,9 @@ public class UsersDetailController {
 //                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
                 if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
                     UsersDetail usersDetail = new UsersDetail();
-//                    System.out.println("id:" + value.getUserId() + "time:" + info.getUsersInfoAltTime());
-//                    System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
+                    System.out.println(value.getUserName());
+//                   System.out.println(info.getUsersInfoId());
+//                   System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()));
                     usersDetail.setUserId(value.getUserId());
                     usersDetail.setUserName(value.getUserName());
                     usersDetail.setUserLocation(info.getUserLocation());
