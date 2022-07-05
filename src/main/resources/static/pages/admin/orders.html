@@ -40,7 +40,7 @@
 
                 <!--表单区域-->
                 <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%;">
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%;">
                         <el-table-column prop="orderId" label="订单编号" width="80">
                         </el-table-column>
                         <el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
@@ -70,8 +70,17 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+
+
+                    <!-- 分页器 -->
+                    <div class="block" style="text-align: center;">
+                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="[1,5,10,20]"
+                                       :page-size="pageSize"
+                                       layout="total, sizes, prev, pager, next, jumper"
+                                       :total="tableData.length">
+                        </el-pagination>
                     </div>
                 </el-card>
             </el-main>
@@ -102,6 +111,9 @@
                     orderOperator:''
                 },
                 formLabelWidth: '120px',
+                currentPage: 1, // 当前页码
+                total: 20, // 总条数
+                pageSize: 5 // 每页的数据条数
             }
         },
 
@@ -182,8 +194,18 @@
 					else{
 						return "未知"
 					}
-				}
-
+				},
+                //每页条数改变时触发 选择一页显示多少行
+                handleSizeChange(val) {
+                    console.log(`每页 ${val} 条`);
+                    this.currentPage = 1;
+                    this.pageSize = val;
+                },
+                //当前页改变时触发 跳转其他页
+                handleCurrentChange(val) {
+                    console.log(`当前页: ${val}`);
+                    this.currentPage = val;
+                }
 			}
 		})
 	</script>

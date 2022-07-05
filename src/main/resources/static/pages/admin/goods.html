@@ -83,7 +83,7 @@
 
 	                    
 	                    <el-card>
-	                        <el-table :data="tableData)" stripe style="width: 100%; " >
+	                        <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
 	                            <el-table-column prop="goodsId" label="货物编号" width="180">
 								</el-table-column>
 	                            <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -96,7 +96,6 @@
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="goods in tableData">
-										
 	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">编辑</el-button>
 	                                    <el-button type="danger" plain @click="removeGoodsById(scope.$index)" icon="el-icon-delete">删除</el-button>
 	                                </template>
@@ -104,17 +103,16 @@
 	                        </el-table>
 
 							<!-- 分页器 -->
+
 							<div class="block" style="text-align: center;">
-	                            <el-pagination align='center'
-											   @size-change="handleSizeChange"
-											   @current-change="handleCurrentChange"
+								<el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
 											   :current-page="currentPage"
 											   :page-sizes="[1,5,10,20]"
 											   :page-size="pageSize"
-											   background layout="prev, pager, next"
-											   :total="1000">
+											   layout="total, sizes, prev, pager, next, jumper"
+											   :total="tableData.length">
 								</el-pagination>
-	                        </div>
+							</div>
 	                    </el-card>
 	                </el-main>
 	            </el-container>
@@ -141,7 +139,10 @@
 						value: ''
 					},
 					formLabelWidth: '120px',
-					isAdd: false
+					isAdd: false,
+					currentPage: 1, // 当前页码
+					total: 20, // 总条数
+					pageSize: 1 // 每页的数据条数
 
 	            }
 	        },
