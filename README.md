@@ -76,7 +76,10 @@
 * goods模糊查询bug zls
 
 * Stockin 完成 hj
+* 完成入库申请订单号前端对接 ymm
+> > 一点提示： 前端调用接口的时候一定要注意大小写、单复数，名字不要写错
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
+
 
 ## 7.5
 * goods名称的模糊查询 zls

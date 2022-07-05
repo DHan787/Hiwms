@@ -69,36 +69,42 @@
 						this.tableData = res.data;
 					});
 				},
-				//selectCall(selection,row){
-				//console.log(selection);
-				//this.itemArr[]=selection;
-				//	this.selectRows = row;
-				//	this.selectTotal = selection.length;
-				//console.log(row);
-				//console.log(selection.length);
-				//},
 				selectCall(val) {
 					this.tableDataSelections = val;
 					console.log(val);
+					//console.log(tableDataSelections);
 				},
 				apply() {
 					console.log(this.tableDataSelections);
 					console.log(this.tableDataSelections.length);
 					var size = this.tableDataSelections.length;
-					if (size < 1) {
+					var item;
+					if (size < 1) {//判断至少选择一个
 						this.$confirm('请选择至少一个选项！', '提示', {
 							confirmButtonText: '确定',
 							type: 'warning'
 						})
-					} else {
+					} else {//循环读取数据
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							console.log('name:' + this.tableDataSelections[i].goodsName);
-							var item = this.tableDataSelections[i];
-							console.log('number:' + this.tableDataSelections[i].goodsNumber);
-							axios.post("http://localhost:8080/stockin/save",item).then(res=> {
-							this.getAll();
-						});
+							//console.log('name:' + this.tableDataSelections[i].goodsName);
+							item = this.tableDataSelections[i];
+							//console.log('item:' + this.tableDataSelections[i]);
+							axios.post("http://localhost:8080/stockIn/save",item).then(res=> {
+								if(res.data){
+										this.$message({
+											type: 'success',
+											message: '入库成功!'
+										});
+										this.getAll();										
+									}else{
+										this.$message({
+											type: 'info',
+											message: '入库失败'
+										});
+									}
+								})
 						}
+						
 					}
 				}
 			}
