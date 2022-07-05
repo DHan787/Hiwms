@@ -18,19 +18,55 @@
                     <el-breadcrumb-item>入库信息</el-breadcrumb-item>
                 </el-breadcrumb>
 
+			<div class="card-container">
+                    <div class="handle-container">
+
+                        <!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
+                        <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
+ -->
+                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+						
+							<el-table :data="gridData">
+							    <el-table-column property="stockId" label="库存id" width="150"></el-table-column>
+							    <el-table-column property="goodsNmae" label="货品名称" width="200"></el-table-column>
+							    <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
+							  </el-table>
+							
+                            <div slot="footer" class="dialog-footer">
+                                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                                <el-button v-if="isAdd" type="primary" @click="addUsers()">确 定</el-button>
+                                <el-button  v-else type="primary" @click="updateUsersById()">更 新</el-button>
+                            
+							</div>
+                        </el-dialog>
+
+                    </div>
+            </div>
+
+
+
+                <!--表单区域-->
                 <el-card>
                     <el-table :data="tableData" stripe style="width: 100%; " >
-                        <el-table-column prop="stockId" label="入库编号">
+                        <el-table-column prop="orderId" label="订单编号" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodsName" label="货品名称">
+                        
+                        <el-table-column prop="orderStartTime" label="订单开始时间">
                         </el-table-column>
-                        <el-table-column prop="goodsNumber" label="入库数量">
+                        <el-table-column prop="orderEndTime" label=订单结束时间>
                         </el-table-column>
-						<el-table-column prop="stockStatus" label="入库状态">
-						</el-table-column>
+						
+                        <el-table-column prop="orderInit" label="订单创建人">
+                        </el-table-column>
+                        <el-table-column prop="orderOperator" label="订单操作员">
+                        </el-table-column>
+                        <el-table-column prop="orderStatus" label="订单状态">
+                        </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="stockin in tableData">
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">详情</el-button>
+                            <template slot-scope="scope" v-for="orders in tableData">
+                
+                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)" icon="el-icon-edit">查看详情</el-button>
+                                <el-button type="success" plain @click="removeOrdersById(scope.$index)" icon="el-icon-delete">入库</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -54,17 +90,10 @@
             return {
                 tableData: [],
                 dialogFormVisible: false,
-                dialogFormTitle: "",
-                form: {
-                    id: '',
-                    name: '',
-                    number: '',
-					warehouseid: '',
-					shelfid: '',
-                    staus: ''
-                },
+                dialogFormTitle: "查看订单详情",
+                gridData: [],
                 formLabelWidth: '120px',
-                isAdd: false
+				orderType: "1"
             }
         },
 
@@ -74,7 +103,7 @@
 
         methods: {
             getAll(){
-                axios.get("http://localhost:8080/stockIn").then(res=>{
+                axios.get("http://localhost:8080/orders/getByType", this.orderType).then(res=>{
                     this.tableData = res.data ;
                 });
             }

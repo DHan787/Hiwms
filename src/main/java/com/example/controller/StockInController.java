@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dao.StockInDao;
 import com.example.domain.StockIn;
 import com.example.service.StockInService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,9 @@ public class StockInController {
 
     @Autowired
     private StockInService stockInService;
+
+    @Autowired
+    private StockInDao stockInDao;
 
     public StockInController(OrdersController ordersController) {
         this.ordersController = ordersController;
@@ -47,6 +52,20 @@ public class StockInController {
     public boolean saveStockIn(@RequestBody StockIn stockIn){
         stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
         return stockInService.save(stockIn);
+    }
+
+    /**
+     * 根据订单ID得到入库货品信息
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/getByOrderId")
+    public List<StockIn> getByOrderId(@RequestParam Integer orderId){
+
+        QueryWrapper<StockIn> wrapper = new QueryWrapper<>();
+        wrapper.eq("orderId",orderId);
+        List<StockIn> stockIns = stockInDao.selectList(wrapper);
+        return stockIns;
     }
 
 }
