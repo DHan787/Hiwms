@@ -67,7 +67,7 @@
                                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                                 <el-button v-if="isAdd" type="primary" @click="addUsers()">确 定</el-button>
                                 <el-button  v-else type="primary" @click="updateUsersById()">更 新</el-button>
-                            
+
 							</div>
                         </el-dialog>
 
@@ -87,7 +87,7 @@
                         </el-table-column>
                         <el-table-column prop="userRole" label="用户权限">
                         </el-table-column>
-						
+
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope">
 

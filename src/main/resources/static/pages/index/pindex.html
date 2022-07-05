@@ -14,11 +14,9 @@
             <!-- 主体 -->
             <el-main>
                 <el-breadcrumb style="margin-bottom: 12px;">
-                    <a href="admin.html">
-                        <div class="back">
+
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
-                        </div>
-                    </a>
+
                 </el-breadcrumb>
                 <el-card class="box-card" style="margin-bottom: 12px;">
                     <div class="card-container">
@@ -34,26 +32,26 @@
                                 <i class="el-icon-heavy-rain"></i>
                                 <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
                             </div>
-                            <div class="name">
-                                <span>姓名：萎滔</span>
-                            </div>
+<!--                            <div class="name">-->
+<!--                                <span>姓名：萎滔</span>-->
+<!--                            </div>-->
 
-                            <div class="tele">
-                                <span>电话：130-3635-1198</span>
-                            </div>
+<!--                            <div class="tele">-->
+<!--                                <span>电话：130-3635-1198</span>-->
+<!--                            </div>-->
 
-                            <div class="role">
-                                <span>职位：管理员</span>
-                            </div>
+<!--                            <div class="role">-->
+<!--                                <span>职位：管理员</span>-->
+<!--                            </div>-->
                         </div>
                         <div class="admin-info2" style="display: inline">
 
-                            <div class="location">
-                                <span>地址：重庆市天生路2号</span>
-                            </div>
-                            <div class="retailer">
-                                <span>店铺：西南大学店</span>
-                            </div>
+<!--                            <div class="location">-->
+<!--                                <span>地址：重庆市天生路2号</span>-->
+<!--                            </div>-->
+<!--                            <div class="retailer">-->
+<!--                                <span>店铺：西南大学店</span>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </el-card>
@@ -77,6 +75,11 @@
 
         },
         methods: {
+            getAll() {
+                axios.get("http://localhost:8080/users_info").then(res =>{
+
+                });
+            }
 
 
         }
