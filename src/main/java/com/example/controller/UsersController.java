@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.dao.UsersDao;
+import com.example.domain.Inventory;
 import com.example.domain.Users;
 import com.example.domain.UsersDetail;
 import com.example.domain.UsersInfo;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.utils.EncryptUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +29,8 @@ public class UsersController {
     @Autowired
     private UsersInfoService usersInfoService;
 
+    @Autowired
+    private UsersDao usersDao;
 
     /**
      * 获得用户表
@@ -61,7 +67,7 @@ public class UsersController {
      *          3 登录为操作员
      */
     @PostMapping("/login")
-    private Integer login(@RequestBody Users users) throws Exception {
+    private Integer login(@RequestBody Users users, HttpServletRequest request) throws Exception {
 //        System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
 //        System.out.println("database:" + usersList);
@@ -69,6 +75,7 @@ public class UsersController {
             if (value.getUserName().equals(users.getUserName()))
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
 //                    System.out.println("role is:" + value.getUserRole());
+                    request.getSession().setAttribute("users",value.getUserRole());
                     return value.getUserRole();
                 }
         }
@@ -130,4 +137,10 @@ public class UsersController {
         return usersService.updateById(users);
     }
 
+    //模糊查询
+    @GetMapping("/like")
+    public List<Users> getAllList(@RequestParam String userId, @RequestParam String userName){
+        System.out.println(userId+userName);
+        return usersDao.selectInventory("%"+userId+"%","%"+userName+"%");
+    }
 }

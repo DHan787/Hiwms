@@ -36,6 +36,13 @@
 													</el-select>
 												</el-form-item>
 											</el-col>
+<!--											<el-col :span='12'>-->
+<!--												<el-form-item label="货物类别">-->
+<!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
+<!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
+<!--													</el-select>-->
+<!--												</el-form-item>-->
+<!--											</el-col>-->
 										</el-row>
 									</el-form>
 								</div>
@@ -129,33 +136,20 @@
 			},
 	        data: function() {
 	            return {
-					tableData1:[],
-					inputName:'',
-					inputId:null,
-					typeOption:[
-						{lable:'类别0',value:'全部'},
-						{lable:'类别1',value:'水果'},
-						{lable:'类别2',value:'蔬菜'},
-					],
-					value:0,
-					pageLength:5,
-					pager:1,
-					allData:[],
-					showData:[],
-					inputType:'',
-
-					tableData2: [],
+	            	listData:[],
+					tableData: {},
+					goodsName:"",
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					form: {
-						name: '',
+						goodsName: '',
 						type: '',
 						size: '',
 						value: ''
 					},
 					formLabelWidth: '120px',
 					isAdd: false
-					
+
 	            }
 	        },
 
@@ -181,9 +175,6 @@
 						this.tableData = res.data ;
 					});
 				},
-				<!--搜索-->
-
-
 
                 <!--删除-->
 				removeGoodsById(index) {
