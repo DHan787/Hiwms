@@ -30,7 +30,12 @@
                                 <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
                                 <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
                             </el-table>
-                            <el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
+							<div slot="footer" class="dialog-footer">
+							
+								<el-button @click="dialogFormVisible = false">取 消</el-button>
+								<el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
+							</div>
+                            
                         </el-dialog>
 
                     </div>
