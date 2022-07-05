@@ -169,7 +169,10 @@
 
             removeUsersById(index) {
                 var id = this.tableData[index].userId;
-				console.log("id");
+                var userInfoAltTime = this.tableData[index].userInfoAltTime;
+                console.log("here is delete");
+				console.log("id为:",id);
+                console.log("userInfoAltTime为:",userInfoAltTime);
                 this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -178,6 +181,10 @@
                     axios.delete("http://localhost:8080/users/" + id).then(res=> {
                         this.getAll();
                     });
+
+                    axios.delete("http://localhost:8080/usersInfo?userId="+id+"&userInfoAltTime="+userInfoAltTime).then(res=>{
+                        this.getAll();
+                    })
                     this.$message({
                         type: 'success',
                         message: '删除成功!'
@@ -251,6 +258,7 @@
                     this.$refs.form.resetFields();
                 })
             },
+
             //每页条数改变时触发 选择一页显示多少行
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
