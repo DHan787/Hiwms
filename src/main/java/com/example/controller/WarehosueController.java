@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.dao.WarehouseDao;
+import com.example.domain.Goods;
 import com.example.domain.Warehouse;
 import com.example.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,9 @@ import java.util.List;
 public class WarehosueController {
     @Autowired
     private WarehouseService warehouseService;
+
+    @Autowired
+    private WarehouseDao warehouseDao;
 
     /**
      * 获取全部货品
@@ -69,4 +74,13 @@ public class WarehosueController {
         System.out.println(warehouse.getWarehouseName());
         return warehouseService.updateById(warehouse);
     }
+
+
+    //模糊查询
+    @GetMapping("/like")
+    public List<Warehouse> getAllList(@RequestParam String warehouseName){
+        System.out.println(warehouseName);
+        return warehouseDao.selectWarehouseName("%"+warehouseName+"%");
+    }
 }
+

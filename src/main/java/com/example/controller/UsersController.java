@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.dao.UsersDao;
+import com.example.domain.Inventory;
 import com.example.domain.Users;
 import com.example.domain.UsersDetail;
 import com.example.domain.UsersInfo;
@@ -27,6 +29,8 @@ public class UsersController {
     @Autowired
     private UsersInfoService usersInfoService;
 
+    @Autowired
+    private UsersDao usersDao;
 
     /**
      * 获得用户表
@@ -133,4 +137,10 @@ public class UsersController {
         return usersService.updateById(users);
     }
 
+    //模糊查询
+    @GetMapping("/like")
+    public List<Users> getAllList(@RequestParam String userId, @RequestParam String userName){
+        System.out.println(userId+userName);
+        return usersDao.selectInventory("%"+userId+"%","%"+userName+"%");
+    }
 }

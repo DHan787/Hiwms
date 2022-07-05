@@ -21,10 +21,29 @@
 
                 <div class="card-container">
                     <div class="handle-container">
+                        <!--查询表单-->
+                        <el-form :model="search">
+                            <el-row>
+                                <el-col :span='12'>
+                                    <el-input v-model="userId" clearable placeholder="请输⼊用户账号" style="width:200px;line-height:68px"></el-input><!-- clearable 输⼊框可清除属性 -->
+                                </el-col>
+                                <el-col :span='12'>
+                                    <el-input v-model="userName" clearable placeholder="请输⼊用户名" style="width:200px;line-height:68px"></el-input>
+                                </el-col>
+                                <!--											<el-col :span='12'>-->
+                                <!--												<el-form-item label="货物类别">-->
+                                <!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
+                                <!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
+                                <!--													</el-select>-->
+                                <!--												</el-form-item>-->
+                                <!--											</el-col>-->
+                            </el-row>
+                        </el-form>
+                    </div>
+                    <el-row :span="8" align="right">
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
+                    </el-row>
 
-                        <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button>
-                        <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
- -->
                         <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                             <el-form :model="form" ref="form">
                                 <!-- <el-form-item label="用户ID" :label-width="formLabelWidth" prop="userId">
@@ -52,7 +71,6 @@
 							</div>
                         </el-dialog>
 
-                    </div>
                 </div>
 
                 <el-card>
@@ -96,7 +114,9 @@
         el: '#app',
         data: function() {
             return {
-                tableData: [],
+                tableData: {},
+                userId:"",
+                userName:"",
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
@@ -109,7 +129,7 @@
                 },
                 formLabelWidth: '120px',
                 isAdd: false,
-				
+
 				altTime: ''
 
             }
@@ -124,6 +144,13 @@
                 axios.get("http://localhost:8080/usersDetail").then(res=>{
                     console.log("here is userdetail");
                     this.tableData = res.data ;
+                });
+            },
+            like(){
+                axios.get("http://localhost:8080/users/like?userId="+this.userId+"&userName="+this.userName).then(res=>{
+
+                    console.log(res);
+                    this.tableData = res.data;
                 });
             },
 
