@@ -32,20 +32,23 @@
                                 <i class="el-icon-heavy-rain"></i>
                                 <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
                             </div>
-                        </div>
 
-                        <el-table :data="tableData" stripe style="width: 100%; " >
-                            <el-table-column prop="users_Info_id" label="用户ID" width="180">
-                            </el-table-column>
-                            <el-table-column prop="userTele" label="用户电话号">
-                            </el-table-column>
-                            <el-table-column prop="userLocation" label="用户地址">
-                            </el-table-column>
-                            <el-table-column prop="userRetailer" label="用户商家名">
-                            </el-table-column>
-                            <el-table-column prop="users_Info_role" label="用户权限">
-                            </el-table-column>
-                        </el-table>
+                            <div class="table">
+                                <el-table :data="tableData" stripe style="width: 100%; " >
+                                    <el-table-column prop="userName" label="用户名" width="180">
+                                    </el-table-column>
+                                    <el-table-column prop="userTele" label="电话号">
+                                    </el-table-column>
+                                    <el-table-column prop="userLocation" label="地址">
+                                    </el-table-column>
+                                    <el-table-column prop="userRetailer" label="商家名">
+                                    </el-table-column>
+                                    <el-table-column prop="userRole" label="职位">
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+
+                        </div>
 
                     </div>
                 </el-card>
@@ -67,11 +70,11 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
-                    users_Info_id:'',
-                    user_tele:'',
-                    user_location:'',
-                    user_retailer:'',
-                    users_Info_role:''
+                    userId: '',
+                    name: '',
+                    userTele: '',
+                    userLocation: '',
+                    userRetailer: ''
                 },
                 formLabelWidth: '120px',
                 isAdd: false
@@ -84,7 +87,7 @@
 
         methods: {
             getAll() {
-                axios.get("http://localhost:8080/usersInfo").then(res =>{
+                axios.get("http://localhost:8080/usersDetail").then(res =>{
                     console.log(res) ;
                     this.tableData = res.data ;
                 });
