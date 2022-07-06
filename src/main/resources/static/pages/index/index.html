@@ -12,12 +12,13 @@
 
 				<el-container>			
 					<!-- 主体 -->
-					<el-main>
+					<el-main class="main">
 						<el-breadcrumb style="margin-bottom: 12px;">
 							<el-breadcrumb-item>首页</el-breadcrumb-item>
 						</el-breadcrumb>
 						<el-card class="box-card" style="margin-bottom: 12px;">
 							<div class="card-container">
+								<div>
 								<el-image :src="src1" class="ava">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
@@ -30,16 +31,20 @@
 										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
 									</div>
 								</div>
-							</div>
-							<h1 align="center" class="word">常用功能</h1>
+								</div>
+								<br/>
+							<div class="top">
+
+
 							<!--用户-->
-							<div><a href="../admin/users.html"> <el-image :src="src2" class="users" >
+							<div class="all">
+							<div ><a href="../admin/users.html" title="跳转至用户页面"> <el-image :src="src2" class="users" >
 								<div slot="placeholder" class="image-slot">
 									加载中<span class="dot">...</span>
 								</div>
 							</el-image>
 							</a><!--订单-->
-								<a href="../admin/orders.html"> <el-image :src="src3" class="orders" >
+								<a href="../admin/orders.html" title="跳转至订单页面"> <el-image :src="src3" class="orders" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
@@ -47,20 +52,23 @@
 								</a>
 							</div>
 							<div><!--商品-->
-								<a href="../admin/goods.html"> <el-image :src="src4" class="goods" >
+								<a href="../admin/goods.html" title="跳转至商品页面"> <el-image :src="src4" class="goods" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 
 								</el-image>
 								</a><!--仓库-->
-								<a href="../admin/warehouse.html"> <el-image :src="src5" class="warehouse" >
+								<a href="../admin/warehouse.html" title="跳转至仓库页面"> <el-image :src="src5" class="warehouse" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 								</el-image>
 								</a>
 							</div>
+						</div>
+
+							</div></div>
 
 						</el-card>
 					</el-main>
@@ -76,7 +84,7 @@
 			el: '#app',
 			data: function () {
 				return {
-					src1: '../../assets/pics/head.jpg',
+					src1: '../../assets/pics/head2.jpg',
 					src2: '../../assets/pics/users.jpg',
 					src3:'../../assets/pics/orders.jpg',
 					src4: '../../assets/pics/goods.jpg',
