@@ -17,18 +17,18 @@
 							<el-breadcrumb-item>业务流</el-breadcrumb-item>
 							<el-breadcrumb-item>入库申请</el-breadcrumb-item>
 						</el-breadcrumb>
-						<!--表单区域-->
+						<!--表格区域-->
 						<el-card>
 							<el-table :data="tableData" stripe style="width: 100%; " @selection-change="selectCall"
 								ref="multipleTable">
 								<el-table-column type="selection" width="60"></el-table-column>
 								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
-								<!-- <el-table-column prop="goodsNumber" label="货品数量" width="180">
-								</el-table-column> -->
-								<el-table-column label="入库数量">
+								<el-table-column prop="goodsNumber" label="货品数量" width="180">
+								</el-table-column>
+								<el-table-column label="入库数量" >
 									<template slot-scope="scope">
-										<el-input-number v-model="scope.row.goodsNumber" :min="1" :max="1000" label="入库数量"></el-input-number>
+										<el-input-number size="medium" placeholder="大于0的整数"v-model="scope.row.stockInNumber"  :min="1" :max="1000" label="入库数量" oninput="value=value.replace(/[^\d]/g,'')"></el-input-number>
 									</template>
 								</el-table-column>
 							</el-table>
@@ -87,13 +87,15 @@
 						})
 					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							if ((this.tableDataSelections[i].goodsNumber) < 1) { //数量不能为0
+							//this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
+							if ((this.tableDataSelections[i].stockInNumber) == undefined) { //数量不能为0
 								this.$confirm('入库数量不能为零！', '提示', {
 									confirmButtonText: '确定',
 									type: 'warning'
 								})
 							} else {
 								//console.log('name:' + this.tableDataSelections[i].goodsName);
+								//this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
 								item = this.tableDataSelections[i];
 								//console.log('number:' + this.tableDataSelections[i].goodsNumber);
 								axios.post("http://localhost:8080/stockIn/save", item).then(res => {
