@@ -50,9 +50,25 @@
 	width: 200px;
 }
 
+.register{
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+	font-size: 16px;
+	background-position: left top;
+	background-color: #0a450a;
+	color: #fff;
+	position: relative;
+	background-image: url("../pics/bg1.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+
 .registerBody{
 	width: 280px;
-	height: 420px;
+	height: 520px;
 	position: absolute;
 	top: 0;
 	left: 0;

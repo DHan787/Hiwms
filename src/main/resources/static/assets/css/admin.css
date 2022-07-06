@@ -4,9 +4,9 @@
         }
 
         .el-main {
-            /* background-color: #E9EEF3; */
-			background-color="#16415f";
+            background-color: #E9EEF3;
             color: #333;
+
         }
 
         .el-header {
@@ -14,6 +14,7 @@
             color: #333;
             line-height: 60px;
             padding-left: 0px;
+
         }
 
         .logo {
@@ -28,7 +29,8 @@
 
         .card-container {
             display: flex;
-            height: 80px;
+            height: 900px;
+
         }
 
         .ava {
@@ -39,14 +41,14 @@
         .users {
             width: 150px;
             height: 180px;
-            margin-left: 610px;
+            margin-left: 310px;
             margin-right: 60px;
+
 
         }
         .word2 {
             width: 400px;
             height: 250px;
-
             text-align: center;
         }
         .orders {
@@ -54,13 +56,17 @@
             height: 180px;
             margin-left: 160px;
             margin-right: 60px;
+
         }
+
         .goods {
             width: 150px;
             height: 180px;
-            margin-left: 610px;
+            margin-left: 310px;
             margin-right: 60px;
             margin-top: 80px;
+
+
         }
         .warehouse {
             width: 150px;
@@ -68,10 +74,10 @@
             margin-left: 160px;
             margin-right: 60px;
             margin-top: 80px;
+
+
         }
-        .word{
-            font-size:40px;
-        }
+
 
 
 
@@ -87,4 +93,21 @@
 
         .cell {
             display: flex;
+        }
+        .all{
+            align-items: center;
+        }
+
+        .top{
+            position: absolute;
+            margin-top: 170px;
+        }
+        .main{
+            position: relative;
+
+        }
+
+        .head{
+            float: right;
+            margin-top: 10px;
         }
