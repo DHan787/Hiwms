@@ -106,3 +106,8 @@
             position: relative;
 
         }
+
+        .head{
+            float: right;
+            margin-top: 10px;
+        }
