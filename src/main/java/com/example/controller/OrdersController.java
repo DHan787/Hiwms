@@ -96,7 +96,8 @@ public class OrdersController {
      * @param orders 订单实体
      * @return if success
      */
-    public boolean endOrders(Orders orders){
+    @PostMapping("/endOrders")
+    public boolean endOrders(@RequestBody Orders orders){
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println(dateFormat.format(date));
