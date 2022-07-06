@@ -4,13 +4,13 @@
         }
 
         .el-main {
-            background-color: #E9EEF3;
+            background-color: #FFFFFF;
             color: #333;
 
         }
 
         .el-header {
-            background-color: #545c64;
+            background-color: #FFFFFF;
             color: #333;
             line-height: 60px;
             padding-left: 0px;
@@ -24,7 +24,7 @@
             font-weight: bolder;
             padding-left: 50px;
             box-sizing: border-box;
-            color: #1d953f;
+            color: #409EFF;
         }
 
         .card-container {
