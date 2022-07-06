@@ -35,41 +35,8 @@
 							</el-col>
 						</el-row>
 					</el-form-item>
-					<el-form-item label="" prop="userTele" style="margin-top:10px;">
-						<el-row>
-							<el-col :span='2'>
-								<span class="el-icon-s-custom"></span>
-							</el-col>
-							<el-col :span='20'>
-								<el-input class="inps" placeholder='电话号码' v-model="registerForm.userTele">
-								</el-input>
-							</el-col>
-						</el-row>
-					</el-form-item>
-					<el-form-item label="" prop="userLocation" style="margin-top:10px;">
-						<el-row>
-							<el-col :span='2'>
-								<span class="el-icon-s-custom"></span>
-							</el-col>
-							<el-col :span='20'>
-								<el-input class="inps" placeholder='地址' v-model="registerForm.userLocation">
-								</el-input>
-							</el-col>
-						</el-row>
-					</el-form-item>
-					<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
-						<el-row>
-							<el-col :span='2'>
-								<span class="el-icon-s-custom"></span>
-							</el-col>
-							<el-col :span='20'>
-								<el-input class="inps" placeholder='单位' v-model="registerForm.userRetailer">
-								</el-input>
-							</el-col>
-						</el-row>
-					</el-form-item>
-					<el-form-item style="margin-top:10px;">
-						<el-button type="primary" round class="submitBtn" v-on:click="register">注册
+					<el-form-item style="margin-top:5px;">
+						<el-button type="primary" round class="submitBtn" v-on:click="register">下一步
 						</el-button>
 					</el-form-item>
 				</el-form>
@@ -84,15 +51,9 @@
 		new Vue({
 			el: '#app',
 			data: {
-				info: [],
 				registerForm: {
 					userName: '',
 					userPassword: '',
-					userTele:'',
-					userLocation:'',
-					userRetailer:'',
-					
-					
 				},
 			},
 			data() {
@@ -105,26 +66,20 @@
 				register() {
 					if (this.registerForm.userName !== '') {
 						if (this.registerForm.userPassword !== ''){
-							if (this.registerForm.userTele !== ''){
-								if (this.registerForm.userLocation !== ''){
-									if (this.registerForm.userRetailer !== ''){
-										axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
-											if (rel.data) {
-												this.$message({
-													type: 'success',
-													message: '新增成功!'
-												});
-												window.location.href = ("login.html")
-											} else {
-												this.$message({
-													type: 'info',
-													message: '新增失败'
-												});
-											}
-										})
-									}
+							axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
+								if (rel.data) {
+									this.$message({
+										type: 'success',
+										message: '新增成功!'
+									});
+									window.location.href = ("registerInfo.html")
+								} else {
+									this.$message.error({
+										type: 'error',
+										message: '新增失败'
+									});
 								}
-							}
+							})
 						}
 					}
 				}
