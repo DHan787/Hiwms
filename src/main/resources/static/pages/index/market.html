@@ -24,7 +24,7 @@
 							background-color="#545c64" text-color="#fff" active-text-color="#1d953f">
 							<el-menu-item index="1">
 								<i class="el-icon-menu"></i>
-								<span slot="title" @click="openUrl('./index.html')">主页</span>
+								<span slot="title" @click="openUrl('./operatorindex.html')">主页</span>
 							</el-menu-item>
 
 							<el-menu-item index="2">
@@ -37,11 +37,11 @@
 									<span>业务流</span>
 								</template>
 								<el-menu-item-group>
-									<el-menu-item index="3">
+									<el-menu-item index="3-1">
 										<i class="el-icon-download"></i>
 										<span slot="title" @click="openUrl('../stock-in-apply.html')">入库申请</span>
 									</el-menu-item>
-									<el-menu-item index="3">
+									<el-menu-item index="3-2">
 										<i class="el-icon-upload2"></i>
 										<span slot="title" @click="openUrl('../stock-out-apply.html')">出库申请</span>
 									</el-menu-item>
