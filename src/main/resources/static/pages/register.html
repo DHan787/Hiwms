@@ -9,8 +9,8 @@
 
 	</head>
 	<div id="app" class="outerDiv">
-		<div class="login">
-			<div class="loginBody" align="center">
+		<div class="register">
+			<div class="registerBody" align="center">
 				<h4>注册</h4>
 				<el-form :model="registerForm" ref="registerForm" label-width="0px">
 					<el-form-item label="" prop="userName" style="margin-top:10px;">
@@ -35,7 +35,40 @@
 							</el-col>
 						</el-row>
 					</el-form-item>
-					<el-form-item style="margin-top:100px;">
+					<el-form-item label="" prop="userTele" style="margin-top:10px;">
+						<el-row>
+							<el-col :span='2'>
+								<span class="el-icon-s-custom"></span>
+							</el-col>
+							<el-col :span='20'>
+								<el-input class="inps" placeholder='电话号码' v-model="registerForm.userTele">
+								</el-input>
+							</el-col>
+						</el-row>
+					</el-form-item>
+					<el-form-item label="" prop="userLocation" style="margin-top:10px;">
+						<el-row>
+							<el-col :span='2'>
+								<span class="el-icon-s-custom"></span>
+							</el-col>
+							<el-col :span='20'>
+								<el-input class="inps" placeholder='地址' v-model="registerForm.userLocation">
+								</el-input>
+							</el-col>
+						</el-row>
+					</el-form-item>
+					<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
+						<el-row>
+							<el-col :span='2'>
+								<span class="el-icon-s-custom"></span>
+							</el-col>
+							<el-col :span='20'>
+								<el-input class="inps" placeholder='单位' v-model="registerForm.userRetailer">
+								</el-input>
+							</el-col>
+						</el-row>
+					</el-form-item>
+					<el-form-item style="margin-top:10px;">
 						<el-button type="primary" round class="submitBtn" v-on:click="register">注册
 						</el-button>
 					</el-form-item>
@@ -54,7 +87,12 @@
 				info: [],
 				registerForm: {
 					userName: '',
-					userPassword: ''
+					userPassword: '',
+					userTele:'',
+					userLocation:'',
+					userRetailer:'',
+					
+					
 				},
 			},
 			data() {
@@ -66,21 +104,28 @@
 			methods: {
 				register() {
 					if (this.registerForm.userName !== '') {
-						if (this.registerForm.userPassword !== '')
-							axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
-								if (rel.data) {
-									this.$message({
-										type: 'success',
-										message: '新增成功!'
-									});
-									window.location.href = ("login.html")
-								} else {
-									this.$message({
-										type: 'info',
-										message: '新增失败'
-									});
+						if (this.registerForm.userPassword !== ''){
+							if (this.registerForm.userTele !== ''){
+								if (this.registerForm.userLocation !== ''){
+									if (this.registerForm.userRetailer !== ''){
+										axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
+											if (rel.data) {
+												this.$message({
+													type: 'success',
+													message: '新增成功!'
+												});
+												window.location.href = ("login.html")
+											} else {
+												this.$message({
+													type: 'info',
+													message: '新增失败'
+												});
+											}
+										})
+									}
 								}
-							})
+							}
+						}
 					}
 				}
 			}
