@@ -25,7 +25,7 @@
 								<el-table-column type="selection" width="60"></el-table-column>
 								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
-								<el-table-column prop="goodsNumber" label="货品数量" width="180">
+								<el-table-column prop="goodsNumber" label="库存数量" width="180">
 								</el-table-column>
 								<el-table-column label="出库数量">
 									<template slot-scope="scope">
@@ -87,8 +87,13 @@
 						})
 					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							if ((this.tableDataSelections[i].stockInNumber) == undefined) { //数量不能为0
+							if ((this.tableDataSelections[i].stockOutNumber) == undefined) { //数量不能为0
 								this.$confirm('出库数量不能为0！', '提示', {
+									confirmButtonText: '确定',
+									type: 'warning'
+								})
+							}else if(this.tableDataSelections[i].goodsNumber < this.tableDataSelections[i].stockOutNumber){
+								this.$confirm('出库数量不能大于库存数量！', '提示', {
 									confirmButtonText: '确定',
 									type: 'warning'
 								})
