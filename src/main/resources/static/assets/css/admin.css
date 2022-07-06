@@ -2,19 +2,20 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .el-main {
-            background-color: #E9EEF3;
+            /* background-color: #E9EEF3; */
+			background-color="#16415f";
             color: #333;
         }
-        
+
         .el-header {
             background-color: #545c64;
             color: #333;
             line-height: 60px;
             padding-left: 0px;
         }
-        
+
         .logo {
             width: 200px;
             line-height: 60px;
@@ -24,28 +25,71 @@
             box-sizing: border-box;
             color: #1d953f;
         }
-        
+
         .card-container {
             display: flex;
-            height: 400px;
+            height: 80px;
         }
-        
+
         .ava {
             width: 80px;
             height: 80px;
             border-radius: 50%;
         }
-        
+        .users {
+            width: 150px;
+            height: 180px;
+            margin-left: 610px;
+            margin-right: 60px;
+
+        }
+        .word2 {
+            width: 400px;
+            height: 250px;
+
+            text-align: center;
+        }
+        .orders {
+            width: 150px;
+            height: 180px;
+            margin-left: 160px;
+            margin-right: 60px;
+        }
+        .goods {
+            width: 150px;
+            height: 180px;
+            margin-left: 610px;
+            margin-right: 60px;
+            margin-top: 80px;
+        }
+        .warehouse {
+            width: 150px;
+            height: 180px;
+            margin-left: 160px;
+            margin-right: 60px;
+            margin-top: 80px;
+        }
+        .word{
+            font-size:40px;
+        }
+
+
+
         .admin-info h3 {
             margin-left: 24px;
             padding-top: 12px;
             margin-bottom: 12px;
         }
-        
+
         .weather {
             margin-left: 24px;
         }
-        
+
         .cell {
             display: flex;
+        }
+
+        .head {
+            float: right;
+            margin-top: 10px;
         }

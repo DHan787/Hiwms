@@ -33,7 +33,7 @@ public class OrdersController {
     @GetMapping//访问方式
     public List<Orders> getAll() {
         //System.out.println(ordersService.list());
-        //System.out.println("used");
+        System.out.println("used");
         return ordersService.list();
     }
 
@@ -80,7 +80,7 @@ public class OrdersController {
         //System.out.println(type);
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(dateFormat.format(date));
+        //System.out.println(dateFormat.format(date));
         Orders orders = new Orders();
         orders.setOrderStartTime(dateFormat.format(date));
         orders.setOrderType(type);

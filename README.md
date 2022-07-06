@@ -111,6 +111,14 @@
 * 分页器 zls
 * 退出登录功能 wlx
 * StockOut前后端完成 （但因出库订单有bug，没有进行测试）hxy
-* 更正订单和库存页面搜索功能的bug zls
-* 修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
+* orders页面能看见订单详情 ymm
+* 更正订单和库存页面搜索功能的bug 
+  修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
+* userInfo的delete的部分代码，存在bug hxy
+* stock-in和stock-out的出入库按钮位置修改 ymm
+* 🍺 出入库、订单生成整个流程的完成 hxy & ymm 
+
+## 7.6
+* 出库订单的详情信息 ymm
+* 个人信息页面 WLX
 * 更改注册页面前端 zls
