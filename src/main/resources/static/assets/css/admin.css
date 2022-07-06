@@ -10,7 +10,7 @@
         }
 
         .el-header {
-            background-color: #545c64;
+            background-color: #FFFFFF;
             color: #333;
             line-height: 60px;
             padding-left: 0px;
@@ -24,7 +24,7 @@
             font-weight: bolder;
             padding-left: 50px;
             box-sizing: border-box;
-            color: #1d953f;
+            color: #409EFF;
         }
 
         .card-container {
@@ -108,4 +108,9 @@
         .main{
             position: relative;
 
+        }
+
+        .head{
+            float: right;
+            margin-top: 10px;
         }

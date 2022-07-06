@@ -36,7 +36,13 @@
     border-radius: 50%;
 }
 
-.admin-info h3 {
+.admin-info1 h3 {
+    margin-left: 24px;
+    padding-top: 12px;
+    margin-bottom: 12px;
+}
+
+.admin-info2 h3 {
     margin-left: 24px;
     padding-top: 12px;
     margin-bottom: 12px;
@@ -50,15 +56,27 @@
     display: flex;
 }
 
-.head {
-    float: right;
-    margin-top: 10px;
+.name {
+    margin-left: 24px;
+    padding-top: 50px;
 }
 
-.admin-info1 {
-    width: 1800px;
+.tele {
+    padding-top: 36px;
+    margin-left: 24px;
 }
 
-.table {
-    margin-top: 50px;
+.location {
+    padding-top: 120px;
+    margin-left: 24px;
+}
+
+.retailer {
+    padding-top: 36px;
+    margin-left: 24px;
+}
+
+.role {
+    padding-top: 36px;
+    margin-left: 24px;
 }
