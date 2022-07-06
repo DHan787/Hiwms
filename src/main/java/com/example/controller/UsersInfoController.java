@@ -74,17 +74,28 @@ public class UsersInfoController {
         //得到UserInfoId
         usersInfo.setUserAltTime(usersInfoAltTime);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-        //根据UserInfoId进行UserInfo其他字段的更新
-        //设置
-//        long timeMillis = System.currentTimeMillis();
-//        log.info("timeMillis{}",timeMillis);
-        //usersInfo.setUserAltTime(timeMillis);
-        //log.info("UsersInfoAltTime2,{}",usersInfo.getUserAltTime());
-        //usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-        //log.info("userInfoId2,{}",usersInfo.getUsersInfoId());
-        //log.info("userId{}",userId);
+
         return usersInfoService.updateById(usersInfo);
     }
+
+    /**
+     * 删除用户信息
+     * @param userId
+     * @return if success
+     */
+    @DeleteMapping()
+    public boolean deleteUserInfo(@RequestParam Integer userId){
+
+        long id = userId;
+        List<UsersInfo> usersInfoList = usersInfoService.list();
+        for (UsersInfo value : usersInfoList
+             ) {
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime()))
+                id = value.getUsersInfoId();
+        }
+        return usersInfoService.removeById(id);
+    }
+
 
     /**
      *

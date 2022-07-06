@@ -27,6 +27,7 @@ public class StockInController {
     private StockInDao stockInDao;
 
     public StockInController(OrdersController ordersController) {
+
         this.ordersController = ordersController;
     }
 

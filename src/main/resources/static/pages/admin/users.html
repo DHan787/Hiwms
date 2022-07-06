@@ -30,13 +30,6 @@
                                 <el-col :span='12'>
                                     <el-input v-model="userName" clearable placeholder="请输⼊用户名" style="width:200px;line-height:68px"></el-input>
                                 </el-col>
-                                <!--											<el-col :span='12'>-->
-                                <!--												<el-form-item label="货物类别">-->
-                                <!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
-                                <!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
-                                <!--													</el-select>-->
-                                <!--												</el-form-item>-->
-                                <!--											</el-col>-->
                             </el-row>
                         </el-form>
                     </div>
@@ -74,7 +67,7 @@
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%; " >
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
                         <el-table-column prop="userId" label="用户ID" width="180">
                         </el-table-column>
                         <el-table-column prop="userName" label="用户姓名" width="180">
@@ -96,8 +89,16 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+
+                    <!-- 分页器 -->
+                    <div class="block" style="text-align: center;">
+                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="[1,5,10,20]"
+                                       :page-size="pageSize"
+                                       layout="total, sizes, prev, pager, next, jumper"
+                                       :total="tableData.length">
+                        </el-pagination>
                     </div>
                 </el-card>
             </el-main>
@@ -130,7 +131,12 @@
                 formLabelWidth: '120px',
                 isAdd: false,
 
-				altTime: ''
+				altTime: '',
+
+                formLabelWidth: '120px',
+                currentPage: 1, // 当前页码
+                total: 20, // 总条数
+                pageSize: 5 // 每页的数据条数
 
             }
         },
@@ -156,7 +162,10 @@
 
             removeUsersById(index) {
                 var id = this.tableData[index].userId;
-				console.log("id");
+                var userInfoAltTime = this.tableData[index].userInfoAltTime;
+                console.log("here is delete");
+				console.log("id为:",id);
+                console.log("userInfoAltTime为:",userInfoAltTime);
                 this.$confirm('此操作将永久删除用户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -165,6 +174,10 @@
                     axios.delete("http://localhost:8080/users/" + id).then(res=> {
                         this.getAll();
                     });
+
+                    axios.delete("http://localhost:8080/usersInfo?userId="+id).then(res=>{
+                        this.getAll();
+                    })
                     this.$message({
                         type: 'success',
                         message: '删除成功!'
@@ -237,6 +250,18 @@
                     }
                     this.$refs.form.resetFields();
                 })
+            },
+
+            //每页条数改变时触发 选择一页显示多少行
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+                this.currentPage = 1;
+                this.pageSize = val;
+            },
+            //当前页改变时触发 跳转其他页
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                this.currentPage = val;
             }
         }
     })

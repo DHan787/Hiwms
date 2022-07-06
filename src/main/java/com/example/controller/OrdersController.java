@@ -33,7 +33,7 @@ public class OrdersController {
     @GetMapping//访问方式
     public List<Orders> getAll() {
         //System.out.println(ordersService.list());
-        //System.out.println("used");
+        System.out.println("used");
         return ordersService.list();
     }
 
@@ -80,7 +80,7 @@ public class OrdersController {
         //System.out.println(type);
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(dateFormat.format(date));
+        //System.out.println(dateFormat.format(date));
         Orders orders = new Orders();
         orders.setOrderStartTime(dateFormat.format(date));
         orders.setOrderType(type);
@@ -123,17 +123,17 @@ public class OrdersController {
      * @return
      */
     @GetMapping("/getByType")
-    public List<Orders> getByType(@RequestParam Integer orderType){
+    public List<Orders> getByType(@RequestParam Integer orderType,@RequestParam Integer orderStatus){
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
         wrapper.eq("order_type",orderType);
-        wrapper.eq("order_status",11);
+        wrapper.eq("order_status",orderStatus);
         List<Orders> orders = ordersDao.selectList(wrapper);
         return orders;
     }
 
     //模糊查询
     @GetMapping("/like")
-    public List<Orders> getAllList(@RequestParam Integer ordersId){
+    public List<Orders> getAllList(@RequestParam String ordersId){
         System.out.println(ordersId);
         return ordersDao.selectOrdersId("%"+ordersId+"%");
     }

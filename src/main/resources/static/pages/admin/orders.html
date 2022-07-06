@@ -18,9 +18,35 @@
 							<el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
 						</el-breadcrumb>
-						<!--表格区域-->
+
+						<!--新建订单区域-->
+						<div class="card-container">
+							<div class="handle-container">
+								<!--查询表单-->
+								<el-form>
+									<el-row>
+										<el-col :span='12'>
+											<el-form-item>
+												<el-input v-model="ordersId" clearable placeholder="请输⼊订单编号"
+													style="width:200px;line-height:68px">
+													<!-- clearable 输⼊框可清除属性 -->
+												</el-input>
+											</el-form-item>
+										</el-col>
+									</el-row>
+								</el-form>
+							</div>
+							<el-row :span="8" align="right">
+								<el-button type="primary" plain style="margin:15px 20px;" @click="like()"
+									icon="el-icon-search">查询订单</el-button>
+							</el-row>
+						</div>
+
+
+						<!--表单区域-->
 						<el-card>
-							<el-table :data="tableData" stripe style="width: 100%;">
+							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+								style="width: 100%;">
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
@@ -31,10 +57,11 @@
 								</el-table-column>
 								<el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
 								</el-table-column>
-								<el-table-column prop="orderOperator" label="订单操作员" :min="1">
+								<el-table-column prop="orderOperator" label="订单操作员">
 									<template slot-scope="scope">
 										<el-select v-model="scope.row.orderOperator" placeholder="请选择操作员">
-											<el-option v-for="users in options" :label="users.userName" :value="users.userId" :key="users.userId">
+											<el-option v-for="users in options" :label="users.userName"
+												:value="users.userId" :key="users.userId">
 											</el-option>
 										</el-select>
 									</template>
@@ -43,80 +70,46 @@
 								</el-table-column>
 								<el-table-column label="操作" width="250" style="display: flex;">
 									<template slot-scope="scope" v-for="orders in tableData">
-										<el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
-											icon="el-icon-edit">确认订单</el-button>
-										<el-button type="danger" plain @click="removeOrdersById(scope.$index)"
-											icon="el-icon-delete">删除</el-button>
+										<!-- <el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
+											icon="el-icon-edit" v-if="seen">确认订单</el-button> -->
+										<el-button :ref="'tableButton' + scope.$index" type="primary" plain
+											 icon="el-icon-edit"
+											@click="checkClick(scope.$index,scope.row)">确认订单</el-button>
+										<el-button type="primary" plain @click="viewClick(scope.$index)"
+											icon="el-icon-info">详情</el-button>
 									</template>
 								</el-table-column>
 							</el-table>
-							<div style="text-align: center;">
-								<el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+							<div class="card-container">
+								<div class="handle-container">
+									<!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
+									<!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>-->
+									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+										<el-table :data="gridData">
+											<el-table-column property="stockId" label="库存id" width="150">
+											</el-table-column>
+											<el-table-column property="goodsName" label="货品名称" width="200">
+											</el-table-column>
+											<el-table-column property="goodsNumber" label="货品数量"></el-table-column>
+										</el-table>
+										<div slot="footer" class="dialog-footer">
+										  <el-button @click="dialogFormVisible = false">取 消</el-button>
+										</div>
+									</el-dialog>
+								</div>
 							</div>
-						</el-card>
-					</el-main>
-				</el-container>
-			</el-container>
-		</div>
-	</body>
-	<script src="../../assets/js/vue.js"></script>
-	<script src="../../assets/css/element-ui/index.js"></script>
-	<script src="../../assets/js/axios.min.js"></script>
-                </el-breadcrumb>
 
-                <!--新建订单区域-->
-                <div class="card-container">
-                    <div class="handle-container">
-                        <!--查询表单-->
-                        <el-form :model="search">
-                            <el-row>
-                                <el-col :span='12'>
-                                    <el-form-item >
-                                        <el-input v-model="ordersId" clearable placeholder="请输⼊订单编号" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
-                                    </el-form-item>
-                                </el-col>
-                            </el-row>
-                        </el-form>
-                    </div>
-                        <el-row :span="8" align="right">
-                            <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询订单</el-button>
-                        </el-row>
-                    </div>
 
-                <!--表单区域-->
-                <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%;">
-                        <el-table-column prop="orderId" label="订单编号" width="80">
-                        </el-table-column>
-                        <el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
-                        </el-table-column>
-                        <el-table-column prop="orderStartTime" label="订单开始时间">
-                        </el-table-column>
-                        <el-table-column prop="orderEndTime" label=订单结束时间>
-                        </el-table-column>
-                        <el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
-                        </el-table-column>
-                        <el-table-column prop="orderOperator" label="订单操作员">
-                            <template slot-scope="scope">
-                                <el-select v-model="scope.row.orderOperator" placeholder="请选择操作员">
-                                    <el-option v-for="users in options" :label="users.userName" :value="users.userId" :key="users.userId">
-                                    </el-option>
-                                </el-select>
-                            </template>
-                        </el-table-column>
-                        <el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
-                        </el-table-column>
-                        <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="orders in tableData">
-                                <el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
-                                           icon="el-icon-edit">确认订单</el-button>
-                                <el-button type="danger" plain @click="removeOrdersById(scope.$index)"
-                                           icon="el-icon-delete">删除</el-button>
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+
+                    <!-- 分页器 -->
+                    <div class="block" style="text-align: center;">
+                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="[1,5,10,20]"
+                                       :page-size="pageSize"
+                                       layout="total, sizes, prev, pager, next, jumper"
+                                       :total="tableData.length">
+                        </el-pagination>
                     </div>
                 </el-card>
             </el-main>
@@ -133,10 +126,13 @@
 			el: '#app',
 			data: function() {
 				return {
-					tableData: {},
-					options:[],//下拉框中的数据
+					tableData: [],
+					ordersId: "",
+					isCheck: false,
+					options: [], //下拉框中的数据
 					dialogFormVisible: false,
-					dialogFormTitle: "",
+					dialogFormTitle: "查看订单详情",
+					gridData: [],
 					form: {
 						orderID: '',
 						orderType: '',
@@ -146,46 +142,60 @@
 						orderOperator: ''
 					},
 					formLabelWidth: '120px',
-					
+					currentPage: 1, // 当前页码
+					total: 20, // 总条数
+					pageSize: 5 // 每页的数据条数
 				}
-        },
+			},
+
 			created() {
 				this.getAll()
                 this.getOperatorName()
 
 			},
+
 			methods: {
 				getAll() {
 					axios.get("http://localhost:8080/orders").then(res => {
 						this.tableData = res.data;
 					});
 				},
-                <!--模糊查询-->
-                like(){
-                    console.log(1);
-                    axios.get("http://localhost:8080/orders/like?ordersId="+this.ordersId).then(res=>{
-                        console.log(res);
-                        this.tableData = res.data ;
-                    });
-                },
-				getOperatorName(){
-					axios.get("http://localhost:8080/users").then(res => {
-						this.options = res.data;
+				viewClick(index) {
+					this.dialogFormVisible = true;
+					var orderId = this.tableData[index].orderId;
+					axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
+						this.gridData = res.data;
+						console.log(this.gridData);
 					});
 				},
-				checkClick(index,row) {
+				//模糊查询
+				like() {
+					console.log(1);
+					axios.get("http://localhost:8080/orders/like?ordersId=" + this.ordersId).then(res => {
+						console.log(res);
+						this.tableData = res.data;
+					});
+				},
+				getOperatorName() {
+					axios.get("http://localhost:8080/users/getByRole?userRole=3").then(res => {
+						//console.log("res:",res);
+						this.options = res.data;
+					});//仅获取操作员，但没实现
+				},
+				checkClick(index, row) {
+					console.log()
 					axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
 						if (res.data) {
 							// console.log(this.tableData[index]);
 							this.$message({
 								type: 'success',
-								message: '修改成功!'
+								message: '确认订单成功!'
 							});
 							this.getAll();
 						} else {
 							this.$message({
 								type: 'info',
-								message: '修改失败'
+								message: '确认订单失败'
 							});
 						}
 					})
@@ -207,7 +217,7 @@
 						case 21:
 							return "出库中"
 							break
-						case 12:
+						case 22:
 							return "已出库"
 							break
 						default:
@@ -216,17 +226,36 @@
 					}
 				},
 				formatType(row) {
-					return row.orderType === 1 ? "入库" : row.orderStatus === 2 ? "出库" : "未填写";
-				},
-				formatInit(row){
-					if(row.orderInit === 11){
-						return "管理员Anna"
+					switch (row.orderType) {
+						case 1:
+							return "入库"
+							break
+						case 2:
+							return "出库"
+							break
+						default:
+							return "未填写"
+							break
 					}
-					else{
+				},
+				formatInit(row) {
+					if (row.orderInit === 11) {
+						return "管理员Anna"
+					} else {
 						return "未知"
 					}
+				},
+				//每页条数改变时触发 选择一页显示多少行
+				handleSizeChange(val) {
+					console.log(`每页 ${val} 条`);
+					this.currentPage = 1;
+					this.pageSize = val;
+				},
+				//当前页改变时触发 跳转其他页
+				handleCurrentChange(val) {
+					console.log(`当前页: ${val}`);
+					this.currentPage = val;
 				}
-
 			}
 		})
 	</script>

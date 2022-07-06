@@ -95,21 +95,6 @@
 * 拦截器V1.0 hj
 * orders页面 完成确认订单 ymm
 * 指名操作员，管理员确认订单debug
-
-## 7.5
-* 提示出入库数量不能为零 ymm
-* goods名称的模糊查询 zls
-* 用户详情显示存在bug hxy
-* inventory页面 下拉菜单 ymm
-* 用户详情显示bug完成修复 hj
-* 用户详情的查看、编辑、删除完成 hxy
-* 用户详情编辑完成；用户详情显示存在bug hxy
-* Detail debug order添加update hj
-* getByType hj
-* orders页面 设置操作员、显示出入库状态 ymm
-* 拦截器V1.0 hj
-* orders页面 完成确认订单 ymm
-* 指名操作员，管理员确认订单debug
 * 所有页面的文本框的模糊查询 zls
 * 修正users页面 zls
 * 拦截器 addPathPatterns("/api/**")配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
@@ -119,9 +104,18 @@
 * orders和inventory的二次渲染 ymm
 * 修正方法名 zls
 * 恢复被覆盖掉的正版搜索内容 zls
-* StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录
+* StockIn前端和后端完成：1.显示订单中入库货物详情;2.入库-修改库存、修改订单状态、删除入库申请记录 hxy
 * users 查询的debug UsersDetailController 添加 getByIds hj
+* 分页器 zls
 * 退出登录功能 wlx
+* StockOut前后端完成 （但因出库订单有bug，没有进行测试）hxy
+* orders页面能看见订单详情 ymm
+* 更正订单和库存页面搜索功能的bug 
+  修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
+* userInfo的delete的部分代码，存在bug hxy
+* stock-in和stock-out的出入库按钮位置修改 ymm
+* 🍺 出入库、订单生成整个流程的完成 hxy & ymm 
+
 
 ## 7.6
 * 个人信息页面 WLX

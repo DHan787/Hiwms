@@ -30,7 +30,11 @@
 							    <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
 							    <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
                             </el-table>
-                            <el-button type="primary" style="margin:15px 0px 0px 570px;" plain @click="handleStockIn" icon="el-icon-delete">入库</el-button>
+							<div slot="footer" class="dialog-footer">
+							  <el-button @click="dialogFormVisible = false">取 消</el-button>
+							  <el-button type="primary" style="float: right;" plain @click="handleStockIn" icon="el-icon-document-checked">入库</el-button>
+							</div>
+                            
                         </el-dialog>
 
                     </div>
@@ -58,7 +62,7 @@
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="orders in tableData">
                 
-                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-edit">查看详情</el-button>
+                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-info">查看详情</el-button>
                                 <!--<el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>-->
                             </template>
                         </el-table-column>
@@ -85,9 +89,7 @@
                 dialogFormVisible: false,
                 dialogFormTitle: "查看订单详情",
                 gridData: [],
-                tableIndex: '',
-				orderType: '',
-                orderStatus: ''
+                tableIndex: ''
             }
         },
 
@@ -98,7 +100,7 @@
         methods: {
             getAll(){
 				//console.log("orderType:{}",orderType);
-                axios.get("http://localhost:8080/orders/getByType?orderType=1").then(res=>{
+                axios.get("http://localhost:8080/orders/getByType?orderType=1&orderStatus=11").then(res=>{
                     this.tableData = res.data ;
 					/*console.log(this.tableData);*/
                 });
@@ -110,7 +112,6 @@
 				this.dialogFormVisible = true;
                 var orderId = this.tableData[index].orderId;
                 this.tableIndex = index;
-                console.log("viewClick中的index",this.tableIndex);
                 axios.get("http://localhost:8080/stockIn/getByOrderId?orderId="+orderId).then(res=>{
                     this.gridData = res.data ;
                     console.log(this.gridData);
@@ -125,18 +126,18 @@
                 console.log("handleStockIn中的index",this.tableIndex);
                 <!--入库，更新库存-->
                 axios.put("http://localhost:8080/inventory/stockIn?goodsName="+goodsName+"&goodsNumber="+goodsNumber).then(res=>{
-                    if(res.data){
+                    if (res.data) {
+                        // console.log(this.tableData[index]);
                         this.$message({
                             type: 'success',
-                            message: '入库成功!'
+                            message: '商品库存修改成功!'
                         });
                         this.getAll();
                         this.dialogFormVisible = false;
-
-                    }else{
+                    } else {
                         this.$message({
                             type: 'info',
-                            message: '入库失败'
+                            message: '商品库存修改失败'
                         });
                     }
                 });
@@ -147,13 +148,14 @@
                         // console.log(this.tableData[index]);
                         this.$message({
                             type: 'success',
-                            message: '订单修改成功!'
+                            message: '订单状态修改成功!'
                         });
                         this.getAll();
+                        this.dialogFormVisible = false;
                     } else {
                         this.$message({
                             type: 'info',
-                            message: '订单修改失败'
+                            message: '订单状态修改失败'
                         });
                     }
                 });
@@ -166,8 +168,6 @@
             },
 
             formatStatus(row) {
-                this.orderStatus = row.orderStatus;
-                console.log("订单状态：",this.orderStatus);
                 switch (row.orderStatus) {
                     case 10:
                         return "未入库"
@@ -184,7 +184,7 @@
                     case 21:
                         return "出库中"
                         break
-                    case 12:
+                    case 22:
                         return "已出库"
                         break
                     default:

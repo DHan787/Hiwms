@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/css/admin.css" >
+    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-container>
+            <!-- 主体 -->
+            <el-main>
+                <el-breadcrumb style="margin-bottom: 12px;">
+                    <el-breadcrumb-item>首页</el-breadcrumb-item>
+                    <el-breadcrumb-item>常用</el-breadcrumb-item>
+                </el-breadcrumb>
+
+                <!--新建订单区域-->
+                <div class="card-container">
+                    <el-image :src="src1" class="ava">
+                        <div slot="placeholder" class="image-slot">
+                            加载中<span class="dot">...</span>
+                        </div>
+                    </el-image>
+
+                    <div class="admin-info">
+                        <h3>早安，管理员，开始您一天的工作吧！</h3>
+                        <div class="weather">
+                            <i class="el-icon-heavy-rain"></i>
+                            <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
+                        </div>
+                    </div>
+
+                </div>
+                <h1 align="center" class="word">常用功能</h1>
+                <div><a href="../admin/users.html"> <el-image :src="src2" class="users" ><br/>
+                    <div slot="placeholder" class="image-slot">
+                        加载中<span class="dot">...</span>
+                    </div>
+                </el-image>
+                </a>
+
+                    <a href="../admin/orders.html"> <el-image :src="src3" class="orders" >
+                        <div slot="placeholder" class="image-slot">
+                            加载中<span class="dot">...</span>
+                        </div>
+                    </el-image>
+                    </a>
+                </div>
+                <div>
+                    <a href="../admin/goods.html"> <el-image :src="src4" class="goods" >
+                        <div slot="placeholder" class="image-slot">
+                            加载中<span class="dot">...</span>
+                        </div>
+
+                    </el-image>
+                    </a>
+                    <a href="../admin/warehouse.html"> <el-image :src="src5" class="warehouse" >
+                        <div slot="placeholder" class="image-slot">
+                            加载中<span class="dot">...</span>
+                        </div>
+                    </el-image>
+                    </a>
+                </div>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/css/element-ui/index.js"></script>
+<script src="../../assets/js/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                src1: '../../assets/pics/head.jpg',
+                src2: '../../assets/pics/users.jpg',
+                src3:'../../assets/pics/orders.jpg',
+                src4: '../../assets/pics/goods.jpg',
+                src5: '../../assets/pics/warehouse.jpg',
+                tableData: [],
+                dialogFormVisible: false,
+                dialogFormTitle: "",
+                formLabelWidth: '120px',
+                isAdd: false
+            }
+        },
+
+
+    })
+
+</script>
+</html>
