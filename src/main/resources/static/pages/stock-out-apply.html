@@ -25,11 +25,11 @@
 								<el-table-column type="selection" width="60"></el-table-column>
 								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
-								<!-- <el-table-column prop="goodsNumber" label="货品数量" width="180">
-								</el-table-column> -->
+								<el-table-column prop="goodsNumber" label="货品数量" width="180">
+								</el-table-column>
 								<el-table-column label="出库数量">
 									<template slot-scope="scope">
-										<el-input-number v-model="scope.row.goodsNumber" :min="1" :max="1000" label="出库数量"></el-input-number>
+										<el-input-number size="medium" v-model="scope.row.stockOutNumber" :min="1" :max="1000" label="出库数量" oninput="value=value.replace(/[^\d]/g,'')" placeholder="大于0的整数"></el-input-number>
 									</template>
 								</el-table-column>
 							</el-table>
@@ -96,6 +96,7 @@
 							//console.log('name:' + this.tableDataSelections[i].goodsName);
 							//console.log("tableDataSelections[i]: " + this.tableDataSelections[i]);
 							//console.log('number:' + this.tableDataSelections[i].goodsNumber);
+							this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockOutNumber;
 							item = this.tableDataSelections[i];
 							axios.post("http://localhost:8080/stockOut/save",item).then(res=> {
 								if(res.data){
