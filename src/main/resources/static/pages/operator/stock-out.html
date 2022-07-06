@@ -31,7 +31,6 @@
                                 <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
                             </el-table>
 							<div slot="footer" class="dialog-footer">
-							
 								<el-button @click="dialogFormVisible = false">取 消</el-button>
 								<el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
 							</div>
@@ -188,7 +187,7 @@
                     case 21:
                         return "出库中"
                         break
-                    case 12:
+                    case 22:
                         return "已出库"
                         break
                     default:

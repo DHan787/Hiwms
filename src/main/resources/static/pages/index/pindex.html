@@ -32,27 +32,24 @@
                                 <i class="el-icon-heavy-rain"></i>
                                 <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
                             </div>
-<!--                            <div class="name">-->
-<!--                                <span>姓名：萎滔</span>-->
-<!--                            </div>-->
 
-<!--                            <div class="tele">-->
-<!--                                <span>电话：130-3635-1198</span>-->
-<!--                            </div>-->
+                            <div class="table">
+                                <el-table :data="tableData" stripe style="width: 100%; " >
+                                    <el-table-column prop="userName" label="用户名" width="180">
+                                    </el-table-column>
+                                    <el-table-column prop="userTele" label="电话号">
+                                    </el-table-column>
+                                    <el-table-column prop="userLocation" label="地址">
+                                    </el-table-column>
+                                    <el-table-column prop="userRetailer" label="商家名">
+                                    </el-table-column>
+                                    <el-table-column prop="userRole" label="职位">
+                                    </el-table-column>
+                                </el-table>
+                            </div>
 
-<!--                            <div class="role">-->
-<!--                                <span>职位：管理员</span>-->
-<!--                            </div>-->
                         </div>
-                        <div class="admin-info2" style="display: inline">
 
-<!--                            <div class="location">-->
-<!--                                <span>地址：重庆市天生路2号</span>-->
-<!--                            </div>-->
-<!--                            <div class="retailer">-->
-<!--                                <span>店铺：西南大学店</span>-->
-<!--                            </div>-->
-                        </div>
                     </div>
                 </el-card>
             </el-main>
@@ -69,15 +66,30 @@
         data: function() {
             return {
                 src: '../../assets/pics/head2.jpg',
+                tableData: [],
+                dialogFormVisible: false,
+                dialogFormTitle: "",
+                form: {
+                    userId: '',
+                    name: '',
+                    userTele: '',
+                    userLocation: '',
+                    userRetailer: ''
+                },
+                formLabelWidth: '120px',
+                isAdd: false
             }
         },
-        created() {
 
+        created() {
+            this.getAll()
         },
+
         methods: {
             getAll() {
-                axios.get("http://localhost:8080/users_info").then(res =>{
-
+                axios.get("http://localhost:8080/usersDetail").then(res =>{
+                    console.log(res) ;
+                    this.tableData = res.data ;
                 });
             }
 

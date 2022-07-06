@@ -74,7 +74,7 @@
 											icon="el-icon-edit" v-if="seen">确认订单</el-button> -->
 										<el-button :ref="'tableButton' + scope.$index" type="primary" plain
 											 icon="el-icon-edit"
-											@click='scope.row.isCheck = true' :disabled="scope.row.isCheck">确认订单</el-button>
+											@click="checkClick(scope.$index,scope.row)">确认订单</el-button>
 										<el-button type="primary" plain @click="viewClick(scope.$index)"
 											icon="el-icon-info">详情</el-button>
 									</template>
@@ -163,10 +163,17 @@
 				viewClick(index) {
 					this.dialogFormVisible = true;
 					var orderId = this.tableData[index].orderId;
+					if(this.tableData[index].orderType == 1){
 					axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
 						this.gridData = res.data;
 						console.log(this.gridData);
 					});
+					}else{
+						axios.get("http://localhost:8080/stockOut/getByOrderId?orderId=" + orderId).then(res => {
+							this.gridData = res.data;
+							console.log(this.gridData);
+						});	
+					}
 				},
 				//模糊查询
 				like() {
@@ -177,11 +184,13 @@
 					});
 				},
 				getOperatorName() {
-					axios.get("http://localhost:8080/users").then(res => {
+					axios.get("http://localhost:8080/users/getByRole?userRole=3").then(res => {
+						//console.log("res:",res);
 						this.options = res.data;
-					});//仅获取操作员，但没实现
+					});//仅获取操作员
 				},
 				checkClick(index, row) {
+					console.log()
 					axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
 						if (res.data) {
 							// console.log(this.tableData[index]);
@@ -215,7 +224,7 @@
 						case 21:
 							return "出库中"
 							break
-						case 12:
+						case 22:
 							return "已出库"
 							break
 						default:

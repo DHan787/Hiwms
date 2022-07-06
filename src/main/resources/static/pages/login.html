@@ -58,11 +58,9 @@
                     <el-button type="primary" round class="submitBtn" v-on:click="login">登录
                     </el-button>
                 </el-form-item>
-                <div class="register" class="submitBtn">
-                    <router-link :to="{ path: '/register'}">
-                        没有账号？点击注册
-                    </router-link>
-                </div>
+                <a href="register.html">
+                    <el-link target="_blank">没有账号？点击注册</el-link>
+                </a>
             </el-form>
         </div>
     </div>

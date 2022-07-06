@@ -81,6 +81,8 @@
 * stockOut 完成 StockIn 和 StockOut 优化整合 hj
 * 个人中心页面跳转
 
+
+
 ## 7.5
 * 提示出入库数量不能为零 ymm
 * goods名称的模糊查询 zls
@@ -114,3 +116,9 @@
   修改login页面”忘了密码？“-》“没有账号？=》点击注册” 修改login页面前端 zls
 * userInfo的delete的部分代码，存在bug hxy
 * stock-in和stock-out的出入库按钮位置修改 ymm
+* 🍺 出入库、订单生成整个流程的完成 hxy & ymm 
+
+## 7.6
+* 出库订单的详情信息 ymm
+* 个人信息页面 WLX
+* 更改注册页面前端 zls
