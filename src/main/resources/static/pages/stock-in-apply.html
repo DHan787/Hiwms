@@ -87,14 +87,15 @@
 						})
 					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							if ((this.tableDataSelections[i].goodsNumber) < 1) { //数量不能为0
+							//this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
+							if ((this.tableDataSelections[i].stockInNumber) == undefined) { //数量不能为0
 								this.$confirm('入库数量不能为零！', '提示', {
 									confirmButtonText: '确定',
 									type: 'warning'
 								})
 							} else {
 								//console.log('name:' + this.tableDataSelections[i].goodsName);
-								this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
+								//this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
 								item = this.tableDataSelections[i];
 								//console.log('number:' + this.tableDataSelections[i].goodsNumber);
 								axios.post("http://localhost:8080/stockIn/save", item).then(res => {
