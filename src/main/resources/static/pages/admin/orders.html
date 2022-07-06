@@ -163,7 +163,7 @@
 				viewClick(index) {
 					this.dialogFormVisible = true;
 					var orderId = this.tableData[index].orderId;
-					if(this.tableData[index].orderType == 2){
+					if(this.tableData[index].orderType == 1){
 					axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
 						this.gridData = res.data;
 						console.log(this.gridData);
