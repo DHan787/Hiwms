@@ -142,30 +142,7 @@
                     }
 
                 });
-                console.log("tabledata",this.tableData[this.tableIndex]);
-                <!--出库，修改订单状态（出库中-已出库）-->
-                /*axios.post("http://localhost:8080/orders/check", this.tableData[this.tableIndex]).then(res => {
-                    if (res.data) {
-                        // console.log(this.tableData[index]);
-                        this.$message({
-                            type: 'success',
-                            message: '订单状态修改成功!'
-                        });
-                        this.getAll();
-                    } else {
-                        this.$message({
-                            type: 'info',
-                            message: '订单状态修改失败'
-                        });
-                    }
-                    this.getAll();
-                    this.dialogFormVisible = false;
-                });*/
-                <!--出库，删除出库申请记录-->
-                console.log("stockId为：",stockId);
-                axios.delete("http://localhost:8080/stockOut/" + stockId).then(res=> {
-                    this.getAll();
-                });
+
                 <!--出库，修改订单状态（出库中-已出库）,修改结束时间-->
                 axios.post("http://localhost:8080/orders/endOrders", this.tableData[this.tableIndex]).then(res => {
                     if (res.data) {

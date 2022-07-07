@@ -3,14 +3,15 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.example.controller.vo.EchartsVo;
 import com.example.dao.InventoryDao;
-import com.example.domain.Goods;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @CrossOrigin
@@ -129,6 +130,27 @@ public class InventoryController {
         UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();  //更新
         updateWrapper.eq("goods_name",goodsName).set("goods_number",goodsNumberNew);
         return inventoryDao.update(null,updateWrapper);
+    }
+
+
+    /**
+     * 获取制作图表所需的数据
+     * @return
+     */
+    @GetMapping("/getBarList")
+    public EchartsVo getInventoryBarList() {
+        List<Inventory> inventories = inventoryService.list();
+
+        EchartsVo echartsVo = new EchartsVo();
+        List<String> names = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        for (Inventory inventory : inventories) {
+            names.add(inventory.getGoodsName());
+            values.add(inventory.getGoodsNumber());
+        }
+        echartsVo.setName(names);
+        echartsVo.setValue(values);
+        return echartsVo;
     }
 
 }
