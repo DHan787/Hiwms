@@ -44,7 +44,7 @@
 
                 <!--表单区域-->
                 <el-card>
-                    <el-table :data="tableData" stripe style="width: 100%; " >
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
                         <el-table-column prop="orderId" label="订单编号" width="180">
                         </el-table-column>
                         
@@ -67,9 +67,6 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                    <div style="text-align: center;">
-                        <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-                    </div>
 
 
                     <!-- 分页器 -->
