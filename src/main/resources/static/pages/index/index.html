@@ -11,9 +11,9 @@
 		<div id="app">
 			<el-container>
 
-				<el-container>			
+				<el-container>
 					<!-- 主体 -->
-					<el-main class="main">
+					<el-main >
 						<el-breadcrumb style="margin-bottom: 12px;">
 							<el-breadcrumb-item>首页</el-breadcrumb-item>
 						</el-breadcrumb>
@@ -71,8 +71,8 @@
 								</div>
 							<div class="top">
 								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-								<div id="charts" style="width: 600px;height:400px;"></div>
-								<el-image :src="src6" class="pics">
+
+								<el-image :src="src7" class="pics">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
@@ -118,12 +118,23 @@
 						</div>
 
 							</div>
-								<div class="down">
-									<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-									<div id="charts" style="width: 300px;height:200px;"></div>
-								</div>
+							<div class="report">
+								<el-image :src="src8" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+
+
+								</el-image>
+								<div class="title1"><h3>系统公告</h3>
 							</div>
 
+							</div>
+							</div>
+							<div class="down">
+								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+								<div id="charts" style="width: 400px;height:270px;"></div>
+							</div>
 						</el-card>
 					</el-main>
 				</el-container>
@@ -143,6 +154,9 @@
 					src3:'../../assets/pics/orders.jpg',
 					src4: '../../assets/pics/goods.jpg',
 					src5: '../../assets/pics/warehouse.jpg',
+					src6: '../../assets/pics/src6.jpg',
+					src7: '../../assets/pics/link.jpg',
+					src8: '../../assets/pics/bell.jpg',
 					tableData: [],
 					dialogFormVisible: false,
 					dialogFormTitle: "",
@@ -161,6 +175,8 @@
 			}
 		})
 	</script>
+
+
 
 	<script>
 		let nameArr = [];
