@@ -13,7 +13,7 @@
 					<!-- 主体 -->
 					<el-main>
 						<el-breadcrumb style="margin-bottom: 12px;">
-							<el-breadcrumb-item><a href="../index/index.html" >首页</a></el-breadcrumb-item>
+							<el-breadcrumb-item><a href="../index/index.html">首页</a></el-breadcrumb-item>
 							<el-breadcrumb-item><a href="#">业务流</a> </el-breadcrumb-item>
 							<el-breadcrumb-item>订单管理</el-breadcrumb-item>
 
@@ -49,7 +49,7 @@
 								style="width: 100%;">
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
-								<el-table-column prop="orderType" label="订单类型" width="130" :formatter="formatType">
+								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
 								</el-table-column>
 								<el-table-column prop="orderStartTime" label="订单开始时间">
 								</el-table-column>
@@ -72,8 +72,7 @@
 									<template slot-scope="scope" v-for="orders in tableData">
 										<!-- <el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
 											icon="el-icon-edit" v-if="seen">确认订单</el-button> -->
-										<el-button :ref="'tableButton' + scope.$index" type="primary" plain
-											 icon="el-icon-edit"
+										<el-button type="primary" plain icon="el-icon-edit"
 											@click="checkClick(scope.$index,scope.row)">确认订单</el-button>
 										<el-button type="primary" plain @click="viewClick(scope.$index)"
 											icon="el-icon-info">详情</el-button>
@@ -93,7 +92,7 @@
 											<el-table-column property="goodsNumber" label="货品数量"></el-table-column>
 										</el-table>
 										<div slot="footer" class="dialog-footer">
-										  <el-button @click="dialogFormVisible = false">取 消</el-button>
+											<el-button @click="dialogFormVisible = false">取 消</el-button>
 										</div>
 									</el-dialog>
 								</div>
@@ -101,25 +100,23 @@
 
 
 
-                    <!-- 分页器 -->
-                    <div class="block" style="text-align: center;">
-                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                                       :current-page="currentPage"
-                                       :page-sizes="[1,5,10,20]"
-                                       :page-size="pageSize"
-                                       layout="total, sizes, prev, pager, next, jumper"
-                                       :total="tableData.length">
-                        </el-pagination>
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
+							<!-- 分页器 -->
+							<div class="block" style="text-align: center;">
+								<el-pagination align='center' @size-change="handleSizeChange"
+									@current-change="handleCurrentChange" :current-page="currentPage"
+									:page-sizes="[1,5,10,20]" :page-size="pageSize"
+									layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+								</el-pagination>
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 
 	<script>
 		new Vue({
@@ -150,7 +147,8 @@
 
 			created() {
 				this.getAll()
-                this.getOperatorName()
+				this.getOperatorName()
+				//this.checkStatus()
 
 			},
 
@@ -160,22 +158,28 @@
 						this.tableData = res.data;
 					});
 				},
+				checkStatus(row) {
+					if (this.row.orderStatus !== 10 || this.row.orderStatus !== 20) {
+						console.log(this.row.isCheck);
+						this.row.isCheck = true;
+					}
+				},
 				viewClick(index) {
 					this.dialogFormVisible = true;
 					var orderId = this.tableData[index].orderId;
-					if(this.tableData[index].orderType == 1){
-					axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
-						this.gridData = res.data;
-						console.log(this.gridData);
-					});
-					}else{
+					if (this.tableData[index].orderType == 1) {
+						axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
+							this.gridData = res.data;
+							console.log(this.gridData);
+						});
+					} else {
 						axios.get("http://localhost:8080/stockOut/getByOrderId?orderId=" + orderId).then(res => {
 							this.gridData = res.data;
 							console.log(this.gridData);
-						});	
+						});
 					}
 					this.getAll();
-					
+
 				},
 				//模糊查询
 				like() {
@@ -189,25 +193,40 @@
 					axios.get("http://localhost:8080/users/getByRole?userRole=3").then(res => {
 						//console.log("res:",res);
 						this.options = res.data;
-					});//仅获取操作员
+					}); //仅获取操作员
 				},
 				checkClick(index, row) {
-					console.log()
-					axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
-						if (res.data) {
-							// console.log(this.tableData[index]);
-							this.$message({
-								type: 'success',
-								message: '确认订单成功!'
-							});
-							this.getAll();
+					if ((this.tableData[index].orderOperator) == undefined) {
+						this.$confirm('请选择操作员！', '提示', {
+							confirmButtonText: '确定',
+							type: 'warning'
+						})
+					} else{
+						if (this.tableData[index].orderStatus == 10 || this.tableData[index].orderStatus == 20) {
+							axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
+								if (res.data) {
+									// console.log(this.tableData[index]);
+									this.$message({
+										type: 'success',
+										message: '确认订单成功!'
+									});
+									//this.tableData[index].isCheck = true;
+									//console.log(this.tableData[index].isCheck);
+									this.getAll();
+								} else {
+									this.$message({
+										type: 'info',
+										message: '确认订单失败'
+									});
+								}
+							})
 						} else {
-							this.$message({
-								type: 'info',
-								message: '确认订单失败'
-							});
+							this.$confirm('请勿重复确认订单！', '提示', {
+								confirmButtonText: '确定',
+								type: 'warning'
+							})
 						}
-					})
+					}
 				},
 				formatStatus(row) {
 					switch (row.orderStatus) {
