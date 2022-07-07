@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../../assets/css/admin.css">
 		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<link rel="shortcut icon" href="../../assets/pics/logo2.png">
 		<title>操作员页面</title>
 	</head>
 	<body>
@@ -13,11 +14,15 @@
 
 					<a href="personal.html">
 						<div class="head">
-							<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+							<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+							</el-avatar>
 						</div>
 					</a>
-
-					<div class="logo" style="font-size: 25px">汇安智能仓储平台</div>
+					<div class="head" style="float: left;">
+						<el-avatar :src="avatarURL">
+						</el-avatar>
+					</div>
+					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
 
 				</el-header>
 
@@ -61,8 +66,8 @@
 
 							<a href="../login.html">
 								<el-menu-item index="6">
-									<i class="el-icon-warning-outline" ></i>
-									<span slot="title" >退出登录</span>
+									<i class="el-icon-warning-outline"></i>
+									<span slot="title">退出登录</span>
 								</el-menu-item>
 							</a>
 
@@ -90,7 +95,9 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					iframeUrl: './index.html'
+					iframeUrl: './index.html',
+					fit:'contain',
+					avatarURL:' ../../assets/pics/logo3.png'
 				}
 			},
 			created() {

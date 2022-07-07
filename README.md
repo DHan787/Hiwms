@@ -128,3 +128,12 @@
 * 判断出入库申请的数量是否为空 ymm
 * 判断出库数量不能大于库存数量 ymm
 * 添加注册时个人信息填写页面registerInfo（未成功实现） zls
+* 新增页面标签页小logo，完整显示header的文字，页面左上角显示logo ymm
+
+## 7.7
+* orders页面不可重复确认订单，必须选择操作员才能确认订单 ymm
+* 解决分页后无法编辑第二页数据的问题 ymm
+    >>核心代码：index = ((this.currentPage-1) * this.pageSize + index)
+    > 
+    > 将index根据页数重新设置
+* 操作员和货物员页面的分页器 zls
