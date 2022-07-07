@@ -1,3 +1,8 @@
+
+//打印引用vue-print-nb插件
+import Print from 'vue-print-nb'
+Vue.use(Print)
+
 /*!
  * Vue.js v2.6.14
  * (c) 2014-2021 Evan You
