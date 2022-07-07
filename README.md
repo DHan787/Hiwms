@@ -132,3 +132,7 @@
 
 ## 7.7
 * orders页面不可重复确认订单，必须选择操作员才能确认订单 ymm
+* 解决分页后无法编辑第二页数据的问题 ymm
+>>核心代码：index = ((this.currentPage-1) * this.pageSize + index)
+> 
+> 将index根据页数重新设置

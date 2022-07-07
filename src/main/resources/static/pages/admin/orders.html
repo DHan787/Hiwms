@@ -46,7 +46,7 @@
 						<!--表单区域-->
 						<el-card>
 							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
-								style="width: 100%;">
+								style="width: 100%;" >
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
@@ -69,7 +69,7 @@
 								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
 								</el-table-column>
 								<el-table-column label="操作" width="250" style="display: flex;">
-									<template slot-scope="scope" v-for="orders in tableData">
+									<template slot-scope="scope" v-for="orders in tableData" :index="getIndex">
 										<!-- <el-button type="primary" plain @click="checkClick(scope.$index,scope.row)"
 											icon="el-icon-edit" v-if="seen">确认订单</el-button> -->
 										<el-button type="primary" plain icon="el-icon-edit"
@@ -148,7 +148,6 @@
 			created() {
 				this.getAll()
 				this.getOperatorName()
-				//this.checkStatus()
 
 			},
 
@@ -158,15 +157,21 @@
 						this.tableData = res.data;
 					});
 				},
-				checkStatus(row) {
-					if (this.row.orderStatus !== 10 || this.row.orderStatus !== 20) {
-						console.log(this.row.isCheck);
-						this.row.isCheck = true;
-					}
+				getIndex(index){
+					// console.log((this.currentPage - 1) * this.pageSize + index + 1)
+					// return(this.currentPage - 1) * this.pageSize + index + 1
 				},
 				viewClick(index) {
 					this.dialogFormVisible = true;
+					// console.log("index: " + index);
+					// console.log("currentPage-1: " + (this.currentPage - 1));
+					// console.log("pageSize: " + this.pageSize);
+					// console.log("currentPage*pageSize " + ((this.currentPage - 1) * this.pageSize));
+					// console.log("newindex: " + ((this.currentPage - 1) * this.pageSize + index));
+					// this.index = (this.currentPage * this.pageSize + this.index);
+					index = ((this.currentPage-1)*this.pageSize+index);
 					var orderId = this.tableData[index].orderId;
+					console.log("index: " + index);
 					if (this.tableData[index].orderType == 1) {
 						axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
 							this.gridData = res.data;
@@ -179,7 +184,6 @@
 						});
 					}
 					this.getAll();
-
 				},
 				//模糊查询
 				like() {
