@@ -131,5 +131,11 @@
 * 新增页面标签页小logo，完整显示header的文字，页面左上角显示logo ymm
 
 ## 7.7
+* orders页面不可重复确认订单，必须选择操作员才能确认订单 ymm
+* 解决分页后无法编辑第二页数据的问题 ymm
+    >>核心代码：index = ((this.currentPage-1) * this.pageSize + index)
+    > 
+    > 将index根据页数重新设置
+* 操作员和货物员页面的分页器 zls
 * 修改出入库后订单无法查看详情的问题 hxy
-* 增加了商品库存柱图 hxy
+* 增加了首页商品库存柱图 hxy
