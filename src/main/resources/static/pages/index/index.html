@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../../assets/css/admin.css">
+		<link rel="stylesheet" href="../../assets/css/home.css">
 		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<script src="../../assets/js/echarts.js"></script>
 		<title></title>
 	</head>
 	<body>
@@ -18,22 +19,68 @@
 						</el-breadcrumb>
 						<el-card class="box-card" style="margin-bottom: 12px;">
 							<div class="card-container">
-								<div>
-								<el-image :src="src1" class="ava">
+								<div >
+								<el-image :src="src1" class="ava" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 								</el-image>
+									<div class="box">
 								<div class="admin-info">
-									<h3>早安，汇安人，开始您一天的工作吧！</h3>
+									<h3 >早安，汇安人，开始您一天的工作吧！</h3>
 									<div class="weather">
 										<i class="el-icon-heavy-rain"></i>
 										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
 									</div>
 								</div>
+									</div>
 								</div>
 								<br/>
+
+								<div class="data">
+									<el-image :src="src6" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
+
+
+									</el-image>
+									<div class="title1"><h3 >数据统计</h3>
+									</div>
+
+
+									<div class="all">
+										<div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">仓库数量</h4>
+									</div>
+									<div class="bg2" >
+										<h4 style="margin-top: 20px">商品库存数量</h4>
+									</div>
+									</div>
+									<div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">未处理订单数量</h4>
+									</div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">已处理订单数量</h4>
+									</div>
+									</div>
+								</div>
+
+								</div>
 							<div class="top">
+								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+								<div id="charts" style="width: 600px;height:400px;"></div>
+								<el-image :src="src6" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+
+
+								</el-image>
+									<div class="title1"><h3>快捷入口</h3>
+								</div>
 
 
 							<!--用户-->
@@ -58,7 +105,8 @@
 									</div>
 
 								</el-image>
-								</a><!--仓库-->
+								</a>
+								<!--仓库-->
 								<a href="../admin/warehouse.html" title="跳转至仓库页面"> <el-image :src="src5" class="warehouse" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
@@ -66,9 +114,15 @@
 								</el-image>
 								</a>
 							</div>
+
 						</div>
 
-							</div></div>
+							</div>
+								<div class="down">
+									<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+									<div id="charts" style="width: 300px;height:200px;"></div>
+								</div>
+							</div>
 
 						</el-card>
 					</el-main>
@@ -93,16 +147,62 @@
 					dialogFormVisible: false,
 					dialogFormTitle: "",
 					formLabelWidth: '120px',
-					isAdd: false
+					isAdd: false,
+					charData: [],
+					nameArr: [],
+					valueArr: []
 				}
 			},
 			created() {
 
 			},
 			methods: {
-				
-				
+
 			}
 		})
 	</script>
+
+	<script>
+		let nameArr = [];
+		let valueArr = [];
+		const char = echarts.init(document.getElementById('charts'));
+		axios.get("http://localhost:8080/inventory/getBarList").then(res=> {
+			this.charData = res.data;
+			for (let i = 0; i < this.charData.name.length; i++) {
+				nameArr[i] = this.charData.name[i];
+				valueArr[i] = this.charData.value[i];
+			}
+			/*console.log("nameArr:", nameArr);
+			console.log("valueArr", valueArr);*/
+			char.setOption({
+				title: {
+					text: '库存商品表'
+				},
+				tooltip: {},
+				legend: {
+					data: ['货物库存数量']
+				},
+				xAxis: {
+					name: '货物名',
+					data: nameArr
+				},
+				yAxis: {
+					name: '货物库存数量',
+				},
+				series: [
+					{
+						name: '货物库存数量',
+						type: 'bar',
+						data: valueArr,
+						barWidth: '20%'//柱条占总类目的宽度
+						/* itemStyle: {
+                            color: ''
+                        } */
+					}
+				]
+			})
+		})
+
+	</script>
+
 </html>

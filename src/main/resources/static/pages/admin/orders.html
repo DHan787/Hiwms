@@ -46,7 +46,7 @@
 						<!--表单区域-->
 						<el-card>
 							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
-								style="width: 100%;" >
+								style="width: 100%;">
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
@@ -84,6 +84,18 @@
 									<!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
 									<!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>-->
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+										<div style="margin-bottom: 5px;margin-left: 120px;">
+											<el-steps :space="200" :active="active" finish-status="success" v-if="isStockIn">
+												<el-step title="未入库"></el-step>
+												<el-step title="入库中"></el-step>
+												<el-step title="已入库"></el-step>
+											</el-steps>
+											<el-steps :space="200" :active="active" finish-status="success" v-else>
+												<el-step title="未出库"></el-step>
+												<el-step title="出库中"></el-step>
+												<el-step title="已出库"></el-step>
+											</el-steps>
+										</div>
 										<el-table :data="gridData">
 											<el-table-column property="stockId" label="库存id" width="150">
 											</el-table-column>
@@ -97,9 +109,6 @@
 									</el-dialog>
 								</div>
 							</div>
-
-
-
 							<!-- 分页器 -->
 							<div class="block" style="text-align: center;">
 								<el-pagination align='center' @size-change="handleSizeChange"
@@ -130,6 +139,8 @@
 					dialogFormVisible: false,
 					dialogFormTitle: "查看订单详情",
 					gridData: [],
+					active: 0,
+					isStockIn: true,
 					form: {
 						orderID: '',
 						orderType: '',
@@ -138,6 +149,16 @@
 						orderInit: '',
 						orderOperator: ''
 					},
+					activities: [{
+						content: '活动按期开始',
+						timestamp: '2018-04-15'
+					}, {
+						content: '通过审核',
+						timestamp: '2018-04-13'
+					}, {
+						content: '创建成功',
+						timestamp: '2018-04-11'
+					}],
 					formLabelWidth: '120px',
 					currentPage: 1, // 当前页码
 					total: 20, // 总条数
@@ -157,22 +178,18 @@
 						this.tableData = res.data;
 					});
 				},
-				getIndex(index){
-					// console.log((this.currentPage - 1) * this.pageSize + index + 1)
-					// return(this.currentPage - 1) * this.pageSize + index + 1
-				},
 				viewClick(index) {
 					this.dialogFormVisible = true;
-					// console.log("index: " + index);
-					// console.log("currentPage-1: " + (this.currentPage - 1));
-					// console.log("pageSize: " + this.pageSize);
-					// console.log("currentPage*pageSize " + ((this.currentPage - 1) * this.pageSize));
-					// console.log("newindex: " + ((this.currentPage - 1) * this.pageSize + index));
-					// this.index = (this.currentPage * this.pageSize + this.index);
-					index = ((this.currentPage-1)*this.pageSize+index);
-					var orderId = this.tableData[index].orderId;
+					index = ((this.currentPage - 1) * this.pageSize + index); //重新设置index
 					console.log("index: " + index);
+					//console.log("isStock: " + this.isStockIn)
 					if (this.tableData[index].orderType == 1) {
+						this.isStockIn = true;
+					}else{
+						this.isStockIn = false;
+					}
+					var orderId = this.tableData[index].orderId;
+					if (this.tableData[index].orderType == 1) { //判断订单类型是出库还是入库，并根据订单ID获取订单信息
 						axios.get("http://localhost:8080/stockIn/getByOrderId?orderId=" + orderId).then(res => {
 							this.gridData = res.data;
 							console.log(this.gridData);
@@ -182,6 +199,25 @@
 							this.gridData = res.data;
 							console.log(this.gridData);
 						});
+					}
+					//console.log("isStock: " + this.isStockIn)
+					switch (this.tableData[index].orderStatus) {
+						case 10:
+						case 20:
+							return this.active = 0
+							break;
+						case 11:
+						case 21:
+							return this.active = 1
+							break;
+						case 12:
+						case 22:
+							return this.active = 3
+							break;
+						default:
+							return this.active = 0
+							break;
+						
 					}
 					this.getAll();
 				},
@@ -205,7 +241,7 @@
 							confirmButtonText: '确定',
 							type: 'warning'
 						})
-					} else{
+					} else {
 						if (this.tableData[index].orderStatus == 10 || this.tableData[index].orderStatus == 20) {
 							axios.post("http://localhost:8080/orders/check", this.tableData[index]).then(res => {
 								if (res.data) {
@@ -232,7 +268,7 @@
 						}
 					}
 				},
-				formatStatus(row) {
+				formatStatus(row) { //二次渲染表格
 					switch (row.orderStatus) {
 						case 10:
 							return "未入库"
@@ -257,7 +293,7 @@
 							break
 					}
 				},
-				formatType(row) {
+				formatType(row) { //二次渲染
 					switch (row.orderType) {
 						case 1:
 							return "入库"
@@ -270,14 +306,13 @@
 							break
 					}
 				},
-				formatInit(row) {
+				formatInit(row) { //二次渲染
 					if (row.orderInit === 11) {
 						return "管理员Anna"
 					} else {
 						return "未知"
 					}
 				},
-
 				//每页条数改变时触发 选择一页显示多少行
 				handleSizeChange(val) {
 					console.log(`每页 ${val} 条`);
