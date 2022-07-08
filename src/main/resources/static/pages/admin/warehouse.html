@@ -1,241 +1,250 @@
 <!DOCTYPE html>
 <html lang="">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="../../assets/css/warehouse.css" >
-		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-		<title>仓库</title>
-	</head>
-	<body>
-	    <div id="app">
-	        <el-container>
-	            <el-container>
-	                <!-- 主体 -->
-	                <el-main>
-	                    <el-breadcrumb style="margin-bottom: 12px;">
-							<el-breadcrumb-item><a href="../index/index.html" >首页</a></el-breadcrumb-item>
-							<el-breadcrumb-item><a href="#">业务流</a> </el-breadcrumb-item>
-	                        <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
-	                        
-	                    </el-breadcrumb>
-	                    
-	                        <div class="card-container">
-	                            <div class="handle-container">
-									<!--查询表单-->
-									<el-form :model="search">
-										<el-row>
-											<el-col :span='12'>
-												<el-form-item >
-													<el-input v-model="warehouseName" clearable placeholder="请输⼊仓库名称" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
-												</el-form-item>
-											</el-col>
-										</el-row>
-									</el-form>
-								</div>
-								<el-row :span="8" align="right">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询仓库</el-button>
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增仓库</el-button>
-								</el-row>
-									
-									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-									  <el-form :model="form" ref="form">
-									    <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
-									      <el-input v-model="form.warehouseName" autocomplete="off"></el-input>
-									    </el-form-item>
-										  <el-form-item label="仓库位置" :label-width="formLabelWidth" prop="warehouseLocation">
-											  <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
-										  </el-form-item>
-									    <el-form-item label="类别" :label-width="formLabelWidth" prop="warehouseType">
-											<el-input v-model="form.warehouseType" autocomplete="off"></el-input>
-									    </el-form-item>
-										<el-form-item label="大小" :label-width="formLabelWidth" prop="warehouseSize">
-										  <el-input v-model="form.warehouseSize" autocomplete="off"></el-input>
-										</el-form-item>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/css/warehouse.css">
+    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+    <title>仓库</title>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-container>
+            <!-- 主体 -->
+            <el-main>
+                <el-breadcrumb style="margin-bottom: 12px;">
+                    <el-breadcrumb-item><a href="../index/index.html">首页</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
+                    <el-breadcrumb-item>仓库管理</el-breadcrumb-item>
 
-									  </el-form>
-									  <div slot="footer" class="dialog-footer">
-									    <el-button @click="dialogFormVisible = false">取 消</el-button>
-									    <el-button v-if="isAdd" type="primary" @click="addWarehouse">确 定</el-button>
-										<el-button  v-else type="primary" @click="updateWarehouseById">更 新</el-button>
-									  </div>
-									</el-dialog>
+                </el-breadcrumb>
 
-	                        </div>
-	                    
-	                    <el-card>
-	                        <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
-	                            <el-table-column prop="warehouseId" label="仓库编号" width="180">
-								</el-table-column>
-	                            <el-table-column prop="warehouseName" label="仓库名称" width="180">
-	                            </el-table-column>
-								<el-table-column prop="warehouseLocation" label="仓库位置">
-								</el-table-column>
-	                            <el-table-column prop="warehouseType" label="类别">
-	                            </el-table-column>
-	                            <el-table-column prop="warehouseSize" label="大小">
-	                            </el-table-column>
-	                            <el-table-column label="操作" width="250" style="display: flex;">
-	                                <template slot-scope="scope" v-for="warehouse in tableData">
-										
-	                                    <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
-	                                    <el-button type="danger" plain @click="removeWarehouseById(scope.$index)">删除</el-button>
-	                                </template>
-	                            </el-table-column>
-	                        </el-table>
+                <div class="card-container">
+                    <div class="handle-container">
+                        <!--查询表单-->
+                        <el-form :model="search">
+                            <el-row>
+                                <el-col :span='12'>
+                                    <el-form-item>
+                                        <el-input v-model="warehouseName" clearable placeholder="请输⼊仓库名称"
+                                                  style="width:200px;line-height:68px">
+                                            <!-- clearable 输⼊框可清除属性 --></el-input>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+                    </div>
+                    <el-row :span="8" align="right">
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">
+                            查询仓库
+                        </el-button>
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">
+                            新增仓库
+                        </el-button>
+                    </el-row>
+
+                    <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+                        <el-form :model="form" ref="form">
+                            <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
+                                <el-input v-model="form.warehouseName" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="仓库位置" :label-width="formLabelWidth" prop="warehouseLocation">
+                                <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="类别" :label-width="formLabelWidth" prop="warehouseType">
+                                <el-input v-model="form.warehouseType" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="大小" :label-width="formLabelWidth" prop="warehouseSize">
+                                <el-input v-model="form.warehouseSize" autocomplete="off"></el-input>
+                            </el-form-item>
+
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">取 消</el-button>
+                            <el-button v-if="isAdd" type="primary" @click="addWarehouse">确 定</el-button>
+                            <el-button v-else type="primary" @click="updateWarehouseById">更 新</el-button>
+                        </div>
+                    </el-dialog>
+
+                </div>
+
+                <el-card>
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                              style="width: 100%; ">
+                        <el-table-column prop="warehouseId" label="仓库编号" width="180">
+                        </el-table-column>
+                        <el-table-column prop="warehouseName" label="仓库名称" width="180">
+                        </el-table-column>
+                        <el-table-column prop="warehouseLocation" label="仓库位置">
+                        </el-table-column>
+                        <el-table-column prop="warehouseType" label="类别">
+                        </el-table-column>
+                        <el-table-column prop="warehouseSize" label="大小">
+                        </el-table-column>
+                        <el-table-column label="操作" width="250" style="display: flex;">
+                            <template slot-scope="scope" v-for="warehouse in tableData">
+
+                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑
+                                </el-button>
+                                <el-button type="danger" plain @click="removeWarehouseById(scope.$index)">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
 
 
-							<!-- 分页器 -->
-							<div class="block" style="text-align: center;">
-								<el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
-											   :current-page="currentPage"
-											   :page-sizes="[1,5,10,20]"
-											   :page-size="pageSize"
-											   layout="total, sizes, prev, pager, next, jumper"
-											   :total="tableData.length">
-								</el-pagination>
-							</div>
-	                    </el-card>
-	                </el-main>
-	            </el-container>
-	        </el-container>
-	    </div>
-	</body>
-	<script src="../../assets/js/vue.js"></script>
-	<script src="../../assets/css/element-ui/index.js"></script>
-	<script src="../../assets/js/axios.min.js"></script>
-	
-	<script>
-	    new Vue({
-	        el: '#app',
-	        data: function() {
-	            return {
-					tableData: {},
-					warehouseName:"",
-					dialogFormVisible: false,
-					dialogFormTitle: "",
-					form: {
-						name: '',
-						location: '',
-						type: '',
-						size: ''
-					},
-					formLabelWidth: '120px',
-					isAdd: false,
-					formLabelWidth: '120px',
-					currentPage: 1, // 当前页码
-					total: 20, // 总条数
-					pageSize: 5 // 每页的数据条数
-					
-	            }
-	        },
+                    <!-- 分页器 -->
+                    <div class="block" style="text-align: center;">
+                        <el-pagination align='center' @size-change="handleSizeChange"
+                                       @current-change="handleCurrentChange"
+                                       :current-page="currentPage"
+                                       :page-sizes="[1,5,10,20]"
+                                       :page-size="pageSize"
+                                       layout="total, sizes, prev, pager, next, jumper"
+                                       :total="tableData.length">
+                        </el-pagination>
+                    </div>
+                </el-card>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/css/element-ui/index.js"></script>
+<script src="../../assets/js/axios.min.js"></script>
 
-			created(){
-				this.getAll();
-			},
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                tableData: {},
+                warehouseName: "",
+                dialogFormVisible: false,
+                dialogFormTitle: "",
+                form: {
+                    name: '',
+                    location: '',
+                    type: '',
+                    size: ''
+                },
+                formLabelWidth: '120px',
+                isAdd: false,
+                formLabelWidth: '120px',
+                currentPage: 1, // 当前页码
+                total: 20, // 总条数
+                pageSize: 5 // 每页的数据条数
 
-	        methods: {
-				getAll(){
-					axios.get("http://localhost:8080/warehouse").then(res=>{
-						this.tableData = res.data ;
-					});
-				},
-				<!--模糊查询-->
-				like(){
-					axios.get("http://localhost:8080/warehouse/like?warehouseName="+this.warehouseName).then(res=>{
-						this.tableData = res.data ;
-					});
-				},
+            }
+        },
 
-				removeWarehouseById(index) {
-					index = ((this.currentPage-1)*this.pageSize+index);
-					var id = this.tableData[index].warehouseId;
-					this.$confirm('此操作将永久删除仓库, 是否继续?', '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						axios.delete("http://localhost:8080/warehouse/" + id).then(res=> {
-							this.getAll();
-						});
-						this.$message({
-							type: 'success',
-							message: '删除成功!'
-						});
-					}).catch(() => {
-						this.$message({
-							type: 'info',
-							message: '已取消删除'
-						});
-					});
-				},
-				
-				addClick() {
-						this.dialogFormVisible = true;
-						this.dialogFormTitle = "新增仓库";
-						this.isAdd = true;
-						this.form = {};
-				},
-				
-				addWarehouse() {
-					axios.post("http://localhost:8080/warehouse",this.form).then(rel=>{
-						if(rel.data){
-							this.$message({
-								type: 'success',
-								message: '新增成功!'
-							});
-							this.getAll();
-							this.dialogFormVisible = false;
-							
-						}else{
-							this.$message({
-								type: 'info',
-								message: '新增失败'
-							});
-						}
-						this.$refs.form.resetFields();
-					})
-				},
-				
-				editClick(index,row) {
-					this.dialogFormVisible = true;
-					this.dialogFormTitle = "修改仓库";
-					this.isAdd = false;
-					this.form = Object.assign({},row);
-					this.form.index = index;				
-				},
+        created() {
+            this.getAll();
+        },
 
-				
-				updateWarehouseById() {
-					axios.put("http://localhost:8080/warehouse",this.form).then(rel=>{
-						if(rel.data){
-							this.$message({
-								type: 'success',
-								message: '修改成功!'
-							});
-							this.getAll();
-							this.dialogFormVisible = false;
-							
-						}else{
-							this.$message({
-								type: 'info',
-								message: '修改失败'
-							});
-						}
-						this.$refs.form.resetFields();
-					})
-				},
-				//每页条数改变时触发 选择一页显示多少行
-				handleSizeChange(val) {
-					console.log(`每页 ${val} 条`);
-					this.currentPage = 1;
-					this.pageSize = val;
-				},
-				//当前页改变时触发 跳转其他页
-				handleCurrentChange(val) {
-					console.log(`当前页: ${val}`);
-					this.currentPage = val;
-				}
-	        }
-	    })
-	</script>
-	</html>
+        methods: {
+            getAll() {
+                axios.get("http://localhost:8080/warehouse").then(res => {
+                    this.tableData = res.data;
+                });
+            },
+            <!--模糊查询-->
+            like() {
+                axios.get("http://localhost:8080/warehouse/like?warehouseName=" + this.warehouseName).then(res => {
+                    this.tableData = res.data;
+                });
+            },
+
+            removeWarehouseById(index) {
+                index = ((this.currentPage - 1) * this.pageSize + index);
+                var id = this.tableData[index].warehouseId;
+                this.$confirm('此操作将永久删除仓库, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios.delete("http://localhost:8080/warehouse/" + id).then(res => {
+                        this.getAll();
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+
+            addClick() {
+                this.dialogFormVisible = true;
+                this.dialogFormTitle = "新增仓库";
+                this.isAdd = true;
+                this.form = {};
+            },
+
+            addWarehouse() {
+                axios.post("http://localhost:8080/warehouse", this.form).then(rel => {
+                    if (rel.data) {
+                        this.$message({
+                            type: 'success',
+                            message: '新增成功!'
+                        });
+                        this.getAll();
+                        this.dialogFormVisible = false;
+
+                    } else {
+                        this.$message({
+                            type: 'info',
+                            message: '新增失败'
+                        });
+                    }
+                    this.$refs.form.resetFields();
+                })
+            },
+
+            editClick(index, row) {
+                this.dialogFormVisible = true;
+                this.dialogFormTitle = "修改仓库";
+                this.isAdd = false;
+                this.form = Object.assign({}, row);
+                this.form.index = index;
+            },
+
+
+            updateWarehouseById() {
+                axios.put("http://localhost:8080/warehouse", this.form).then(rel => {
+                    if (rel.data) {
+                        this.$message({
+                            type: 'success',
+                            message: '修改成功!'
+                        });
+                        this.getAll();
+                        this.dialogFormVisible = false;
+
+                    } else {
+                        this.$message({
+                            type: 'info',
+                            message: '修改失败'
+                        });
+                    }
+                    this.$refs.form.resetFields();
+                })
+            },
+            //每页条数改变时触发 选择一页显示多少行
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+                this.currentPage = 1;
+                this.pageSize = val;
+            },
+            //当前页改变时触发 跳转其他页
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                this.currentPage = val;
+            }
+        }
+    })
+</script>
+</html>

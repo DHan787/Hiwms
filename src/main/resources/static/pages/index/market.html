@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="../../assets/css/home.css">
-		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-		<link rel="shortcut icon" href="../../assets/pics/logo2.png">
-		<title>超市货物员</title>
-	</head>
-	<body>
-		<div id="app">
-			<el-container>
-				<el-header>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/css/home.css">
+    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+    <link rel="shortcut icon" href="../../assets/pics/logo2.png">
+    <title>超市货物员</title>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>
 
-					<a href="personal.html">
-					<div class="head">
-						<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-					</div>
-					</a>
-					<div class="head" style="float: left;">
-						<el-avatar :src="avatarURL">
-						</el-avatar>
-					</div>
-					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
+            <a href="personal.html">
+                <div class="head">
+                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                </div>
+            </a>
+            <div class="head" style="float: left;">
+                <el-avatar :src="avatarURL">
+                </el-avatar>
+            </div>
+            <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
 
-				</el-header>
+        </el-header>
 
-				<el-container>
-					<!--侧边栏-->
-					<el-aside width="200px">
-						<el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
-							background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
-							<el-menu-item index="1">
-								<i class="el-icon-menu"></i>
-								<span slot="title" @click="openUrl('./marketindex.html')">主页</span>
-							</el-menu-item>
+        <el-container>
+            <!--侧边栏-->
+            <el-aside width="200px">
+                <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
+                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
+                    <el-menu-item index="1">
+                        <i class="el-icon-menu"></i>
+                        <span slot="title" @click="openUrl('./marketindex.html')">主页</span>
+                    </el-menu-item>
 
-							<el-menu-item index="2">
-								<i class="el-icon-s-help"></i>
-								<span slot="title">控制台</span>
-							</el-menu-item>
-							<el-submenu index="3">
-								<template slot="title">
-									<i class="el-icon-view"></i>
-									<span>业务流</span>
-								</template>
-								<el-menu-item-group>
-									<el-menu-item index="3-1">
-										<i class="el-icon-download"></i>
-										<span slot="title" @click="openUrl('../stock-in-apply.html')">入库申请</span>
-									</el-menu-item>
-									<el-menu-item index="3-2">
-										<i class="el-icon-upload2"></i>
-										<span slot="title" @click="openUrl('../stock-out-apply.html')">出库申请</span>
-									</el-menu-item>
-								</el-menu-item-group>
-							</el-submenu>
+                    <el-menu-item index="2">
+                        <i class="el-icon-s-help"></i>
+                        <span slot="title">控制台</span>
+                    </el-menu-item>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-view"></i>
+                            <span>业务流</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1">
+                                <i class="el-icon-download"></i>
+                                <span slot="title" @click="openUrl('../stock-in-apply.html')">入库申请</span>
+                            </el-menu-item>
+                            <el-menu-item index="3-2">
+                                <i class="el-icon-upload2"></i>
+                                <span slot="title" @click="openUrl('../stock-out-apply.html')">出库申请</span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
 
-							<el-menu-item index="4">
-								<i class="el-icon-setting"></i>
-								<span slot="title">系统设置</span>
-							</el-menu-item>
+                    <el-menu-item index="4">
+                        <i class="el-icon-setting"></i>
+                        <span slot="title">系统设置</span>
+                    </el-menu-item>
 
-							<a href="../login.html">
-								<el-menu-item index="6">
-									<i class="el-icon-warning-outline" ></i>
-									<span slot="title" >退出登录</span>
-								</el-menu-item>
-							</a>
+                    <a href="../login.html">
+                        <el-menu-item index="6">
+                            <i class="el-icon-warning-outline"></i>
+                            <span slot="title">退出登录</span>
+                        </el-menu-item>
+                    </a>
 
-						</el-menu>
-					</el-aside>
-					<!-- 主体 -->
-					<el-main>
-						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
-							frameborder="0" scrolling="yes"></iframe>
-					</el-main>
-				</el-container>
-			</el-container>
-		</div>
-	</body>
-	<script src="../../assets/js/vue.js"></script>
-	<script src="../../assets/css/element-ui/index.js"></script>
-	<script src="../../assets/js/axios.min.js"></script>
-	
-	<script>
-		new Vue({
-			el: '#app',
-			data: function() {
-				return {
-					src: '../pics/head.jpg',
-					UserEditVisible: false,
-					editForm: [],
-					datalist: [],
-					FormData: {},
-					iframeUrl: './marketindex.html',
-					fit:'contain',
-					avatarURL:' ../../assets/pics/logo3.png'
-				}
-			},
-			created() {
-				this.getAll()
-			},
-			methods: {
-				adjustIframe() {
-					var ifm = document.getElementById("bi_iframe");
-					ifm.height = document.documentElement.clientHeight;
-					ifm.width = document.documentElement.clientWidth;
-				},
+                </el-menu>
+            </el-aside>
+            <!-- 主体 -->
+            <el-main>
+                <iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
+                        frameborder="0" scrolling="yes"></iframe>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+</body>
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/css/element-ui/index.js"></script>
+<script src="../../assets/js/axios.min.js"></script>
 
-				openUrl(url) {
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                src: '../pics/head.jpg',
+                UserEditVisible: false,
+                editForm: [],
+                datalist: [],
+                FormData: {},
+                iframeUrl: './marketindex.html',
+                fit: 'contain',
+                avatarURL: ' ../../assets/pics/logo3.png'
+            }
+        },
+        created() {
+            this.getAll()
+        },
+        methods: {
+            adjustIframe() {
+                var ifm = document.getElementById("bi_iframe");
+                ifm.height = document.documentElement.clientHeight;
+                ifm.width = document.documentElement.clientWidth;
+            },
 
-					this.iframeUrl = url;
-				},
-				getAll() {
-					axios.get("http://localhost:8080/users").then(res => {
-						this.datalist = res.data;
-					});
-				}
+            openUrl(url) {
 
-			}
-		})
-	</script>
+                this.iframeUrl = url;
+            },
+            getAll() {
+                axios.get("http://localhost:8080/users").then(res => {
+                    this.datalist = res.data;
+                });
+            }
+
+        }
+    })
+</script>
 </html>

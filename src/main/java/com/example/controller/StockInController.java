@@ -36,6 +36,7 @@ public class StockInController {
 
     /**
      * 获取全部入库信息
+     *
      * @return list
      */
     @GetMapping//访问方式
@@ -56,14 +57,15 @@ public class StockInController {
 
     /**
      * 根据订单ID得到入库货品信息
+     *
      * @param orderId
      * @return
      */
     @GetMapping("/getByOrderId")
-    public List<StockIn> getByOrderId(@RequestParam Integer orderId){
+    public List<StockIn> getByOrderId(@RequestParam Integer orderId) {
 
         QueryWrapper<StockIn> wrapper = new QueryWrapper<>();
-        wrapper.eq("order_id",orderId);
+        wrapper.eq("order_id", orderId);
         List<StockIn> stockIns = stockInDao.selectList(wrapper);
         return stockIns;
     }
@@ -71,11 +73,12 @@ public class StockInController {
 
     /**
      * 删除入库申请记录
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id){
+    public boolean delete(@PathVariable int id) {
 
         return stockInService.removeById(id);
 

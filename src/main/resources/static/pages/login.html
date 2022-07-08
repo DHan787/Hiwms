@@ -5,7 +5,7 @@
     <title></title>
     <link rel="stylesheet" href="../assets/css/login.css"/>
     <link rel="stylesheet" href="../assets/css/element-ui/index.css"/>
-	<link rel="shortcut icon" href="../assets/pics/logo2.png">
+    <link rel="shortcut icon" href="../assets/pics/logo2.png">
 </head>
 <body>
 <div id="app" class="outerDiv">
@@ -46,7 +46,8 @@
                             <span class="el-icon-info"></span>
                         </el-col>
                         <el-col :span='20'>
-                            <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input" ref="getValue" />
+                            <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input"
+                                      ref="getValue"/>
                             </el-input>
                         </el-col>
                     </el-row>
@@ -79,11 +80,13 @@
         el: '#app',
         data: {
             info: [],
-            loginForm: {userName:'',
+            loginForm: {
+                userName: '',
                 userPassword: '',
-            code:''},
+                code: ''
+            },
         },
-        data(){
+        data() {
             return {
                 loginForm: {},
                 loginRules: {
@@ -103,7 +106,7 @@
                         message: '请输入密码',
                         trigger: 'blur'
                     }],
-                    code:[{
+                    code: [{
                         required: true,
                         message: '请输入验证码',
                         trigger: 'blur'
@@ -124,35 +127,35 @@
                 });
             },
             login() {
-                 if(this.loginForm.userName!==''){
-                     if(this.loginForm.userPassword!==''){
-                         if(this.loginForm.code!==''){
-                             if(code === this.$refs.getValue.value.toLowerCase()) {
-                                 axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
-                                     console.log(rel.data);
-                                     if (rel.data === 1) {
-                                         alert("欢迎你！管理员")
-                                         window.location.href = ("index/admin.html")
-                                     } else if(rel.data === 2){
-                                         alert("欢迎你！货物员")
-                                         window.location.href = ("index/market.html")
-                                     }else if(rel.data === 3){
-                                         window.location.href = ("index/operator.html")
-                                         alert("欢迎你！操作员")
-                                     }
-                                 })
-                             }else{
-                                 alert("验证码错误!")
-                             }
-                         }else{
-                             alert("验证码为空！")
-                         }
-                     }else{
-                         alert("密码为空！")
-                     }
-                 }else{
-                     alert("用户名为空！")
-                 }
+                if (this.loginForm.userName !== '') {
+                    if (this.loginForm.userPassword !== '') {
+                        if (this.loginForm.code !== '') {
+                            if (code === this.$refs.getValue.value.toLowerCase()) {
+                                axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
+                                    console.log(rel.data);
+                                    if (rel.data === 1) {
+                                        alert("欢迎你！管理员")
+                                        window.location.href = ("index/admin.html")
+                                    } else if (rel.data === 2) {
+                                        alert("欢迎你！货物员")
+                                        window.location.href = ("index/market.html")
+                                    } else if (rel.data === 3) {
+                                        window.location.href = ("index/operator.html")
+                                        alert("欢迎你！操作员")
+                                    }
+                                })
+                            } else {
+                                alert("验证码错误!")
+                            }
+                        } else {
+                            alert("验证码为空！")
+                        }
+                    } else {
+                        alert("密码为空！")
+                    }
+                } else {
+                    alert("用户名为空！")
+                }
             },
         }
     })
@@ -160,6 +163,7 @@
 
 <script>
     var code = '';
+
     class Verification {
         constructor() {
 
@@ -185,6 +189,7 @@
             this.drawLine()
             this.drawDot()
         }
+
         // 检测验证码是否符合???
 
 
@@ -216,7 +221,7 @@
                 code += this.charArr[index].toString().toLowerCase()
                 let x = i * 20 + 15
                 let y = 24 + Math.random() * 5
-                let angle = Math.random() * - 0.5
+                let angle = Math.random() * -0.5
                 this.ctx.translate(x, y)
                 this.ctx.rotate(angle)
                 this.ctx.fillStyle = this.getRandomColor()
