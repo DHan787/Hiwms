@@ -108,6 +108,7 @@ public class GoodsController {
         //在内存操作，写出到浏览器，从浏览器下载
         ExcelWriter writer = ExcelUtil.getWriter(true);
         //自定义标题名
+        writer.addHeaderAlias("goodsId", "货物编号");
         writer.addHeaderAlias("goodsName", "货物名称");
         writer.addHeaderAlias("goodsType", "货物类别");
         writer.addHeaderAlias("goodsSize", "货物尺寸");
