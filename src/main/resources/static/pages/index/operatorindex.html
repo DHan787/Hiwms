@@ -86,21 +86,23 @@
 
                             <!--用户-->
                             <div class="all" >
-                                <div><a href="../operator/stock-in.html" title="跳转至入库页面"> <el-image :src="src2" class="in" >
+                                <div>
+                                    <el-tooltip content="入库界面" placement="bottom"><a href="../admin/stock-in.html" > <el-image :src="src2" class="in" >
                                     <div slot="placeholder" class="image-slot">
                                         加载中<span class="dot">...</span>
                                     </div>
                                 </el-image>
-                                </a><!--订单-->
+                                </a></el-tooltip><!--订单-->
                                 </div>
                                 <div>
-                                    <a href="../operator/stock-out.html" title="跳转至出库页面"> <el-image :src="src3" class="out" >
+                                    <el-tooltip content="出库界面" placement="bottom"><a href="../admin/stock-out.html" > <el-image :src="src3" class="out" >
                                         <div slot="placeholder" class="image-slot">
                                             加载中<span class="dot">...</span>
                                         </div>
                                     </el-image>
-                                    </a>
+                                    </a></el-tooltip>
                                 </div>
+                            </div>
 
 
                             </div>
@@ -118,7 +120,6 @@
                             </div>
 
                         </div>
-                    </div>
                     <div class="down">
                     </div>
                 </el-card>
