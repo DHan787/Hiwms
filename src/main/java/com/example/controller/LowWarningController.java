@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.Inventory;
 import com.example.domain.LowWarning;
+import com.example.service.LowWarningService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,8 @@ import java.util.List;
 @RequestMapping("/warning")
 public class LowWarningController {
     @Autowired
+    private LowWarningService lowWarningService;
+
     private LowWarningController lowWarningController;
 
     @Autowired
@@ -27,27 +30,36 @@ public class LowWarningController {
 
     List<String> WarnList = new ArrayList<String>();
 
-    @GetMapping()
+    @GetMapping("/warn")
     public List<String> WarningInfo() {
         getWarnInfo();
         return WarnList;
     }
 
+    @GetMapping
     public List<LowWarning> getAll() {
-        return lowWarningController.getAll();
+        return lowWarningService.list();
     }
 
     private void getWarnInfo() {
         List<Inventory> inventories = inventoryController.getAll();
-        List<LowWarning> lowWarnings = lowWarningController.getAll();
+        List<LowWarning> lowWarnings = this.getAll();
         for (LowWarning value : lowWarnings
         ) {
             for (Inventory invent : inventories
             ) {
-                if (value.getMinNum() >= invent.getGoodsNumber()) {
+//                System.out.println(value.getGoodsId()+"idandid"+invent.getInventoryId());
+                if (value.getGoodsId().equals(invent.getInventoryId())) {
+                    System.out.println("in");
+//                    System.out.println(invent.getGoodsName());
+                    if (value.getMinNum() >= invent.getGoodsNumber()) {
+                        WarnList.add(invent.getGoodsName());
+                        System.out.println("inside");
+                        break;
+                    }
                 }
-                WarnList.add(invent.getGoodsName());
             }
+            System.out.println(WarnList);
         }
     }
 }

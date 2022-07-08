@@ -17,23 +17,22 @@
                     <el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
                     <el-breadcrumb-item>出库申请</el-breadcrumb-item>
                 </el-breadcrumb>
-                <!--表单区域-->
+                <!--表格区域-->
                 <el-card>
-                    <!--复选框列-->
                     <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
-                              style="width: 100%; " @selection-change="selectCall" ref="multipleTable">
+                              style="width: 100%; " @selection-change="selectCall"
+                              ref="multipleTable" >
                         <!-- reserve-selection分页保留勾选项 -->
-                        <el-table-column type="selection" width="60" :reserve-selection="true">
-                        </el-table-column>
+                        <el-table-column type="selection" width="60" :reserve-selection="true"></el-table-column>
                         <el-table-column prop="goodsName" label="货物名称" width="180">
                         </el-table-column>
-                        <el-table-column prop="goodsNumber" label="库存数量" width="180">
+                        <el-table-column prop="goodsNumber" label="货品数量" width="180">
                         </el-table-column>
                         <el-table-column label="出库数量">
                             <template slot-scope="scope">
-                                <el-input-number size="medium" v-model="scope.row.stockOutNumber" :min="1"
-                                                 :max="1000" label="出库数量" oninput="value=value.replace(/[^\d]/g,'')"
-                                                 placeholder="大于0的整数"></el-input-number>
+                                <el-input-number size="medium" placeholder="大于0的整数" v-model="scope.row.stockOutNumber"
+                                                 :min="1" :max="1000" label="出库数量"
+                                                 oninput="value=value.replace(/[^\d]/g,'')"></el-input-number>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -88,6 +87,7 @@
             selectCall(val) {
                 this.tableDataSelections = val;
                 console.log(val);
+                //console.log(tableDataSelections);
             },
             handleclose() {
                 this.$refs.multipleTable.clearSelection()
@@ -104,29 +104,24 @@
                     })
                 } else {
                     for (var i = 0; i < this.tableDataSelections.length; i++) {
-                        if ((this.tableDataSelections[i].stockOutNumber) === undefined) { //数量不能为0
-                            this.$confirm('出库数量不能为0！', '提示', {
-                                confirmButtonText: '确定',
-                                type: 'warning'
-                            })
-                        } else if (this.tableDataSelections[i].goodsNumber < this.tableDataSelections[i]
-                            .stockOutNumber) {
-                            this.$confirm('出库数量不能大于库存数量！', '提示', {
+                        //this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockOutNumber;
+                        if ((this.tableDataSelections[i].stockOutNumber) == undefined) { //数量不能为0
+                            this.$confirm('出库数量不能为零！', '提示', {
                                 confirmButtonText: '确定',
                                 type: 'warning'
                             })
                         } else {
                             //console.log('name:' + this.tableDataSelections[i].goodsName);
-                            //console.log("tableDataSelections[i]: " + this.tableDataSelections[i]);
-                            //console.log('number:' + this.tableDataSelections[i].goodsNumber);
                             this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockOutNumber;
                             item = this.tableDataSelections[i];
+                            //console.log('number:' + this.tableDataSelections[i].goodsNumber);
                             axios.post("http://localhost:8080/stockOut/save", item).then(res => {
                                 if (res.data) {
                                     this.$message({
                                         type: 'success',
                                         message: '申请出库成功!'
                                     });
+									this.$refs.multipleTable.clearSelection();
                                     this.getAll();
                                 } else {
                                     this.$message({
