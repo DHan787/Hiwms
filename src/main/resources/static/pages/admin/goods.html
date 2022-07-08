@@ -29,30 +29,21 @@
 													<el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px;line-height:68px"><!-- clearable 输⼊框可清除属性 --></el-input>
 												</el-form-item>
 											</el-col>
-<!--											<el-col :span='12'>-->
-<!--												<el-form-item label="货物类别">-->
-<!--													<el-select v-model="search.goodsType" clearable  filterable placeholder="请选择类别">-->
-<!--														<el-option v-for="item in typeOption" :key= "item.value" :label="item.label" :value ="item.value"></el-option>-->
-<!--													</el-select>-->
-<!--												</el-form-item>-->
-<!--											</el-col>-->
 										</el-row>
 									</el-form>
 								</div>
 										<el-row :span="8" align="right">
-									<el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
-									<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
+											<el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
+											<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>
+											<el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
+											<el-upload action="http://localhost:8080/goods/importExcel"
+													   :show-file-list="false"
+													   accept="xlsx"
+													   :on-success="importExcel"
+													   style="display:inline-block">
+											<el-button type="primary" plain style="margin:15px 20px;" icon="el-icon-upload2">导入excel</el-button>
+											</el-upload>
 										</el-row>
-
-<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getAllGoodsBtn" icon="el-icon-search">查询所有货物</el-button>-->
-<!--										<el-input v-model="GoodsForm.goodsId" style="width:100px"></el-input>-->
-<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsIdBtn" icon="el-icon-search">id查询</el-button>-->
-<!--										<el-input v-model="GoodsForm.goodsName" style="width:100px"></el-input>-->
-<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsNameBtn" icon="el-icon-search">货物名称查询</el-button>-->
-<!--										<el-input v-model="GoodsForm.goodsType" style="width:100px"></el-input>-->
-<!--										<el-button type="primary" plain style="margin:15px 20px;" @click="getGoodsTypeBtn" icon="el-icon-search">货物类别查询</el-button>-->
-
-<!--								<el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增货物</el-button>-->
 							</div>
 
 									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -88,11 +79,11 @@
 								</el-table-column>
 	                            <el-table-column prop="goodsName" label="货物名称" width="180">
 	                            </el-table-column>
-	                            <el-table-column prop="goodsType" label="类别">
+	                            <el-table-column prop="goodsType" label="货物类别">
 	                            </el-table-column>
-	                            <el-table-column prop="goodsSize" label="尺寸">
+	                            <el-table-column prop="goodsSize" label="货物尺寸">
 								</el-table-column>
-								<el-table-column prop="goodsValue" label="价格">
+								<el-table-column prop="goodsValue" label="货物价格">
 								</el-table-column>
 	                            <el-table-column label="操作" width="250" style="display: flex;">
 	                                <template slot-scope="scope" v-for="goods in tableData">
@@ -122,6 +113,7 @@
 	<script src="../../assets/js/vue.js"></script>
 	<script src="../../assets/css/element-ui/index.js"></script>
 	<script src="../../assets/js/axios.min.js"></script>
+
 	
 	<script>
 	    new Vue({
@@ -134,15 +126,15 @@
 					dialogFormTitle: "",
 					form: {
 						goodsName: '',
-						type: '',
-						size: '',
-						value: ''
+						goodsType: '',
+						goodsSize: '',
+						goodsValue: ''
 					},
 					formLabelWidth: '120px',
 					isAdd: false,
 					currentPage: 1, // 当前页码
 					total: 20, // 总条数
-					pageSize: 5 // 每页的数据条数
+					pageSize: 5,// 每页的数据条数
 
 	            }
 	        },
@@ -164,6 +156,18 @@
 						this.tableData = res.data ;
 					});
 				},
+
+				<!--导出excel-->
+				exportExcel(){
+					window.open("http://localhost:8080/goods/exportExcel");
+				},
+
+				<!--导入excel-->
+				importExcel(){
+					this.$message.success("导入excel成功！");
+					this.load();
+				},
+
 
                 <!--删除-->
 				removeGoodsById(index) {
@@ -255,7 +259,7 @@
 					console.log(`当前页: ${val}`);
 					this.currentPage = val;
 				}
-	        },
+	        }
 
 
 	    })
