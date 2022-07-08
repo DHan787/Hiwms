@@ -40,6 +40,7 @@
                         <el-button type="primary" plain style="margin:15px 20px;" @click="like()"
                                    icon="el-icon-search">查询订单
                         </el-button>
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
                     </el-row>
                 </div>
 
@@ -237,6 +238,13 @@
                     this.tableData = res.data;
                 });
             },
+
+            <!--导出excel-->
+            exportExcel(){
+                window.open("http://localhost:8080/orders/exportExcel");
+            },
+
+
             getOperatorName() {
                 axios.get("http://localhost:8080/users/getByRole?userRole=3").then(res => {
                     //console.log("res:",res);

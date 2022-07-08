@@ -1,6 +1,8 @@
 package com.example.controller;
 
 
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.OrdersDao;
 import com.example.dao.GoodsDao;
@@ -12,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -146,5 +151,41 @@ public class OrdersController {
     public List<Orders> getAllList(@RequestParam String ordersId) {
         System.out.println(ordersId);
         return ordersDao.selectOrdersId("%" + ordersId + "%");
+    }
+
+    /**
+     * excel导出
+     * @param response
+     * @throws Exception
+     */
+    @GetMapping("/exportExcel")
+    public void exportExcel(HttpServletResponse response) throws Exception {
+        //查询所有数据
+        List<Orders> list = ordersService.list();
+        //在内存操作，写出到浏览器，从浏览器下载
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        //自定义标题名
+        writer.addHeaderAlias("orderId", "订单编号");
+        writer.addHeaderAlias("orderType", "订单类型");
+        writer.addHeaderAlias("orderStartTime", "订单开始时间");
+        writer.addHeaderAlias("orderEndTime", "订单结束时间");
+        writer.addHeaderAlias("orderInit", "订单创建人");
+        writer.addHeaderAlias("orderOperator", "订单操作员");
+        writer.addHeaderAlias("orderStatus", "订单状态");
+
+        //一次性写出list内的对象到excel，使用默认格式，强制输出标题
+        writer.write(list,true);
+
+        //设置浏览器响应格式
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+        String fileName = URLEncoder.encode("订单信息","UTF-8");
+        response.setHeader("Content-Disposition","attachment;filename="+fileName+".xlsx");
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        writer.flush(outputStream,true);
+
+        //关闭流
+        outputStream.close();
+        writer.close();
     }
 }

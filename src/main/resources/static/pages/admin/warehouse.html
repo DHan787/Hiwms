@@ -41,6 +41,7 @@
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">
                             新增仓库
                         </el-button>
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
                     </el-row>
 
                     <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -77,9 +78,9 @@
                         </el-table-column>
                         <el-table-column prop="warehouseLocation" label="仓库位置">
                         </el-table-column>
-                        <el-table-column prop="warehouseType" label="类别">
+                        <el-table-column prop="warehouseType" label="仓库类别">
                         </el-table-column>
-                        <el-table-column prop="warehouseSize" label="大小">
+                        <el-table-column prop="warehouseSize" label="仓库大小">
                         </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="warehouse in tableData">
@@ -153,6 +154,11 @@
                 axios.get("http://localhost:8080/warehouse/like?warehouseName=" + this.warehouseName).then(res => {
                     this.tableData = res.data;
                 });
+            },
+
+            <!--导出excel-->
+            exportExcel(){
+                window.open("http://localhost:8080/warehouse/exportExcel");
             },
 
             removeWarehouseById(index) {
