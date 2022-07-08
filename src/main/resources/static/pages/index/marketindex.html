@@ -86,22 +86,23 @@
 
                             <!--用户-->
                             <div class="all">
-                                <div><a href="../stock-in-apply.html" title="跳转至入库申请页面">
-                                    <el-image :src="src2" class="in">
-                                        <div slot="placeholder" class="image-slot">
-                                            加载中<span class="dot">...</span>
-                                        </div>
-                                    </el-image>
-                                </a><!--订单-->
+                                <div>
+                                    <el-tooltip content="入库申请" placement="bottom"><a href="../stock-in-apply.html">
+                                        <el-image :src="src2" class="in">
+                                            <div slot="placeholder" class="image-slot">
+                                                加载中<span class="dot">...</span>
+                                            </div>
+                                        </el-image>
+                                    </a></el-tooltip><!--订单-->
                                 </div>
                                 <div>
-                                    <a href="../stock-out-apply.html" title="跳转至出库申请页面">
+                                    <el-tooltip content="出库申请" placement="bottom"><a href="../stock-out-apply.html">
                                         <el-image :src="src3" class="out">
                                             <div slot="placeholder" class="image-slot">
                                                 加载中<span class="dot">...</span>
                                             </div>
                                         </el-image>
-                                    </a>
+                                    </a></el-tooltip>
                                 </div>
 
 
