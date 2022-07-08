@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.List;
+
 @Slf4j
 @CrossOrigin
 @RestController
@@ -27,8 +28,10 @@ public class GoodsController {
     private GoodsService goodsService;
     @Autowired
     private GoodsDao goodsDao;
+
     /**
      * 获取全部货品
+     *
      * @return
      */
     @GetMapping//访问方式
@@ -40,6 +43,7 @@ public class GoodsController {
 
     /**
      * 根据id获取货物
+     *
      * @param id
      * @return
      */
@@ -50,11 +54,12 @@ public class GoodsController {
 
     /**
      * 删除货物
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id){
+    public boolean delete(@PathVariable int id) {
 
         return goodsService.removeById(id);
 
@@ -62,31 +67,33 @@ public class GoodsController {
 
     /**
      * 保存用户
+     *
      * @param goods
      * @return
      */
     @PostMapping
-    public boolean saveGoods(@RequestBody Goods goods){
+    public boolean saveGoods(@RequestBody Goods goods) {
         System.out.println("save!");
         return goodsService.save(goods);
     }
 
     /**
-     *更新商品信息
+     * 更新商品信息
+     *
      * @param goods 商品对象
      * @return if success
      */
     @PutMapping
-    public boolean updateGoods(@RequestBody Goods goods){
+    public boolean updateGoods(@RequestBody Goods goods) {
         System.out.println(goods.getGoodsName());
         return goodsService.updateById(goods);
     }
 
     //模糊查询
     @GetMapping("/like")
-    public List<Goods> getAllList(@RequestParam String goodsName){
+    public List<Goods> getAllList(@RequestParam String goodsName) {
         System.out.println(goodsName);
-        return goodsDao.selectGoodsName("%"+goodsName+"%");
+        return goodsDao.selectGoodsName("%" + goodsName + "%");
     }
 
     /**
