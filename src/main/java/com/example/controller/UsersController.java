@@ -73,11 +73,23 @@ public class UsersController {
             if (value.getUserName().equals(users.getUserName()))
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
 //                    System.out.println("role is:" + value.getUserRole());
-                    request.getSession().setAttribute("users",value.getUserRole());
+                    request.getSession().setAttribute("users",value);
+                    System.out.println("set:"+request.getSession().getAttribute("users"));
                     return value.getUserRole();
                 }
         }
         return 0;
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "user/login.html";
     }
 
     /**

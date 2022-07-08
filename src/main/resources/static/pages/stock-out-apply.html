@@ -104,7 +104,7 @@
 						})
 					} else {
 						for (var i = 0; i < this.tableDataSelections.length; i++) {
-							if ((this.tableDataSelections[i].stockOutNumber) == undefined) { //数量不能为0
+							if ((this.tableDataSelections[i].stockOutNumber) === undefined) { //数量不能为0
 								this.$confirm('出库数量不能为0！', '提示', {
 									confirmButtonText: '确定',
 									type: 'warning'

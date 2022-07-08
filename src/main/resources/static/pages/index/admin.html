@@ -81,7 +81,7 @@
 							<a href="../login.html">
 								<el-menu-item index="6">
 									<i class="el-icon-warning-outline"></i>
-									<span slot="title">退出登录</span>
+									<span slot="title" @click="logout">退出登录</span>
 								</el-menu-item>
 							</a>
 
@@ -125,6 +125,11 @@
 					var ifm = document.getElementById("bi_iframe");
 					ifm.height = document.documentElement.clientHeight;
 					ifm.width = document.documentElement.clientWidth;
+				},
+				logout(){
+					axios.request("http://localhost:8080/users/logout").then(res => {
+						window.location.href(res)
+					});
 				},
 
 				openUrl(url) {
