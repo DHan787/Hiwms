@@ -13,21 +13,21 @@
 
         <el-container>
             <!-- 主体 -->
-            <el-main >
+            <el-main>
                 <el-breadcrumb style="margin-bottom: 12px;">
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
                 </el-breadcrumb>
                 <el-card class="box-card" style="margin-bottom: 12px;">
                     <div class="card-container">
-                        <div >
-                            <el-image :src="src1" class="ava" >
+                        <div>
+                            <el-image :src="src1" class="ava">
                                 <div slot="placeholder" class="image-slot">
                                     加载中<span class="dot">...</span>
                                 </div>
                             </el-image>
                             <div class="box">
                                 <div class="admin-info">
-                                    <h3 >早安，汇安人，开始您一天的工作吧！</h3>
+                                    <h3>早安，汇安人，开始您一天的工作吧！</h3>
                                     <div class="weather">
                                         <i class="el-icon-heavy-rain"></i>
                                         <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
@@ -45,7 +45,7 @@
 
 
                             </el-image>
-                            <div class="title1"><h3 >数据统计</h3>
+                            <div class="title1"><h3>数据统计</h3>
                             </div>
 
 
@@ -54,7 +54,7 @@
                                     <div class="bg2">
                                         <h4 style="margin-top: 20px">今日入库订单剩余</h4>
                                     </div>
-                                    <div class="bg2" >
+                                    <div class="bg2">
                                         <h4 style="margin-top: 20px">今日出库订单剩余</h4>
                                     </div>
                                 </div>
@@ -85,20 +85,22 @@
 
 
                             <!--用户-->
-                            <div class="all" >
-                                <div><a href="../operator/stock-in.html" title="跳转至入库页面"> <el-image :src="src2" class="in" >
-                                    <div slot="placeholder" class="image-slot">
-                                        加载中<span class="dot">...</span>
-                                    </div>
-                                </el-image>
-                                </a><!--订单-->
-                                </div>
-                                <div>
-                                    <a href="../operator/stock-out.html" title="跳转至出库页面"> <el-image :src="src3" class="out" >
+                            <div class="all">
+                                <div><a href="../operator/stock-in.html" title="跳转至入库页面">
+                                    <el-image :src="src2" class="in">
                                         <div slot="placeholder" class="image-slot">
                                             加载中<span class="dot">...</span>
                                         </div>
                                     </el-image>
+                                </a><!--订单-->
+                                </div>
+                                <div>
+                                    <a href="../operator/stock-out.html" title="跳转至出库页面">
+                                        <el-image :src="src3" class="out">
+                                            <div slot="placeholder" class="image-slot">
+                                                加载中<span class="dot">...</span>
+                                            </div>
+                                        </el-image>
                                     </a>
                                 </div>
 
@@ -137,7 +139,7 @@
             return {
                 src1: '../../assets/pics/head2.jpg',
                 src2: '../../assets/pics/in.jpg',
-                src3:'../../assets/pics/out.jpg',
+                src3: '../../assets/pics/out.jpg',
                 src6: '../../assets/pics/src6.jpg',
                 src7: '../../assets/pics/link.jpg',
                 src8: '../../assets/pics/bell.jpg',
@@ -154,9 +156,7 @@
         created() {
 
         },
-        methods: {
-
-        }
+        methods: {}
     })
 </script>
 </html>

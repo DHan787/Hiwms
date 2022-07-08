@@ -15,7 +15,7 @@
     <tr>
         <td>
             <table>商品名：</table>
-            <input type="number" v-model="formData.id" >
+            <input type="number" v-model="formData.id">
         </td>
         <td>
             <table>商品数量：</table>
@@ -28,36 +28,38 @@
 <script>
     new Vue({
         el: "#app",
-        data:{
-            info:{},
-            formData:{}
+        data: {
+            info: {},
+            formData: {}
         },
-        created(){
+        created() {
             // this.getAll();
         },
 
-        methods:{
+        methods: {
             //查询所有
-            getAll(){
-                axios.get("http://localhost:8080/usersDetail/"+formData.id).then(res=>{
-                    this.info=res.data;
+            getAll() {
+                axios.get("http://localhost:8080/usersDetail/" + formData.id).then(res => {
+                    this.info = res.data;
                     console.log(this.info)
                 });
             },
 
-            submitForm(){
-                axios.post("http://localhost:8080/usersDetail/"+id).then(rel=>{
-                    if(rel.data){
+            submitForm() {
+                axios.post("http://localhost:8080/usersDetail/" + id).then(rel => {
+                    if (rel.data) {
                         alert(rel.data);
                         // window.location.href=("admin.html")
-                    }else{alert(rel.data)}
+                    } else {
+                        alert(rel.data)
+                    }
 
                 })
             },
-            getById(){
+            getById() {
                 var id = this.formData.id;
-                axios.get("http://localhost:8080/usersDetail/"+id).then(res=>{
-                    this.info=res.data;
+                axios.get("http://localhost:8080/usersDetail/" + id).then(res => {
+                    this.info = res.data;
                     console.log(this.info)
                 });
             }

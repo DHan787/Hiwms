@@ -37,6 +37,14 @@ public class Goods {
         return goodsType;
     }
 
+    public Integer getGoodsNumber() {
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(Integer goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
+
     public void setGoodsType(String goodsType) {
         this.goodsType = goodsType;
     }

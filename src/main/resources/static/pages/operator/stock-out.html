@@ -2,7 +2,7 @@
 <html lang="">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/goods.css" >
+    <link rel="stylesheet" href="../../assets/css/goods.css">
     <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <title></title>
 </head>
@@ -13,8 +13,8 @@
             <!-- 主体 -->
             <el-main>
                 <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item><a href="../pages/index.html" >首页</a></el-breadcrumb-item>
-                    <el-breadcrumb-item><a href="#">业务流</a> </el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="../pages/index.html">首页</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
                     <el-breadcrumb-item>出库信息</el-breadcrumb-item>
                 </el-breadcrumb>
 
@@ -30,21 +30,23 @@
                                 <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
                                 <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
                             </el-table>
-							<div slot="footer" class="dialog-footer">
-								<el-button @click="dialogFormVisible = false">取 消</el-button>
-								<el-button type="primary" style="float: right;" plain @click="handleStockOut" icon="el-icon-document-checked">出库</el-button>
-							</div>
-                            
+                            <div slot="footer" class="dialog-footer">
+                                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                                <el-button type="primary" style="float: right;" plain @click="handleStockOut"
+                                           icon="el-icon-document-checked">出库
+                                </el-button>
+                            </div>
+
                         </el-dialog>
 
                     </div>
                 </div>
 
 
-
                 <!--表单区域-->
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                              style="width: 100%; ">
                         <el-table-column prop="orderId" label="订单编号" width="180">
                         </el-table-column>
 
@@ -62,7 +64,9 @@
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="orders in tableData">
 
-                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-info">查看详情</el-button>
+                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-info">
+                                    查看详情
+                                </el-button>
                                 <!--<el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>-->
                             </template>
                         </el-table-column>
@@ -89,7 +93,7 @@
 <script>
     new Vue({
         el: '#app',
-        data: function() {
+        data: function () {
             return {
                 tableData: [],
                 dialogFormVisible: false,
@@ -102,27 +106,26 @@
             }
         },
 
-        created(){
+        created() {
             this.getAll();
         },
 
         methods: {
-            getAll(){
+            getAll() {
                 //console.log("orderType:{}",orderType);
-                axios.get("http://localhost:8080/orders/getByType?orderType=2&orderStatus=21").then(res=>{
-                    this.tableData = res.data ;
+                axios.get("http://localhost:8080/orders/getByType?orderType=2&orderStatus=21").then(res => {
+                    this.tableData = res.data;
                     /*console.log(this.tableData);*/
                 });
             },
-
 
 
             viewClick(index) {
                 this.dialogFormVisible = true;
                 var orderId = this.tableData[index].orderId;
                 this.tableIndex = index;
-                axios.get("http://localhost:8080/stockOut/getByOrderId?orderId="+orderId).then(res=>{
-                    this.gridData = res.data ;
+                axios.get("http://localhost:8080/stockOut/getByOrderId?orderId=" + orderId).then(res => {
+                    this.gridData = res.data;
                     console.log(this.gridData);
                 });
             },
@@ -132,9 +135,9 @@
                 var goodsName = this.gridData[0].goodsName;
                 var goodsNumber = this.gridData[0].goodsNumber;
                 console.log(goodsNumber);
-                console.log("handleStockIn中的index",this.tableIndex);
+                console.log("handleStockIn中的index", this.tableIndex);
                 <!--出库，更新库存-->
-                axios.put("http://localhost:8080/inventory/stockOut?goodsName="+goodsName+"&goodsNumber="+goodsNumber).then(res=>{
+                axios.put("http://localhost:8080/inventory/stockOut?goodsName=" + goodsName + "&goodsNumber=" + goodsNumber).then(res => {
                     if (res.data) {
                         // console.log(this.tableData[index]);
                         this.$message({
@@ -170,42 +173,41 @@
                 });
 
             }
-    },
+        },
 
-            formatStatus(row) {
-                switch (row.orderStatus) {
-                    case 10:
-                        return "未入库"
-                        break
-                    case 11:
-                        return "入库中"
-                        break
-                    case 12:
-                        return "已入库"
-                        break
-                    case 20:
-                        return "未出库"
-                        break
-                    case 21:
-                        return "出库中"
-                        break
-                    case 22:
-                        return "已出库"
-                        break
-                    default:
-                        return "未知"
-                        break
-                }
-            },
-
-            formatInit(row){
-                if(row.orderInit === 11){
-                    return "管理员Anna"
-                }
-                else{
+        formatStatus(row) {
+            switch (row.orderStatus) {
+                case 10:
+                    return "未入库"
+                    break
+                case 11:
+                    return "入库中"
+                    break
+                case 12:
+                    return "已入库"
+                    break
+                case 20:
+                    return "未出库"
+                    break
+                case 21:
+                    return "出库中"
+                    break
+                case 22:
+                    return "已出库"
+                    break
+                default:
                     return "未知"
-                }
-            },
+                    break
+            }
+        },
+
+        formatInit(row) {
+            if (row.orderInit === 11) {
+                return "管理员Anna"
+            } else {
+                return "未知"
+            }
+        },
 
         //每页条数改变时触发 选择一页显示多少行
         handleSizeChange(val) {
