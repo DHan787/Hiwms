@@ -3,7 +3,7 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.example.controller.vo.EchartsVo;
+import com.example.vo.InventoryVo;
 import com.example.dao.InventoryDao;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
@@ -138,19 +138,19 @@ public class InventoryController {
      * @return
      */
     @GetMapping("/getBarList")
-    public EchartsVo getInventoryBarList() {
+    public InventoryVo getInventoryBarList() {
         List<Inventory> inventories = inventoryService.list();
 
-        EchartsVo echartsVo = new EchartsVo();
+        InventoryVo inventoryVo = new InventoryVo();
         List<String> names = new ArrayList<>();
         List<String> values = new ArrayList<>();
         for (Inventory inventory : inventories) {
             names.add(inventory.getGoodsName());
             values.add(inventory.getGoodsNumber());
         }
-        echartsVo.setName(names);
-        echartsVo.setValue(values);
-        return echartsVo;
+        inventoryVo.setName(names);
+        inventoryVo.setValue(values);
+        return inventoryVo;
     }
 
 }

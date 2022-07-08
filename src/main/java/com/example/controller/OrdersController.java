@@ -2,20 +2,20 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.vo.InventoryVo;
 import com.example.dao.OrdersDao;
-import com.example.dao.GoodsDao;
-import com.example.dao.OrdersDao;
-import com.example.domain.Goods;
 import com.example.domain.Orders;
 import com.example.service.OrdersService;
+import com.example.vo.OrderVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 @Slf4j
 @CrossOrigin
@@ -132,10 +132,70 @@ public class OrdersController {
         return orders;
     }
 
-    //模糊查询
+    /**
+     * 模糊查询
+     * @param ordersId
+     * @return
+     */
     @GetMapping("/like")
     public List<Orders> getAllList(@RequestParam String ordersId){
         System.out.println(ordersId);
         return ordersDao.selectOrdersId("%"+ordersId+"%");
     }
+
+    /**
+     * 获取制作订单图表所需的数据
+     * @return
+     */
+    @GetMapping("/getOrderChar")
+    public OrderVo getOrderChar(){
+        List<Orders> orders = ordersService.list();
+
+        OrderVo orderVo = new OrderVo();
+        List<String> orderDate = new ArrayList<>(); //订单的下单日期
+        List<Integer> stockInOrders = new ArrayList<>();
+        List<Integer> stockOutOrders = new ArrayList<>();
+
+
+        for(Orders orders1: orders) {
+            //获取订单的下单时间
+            String orderStartTime = orders1.getOrderStartTime();
+            //获取订单的下单日期
+            String orderStartDate = orderStartTime.substring(0,orderStartTime.indexOf(" "));
+            orderDate.add(orderStartDate);
+        }
+
+        //日期去重
+        HashSet<String> hashSet = new HashSet<String>(orderDate);
+        List<String> newDate = new ArrayList<>();
+        newDate.addAll(hashSet);
+
+        for(String time1 : newDate){
+
+                QueryWrapper<Orders> wrapper1 = new QueryWrapper<>();
+                wrapper1.eq("order_type",1).like("order_start_time",time1);
+                List<Orders> orderList1 = ordersDao.selectList(wrapper1);
+                //Integer stockInCount = ordersDao.selectCount(wrapper1);
+                Integer stockInCount = orderList1.size();
+                stockInOrders.add(stockInCount);
+
+
+                QueryWrapper<Orders> wrapper2 = new QueryWrapper<>();
+                wrapper2.eq("order_type",2).like("order_start_time",time1);
+                List<Orders> orderList2 = ordersDao.selectList(wrapper2);
+                //Integer stockOutCount = ordersDao.selectCount(wrapper2);
+                Integer stockOutCount = orderList2.size();
+                stockOutOrders.add(stockOutCount);
+
+        }
+        log.info("stockInOrders为：{}",stockInOrders);
+        log.info("stockOutOrders为：{}",stockOutOrders);
+
+        orderVo.setTime(newDate);
+        orderVo.setStockInOrder(stockInOrders);
+        orderVo.setStockOutOrder(stockOutOrders);
+
+        return orderVo;
+    }
+
 }

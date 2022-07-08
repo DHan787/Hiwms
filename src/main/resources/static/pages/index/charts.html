@@ -2,80 +2,148 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/charts.css" />
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
 		<script src="../../assets/js/echarts.js"></script>
 		<title></title>
 	</head>
 	<body>
-		<div id='app'>
-		<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-		  <div id="charts" style="width: 600px;height:400px;"></div>
-		</div>
+	<div id="app">
+		<el-container>
+			<!-- 主体 -->
+			<el-main>
+				<el-breadcrumb style="margin-bottom: 12px;">
+					<el-breadcrumb-item><a href="../index/index.html">首页</a></el-breadcrumb-item>
+					<el-breadcrumb-item><a href="#">控制台</a> </el-breadcrumb-item>
+				</el-breadcrumb>
+
+
+					<div class="chart">
+						<template>
+							<el-carousel :interval="4000" type="card" height="400px" width="600px">
+								<el-carousel-item>
+									<div id="inventoryChart" style="width: 600px;height:400px;"></div>
+								</el-carousel-item>
+								<el-carousel-item>
+									<div id="orderChart" style="width: 600px;height:400px;"></div>
+								</el-carousel-item>
+							</el-carousel>
+						</template>
+					</div>
+
+			</el-main>
+		</el-container>
+	</div>
 	</body>
-	
-	
+
+
 	<script src="../../assets/js/vue.js"></script>
 	<script src="../../assets/css/element-ui/index.js"></script>
 	<script src="../../assets/js/axios.min.js"></script>
+
 	<script>
-		/*new Vue({
+		new Vue({
 			el: '#app',
 			data: function () {
 				return {
-					charData: [],
-					nameArr: [],
-					valueArr: []
+
 				}
 			},
 			created() {
-				this.initChart();
+
 			},
 			methods: {
-				initChart(){*/
-					let nameArr = [];
-					let valueArr = [];
-					const char = echarts.init(document.getElementById('charts'));
-					axios.get("http://localhost:8080/inventory/getBarList").then(res=> {
-						this.charData = res.data;
-						for (let i = 0; i < this.charData.name.length; i++) {
-							nameArr[i] = this.charData.name[i];
-							valueArr[i] = this.charData.value[i];
-						}
-						/*nameArr = this.nameArr;
-						valueArr = this.valueArr;*/
-						console.log("nameArr:", nameArr);
-						console.log("valueArr", valueArr);
-						char.setOption({
-							title: {
-								text: '库存商品表'
-							},
-							tooltip: {},
-							legend: {
-								data: ['货物库存数量']
-							},
-							xAxis: {
-								name: '货物名',
-								data: nameArr
-							},
-							yAxis: {
-								name: '货物库存数量',
-							},
-							series: [
-								{
-									name: '货物库存数量',
-									type: 'bar',
-									data: valueArr,
-									barWidth: '20%'//柱条占总类目的宽度
-									/* itemStyle: {
-										color: ''
-									} */
-								}
-							]
-						})
-					})
-	/*				})
-				}
-				
+
 			}
-		})*/
+		})
+	</script>
+
+	<!--库存商品柱状图-->
+	<script>
+		let nameArr = [];
+		let valueArr = [];
+		const inventoryChart = echarts.init(document.getElementById('inventoryChart'));
+		axios.get("http://localhost:8080/inventory/getBarList").then(res => {
+			this.charData = res.data;
+			for (let i = 0; i < this.charData.name.length; i++) {
+				nameArr[i] = this.charData.name[i];
+				valueArr[i] = this.charData.value[i];
+			}
+			console.log("nameArr:", nameArr);
+			console.log("valueArr", valueArr);
+			inventoryChart.setOption({
+				title: {
+					text: '库存商品表'
+				},
+				tooltip: {},
+				legend: {
+					data: ['货物库存数量']
+				},
+				xAxis: {
+					name: '货物名',
+					data: nameArr
+				},
+				yAxis: {
+					name: '货物库存数量',
+				},
+				series: [{
+					name: '货物库存数量',
+					type: 'bar',
+					data: valueArr,
+					barWidth: '20%' //柱条占总类目的宽度
+					/* itemStyle: {
+						color: ''
+					} */
+				}]
+			})
+		})
+	</script>
+
+	<!--订单折线图-->
+	<script>
+		let timeArr = [];
+		let stockInArr = [];
+		let stockOutArr = [];
+		const orderChart = echarts.init(document.getElementById('orderChart'));
+		axios.get("http://localhost:8080/orders/getOrderChar").then(res => {
+			this.charData = res.data;
+			console.log("res.data", res.data);
+			for (let i = 0; i < this.charData.time.length; i++) {
+				timeArr[i] = this.charData.time[i];
+				stockInArr[i] = this.charData.stockInOrder[i];
+				stockOutArr[i] = this.charData.stockOutOrder[i];
+			}
+			orderChart.setOption({
+				title: {
+					text: '每日新增订单'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					data: ['入库订单', '出库订单']
+				},
+				xAxis: {
+					name: '日期',
+					data: timeArr
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [{
+						name: '入库订单',
+						type: 'line',
+						data: stockInArr
+
+					},
+					{
+						name: '出库订单',
+						type: 'line',
+						data: stockOutArr
+
+					}
+				]
+			})
+		})
 	</script>
 </html>
