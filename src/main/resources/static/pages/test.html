@@ -10,7 +10,7 @@
 <div id="app">
     the test
     <ul>
-        {{info.userTele}}
+        {{info}}
     </ul>
     <tr>
         <td>
@@ -30,18 +30,19 @@
         el: "#app",
         data: {
             info: {},
-            formData: {}
+            formData: {},
+            lista:[]
         },
         created() {
-            // this.getAll();
+             this.getAll();
         },
 
         methods: {
             //查询所有
             getAll() {
-                axios.get("http://localhost:8080/usersDetail/" + formData.id).then(res => {
-                    this.info = res.data;
-                    console.log(this.info)
+                axios.get("http://localhost:8080/warning/warn" ).then(res => {
+                    this.lista = res.data;
+                    console.log(this.lista)
                 });
             },
 
