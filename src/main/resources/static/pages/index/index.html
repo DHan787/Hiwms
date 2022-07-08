@@ -85,34 +85,35 @@
 
 							<!--用户-->
 							<div class="all" >
-							<div><a href="../admin/users.html" title="跳转至用户页面"> <el-image :src="src2" class="users" >
+							<div>
+								<el-tooltip content="用户" placement="bottom"><a href="../admin/users.html" > <el-image :src="src2" class="users" >
 								<div slot="placeholder" class="image-slot">
 									加载中<span class="dot">...</span>
 								</div>
 							</el-image>
-							</a><!--订单-->
-								<a href="../admin/orders.html" title="跳转至订单页面"> <el-image :src="src3" class="orders" >
+								</a></el-tooltip><!--订单-->
+								<el-tooltip content="订单" placement="bottom"><a href="../admin/orders.html" > <el-image :src="src3" class="orders" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 								</el-image>
-								</a>
+								</a></el-tooltip>
 							</div>
 							<div><!--商品-->
-								<a href="../admin/goods.html" title="跳转至商品页面"> <el-image :src="src4" class="goods" >
+								<el-tooltip content="商品" placement="bottom"><a href="../admin/goods.html" > <el-image :src="src4" class="goods" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 
 								</el-image>
-								</a>
+								</a></el-tooltip>
 								<!--仓库-->
-								<a href="../admin/warehouse.html" title="跳转至仓库页面"> <el-image :src="src5" class="warehouse" >
+								<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html" > <el-image :src="src5" class="warehouse" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 								</el-image>
-								</a>
+								</a></el-tooltip>
 							</div>
 
 						</div>
@@ -132,8 +133,6 @@
 							</div>
 							</div>
 							<div class="down">
-								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-								<div id="charts" style="width: 400px;height:270px;"></div>
 							</div>
 						</el-card>
 					</el-main>
@@ -175,50 +174,4 @@
 			}
 		})
 	</script>
-
-
-
-	<script>
-		let nameArr = [];
-		let valueArr = [];
-		const char = echarts.init(document.getElementById('charts'));
-		axios.get("http://localhost:8080/inventory/getBarList").then(res=> {
-			this.charData = res.data;
-			for (let i = 0; i < this.charData.name.length; i++) {
-				nameArr[i] = this.charData.name[i];
-				valueArr[i] = this.charData.value[i];
-			}
-			/*console.log("nameArr:", nameArr);
-			console.log("valueArr", valueArr);*/
-			char.setOption({
-				title: {
-					text: '库存商品表'
-				},
-				tooltip: {},
-				legend: {
-					data: ['货物库存数量']
-				},
-				xAxis: {
-					name: '货物名',
-					data: nameArr
-				},
-				yAxis: {
-					name: '货物库存数量',
-				},
-				series: [
-					{
-						name: '货物库存数量',
-						type: 'bar',
-						data: valueArr,
-						barWidth: '20%'//柱条占总类目的宽度
-						/* itemStyle: {
-                            color: ''
-                        } */
-					}
-				]
-			})
-		})
-
-	</script>
-
 </html>

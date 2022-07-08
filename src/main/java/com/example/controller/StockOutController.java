@@ -31,8 +31,10 @@ public class StockOutController {
     public StockOutController(OrdersController ordersController) {
         this.ordersController = ordersController;
     }
+
     /**
      * 获取全部入库信息
+     *
      * @return
      */
     @GetMapping//访问方式
@@ -42,12 +44,11 @@ public class StockOutController {
     }
 
     /**
-     *
      * @param stockOut
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockOut(@RequestBody StockOut stockOut){
+    public boolean saveStockOut(@RequestBody StockOut stockOut) {
 //        System.out.println(stockOut);
 //        System.out.println("out");
         stockOut.setOrderId(ordersController.initOrders(2)); //type = 2 入库
@@ -57,25 +58,27 @@ public class StockOutController {
 
     /**
      * 根据订单ID得到出库货品信息
+     *
      * @param orderId
      * @return
      */
     @GetMapping("/getByOrderId")
-    public List<StockOut> getByOrderId(@RequestParam Integer orderId){
+    public List<StockOut> getByOrderId(@RequestParam Integer orderId) {
 
         QueryWrapper<StockOut> wrapper = new QueryWrapper<>();
-        wrapper.eq("order_id",orderId);
+        wrapper.eq("order_id", orderId);
         List<StockOut> stockOuts = stockOutDao.selectList(wrapper);
         return stockOuts;
     }
 
     /**
      * 删除出库申请记录
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id){
+    public boolean delete(@PathVariable int id) {
 
         return stockOutService.removeById(id);
 

@@ -2,7 +2,7 @@
 <html lang="">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/inventory.css" >
+    <link rel="stylesheet" href="../../assets/css/inventory.css">
     <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <title>商品库存</title>
 </head>
@@ -13,8 +13,8 @@
             <!-- 主体 -->
             <el-main>
                 <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item><a href="../index/index.html" >首页</a></el-breadcrumb-item>
-                    <el-breadcrumb-item><a href="#">业务流</a> </el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="../index/index.html">首页</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
                     <el-breadcrumb-item>库存管理</el-breadcrumb-item>
 
                 </el-breadcrumb>
@@ -25,10 +25,13 @@
                         <el-form :model="search">
                             <el-row>
                                 <el-col :span='12'>
-                                        <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号" style="width:200px;line-height:68px"></el-input><!-- clearable 输⼊框可清除属性 -->
+                                    <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号"
+                                              style="width:200px;line-height:68px"></el-input>
+                                    <!-- clearable 输⼊框可清除属性 -->
                                 </el-col>
                                 <el-col :span='12'>
-                                    <el-input v-model="goodsName" clearable placeholder="请输⼊货物名称" style="width:200px;line-height:68px"></el-input>
+                                    <el-input v-model="goodsName" clearable placeholder="请输⼊货物名称"
+                                              style="width:200px;line-height:68px"></el-input>
                                 </el-col>
                             </el-row>
                         </el-form>
@@ -36,42 +39,45 @@
                     <el-row :span="8" align="right">
                         <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增库存</el-button>
+                        <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
                     </el-row>
 
-                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-                            <el-form :model="form" ref="form">
-                                <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goods_Name">
-                                    <el-input v-model="form.goodsName" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodsNumber">
-                                    <el-input v-model="form.goodsNumber" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber" placeholder="请输入货物数量">
-									<el-input-number v-model="form.goodsNumber" :min="1" :max="1000" label="入库数量">
-									</el-input-number>
-                                </el-form-item>
-                                <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
-                                    <el-select v-model="form.warehouseName" placeholder="请选择仓库">
-                                        <el-option v-for="warehouse in options" :label="warehouse.warehouseName"
-                                                   :value="warehouse.warehouseId" :key="warehouse.warehouseId">
-                                        </el-option>
-                                    </el-select>
+                    <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+                        <el-form :model="form" ref="form">
+                            <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goods_Name">
+                                <el-input v-model="form.goodsName" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodsNumber">
+                                <el-input v-model="form.goodsNumber" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber"
+                                          placeholder="请输入货物数量">
+                                <el-input-number v-model="form.goodsNumber" :min="1" :max="1000" label="入库数量">
+                                </el-input-number>
+                            </el-form-item>
+                            <el-form-item label="仓库名称" :label-width="formLabelWidth" prop="warehouseName">
+                                <el-select v-model="form.warehouseName" placeholder="请选择仓库">
+                                    <el-option v-for="warehouse in options" :label="warehouse.warehouseName"
+                                               :value="warehouse.warehouseId" :key="warehouse.warehouseId">
+                                    </el-option>
+                                </el-select>
 
-                                </el-form-item>
+                            </el-form-item>
 
-                            </el-form>
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button v-if="isAdd" type="primary" @click="addInventory">确 定</el-button>
-                                <el-button  v-else type="primary" @click="updateInventoryById">更 新</el-button>
-                            </div>
-                        </el-dialog>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="dialogFormVisible = false">取 消</el-button>
+                            <el-button v-if="isAdd" type="primary" @click="addInventory">确 定</el-button>
+                            <el-button v-else type="primary" @click="updateInventoryById">更 新</el-button>
+                        </div>
+                    </el-dialog>
 
 
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " >
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                              style="width: 100%; ">
                         <el-table-column prop="inventoryId" label="库存编号" width="180">
                         </el-table-column>
                         <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -82,7 +88,8 @@
                         </el-table-column>
                         <el-table-column label="操作" width="250" style="display: flex;">
                             <template slot-scope="scope" v-for="inventory in tableData">
-                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑</el-button>
+                                <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑
+                                </el-button>
                                 <el-button type="danger" plain @click="removeInventoryById(scope.$index)">删除</el-button>
                             </template>
                         </el-table-column>
@@ -91,7 +98,8 @@
 
                     <!-- 分页器 -->
                     <div class="block" style="text-align: center;">
-                        <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                        <el-pagination align='center' @size-change="handleSizeChange"
+                                       @current-change="handleCurrentChange"
                                        :current-page="currentPage"
                                        :page-sizes="[1,5,10,20]"
                                        :page-size="pageSize"
@@ -113,15 +121,15 @@
 <script>
     new Vue({
         el: '#app',
-        data: function() {
+        data: function () {
             return {
                 tableData: {},
-                inventoryId:"",
-                goodsName:"",
+                inventoryId: "",
+                goodsName: "",
                 dialogFormVisible: false,
                 dialogFormTitle: "",
                 form: {
-                    id:'',
+                    id: '',
                     goodsName: '',
                     number: '',
                     warehousename: '',
@@ -138,24 +146,33 @@
             }
         },
 
-            created() {
-                this.getAll()
-                this.getWarehouseName()
-            },
+        created() {
+            this.getAll()
+            this.getWarehouseName()
+        },
 
         methods: {
-            getAll(){
-                axios.get("http://localhost:8080/inventory").then(res=>{
-                    this.tableData = res.data ;
-                });
-            },
-            like(){
-                axios.get("http://localhost:8080/inventory/like?inventoryId="+this.inventoryId+"&goodsName="+this.goodsName).then(res=>{
-
-                       console.log(res);
+            getAll() {
+                axios.get("http://localhost:8080/inventory").then(res => {
                     this.tableData = res.data;
                 });
             },
+
+            <!--模糊查询-->
+            like() {
+                axios.get("http://localhost:8080/inventory/like?inventoryId=" + this.inventoryId + "&goodsName=" + this.goodsName).then(res => {
+
+                    console.log(res);
+                    this.tableData = res.data;
+                });
+            },
+
+            <!--导出excel-->
+            exportExcel(){
+                window.open("http://localhost:8080/inventory/exportExcel");
+            },
+
+
             getWarehouseName() {
                 axios.get("http://localhost:8080/warehouse").then(res => {
                     this.options = res.data;
@@ -197,14 +214,14 @@
             },
 
             removeInventoryById(index) {
-				index = ((this.currentPage-1)*this.pageSize+index)
+                index = ((this.currentPage - 1) * this.pageSize + index)
                 var id = this.tableData[index].inventoryId;
                 this.$confirm('此操作将永久删除该库存, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    axios.delete("http://localhost:8080/inventory/" +id).then(res=> {
+                    axios.delete("http://localhost:8080/inventory/" + id).then(res => {
                         this.getAll();
                     });
                     this.$message({
@@ -227,8 +244,8 @@
             },
 
             addInventory() {
-                axios.post("http://localhost:8080/inventory",this.form).then(rel=>{
-                    if(rel.data){
+                axios.post("http://localhost:8080/inventory", this.form).then(rel => {
+                    if (rel.data) {
                         this.$message({
                             type: 'success',
                             message: '新增成功!'
@@ -236,7 +253,7 @@
                         this.getAll();
                         this.dialogFormVisible = false;
 
-                    }else{
+                    } else {
                         this.$message({
                             type: 'info',
                             message: '新增失败'
@@ -246,18 +263,18 @@
                 })
             },
 
-            editClick(index,row) {
+            editClick(index, row) {
                 this.dialogFormVisible = true;
                 this.dialogFormTitle = "修改库存";
                 this.isAdd = false;
-                this.form = Object.assign({},row);
+                this.form = Object.assign({}, row);
                 this.form.index = index;
             },
 
 
             updateInventoryById() {
-                axios.put("http://localhost:8080/inventory",this.form).then(rel=>{
-                    if(rel.data){
+                axios.put("http://localhost:8080/inventory", this.form).then(rel => {
+                    if (rel.data) {
                         this.$message({
                             type: 'success',
                             message: '修改成功!'
@@ -265,7 +282,7 @@
                         this.getAll();
                         this.dialogFormVisible = false;
 
-                    }else{
+                    } else {
                         this.$message({
                             type: 'info',
                             message: '修改失败'
