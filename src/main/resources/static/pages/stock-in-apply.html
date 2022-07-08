@@ -21,7 +21,8 @@
 						<el-card>
 							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe style="width: 100%; " @selection-change="selectCall"
 								ref="multipleTable">
-								<el-table-column type="selection" width="60"></el-table-column>
+								<!-- reserve-selection分页保留勾选项 -->
+								<el-table-column type="selection" width="60" :reserve-selection="true"></el-table-column>
 								<el-table-column prop="goodsName" label="货物名称" width="180">
 								</el-table-column>
 								<el-table-column prop="goodsNumber" label="货品数量" width="180">
@@ -84,6 +85,9 @@
 					this.tableDataSelections = val;
 					console.log(val);
 					//console.log(tableDataSelections);
+				},			
+				handleclose() {
+				    this.$refs.multipleTable.clearSelection()
 				},
 				apply() {
 					console.log(this.tableDataSelections);
@@ -112,13 +116,13 @@
 									if (res.data) {
 										this.$message({
 											type: 'success',
-											message: '入库成功!'
+											message: '申请入库成功!'
 										});
 										this.getAll();
 									} else {
 										this.$message({
 											type: 'info',
-											message: '入库失败'
+											message: '申请入库失败'
 										});
 									}
 								})
