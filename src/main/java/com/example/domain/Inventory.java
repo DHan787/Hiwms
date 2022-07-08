@@ -10,7 +10,7 @@ public class Inventory {
     @TableId("inventory_id")
     private Integer inventoryId;
     private String goodsName;
-    private String goodsNumber;
+    private Integer goodsNumber;
     private String warehouseName;
 
 
@@ -22,7 +22,7 @@ public class Inventory {
         return goodsName;
     }
 
-    public String getGoodsNumber() {
+    public Integer getGoodsNumber() {
         return goodsNumber;
     }
 
@@ -31,7 +31,7 @@ public class Inventory {
     }
 
 
-    public void setGoodsNumber(String goodsNumber) {
+    public void setGoodsNumber(Integer goodsNumber) {
         this.goodsNumber = goodsNumber;
     }
 
