@@ -145,7 +145,7 @@ public class InventoryController {
         queryWrapper.eq("goods_name", goodsName); //根据货物名称查询到该条记录
         Inventory inventory = inventoryService.getOne(queryWrapper);
 
-        Integer inventoryNumber = Integer.parseInt(inventory.getGoodsNumber()); //将string类型的库存数转换为整型
+        Integer inventoryNumber = inventory.getGoodsNumber(); //将string类型的库存数转换为整型
         log.info("之前的库存数：", inventoryNumber);
         Integer inventoryNumberNew = inventoryNumber + Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
         log.info("入库后的库存数：", inventoryNumberNew);
@@ -169,7 +169,7 @@ public class InventoryController {
         queryWrapper.eq("goods_name", goodsName); //根据货物名称查询到该条记录
         Inventory inventory = inventoryService.getOne(queryWrapper);
 
-        Integer inventoryNumber = Integer.parseInt(inventory.getGoodsNumber()); //将string类型的库存数转换为整型
+        Integer inventoryNumber = inventory.getGoodsNumber(); //将string类型的库存数转换为整型
         log.info("之前的库存数：", inventoryNumber);
         Integer inventoryNumberNew = inventoryNumber - Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
         log.info("入库后的库存数：", inventoryNumberNew);
@@ -195,7 +195,7 @@ public class InventoryController {
         List<String> values = new ArrayList<>();
         for (Inventory inventory : inventories) {
             names.add(inventory.getGoodsName());
-            values.add(inventory.getGoodsNumber());
+            values.add(inventory.getGoodsNumber().toString());
         }
         inventoryVo.setName(names);
         inventoryVo.setValue(values);
