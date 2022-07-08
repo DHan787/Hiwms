@@ -9,8 +9,8 @@ import lombok.Data;
 public class LowWarning {
     @TableId("goods_id")
 //    库存id
-    private int goods_id;
+    private Integer goodsId;
 //    最低库存量
-    private int minNum;
+    private Integer minNum;
 
 }
