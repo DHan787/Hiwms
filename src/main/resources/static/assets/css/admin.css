@@ -7,14 +7,43 @@
             background-color: #E9EEF3;
             color: #333;
 
+
         }
+        .el-menu-vertical-demo el-menu{
+            background-image: url("../pics/5.jpg");
+        }
+        .el-menu-item-group__title{
+            background-image: url("../pics/5.jpg");
+        }
+
 
         .el-header {
             background-color: #FFFFFF;
             color: #333;
             line-height: 60px;
             padding-left: 0px;
+            background-image: url("../pics/5.jpg");
+            background-size:1600px;
 
+        }
+        .el-submenu__title{
+            background-image: url("../pics/5.jpg");
+        }
+        .el-menu-item{
+            background-image: url("../pics/5.jpg");
+        }
+
+        .el-icon-s-help{
+            background-image: url("../pics/5.jpg");
+        }
+        .el-icon-view{
+            background-image: url("../pics/5.jpg");
+        }
+        .el-icon-setting{
+            background-image: url("../pics/5.jpg");
+        }
+        .el-icon-warning-outline{
+            background-image: url("../pics/5.jpg");
         }
 
         .logo {
@@ -79,8 +108,10 @@
 
         }
         .el-menu-vertical-demo{
-            background-image: url("../pics/4.jpg");
+            background-image: url("../pics/5.jpg");
+            background-size: 1600px;
         }
+
 
 
 
