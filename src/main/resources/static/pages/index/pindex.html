@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/css/pindex.css">
     <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <title></title>
+    <style>
+        #thp{
+            width: 60px;
+            height: 60px;
+            background-color: antiquewhite;
+            border-radius: 60px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -21,11 +30,24 @@
                 <el-card class="box-card" style="margin-bottom: 12px;">
                     <div class="card-container">
 
+
                         <el-image :src="src" class="ava">
                             <div slot="placeholder" class="image-slot">
                                 加载中<span class="dot">...</span>
                             </div>
                         </el-image>
+
+<!--                        <form action="http://localhost:8080/api/profilePhotoUpload" method="post" enctype="multipart/form-data">-->
+<!--                            <input type="file" value="选择头像" name="files"/>-->
+<!--                            <p></p>-->
+<!--                            <input type="submit" value="上传">-->
+<!--                        </form>-->
+
+<!--                        <div id="thp">-->
+<!--                            <img th:src="${thps}" style="width: 60px;height: 60px;overflow: hidden"/>-->
+<!--                        </div>-->
+
+
                         <div class="admin-info1" style="display: inline">
                             <h3>您好，感谢您每天的辛勤付出！</h3>
                             <div class="weather">
