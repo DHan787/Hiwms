@@ -1,4 +1,4 @@
-package com.example.controller.vo;
+package com.example.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EchartsVo implements Serializable {
+public class InventoryVo implements Serializable {
     //柱状图的名称集合
     private List<String> name;
     //柱状图的数量集合
