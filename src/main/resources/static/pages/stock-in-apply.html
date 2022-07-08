@@ -21,7 +21,7 @@
                 <el-card>
                     <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
                               style="width: 100%; " @selection-change="selectCall"
-                              ref="multipleTable">
+                              ref="multipleTable" >
                         <!-- reserve-selection分页保留勾选项 -->
                         <el-table-column type="selection" width="60" :reserve-selection="true"></el-table-column>
                         <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -112,7 +112,7 @@
                             })
                         } else {
                             //console.log('name:' + this.tableDataSelections[i].goodsName);
-                            //this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
+                            this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockInNumber;
                             item = this.tableDataSelections[i];
                             //console.log('number:' + this.tableDataSelections[i].goodsNumber);
                             axios.post("http://localhost:8080/stockIn/save", item).then(res => {
@@ -121,6 +121,7 @@
                                         type: 'success',
                                         message: '申请入库成功!'
                                     });
+									this.$refs.multipleTable.clearSelection();
                                     this.getAll();
                                 } else {
                                     this.$message({
