@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <link rel="stylesheet" href="../../assets/css/adminindex.css">
     <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <link rel="shortcut icon" href="../../assets/pics/logo2.png">
     <title>管理员页面</title>
@@ -11,7 +11,7 @@
 <div id="app">
     <el-container>
 
-        <el-header>
+        <el-header style="height: 80px">
             <!--					TODO: 假的，需要加token后续实现-->
             <a href="personal.html">
                 <div class="head">
@@ -33,17 +33,17 @@
                 <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
                          background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
 
-                    <el-menu-item index="1">
+                    <el-menu-item index="1" >
                         <i class="el-icon-menu"></i>
                         <span slot="title" @click="openUrl('./index.html')">主页</span>
                     </el-menu-item>
 
 
-							<el-menu-item index="2">
+							<el-menu-item index="2" >
 								<i class="el-icon-s-help"></i>
-								<span slot="title"  @click="openUrl('./charts.html')">控制台</span>
+								<span slot="title"  @click="openUrl('./charts.html')" style="">控制台</span>
 							</el-menu-item>
-							<el-submenu index="3">
+							<el-submenu index="3" >
 								<template slot="title">
 									<i class="el-icon-view"></i>
 									<span slot="title" >业务流</span>
