@@ -1,178 +1,177 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/home.css">
-    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-    <script src="../../assets/js/echarts.js"></script>
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/home.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<script src="../../assets/js/echarts.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
 
-        <el-container>
-            <!-- 主体 -->
-            <el-main>
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item>首页</el-breadcrumb-item>
-                </el-breadcrumb>
-                <el-card class="box-card" style="margin-bottom: 12px;">
-                    <div class="card-container">
-                        <div>
-                            <el-image :src="src1" class="ava">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-                            </el-image>
-                            <div class="box">
-                                <div class="admin-info">
-                                    <h3>早安，汇安人，开始您一天的工作吧！</h3>
-                                    <div class="weather">
-                                        <i class="el-icon-heavy-rain"></i>
-                                        <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
+				<el-container>
+					<!-- 主体 -->
+					<el-main >
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item>首页</el-breadcrumb-item>
+						</el-breadcrumb>
+						<el-card class="box-card" style="margin-bottom: 12px;">
+							<div class="card-container">
+								<div >
+								<el-image :src="src1" class="ava" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+									<div class="box">
+								<div class="admin-info">
+									<h3 >早安，汇安人，开始您一天的工作吧！</h3>
+									<div class="weather">
+										<i class="el-icon-heavy-rain"></i>
+										<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
+									</div>
+								</div>
+									</div>
+								</div>
+								<br/>
 
-                        <div class="data">
-                            <el-image :src="src6" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-
-
-                            </el-image>
-                            <div class="title1"><h3>数据统计</h3>
-                            </div>
+								<div class="data">
+									<el-image :src="src6" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
 
 
-                            <div class="all">
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">仓库数量</h4>
-                                    </div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">商品库存数量</h4>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">未处理订单数量</h4>
-                                    </div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">已处理订单数量</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="top">
-                            <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-
-                            <el-image :src="src7" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
+									</el-image>
+									<div class="title1"><h3 >数据统计</h3>
+									</div>
 
 
-                            </el-image>
-                            <div class="title1"><h3>快捷入口</h3>
-                            </div>
+									<div class="all">
+										<div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">仓库数量</h4>
+									</div>
+									<div class="bg2" >
+										<h4 style="margin-top: 20px">商品库存数量</h4>
+									</div>
+									</div>
+									<div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">未处理订单数量</h4>
+									</div>
+									<div class="bg2">
+										<h4 style="margin-top: 20px">已处理订单数量</h4>
+									</div>
+									</div>
+								</div>
+
+								</div>
+							<div class="top">
+								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+
+								<el-image :src="src7" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
 
 
-                            <!--用户-->
-                            <div class="all">
-                                <div><a href="../admin/users.html" title="跳转至用户页面">
-                                    <el-image :src="src2" class="users">
-                                        <div slot="placeholder" class="image-slot">
-                                            加载中<span class="dot">...</span>
-                                        </div>
-                                    </el-image>
-                                </a><!--订单-->
-                                    <a href="../admin/orders.html" title="跳转至订单页面">
-                                        <el-image :src="src3" class="orders">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-                                        </el-image>
-                                    </a>
-                                </div>
-                                <div><!--商品-->
-                                    <a href="../admin/goods.html" title="跳转至商品页面">
-                                        <el-image :src="src4" class="goods">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-
-                                        </el-image>
-                                    </a>
-                                    <!--仓库-->
-                                    <a href="../admin/warehouse.html" title="跳转至仓库页面">
-                                        <el-image :src="src5" class="warehouse">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-                                        </el-image>
-                                    </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="report">
-                            <el-image :src="src8" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
+								</el-image>
+									<div class="title1"><h3>快捷入口</h3>
+								</div>
 
 
-                            </el-image>
-                            <div class="title1"><h3>系统公告</h3>
-                            </div>
+							<!--用户-->
+							<div class="all" >
+							<div>
+								<el-tooltip content="用户" placement="bottom"><a href="../admin/users.html" > <el-image :src="src2" class="users" >
+								<div slot="placeholder" class="image-slot">
+									加载中<span class="dot">...</span>
+								</div>
+							</el-image>
+								</a></el-tooltip><!--订单-->
+								<el-tooltip content="订单" placement="bottom"><a href="../admin/orders.html" > <el-image :src="src3" class="orders" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								</a></el-tooltip>
+							</div>
+							<div><!--商品-->
+								<el-tooltip content="商品" placement="bottom"><a href="../admin/goods.html" > <el-image :src="src4" class="goods" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
 
-                        </div>
-                    </div>
-                    <div class="down">
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                src1: '../../assets/pics/head2.jpg',
-                src2: '../../assets/pics/users.jpg',
-                src3: '../../assets/pics/orders.jpg',
-                src4: '../../assets/pics/goods.jpg',
-                src5: '../../assets/pics/warehouse.jpg',
-                src6: '../../assets/pics/src6.jpg',
-                src7: '../../assets/pics/link.jpg',
-                src8: '../../assets/pics/bell.jpg',
-                tableData: [],
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                formLabelWidth: '120px',
-                isAdd: false,
-                charData: [],
-                nameArr: [],
-                valueArr: []
-            }
-        },
-        created() {
+								</el-image>
+								</a></el-tooltip>
+								<!--仓库-->
+								<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html" > <el-image :src="src5" class="warehouse" >
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								</a></el-tooltip>
+							</div>
 
-        },
-        methods: {}
-    })
-</script>
+						</div>
+
+							</div>
+							<div class="report">
+								<el-image :src="src8" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+
+
+								</el-image>
+								<div class="title1"><h3>系统公告</h3>
+							</div>
+
+							</div>
+							</div>
+							<div class="down">
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function () {
+				return {
+					src1: '../../assets/pics/head2.jpg',
+					src2: '../../assets/pics/users.jpg',
+					src3:'../../assets/pics/orders.jpg',
+					src4: '../../assets/pics/goods.jpg',
+					src5: '../../assets/pics/warehouse.jpg',
+					src6: '../../assets/pics/src6.jpg',
+					src7: '../../assets/pics/link.jpg',
+					src8: '../../assets/pics/bell.jpg',
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					formLabelWidth: '120px',
+					isAdd: false,
+					charData: [],
+					nameArr: [],
+					valueArr: []
+				}
+			},
+			created() {
+
+			},
+			methods: {
+
+			}
+		})
+	</script>
 </html>

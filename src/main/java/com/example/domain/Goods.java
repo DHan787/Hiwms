@@ -1,12 +1,13 @@
 package com.example.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.ToString;
 
 @TableName("goods")
 @Data
+@ToString
 public class Goods {
 
     @TableId("goods_id")
@@ -14,7 +15,7 @@ public class Goods {
     private String goodsName;
     private String goodsType;
     private String goodsSize;
-    private Double goodsValue;
+    private String goodsValue;
     private Integer goodsNumber;
 
     public Integer getGoodsId() {
@@ -58,11 +59,11 @@ public class Goods {
         this.goodsSize = goodsSize;
     }
 
-    public Double getGoodsValue() {
+    public String getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(Double goodsValue) {
+    public void setGoodsValue(String goodsValue) {
         this.goodsValue = goodsValue;
     }
 }
