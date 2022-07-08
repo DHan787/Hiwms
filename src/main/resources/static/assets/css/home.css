@@ -1,0 +1,176 @@
+* {
+            margin: 0;
+            padding: 0;
+        }
+
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            position: relative;
+            display: flex;
+
+        }
+
+        .el-header {
+            background-color: #FFFFFF;
+            color: #333;
+            line-height: 60px;
+            padding-left: 0px;
+
+
+
+        }
+
+        .logo {
+            width: 200px;
+            line-height: 60px;
+            color: #fff;
+            font-weight: bolder;
+            padding-left: 50px;
+            box-sizing: border-box;
+            color: #409EFF;
+        }
+
+        .card-container {
+
+            display: flex;
+
+
+
+        }
+
+        .ava {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            vertical-align:middle;
+            position:absolute;
+            margin-left: 10px;
+            display:inline-block;
+        }
+
+
+
+
+
+
+        .admin-info h3 {
+            margin-left: 24px;
+            padding-top: 12px;
+            margin-bottom: 12px;
+            display:inline-block;
+
+
+        }
+
+        .weather {
+            margin-left: 24px;
+        }
+
+        .cell {
+            display: flex;
+        }
+        .all{
+            align-items: center;
+        }
+
+        .top{
+            position: absolute;
+            margin-top: 150px;
+            margin-left: 600px;
+        }
+        .users {
+            width: 80px;
+            height: 95px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .orders {
+            width: 80px;
+            height: 95px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .goods {
+            width: 80px;
+            height: 95px;
+            margin-right: 15px;
+            margin-top: 15px;
+        }
+        .warehouse {
+            width: 80px;
+            height: 95px;
+            margin-left: 15px;
+            margin-top: 15px;
+        }
+        .pics{
+            width: 40px;
+            height: 45px;
+            vertical-align:middle;
+            position:absolute;
+        }
+
+
+        .data{
+            position: absolute;
+            margin-top: 150px;
+            margin-left: 70px;
+            border:solid ;
+            border-color: #d9ecff;
+            border-left: #f5f5ff;
+            border-top: #f5f5ff;
+
+        }
+
+        .bg2{
+            background-color: #ecf0ff;
+            width: 200px;
+            height: 100px;
+            align-items: center;
+            margin-bottom: 40px;
+            display:inline-block;
+            margin-right: 20px;
+        }
+
+
+        .head{
+            float: right;
+            margin-top: 10px;
+        }
+        .h4{
+            display:inline-block;
+            text-align: center;
+
+        }
+        .box{
+            display:inline-block;
+        }
+        .title1{
+            display:inline-block;
+        }
+        .down{
+            margin-top: 450px;
+            margin-left: 40px;
+
+        }
+        .report{
+            position: absolute;
+            margin-top: 150px;
+            margin-left: 870px;
+
+        }
+        .in{
+            width: 80px;
+            height: 95px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        .out{
+            width: 80px;
+            height: 95px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+
+        }

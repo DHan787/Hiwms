@@ -24,6 +24,7 @@ public class UsersInfoController {
 
     /**
      * 获取所有用户信息
+     *
      * @return
      */
     @GetMapping//访问方式
@@ -34,6 +35,7 @@ public class UsersInfoController {
 
     /**
      * 根据id获取用户信息
+     *
      * @param id
      * @return
      */
@@ -46,11 +48,12 @@ public class UsersInfoController {
 
     /**
      * 保存用户信息
+     *
      * @param usersInfo
      * @return
      */
     @PostMapping("/save")
-    public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo, @RequestParam Integer userId){
+    public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo, @RequestParam Integer userId) {
         try {
 
             long timeMillis = System.currentTimeMillis();
@@ -65,11 +68,12 @@ public class UsersInfoController {
 
     /**
      * 更新用户信息
+     *
      * @param usersInfo
      * @return if success
      */
     @PutMapping
-    public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime,@RequestBody UsersInfo usersInfo){
+    public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo) {
 
         //得到UserInfoId
         usersInfo.setUserAltTime(usersInfoAltTime);
@@ -80,17 +84,18 @@ public class UsersInfoController {
 
     /**
      * 删除用户信息
+     *
      * @param userId
      * @return if success
      */
     @DeleteMapping()
-    public boolean deleteUserInfo(@RequestParam Integer userId){
+    public boolean deleteUserInfo(@RequestParam Integer userId) {
 
         long id = userId;
         List<UsersInfo> usersInfoList = usersInfoService.list();
         for (UsersInfo value : usersInfoList
-             ) {
-            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime()))
+        ) {
+            if (value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId, value.getUserAltTime()))
                 id = value.getUsersInfoId();
         }
         return usersInfoService.removeById(id);
@@ -98,13 +103,12 @@ public class UsersInfoController {
 
 
     /**
-     *
-     * @param userId id
+     * @param userId    id
      * @param usersInfo info
      * @return if success
      */
     @PostMapping("/init")
-    public boolean intiUserInfo(@RequestParam Integer userId,@RequestBody UsersInfo usersInfo){
+    public boolean intiUserInfo(@RequestParam Integer userId, @RequestBody UsersInfo usersInfo) {
         long timeMills = System.currentTimeMillis();
         usersInfo.setUserAltTime(timeMills);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));

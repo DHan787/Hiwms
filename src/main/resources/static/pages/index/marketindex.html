@@ -52,21 +52,22 @@
                             <div class="all">
                                 <div>
                                     <div class="bg2">
-                                        <h4 style="margin-top: 20px">仓库数量</h4>
+                                        <h4 style="margin-top: 20px">今日发起入库订单</h4>
                                     </div>
                                     <div class="bg2">
-                                        <h4 style="margin-top: 20px">商品库存数量</h4>
+                                        <h4 style="margin-top: 20px">今日发起出库订单</h4>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="bg2">
-                                        <h4 style="margin-top: 20px">未处理订单数量</h4>
+                                        <h4 style="margin-top: 20px">今日已通过入库订单</h4>
                                     </div>
                                     <div class="bg2">
-                                        <h4 style="margin-top: 20px">已处理订单数量</h4>
+                                        <h4 style="margin-top: 20px">今日已通过出库订单</h4>
                                     </div>
                                 </div>
                             </div>
+
 
                         </div>
                         <div class="top">
@@ -85,39 +86,24 @@
 
                             <!--用户-->
                             <div class="all">
-                                <div><a href="../admin/users.html" title="跳转至用户页面">
-                                    <el-image :src="src2" class="users">
+                                <div><a href="../stock-in-apply.html" title="跳转至入库申请页面">
+                                    <el-image :src="src2" class="in">
                                         <div slot="placeholder" class="image-slot">
                                             加载中<span class="dot">...</span>
                                         </div>
                                     </el-image>
                                 </a><!--订单-->
-                                    <a href="../admin/orders.html" title="跳转至订单页面">
-                                        <el-image :src="src3" class="orders">
+                                </div>
+                                <div>
+                                    <a href="../stock-out-apply.html" title="跳转至出库申请页面">
+                                        <el-image :src="src3" class="out">
                                             <div slot="placeholder" class="image-slot">
                                                 加载中<span class="dot">...</span>
                                             </div>
                                         </el-image>
                                     </a>
                                 </div>
-                                <div><!--商品-->
-                                    <a href="../admin/goods.html" title="跳转至商品页面">
-                                        <el-image :src="src4" class="goods">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
 
-                                        </el-image>
-                                    </a>
-                                    <!--仓库-->
-                                    <a href="../admin/warehouse.html" title="跳转至仓库页面">
-                                        <el-image :src="src5" class="warehouse">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-                                        </el-image>
-                                    </a>
-                                </div>
 
                             </div>
 
@@ -152,10 +138,8 @@
         data: function () {
             return {
                 src1: '../../assets/pics/head2.jpg',
-                src2: '../../assets/pics/users.jpg',
-                src3: '../../assets/pics/orders.jpg',
-                src4: '../../assets/pics/goods.jpg',
-                src5: '../../assets/pics/warehouse.jpg',
+                src2: '../../assets/pics/in.jpg',
+                src3: '../../assets/pics/out.jpg',
                 src6: '../../assets/pics/src6.jpg',
                 src7: '../../assets/pics/link.jpg',
                 src8: '../../assets/pics/bell.jpg',

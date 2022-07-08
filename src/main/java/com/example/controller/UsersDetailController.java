@@ -31,30 +31,30 @@ public class UsersDetailController {
     private UsersController usersController;
     @Autowired
 
-    private  UsersService usersService;
+    private UsersService usersService;
 
-   @Autowired
-   UsersDao usersDao;
     @Autowired
-   UsersInfoDao usersInfoDao;
+    UsersDao usersDao;
+    @Autowired
+    UsersInfoDao usersInfoDao;
 
 
     @GetMapping//访问方式
     public List<UsersDetail> getAll() {
 
-        List<Users> usersList =usersDao.selectList(null);
+        List<Users> usersList = usersDao.selectList(null);
 
-        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+        List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
-        return this.setUsersDetail(usersList,usersInfoList);
+        return this.setUsersDetail(usersList, usersInfoList);
     }
 
 
     /**
      * 装配用户详情
      */
-    public List<UsersDetail> setUsersDetail(List<Users> usersList,List<UsersInfo> usersInfoList) {
-         List<UsersDetail> usersDetailsList = new ArrayList<>();
+    public List<UsersDetail> setUsersDetail(List<Users> usersList, List<UsersInfo> usersInfoList) {
+        List<UsersDetail> usersDetailsList = new ArrayList<>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
@@ -71,8 +71,8 @@ public class UsersDetailController {
                     usersDetail.setUserTele(info.getUserTele());
                     usersDetail.setUserRetailer(info.getUserRetailer());
 
-                   // long timeMillis = System.currentTimeMillis();
-                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
+                    // long timeMillis = System.currentTimeMillis();
+                    usersDetail.setUsersInfoAltTime(info.getUserAltTime());
 
                     if (value.getUserRole() == 1) {
                         usersDetail.setUserRole("管理员");
@@ -88,30 +88,32 @@ public class UsersDetailController {
 //        System.out.println(usersDetail.toString());
         return usersDetailsList;
     }
-    @GetMapping("/{id}")
-    public List<UsersDetail> getById(@PathVariable int id){
-        System.out.println("getDetail");
-        QueryWrapper<Users> queryWrapper =new QueryWrapper<>();
-        queryWrapper.eq("userId",id);
-        List<Users> usersList =usersDao.selectList(queryWrapper);
 
-        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+    @GetMapping("/{id}")
+    public List<UsersDetail> getById(@PathVariable int id) {
+        System.out.println("getDetail");
+        QueryWrapper<Users> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userId", id);
+        List<Users> usersList = usersDao.selectList(queryWrapper);
+
+        List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
-        return this.setUsersDetail(usersList,usersInfoList);
+        return this.setUsersDetail(usersList, usersInfoList);
     }
 
     /**
      * 模糊查询
+     *
      * @param userId
      * @param userName
      * @return usersDetail
      */
     @GetMapping("/like")
-    public List<UsersDetail> getByIds(@RequestParam String userId, @RequestParam String userName){
-        List<Users> usersList = usersDao.selectUsers("%"+userId+"%","%"+userName+"%");
-        List<UsersInfo> usersInfoList=usersInfoDao.selectList(null);
+    public List<UsersDetail> getByIds(@RequestParam String userId, @RequestParam String userName) {
+        List<Users> usersList = usersDao.selectUsers("%" + userId + "%", "%" + userName + "%");
+        List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
         //log.info("users获取的数据，{}",usersService.list());
-        return this.setUsersDetail(usersList,usersInfoList);
+        return this.setUsersDetail(usersList, usersInfoList);
     }
 
 }
