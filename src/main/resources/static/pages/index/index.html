@@ -17,9 +17,10 @@
 						<el-breadcrumb style="margin-bottom: 12px;">
 							<el-breadcrumb-item>首页</el-breadcrumb-item>
 						</el-breadcrumb>
-						<el-card class="box-card" style="margin-bottom: 12px;" >
+
 							<div class="card-container">
 								<div >
+									<el-card class="box-card1">
 								<el-image :src="src1" class="ava" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
@@ -34,10 +35,12 @@
 									</div>
 								</div>
 									</div>
+									</el-card>
 								</div>
 								<br/>
 
 								<div class="data">
+									<el-card class="box-card2">
 									<el-image :src="src6" class="pics">
 										<div slot="placeholder" class="image-slot">
 											加载中<span class="dot">...</span>
@@ -67,9 +70,11 @@
 									</div>
 									</div>
 								</div>
+									</el-card>
 
 								</div>
 							<div class="top">
+								<el-card class="box-card3">
 								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
 
 								<el-image :src="src7" class="pics">
@@ -97,16 +102,18 @@
 										加载中<span class="dot">...</span>
 									</div>
 								</el-image>
-								</a></el-tooltip>
-							</div>
-							<div><!--商品-->
+								</a>
+								</el-tooltip>
+
+							<!--商品-->
 								<el-tooltip content="商品" placement="bottom"><a href="../admin/goods.html" > <el-image :src="src4" class="goods" >
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
 
 								</el-image>
-								</a></el-tooltip>
+								</a>
+								</el-tooltip>
 								<!--仓库-->
 								<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html" > <el-image :src="src5" class="warehouse" >
 									<div slot="placeholder" class="image-slot">
@@ -117,9 +124,10 @@
 							</div>
 
 						</div>
-
+								</el-card>
 							</div>
 							<div class="report">
+								<el-card class="box-card4">
 								<el-image :src="src8" class="pics">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
@@ -129,12 +137,12 @@
 								</el-image>
 								<div class="title1"><h3>系统公告</h3>
 							</div>
-
+								</el-card>
 							</div>
 							</div>
 							<div class="down">
 							</div>
-						</el-card>
+
 					</el-main>
 				</el-container>
 		</div>
