@@ -47,9 +47,6 @@
                             <el-form-item label="货物名称" :label-width="formLabelWidth" prop="goods_Name">
                                 <el-input v-model="form.goodsName" autocomplete="off"></el-input>
                             </el-form-item>
-                            <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodsNumber">
-                                <el-input v-model="form.goodsNumber" autocomplete="off"></el-input>
-                            </el-form-item>
                             <el-form-item label="货物数量" :label-width="formLabelWidth" prop="goodNumber"
                                           placeholder="请输入货物数量">
                                 <el-input-number v-model="form.goodsNumber" :min="1" :max="1000" label="入库数量">
