@@ -2,6 +2,9 @@ package com.example.domain;
 
 import lombok.Data;
 
+/**
+ * @author ginger
+ */
 @Data
 public class UsersDetail {
     private Integer userId;

@@ -9,6 +9,9 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Mapper
 public interface UsersDetailDao extends BaseMapper<UsersDetail> {
 
