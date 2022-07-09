@@ -104,9 +104,26 @@
             }
         },
         created() {
-            this.getAll()
+            this.getAll(),
+                this.getLowWarnList();
         },
         methods: {
+
+            //低库存提醒
+            getLowWarnList(){
+                axios.get("http://localhost:8080/warning/warn").then(res => {
+                    if(res.data!= null && res.data.length > 0){
+                        this.$notify({
+                            title: '低库存提醒',
+                            message: '目前仓库内有货物库存量过低哦！',
+                            position: 'bottom-left',
+                            type: 'warning'
+                        });
+                    }
+                });
+            },
+
+
             adjustIframe() {
                 var ifm = document.getElementById("bi_iframe");
                 ifm.height = document.documentElement.clientHeight;

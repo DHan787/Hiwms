@@ -152,6 +152,8 @@
 * 前端页面美化 wlx
 * 低库存警告Debug login.html debug hj
 
+
 ## 7.9
 * 侧边栏 wlx 
 * 侧边栏 ch
+* 低库存提醒 zls
