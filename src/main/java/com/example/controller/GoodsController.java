@@ -19,6 +19,9 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -32,20 +35,18 @@ public class GoodsController {
     /**
      * 获取全部货品
      *
-     * @return
+     * @return 货物列表
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<Goods> getAll() {
-        //log.info("goods获取的数据，{}",goodsService.list());
-        //System.out.println("used");
         return goodsService.list();
     }
 
     /**
      * 根据id获取货物
      *
-     * @param id
-     * @return
+     * @param id 货物id
+     * @return 货物列表
      */
     @GetMapping("/{id}")
     public Goods getById(@PathVariable int id) {
@@ -55,8 +56,8 @@ public class GoodsController {
     /**
      * 删除货物
      *
-     * @param id
-     * @return
+     * @param id 货物id
+     * @return if success
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
@@ -68,8 +69,8 @@ public class GoodsController {
     /**
      * 保存用户
      *
-     * @param goods
-     * @return
+     * @param goods 实体
+     * @return if success
      */
     @PostMapping
     public boolean saveGoods(@RequestBody Goods goods) {
@@ -89,7 +90,11 @@ public class GoodsController {
         return goodsService.updateById(goods);
     }
 
-    //模糊查询
+    /**
+     * 模糊查询
+     * @param goodsName 名称
+     * @return 获得数组
+     */
     @GetMapping("/like")
     public List<Goods> getAllList(@RequestParam String goodsName) {
         System.out.println(goodsName);
@@ -98,8 +103,8 @@ public class GoodsController {
 
     /**
      * excel导出
-     * @param response
-     * @throws Exception
+     * @param response res
+     * @throws Exception 错误提示
      */
     @GetMapping("/exportExcel")
     public void exportExcel(HttpServletResponse response) throws Exception {
@@ -133,9 +138,8 @@ public class GoodsController {
 
     /**
      * excel导入
-     * @param file
-     * @return
-     * @throws IOException
+     * @param file 文件
+     * @throws IOException 错误
      */
     @PostMapping("/importExcel")
     public Boolean importExcel(MultipartFile file) throws IOException {
@@ -143,7 +147,6 @@ public class GoodsController {
         ExcelReader reader = ExcelUtil.getReader(inputStream);
 
         //方式1：通过JavaBean的方式读取excel内的对象，但是要求表头必须市英文，和JavaBean属性对应
-//        List<User> users = reader.readAll(User.class);
 
         //方式二：忽略表头中文，直接获取表格数据
         List<List<Object>> list = reader.read(1);

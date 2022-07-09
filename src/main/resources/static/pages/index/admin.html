@@ -83,6 +83,10 @@
                         <span slot="title" @click="logout">退出登录</span>
                     </el-menu-item>
 
+					<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+						<el-radio-button :label="false">展开</el-radio-button>
+						<el-radio-button :label="true">收起</el-radio-button>
+					</el-radio-group>
 
                 </el-menu>
             </el-aside>
@@ -101,24 +105,25 @@
 <script src="../../assets/css/element-ui/index.js"></script>
 <script src="../../assets/js/axios.min.js"></script>
 <script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                /* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-                UserEditVisible: false,
-                editForm: [],
-                datalist: [],
-                FormData: {},
-                iframeUrl: './index.html',
-                fit: 'contain',
-                avatarURL: ' ../../assets/pics/logo3.png'
-            }
-        },
-        created() {
-            this.getLowWarnList();
-        },
-        methods: {
+	new Vue({
+		el: '#app',
+		data: function () {
+			return {
+				/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
+				UserEditVisible: false,
+				editForm: [],
+				datalist: [],
+				FormData: {},
+				isCollapse: true,
+				iframeUrl: './index.html',
+				fit: 'contain',
+				avatarURL: ' ../../assets/pics/logo3.png'
+			}
+		},
+		created() {
+
+		},
+		methods: {
             //低库存提醒
             getLowWarnList(){
                 axios.get("http://localhost:8080/warning/warn").then(res => {
@@ -133,16 +138,22 @@
                 });
             },
 
-            adjustIframe() {
-                var ifm = document.getElementById("bi_iframe");
-                ifm.height = document.documentElement.clientHeight;
-                ifm.width = document.documentElement.clientWidth;
-            },
-            logout() {
-                axios.request("http://localhost:8080/users/logout").then(res => {
-                    window.location.href(res)
-                });
-            },
+			adjustIframe() {
+				var ifm = document.getElementById("bi_iframe");
+				ifm.height = document.documentElement.clientHeight;
+				ifm.width = document.documentElement.clientWidth;
+			},
+			logout() {
+				axios.request("http://localhost:8080/users/logout").then(res => {
+					window.location.href(res)
+				});
+			},
+			handleOpen(key, keyPath) {
+				console.log(key, keyPath);
+			},
+			handleClose(key, keyPath) {
+				console.log(key, keyPath);
+			},
 
             openUrl(url) {
 

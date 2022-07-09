@@ -22,9 +22,10 @@
 
         <el-container>
             <!--侧边栏-->
-            <el-aside width="200px">
+            <el-aside width="auto">
                 <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
-                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
+                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
+                         @open="handleOpen" @close="handleClose" :collapse="isCollapse">
 
                     <!--返回主页功能实现-->
 
@@ -40,6 +41,11 @@
                         <i class="el-icon-setting"></i>
                         <span slot="title">编辑信息</span>
                     </el-menu-item>
+
+                    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+                        <el-radio-button :label="false">展开</el-radio-button>
+                        <el-radio-button :label="true">收起</el-radio-button>
+                    </el-radio-group>
 
                 </el-menu>
             </el-aside>
@@ -67,6 +73,7 @@
                 editForm: [],
                 datalist: [],
                 FormData: {},
+                isCollapse: {},
                 iframeUrl: './pindex.html',
             }
         },
@@ -84,7 +91,15 @@
             openUrl(url) {
 
                 this.iframeUrl = url;
-            }
+            },
+
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+
+            handleClose() {
+                console.log(key, keyPath);
+            },
 
         }
     })

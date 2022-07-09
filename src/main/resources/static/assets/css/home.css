@@ -4,11 +4,12 @@
         }
 
         .el-main {
-            background-color: #E9EEF3;
+
             color: #333;
             position: relative;
             display: flex;
             background-color: #FFFFFF;
+
 
 
         }
@@ -18,6 +19,7 @@
             color: #333;
             line-height: 60px;
             padding-left: 0px;
+
 
 
 
@@ -61,10 +63,11 @@
             margin-left: 24px;
             padding-top: 12px;
             margin-bottom: 12px;
-            display:inline-block;
+
 
 
         }
+
 
         .weather {
             margin-left: 24px;
@@ -136,6 +139,7 @@
             display:inline-block;
             margin-right: 20px;
             border: #bcbec2;
+            background-color: #d9ecff;
         }
 
 
@@ -163,7 +167,7 @@
         .report{
             position: absolute;
             margin-top: 150px;
-            margin-left: 870px;
+            margin-left: 900px;
 
         }
         .in{
@@ -182,4 +186,5 @@
         .box-card{
 
             background-size: 1600px;
+            display: flex;
         }

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * @author ginger
+ */
 @TableName("goods")
 @Data
 @ToString

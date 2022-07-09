@@ -5,11 +5,10 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.example.vo.InventoryVo;
 import com.example.dao.InventoryDao;
-import com.example.domain.Goods;
 import com.example.domain.Inventory;
 import com.example.service.InventoryService;
+import com.example.vo.InventoryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -31,12 +33,11 @@ public class InventoryController {
     @Autowired
     private InventoryDao inventoryDao;
 
-    /**
-     * 获取全部库存
-     *
-     * @return
+    /**访问方式
+     * getAll
+     * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<Inventory> getAll() {
         return inventoryService.list();
     }
@@ -44,8 +45,8 @@ public class InventoryController {
     /**
      * 根据id获取货物
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return 库存
      */
     @GetMapping("/{id}")
     public Inventory getById(@PathVariable int id) {
@@ -53,7 +54,12 @@ public class InventoryController {
         return inventoryService.getById(id);
     }
 
-    //模糊查询
+    /**
+     * 模糊查询
+     * @param inventoryId id
+     * @param goodsName name
+     * @return 库存
+     */
     @GetMapping("/like")
     public List<Inventory> getAllList(@RequestParam String inventoryId, @RequestParam String goodsName) {
         System.out.println(inventoryId + goodsName);
@@ -62,8 +68,8 @@ public class InventoryController {
 
     /**
      * excel导出
-     * @param response
-     * @throws Exception
+     * @param response 参数
+     * @throws Exception 错误
      */
     @GetMapping("/exportExcel")
     public void exportExcel(HttpServletResponse response) throws Exception {
@@ -97,8 +103,8 @@ public class InventoryController {
     /**
      * 删除库存
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return 库存
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
@@ -110,20 +116,18 @@ public class InventoryController {
     /**
      * 保存库存
      *
-     * @param inventory
-     * @return
+     * @param inventory 库存对象
+     * @return if success
      */
     @PostMapping
     public boolean saveInventory(@RequestBody Inventory inventory) {
-//        System.out.println("save!");
-//        System.out.println(inventory);
         return inventoryService.save(inventory);
     }
 
     /**
      * 更新库存
      *
-     * @param inventory
+     * @param inventory 库存
      * @return if success
      */
     @PutMapping
@@ -135,23 +139,24 @@ public class InventoryController {
     /**
      * 入库-根据入库订单表stockin更新库存
      *
-     * @param goodsName
-     * @param goodsNumber
-     * @return
+     * @param goodsName 名称
+     * @param goodsNumber 数量
+     * @return if success
      */
     @PutMapping("/stockIn")
     public int updateStockIn(@RequestParam String goodsName, @RequestParam String goodsNumber) {
         QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("goods_name", goodsName); //根据货物名称查询到该条记录
+        //根据货物名称查询到该条记录
+        queryWrapper.eq("goods_name", goodsName);
         Inventory inventory = inventoryService.getOne(queryWrapper);
-
-        Integer inventoryNumber = inventory.getGoodsNumber(); //将string类型的库存数转换为整型
-        log.info("之前的库存数：", inventoryNumber);
-        Integer inventoryNumberNew = inventoryNumber + Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
-        log.info("入库后的库存数：", inventoryNumberNew);
-        String goodsNumberNew = String.valueOf(inventoryNumberNew); //将现在的库存数（整型）转换为字符串
-
-        UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();  //更新
+        //将string类型的库存数转换为整型
+        Integer inventoryNumber = inventory.getGoodsNumber();
+        //原库存数加上新入库的数量
+        Integer inventoryNumberNew = inventoryNumber + Integer.parseInt(goodsNumber);
+        //将现在的库存数（整型）转换为字符串
+        String goodsNumberNew = String.valueOf(inventoryNumberNew);
+        //更新
+        UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("goods_name", goodsName).set("goods_number", goodsNumberNew);
         return inventoryDao.update(null, updateWrapper);
     }
@@ -159,32 +164,32 @@ public class InventoryController {
     /**
      * 出库-根据出库订单表stockout更新库存
      *
-     * @param goodsName
-     * @param goodsNumber
-     * @return
+     * @param goodsName 名称
+     * @param goodsNumber 数字
+     * @return if success
      */
     @PutMapping("/stockOut")
     public int updateStockOut(@RequestParam String goodsName, @RequestParam String goodsNumber) {
         QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("goods_name", goodsName); //根据货物名称查询到该条记录
+        //根据货物名称查询到该条记录
+        queryWrapper.eq("goods_name", goodsName);
         Inventory inventory = inventoryService.getOne(queryWrapper);
-
-        Integer inventoryNumber = inventory.getGoodsNumber(); //将string类型的库存数转换为整型
-        log.info("之前的库存数：", inventoryNumber);
-        Integer inventoryNumberNew = inventoryNumber - Integer.parseInt(goodsNumber); //原库存数加上新入库的数量
-        log.info("入库后的库存数：", inventoryNumberNew);
-        String goodsNumberNew = String.valueOf(inventoryNumberNew); //将现在的库存数（整型）转换为字符串
-
-        UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();  //更新
+        //将string类型的库存数转换为整型
+        Integer inventoryNumber = inventory.getGoodsNumber();
+        //原库存数加上新入库的数量
+        Integer inventoryNumberNew = inventoryNumber - Integer.parseInt(goodsNumber);
+        //将现在的库存数（整型）转换为字符串
+        String goodsNumberNew = String.valueOf(inventoryNumberNew);
+        //更新
+        UpdateWrapper<Inventory> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("goods_name", goodsName).set("goods_number", goodsNumberNew);
         return inventoryDao.update(null, updateWrapper);
     }
 
 
     /**
-     * 获取制作图表所需的数据
-     *
-     * @return
+     *获取图表所需数据
+     * @return 对象
      */
     @GetMapping("/getBarList")
     public InventoryVo getInventoryBarList() {

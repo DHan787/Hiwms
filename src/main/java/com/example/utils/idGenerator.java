@@ -2,6 +2,9 @@ package com.example.utils;
 
 import java.util.Date;
 
+/**
+ * @author ginger
+ */
 public class idGenerator {
     private idGenerator(){
     }

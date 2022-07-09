@@ -114,7 +114,7 @@
 .el-menu-vertical-demo{
     background-image: url("../pics/5.jpg");
     background-size: 1600px;
-    background-position:left 100px;
+
 }
 
 
@@ -150,4 +150,11 @@
 .head{
     float: right;
     margin-top: 20px;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+}
+.el-radio-button{
+    size: 100px;
 }
