@@ -10,10 +10,12 @@
 
         }
         .el-menu-vertical-demo el-menu{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
+
         }
         .el-menu-item-group__title{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
+
         }
 
 
@@ -22,28 +24,30 @@
             color: #333;
             line-height: 60px;
             padding-left: 0px;
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
             background-size:1600px;
+
 
         }
         .el-submenu__title{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
+
         }
         .el-menu-item{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
         }
 
         .el-icon-s-help{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
         }
         .el-icon-view{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
         }
         .el-icon-setting{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
         }
         .el-icon-warning-outline{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
         }
 
         .logo {
@@ -108,8 +112,9 @@
 
         }
         .el-menu-vertical-demo{
-            background-image: url("../pics/5.jpg");
+            background-image: url("../pics/6.jpg");
             background-size: 1600px;
+            background-position:left 100px;
         }
 
 
@@ -146,3 +151,8 @@
             float: right;
             margin-top: 10px;
         }
+		
+		 .el-menu-vertical-demo:not(.el-menu--collapse) {
+		    width: 200px;
+		    min-height: 400px;
+		  }

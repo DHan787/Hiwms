@@ -80,7 +80,7 @@
 
         methods: {
             getAll() {
-                axios.get("http://localhost:8080/goods").then(res => {
+                axios.get("http://localhost:8080/inventory").then(res => {
                     this.tableData = res.data;
                 });
             },

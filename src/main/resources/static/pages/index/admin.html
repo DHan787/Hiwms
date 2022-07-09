@@ -27,21 +27,25 @@
 
         </el-header>
 
-        <el-container>
-            <!--侧边栏-->
-            <el-aside width="200px">
-                <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
-                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
-
-                    <el-menu-item index="1">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title" @click="openUrl('./index.html')">主页</span>
-                    </el-menu-item>
+				<el-container>
+					<!--侧边栏-->
+					<el-aside width="200px">
+						<el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
+							background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
+							@open="handleOpen" @close="handleClose" :collapse="isCollapse">
+							<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+								<el-radio-button :label="false">展开</el-radio-button>
+								<el-radio-button :label="true">收起</el-radio-button>
+							</el-radio-group>
+							<el-menu-item index="1">
+								<i class="el-icon-menu"></i>
+								<span slot="title" @click="openUrl('./index.html')">主页</span>
+							</el-menu-item>
 
 
 							<el-menu-item index="2">
 								<i class="el-icon-s-help"></i>
-								<span slot="title"  @click="openUrl('./charts.html')">控制台</span>
+								<span slot="title" @click="openUrl('./charts.html')">控制台</span>
 							</el-menu-item>
 							<el-submenu index="3">
 								<template slot="title">
@@ -88,49 +92,56 @@
             </el-aside>
 
 
-            <!-- 主体 -->
-            <el-main>
-                <iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
-                        frameborder="0" scrolling="no"></iframe>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                /* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-                UserEditVisible: false,
-                editForm: [],
-                datalist: [],
-                FormData: {},
-                iframeUrl: './index.html',
-                fit: 'contain',
-                avatarURL: ' ../../assets/pics/logo3.png'
-            }
-        },
-        created() {
+					<!-- 主体 -->
+					<el-main>
+						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
+							frameborder="0" scrolling="no"></iframe>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
+					UserEditVisible: false,
+					editForm: [],
+					datalist: [],
+					FormData: {},
+					isCollapse: true,
+					iframeUrl: './index.html',
+					fit: 'contain',
+					avatarURL: ' ../../assets/pics/logo3.png'
+				}
+			},
+			created() {
 
-        },
-        methods: {
-            adjustIframe() {
-                var ifm = document.getElementById("bi_iframe");
-                ifm.height = document.documentElement.clientHeight;
-                ifm.width = document.documentElement.clientWidth;
-            },
-            logout() {
-                axios.request("http://localhost:8080/users/logout").then(res => {
-                    window.location.href(res)
-                });
-            },
+			},
+			methods: {
+				adjustIframe() {
+					var ifm = document.getElementById("bi_iframe");
+					ifm.height = document.documentElement.clientHeight;
+					ifm.width = document.documentElement.clientWidth;
+				},
+				logout() {
+					axios.request("http://localhost:8080/users/logout").then(res => {
+						window.location.href(res)
+					});
+				},
+				handleOpen(key, keyPath) {
+					console.log(key, keyPath);
+				},
+				handleClose(key, keyPath) {
+					console.log(key, keyPath);
+				},
 
-            openUrl(url) {
+				openUrl(url) {
 
                 this.iframeUrl = url;
             }
