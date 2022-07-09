@@ -21,7 +21,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/warehouse")
-public class WarehosueController {
+public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
