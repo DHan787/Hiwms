@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+/**
+ * @author ginger
+ */
 @Slf4j
-@RestController//添加到IOC容器
-@RequestMapping("/usersInfo")//设置路径
-@CrossOrigin//解决跨域问题
+//添加到IOC容器
+@RestController
+//设置路径
+@RequestMapping("/usersInfo")
+//解决跨域问题
+@CrossOrigin
+
 public class UsersInfoController {
     @Autowired
     private UsersInfoService usersInfoService;
@@ -25,9 +32,9 @@ public class UsersInfoController {
     /**
      * 获取所有用户信息
      *
-     * @return
+     * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<UsersInfo> getAll() {
         System.out.println(usersInfoService.list());
         return usersInfoService.list();
@@ -36,21 +43,20 @@ public class UsersInfoController {
     /**
      * 根据id获取用户信息
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return info
      */
     @GetMapping("/{id}")
     public UsersInfo getById(@PathVariable long id) {
-        //System.out.println("getbyid");
         return usersInfoService.getById(id);
     }
 
 
     /**
-     * 保存用户信息
-     *
-     * @param usersInfo
-     * @return
+     * save user info
+     * @param usersInfo info
+     * @param userId id
+     * @return if success
      */
     @PostMapping("/save")
     public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo, @RequestParam Integer userId) {
@@ -69,7 +75,7 @@ public class UsersInfoController {
     /**
      * 更新用户信息
      *
-     * @param usersInfo
+     * @param usersInfo info
      * @return if success
      */
     @PutMapping
@@ -85,7 +91,7 @@ public class UsersInfoController {
     /**
      * 删除用户信息
      *
-     * @param userId
+     * @param userId id
      * @return if success
      */
     @DeleteMapping()
@@ -95,8 +101,9 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = usersInfoService.list();
         for (UsersInfo value : usersInfoList
         ) {
-            if (value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId, value.getUserAltTime()))
+            if (value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId, value.getUserAltTime())) {
                 id = value.getUsersInfoId();
+            }
         }
         return usersInfoService.removeById(id);
     }

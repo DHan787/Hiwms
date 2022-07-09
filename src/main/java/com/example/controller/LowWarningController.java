@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -23,17 +25,15 @@ public class LowWarningController {
     @Autowired
     private LowWarningService lowWarningService;
 
-    private LowWarningController lowWarningController;
-
     @Autowired
     private InventoryController inventoryController;
 
-    List<String> WarnList = new ArrayList<String>();
+    List<String> warnList = new ArrayList<>();
 
     @GetMapping("/warn")
-    public List<String> WarningInfo() {
+    public List<String> warningInfo() {
         getWarnInfo();
-        return WarnList;
+        return warnList;
     }
 
     @GetMapping
@@ -48,18 +48,15 @@ public class LowWarningController {
         ) {
             for (Inventory invent : inventories
             ) {
-//                System.out.println(value.getGoodsId()+"idandid"+invent.getInventoryId());
                 if (value.getGoodsId().equals(invent.getInventoryId())) {
-                    System.out.println("in");
-//                    System.out.println(invent.getGoodsName());
-                    if (value.getMinNum() >= invent.getGoodsNumber()) {
-                        WarnList.add(invent.getGoodsName());
+                    System.out.println("in");if (value.getMinNum() >= invent.getGoodsNumber()) {
+                        warnList.add(invent.getGoodsName());
                         System.out.println("inside");
                         break;
                     }
                 }
             }
-            System.out.println(WarnList);
+            System.out.println(warnList);
         }
     }
 }

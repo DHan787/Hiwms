@@ -2,30 +2,30 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dao.UsersDao;
-import com.example.domain.*;
-import com.example.service.UsersDetailService;
-import com.example.service.UsersInfoService;
+import com.example.domain.Users;
 import com.example.service.UsersService;
-import com.example.utils.idGenerator;
+import com.example.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.utils.EncryptUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
-@RestController//添加到IOC容器
-@RequestMapping("/users")//设置路径
-@CrossOrigin//解决跨域问题
-public class UsersController {
-    @Autowired//
-    private UsersService usersService;
+//添加到IOC容器
+@RestController
+//设置路径
+@RequestMapping("/users")
+//解决跨域问题
+@CrossOrigin
 
+public class UsersController {
     @Autowired
-    private UsersInfoService usersInfoService;
+    private UsersService usersService;
 
     @Autowired
     private UsersDao usersDao;
@@ -35,17 +35,15 @@ public class UsersController {
      *
      * @return usersService.list()
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<Users> getAll() {
-        //log.info("users获取的数据，{}",usersService.list());
-        //System.out.println(usersService.list());
         return usersService.list();
     }
 
     /**
      * 更新用户表
      *
-     * @param users
+     * @param users 对象
      * @return usersService.updateById(users)
      */
     public boolean update(@RequestBody Users users) {
@@ -54,14 +52,13 @@ public class UsersController {
 
     @GetMapping("/{id}")
     public Users getById(@PathVariable int id) {
-        //System.out.println("getbyid");
         return usersService.getById(id);
     }
 
     /**
      * 登录
      *
-     * @param users
+     * @param users 对象
      * @return 0 登录失败
      * 1 登录为管理员
      * 2 登录为货物员
@@ -69,24 +66,22 @@ public class UsersController {
      */
     @PostMapping("/login")
     private Integer login(@RequestBody Users users, HttpServletRequest request) throws Exception {
-//        System.out.println(users.getUserName() + users.getUserPassword());
         List<Users> usersList = usersService.list();
-//        System.out.println("database:" + usersList);
         for (Users value : usersList) {
-            if (value.getUserName().equals(users.getUserName()))
+            if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
-//                    System.out.println("role is:" + value.getUserRole());
                     request.getSession().setAttribute("users", value);
                     System.out.println("set:" + request.getSession().getAttribute("users"));
                     return value.getUserRole();
                 }
+            }
         }
         return 0;
     }
 
     /**
      * 登出
-     * @param request
+     * @param request 请求
      * @return login地址
      */
     @RequestMapping("/logout")
@@ -98,7 +93,7 @@ public class UsersController {
     /**
      * 保存用户
      *
-     * @param users
+     * @param users 对象
      * @return if success
      */
     @PostMapping("/save")
@@ -116,7 +111,7 @@ public class UsersController {
     /**
      * 删除用户
      *
-     * @param id
+     * @param id id
      * @return usersService.removeById(id)
      */
     @DeleteMapping("/{id}")
@@ -130,7 +125,7 @@ public class UsersController {
     /**
      * 注册
      *
-     * @param users
+     * @param users 对象
      * @return if success
      */
     @PostMapping("/register")
@@ -146,7 +141,7 @@ public class UsersController {
     /**
      * 更新用户
      *
-     * @param users
+     * @param users 对象
      * @return if success
      */
     @PutMapping
@@ -158,14 +153,13 @@ public class UsersController {
     /**
      * 根据用户类型获取订单 1-管理员 2-货物员 3-操作员
      *
-     * @param userRole
+     * @param userRole 身份
      * @return users
      */
     @GetMapping("/getByRole")
     public List<Users> getByRole(@RequestParam Integer userRole) {
         QueryWrapper<Users> wrapper = new QueryWrapper<>();
         wrapper.eq("user_role", userRole);
-        List<Users> users = usersDao.selectList(wrapper);
-        return users;
+        return usersDao.selectList(wrapper);
     }
 }

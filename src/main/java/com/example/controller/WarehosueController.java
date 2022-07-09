@@ -3,7 +3,6 @@ package com.example.controller;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.example.dao.WarehouseDao;
-import com.example.domain.Goods;
 import com.example.domain.Warehouse;
 import com.example.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -27,22 +29,20 @@ public class WarehosueController {
     private WarehouseDao warehouseDao;
 
     /**
-     * 获取全部货品
-     *
-     * @return
+     * get all warehouse
+     * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<Warehouse> getAll() {
         log.info("warehouse获取的数据，{}", warehouseService.list());
-        //System.out.println("used");
         return warehouseService.list();
     }
 
     /**
      * 根据id获取货物
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return warehouse
      */
     @GetMapping("/{id}")
     public Warehouse getById(@PathVariable int id) {
@@ -52,21 +52,19 @@ public class WarehosueController {
     /**
      * 删除货物
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return if success
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
-
         return warehouseService.removeById(id);
-
     }
 
     /**
      * 保存用户
      *
-     * @param warehouse
-     * @return
+     * @param warehouse object
+     * @return if success
      */
     @PostMapping
     public boolean saveWarehouse(@RequestBody Warehouse warehouse) {
@@ -77,7 +75,7 @@ public class WarehosueController {
     /**
      * 更新仓库信息
      *
-     * @param warehouse
+     * @param warehouse object
      * @return if success
      */
     @PutMapping
@@ -87,7 +85,11 @@ public class WarehosueController {
     }
 
 
-    //模糊查询
+    /**
+     * find
+     * @param warehouseName name
+     * @return names
+     */
     @GetMapping("/like")
     public List<Warehouse> getAllList(@RequestParam String warehouseName) {
         System.out.println(warehouseName);
@@ -96,8 +98,8 @@ public class WarehosueController {
 
     /**
      * excel导出
-     * @param response
-     * @throws Exception
+     * @param response res
+     * @throws Exception exception
      */
     @GetMapping("/exportExcel")
     public void exportExcel(HttpServletResponse response) throws Exception {

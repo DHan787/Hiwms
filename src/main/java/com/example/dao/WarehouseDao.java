@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Mapper
 @Component
 public interface WarehouseDao extends BaseMapper<Warehouse> {
