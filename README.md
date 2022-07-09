@@ -151,3 +151,4 @@
 * 前端页面优化 ch
 * 前端页面美化 wlx
 * 低库存警告Debug login.html debug hj
+* 低库存提醒 zls
