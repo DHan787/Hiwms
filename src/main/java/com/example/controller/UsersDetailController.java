@@ -17,10 +17,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
-@RestController//添加到IOC容器
-@RequestMapping("/usersDetail")//设置路径
-@CrossOrigin//解决跨域问题
+//添加到IOC容器
+@RestController
+//设置路径
+@RequestMapping("/usersDetail")
+//解决跨域问题
+@CrossOrigin
+
 public class UsersDetailController {
 
     @Autowired
@@ -38,42 +45,40 @@ public class UsersDetailController {
     @Autowired
     UsersInfoDao usersInfoDao;
 
-
-    @GetMapping//访问方式
+    /**
+     * getAll
+     * @return if sccuess
+     */
+    @GetMapping
     public List<UsersDetail> getAll() {
 
         List<Users> usersList = usersDao.selectList(null);
 
         List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
-        //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList, usersInfoList);
     }
 
 
     /**
      * 装配用户详情
+     * @param usersList 用户表
+     * @param usersInfoList 用户信息表
+     * @return detail
      */
     public List<UsersDetail> setUsersDetail(List<Users> usersList, List<UsersInfo> usersInfoList) {
         List<UsersDetail> usersDetailsList = new ArrayList<>();
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
-//                System.out.println("time is :" + info.getUsersInfoAltTime());
-//                System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUsersInfoAltTime()));
                 if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
                     UsersDetail usersDetail = new UsersDetail();
                     System.out.println(value.getUserName());
-//                   System.out.println(info.getUsersInfoId());
-//                   System.out.println("id:" + idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()));
                     usersDetail.setUserId(value.getUserId());
                     usersDetail.setUserName(value.getUserName());
                     usersDetail.setUserLocation(info.getUserLocation());
                     usersDetail.setUserTele(info.getUserTele());
                     usersDetail.setUserRetailer(info.getUserRetailer());
-
-                    // long timeMillis = System.currentTimeMillis();
                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
-
                     if (value.getUserRole() == 1) {
                         usersDetail.setUserRole("管理员");
                     } else {
@@ -82,37 +87,37 @@ public class UsersDetailController {
 
                     usersDetailsList.add(usersDetail);
                 }
-
             }
         }
-//        System.out.println(usersDetail.toString());
         return usersDetailsList;
     }
 
+    /**
+     *
+     * @param id id
+     * @return if success
+     */
     @GetMapping("/{id}")
     public List<UsersDetail> getById(@PathVariable int id) {
         System.out.println("getDetail");
         QueryWrapper<Users> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userId", id);
         List<Users> usersList = usersDao.selectList(queryWrapper);
-
         List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
-        //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList, usersInfoList);
     }
 
     /**
      * 模糊查询
      *
-     * @param userId
-     * @param userName
+     * @param userId id
+     * @param userName name
      * @return usersDetail
      */
     @GetMapping("/like")
     public List<UsersDetail> getByIds(@RequestParam String userId, @RequestParam String userName) {
         List<Users> usersList = usersDao.selectUsers("%" + userId + "%", "%" + userName + "%");
         List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
-        //log.info("users获取的数据，{}",usersService.list());
         return this.setUsersDetail(usersList, usersInfoList);
     }
 
