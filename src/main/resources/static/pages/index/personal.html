@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../../assets/css/admin.css">
     <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
     <title></title>
+    <style>a{text-decoration:none}</style>
 </head>
 <body>
 <div id="app">
@@ -32,7 +33,7 @@
                     <div class="back">
                         <el-menu-item index="1">
                             <i class="el-icon-menu"></i>
-                            <span slot="title">主页</span>
+                            <span slot="title" @click="back">主页</span>
                         </el-menu-item>
                     </div>
 
@@ -100,6 +101,18 @@
             handleClose() {
                 console.log(key, keyPath);
             },
+
+            back() {
+                axios.get("http://localhost:8080/users/back").then(rel =>{
+                    if (rel.data === 1) {
+                        window.location.href("./admin.html")
+                    } else if (rel.data ===2) {
+                        window.location.href("./operator.html")
+                    } else if (rel.data ===3) {
+                        window.location.href("./market.html")
+                    }
+                })
+            }
 
         }
     })
