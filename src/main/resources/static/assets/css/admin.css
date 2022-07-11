@@ -156,3 +156,12 @@
 		    width: 200px;
 		    min-height: 400px;
 		  }
+		  
+		  #msgs{
+		          width: 200px;
+		          height: 300px;
+		         border: 1px solid palegoldenrod;
+		          position: absolute;
+		          top: 350px;
+		          left: 1320px;
+		      }

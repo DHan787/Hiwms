@@ -12,7 +12,7 @@
     <el-container>
 
         <el-header>
-            <!--					TODO: 假的，需要加token后续实现-->
+            <!--TODO: 假的，需要加token后续实现-->
             <a href="personal.html">
                 <div class="head">
                     <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
@@ -90,8 +90,15 @@
 
                 </el-menu>
             </el-aside>
-
-
+                    <!--新申请提醒-->
+                    <div id="msgs" v-if="msgsfig" >
+                        <ul>
+                            <li v-for="ms in msgs">
+                                消息队列<a href="#">{{ms.msgsId}}---{{ms.msgsCont}}</a>
+                                <a href="#" id="yd" @click="msgtu(ms.msgsId)">标为已读</a>
+                            </li>
+                        </ul>
+                    </div>
 					<!-- 主体 -->
 					<el-main>
 						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
@@ -106,47 +113,47 @@
 	<script src="../../assets/js/axios.min.js"></script>
 	<script>
 		new Vue({
-			el: '#app',
-			data: function() {
-				return {
-					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-					UserEditVisible: false,
-					editForm: [],
-					datalist: [],
-					FormData: {},
-					isCollapse: true,
-					iframeUrl: './index.html',
-					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo3.png'
-				}
-			},
-			created() {
+            el: '#app',
+            data: function () {
+                return {
+                    /* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
+                    UserEditVisible: false,
+                    editForm: [],
+                    datalist: [],
+                    FormData: {},
+                    isCollapse: false,
+                    iframeUrl: './index.html',
+                    fit: 'contain',
+                    avatarURL: ' ../../assets/pics/logo3.png',
+                    // msgsfig:false,
+                    // msgs:[]
+                }
+            },
+            created() {
+                setInterval(this.getMsgs, 1000);
 
-			},
-			methods: {
-				adjustIframe() {
-					var ifm = document.getElementById("bi_iframe");
-					ifm.height = document.documentElement.clientHeight;
-					ifm.width = document.documentElement.clientWidth;
-				},
-				logout() {
-					axios.request("http://localhost:8080/users/logout").then(res => {
-						window.location.href(res)
-					});
-				},
-				handleOpen(key, keyPath) {
-					console.log(key, keyPath);
-				},
-				handleClose(key, keyPath) {
-					console.log(key, keyPath);
-				},
-
-				openUrl(url) {
-
-                this.iframeUrl = url;
+            },
+            methods: {
+                adjustIframe() {
+                    var ifm = document.getElementById("bi_iframe");
+                    ifm.height = document.documentElement.clientHeight;
+                    ifm.width = document.documentElement.clientWidth;
+                },
+                logout() {
+                    axios.request("http://localhost:8080/users/logout").then(res => {
+                        window.location.href(res)
+                    });
+                },
+                handleOpen(key, keyPath) {
+                    console.log(key, keyPath);
+                },
+                handleClose(key, keyPath) {
+                    console.log(key, keyPath);
+                },
+                openUrl(url) {
+                    this.iframeUrl = url;
+                }
             }
-
-        }
-    })
+        })
 </script>
 </html>

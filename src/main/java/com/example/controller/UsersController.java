@@ -73,13 +73,14 @@ public class UsersController {
         List<Users> usersList = usersService.list();
 //        System.out.println("database:" + usersList);
         for (Users value : usersList) {
-            if (value.getUserName().equals(users.getUserName()))
+            if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
 //                    System.out.println("role is:" + value.getUserRole());
                     request.getSession().setAttribute("users", value);
                     System.out.println("set:" + request.getSession().getAttribute("users"));
                     return value.getUserRole();
                 }
+            }
         }
         return 0;
     }

@@ -4,6 +4,8 @@ package com.example.controller;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dao.MsgsDao;
+import com.example.domain.Msgs;
 import com.example.vo.InventoryVo;
 import com.example.dao.OrdersDao;
 import com.example.domain.Orders;
@@ -31,6 +33,22 @@ public class OrdersController {
     private OrdersService ordersService;
     @Autowired
     private OrdersDao ordersDao;
+    @Autowired
+    public MsgsDao msgsDao;
+    public  boolean saveMsg(){
+        Msgs msgs=new Msgs();
+        msgs.setMsgsCont("有新的入库申请");
+        msgs.setType(1);
+        return msgsDao.insert(msgs)>0;
+    }
+    @PutMapping("/putmsg")
+    public  boolean updatamsg(@RequestParam("msgid") Integer msgid){
+        return msgsDao.updatamsg(msgid)>0;
+    }
+    @GetMapping("/msg")
+    public List<Msgs> getMsgs(){
+        return msgsDao.selectType(1);
+    }
 
     /**
      * 获取订单表
