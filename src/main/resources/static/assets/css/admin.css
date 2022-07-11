@@ -156,3 +156,6 @@
 		    width: 200px;
 		    min-height: 400px;
 		  }
+         .el-radio-button__inner{
+             size: 100px;
+         }
