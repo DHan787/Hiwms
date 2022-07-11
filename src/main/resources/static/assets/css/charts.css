@@ -5,10 +5,18 @@
 
     .el-carousel__item:nth-child(2n) {
       background-color: #ffffff;
-      border: 1px solid #333333;
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      /*border: 1px solid #333333;*/
+      box-shadow:  10px 10px 10px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
       border-radius: 16px;
     }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #ffffff;
+        /*border: 1px solid #333333;*/
+        box-shadow:  10px 10px 10px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        border-radius: 16px;
+    }
+
     .el-carousel__item el-carousel__item--card is-in-stage{
       width: 750px;
       height: 600px;
@@ -23,13 +31,6 @@
       height: 600px;
     }
 
-
-    .el-carousel__item:nth-child(2n+1) {
-      background-color: #ffffff;
-      border: 1px solid #333333;
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 16px;
-    }
     .gauge{
       margin-left: 0px;
       margin-top: 0px;

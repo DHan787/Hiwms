@@ -16,10 +16,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ginger
@@ -216,6 +213,9 @@ public class OrdersController {
         //日期去重
         HashSet<String> hashSet = new HashSet<>(orderDate);
         List<String> newDate = new ArrayList<>(hashSet);
+        //日期排序
+        Collections.sort(newDate);
+        log.info("newDate:{}",newDate);
 
         for(String time1 : newDate){
 
