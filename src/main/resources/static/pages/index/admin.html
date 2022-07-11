@@ -14,12 +14,12 @@
         <el-header style="height: 80px">
             <!--					TODO: 假的，需要加token后续实现-->
 
-            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+<!--            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">-->
                 <div class="head">
                     <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
                     </el-avatar>
                 </div>
-            </el-button>
+<!--            </el-button>-->
 
             <div class="head" style="float: left;">
                 <el-avatar :src="avatarURL">
@@ -88,7 +88,7 @@
 
 					<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
 						<el-radio-button :label="false">展开</el-radio-button>
-						<el-radio-button :label="true">f收起</el-radio-button>
+						<el-radio-button :label="true">收起</el-radio-button>
 					</el-radio-group>
 
                 </el-menu>
@@ -156,7 +156,7 @@
 			},
 			logout() {
 				axios.request("http://localhost:8080/users/logout").then(res => {
-					window.location.href(res)
+					window.location.href = ("../login.html")
 				});
 			},
 			handleOpen(key, keyPath) {
