@@ -85,7 +85,7 @@
         .top{
             position: absolute;
             margin-top: 0px;
-            margin-left: 650px;
+            margin-left: 630px;
         }
         .users {
             width: 80px;
@@ -131,8 +131,6 @@
 
         .data{
             position: absolute;
-
-
             border:solid ;
             border-left: #f5f5ff;
             border-top: #f5f5ff;
