@@ -73,7 +73,7 @@
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" :row-class-name="tableRowClassName" stripe
                               style="width: 100%; ">
                         <el-table-column prop="inventoryId" label="库存编号" width="180">
                         </el-table-column>
@@ -146,6 +146,7 @@
         created() {
             this.getAll()
             this.getWarehouseName()
+            this.getLowWarnList()
         },
 
         methods: {
@@ -298,7 +299,23 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
                 this.currentPage = val;
-            }
+            },
+
+
+            // //低库存标注
+            // getLowWarnList({row, rowIndex}){
+            //     axios.get("http://localhost:8080/warning/warn").then(res => {
+            //         console.log(res);
+            //         this.tableData = res.data;
+            //         for(){
+            //
+            //         }
+            //         if(this.tableData.goodsName==row.goodsName){
+            //             return 'warning-row';
+            //         }
+            //         return '';
+            //     });
+            // },
         }
     })
 </script>

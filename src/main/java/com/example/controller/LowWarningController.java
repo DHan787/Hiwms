@@ -40,7 +40,6 @@ public class LowWarningController {
     public List<LowWarning> getAll() {
         return lowWarningService.list();
     }
-
     private void getWarnInfo() {
         List<Inventory> inventories = inventoryController.getAll();
         List<LowWarning> lowWarnings = this.getAll();
@@ -49,7 +48,8 @@ public class LowWarningController {
             for (Inventory invent : inventories
             ) {
                 if (value.getGoodsId().equals(invent.getInventoryId())) {
-                    System.out.println("in");if (value.getMinNum() >= invent.getGoodsNumber()) {
+                    System.out.println("in");
+                    if (value.getMinNum() >= invent.getGoodsNumber()) {
                         warnList.add(invent.getGoodsName());
                         System.out.println("inside");
                         break;
