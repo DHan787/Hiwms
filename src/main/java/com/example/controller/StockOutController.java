@@ -2,12 +2,15 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.config.StockInEvent;
+import com.example.config.StockOutEvent;
 import com.example.dao.StockOutDao;
 import com.example.domain.StockOut;
 import com.example.service.StockOutService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class StockOutController {
 
     @Autowired
     private StockOutDao stockOutDao;
+
+    @Autowired
+    private WebApplicationContext webapplicationcontext;
 
 
     OrdersController ordersController;
@@ -51,6 +57,8 @@ public class StockOutController {
     public boolean saveStockOut(@RequestBody StockOut stockOut) {
         //type = 2 入库
         stockOut.setOrderId(ordersController.initOrders(2));
+        StockOutEvent stockOutEvent=new StockOutEvent("stockIn:",stockOut,"新的出库申请");
+        webapplicationcontext.publishEvent(stockOutEvent);
         return stockOutService.save(stockOut);
     }
 

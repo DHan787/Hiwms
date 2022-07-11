@@ -19,7 +19,7 @@
                 </el-breadcrumb>
                 <!--表格区域-->
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                               style="width: 100%; " @selection-change="selectCall"
                               ref="multipleTable"  :row-key="getRowKey">
                         <!-- reserve-selection分页保留勾选项 -->

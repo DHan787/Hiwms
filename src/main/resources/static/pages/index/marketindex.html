@@ -1,174 +1,211 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/home.css">
-    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-    <script src="../../assets/js/echarts.js"></script>
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/home.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<script src="../../assets/js/echarts.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<!-- 主体 -->
+				<el-main>
+					<el-breadcrumb style="margin-bottom: 12px;">
+						<el-breadcrumb-item>首页</el-breadcrumb-item>
+					</el-breadcrumb>
 
-        <el-container>
-            <!-- 主体 -->
-            <el-main>
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item>首页</el-breadcrumb-item>
-                </el-breadcrumb>
+					<div class="card-container">
+						<div>
+							<el-card class="box-card1">
+								<el-image :src="src1" class="ava">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
+								</el-image>
+								<div class="box">
+									<div class="admin-info">
+										<h3>早安，汇安人，开始您一天的工作吧！</h3>
+										<div class="weather">
+											<i class="el-icon-heavy-rain"></i>
+											<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
+										</div>
+									</div>
+								</div>
+							</el-card>
+						</div>
+						<br />
 
-                    <div class="card-container">
-                        <div>
-                            <el-card class="box-card1">
-                            <el-image :src="src1" class="ava">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-                            </el-image>
-                            <div class="box">
-                                <div class="admin-info">
-                                    <h3>早安，汇安人，开始您一天的工作吧！</h3>
-                                    <div class="weather">
-                                        <i class="el-icon-heavy-rain"></i>
-                                        <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
-                                    </div>
-                                </div>
-                            </div>
-                            </el-card>
-                        </div>
-                        <br/>
-
-                        <div class="data">
-                            <el-card class="box-card2">
-                            <el-image :src="src6" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
+						<div class="data">
+							<el-card class="box-card2">
+								<el-image :src="src6" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
 
 
-                            </el-image>
-                            <div class="title1"><h3>数据统计</h3>
-                            </div>
+								</el-image>
+								<div class="title1">
+									<h3>数据统计</h3>
+								</div>
 
 
-                            <div class="all">
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">今日发起入库订单</h4>
-                                        <h2 align="center">1</h2>
-                                    </div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">今日发起出库订单</h4>
-                                        <h2 align="center">0</h2>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">今日已通过入库订单</h4>
-                                        <h2 align="center">1</h2>
-                                    </div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">今日已通过出库订单</h4>
-                                        <h2 align="center">0</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            </el-card>
+								<div class="all">
+									<div>
+										<div class="bg2">
+											<h4 style="margin-top: 20px">今日发起入库订单</h4>
+											<h2 align="center">1</h2>
+										</div>
+										<div class="bg2">
+											<h4 style="margin-top: 20px">今日发起出库订单</h4>
+											<h2 align="center">0</h2>
+										</div>
+									</div>
+									<div>
+										<div class="bg2">
+											<h4 style="margin-top: 20px">今日已通过入库订单</h4>
+											<h2 align="center">1</h2>
+										</div>
+										<div class="bg2">
+											<h4 style="margin-top: 20px">今日已通过出库订单</h4>
+											<h2 align="center">0</h2>
+										</div>
+									</div>
+								</div>
+							</el-card>
 
 
-                        </div>
-                        <div class="top">
-                            <el-card class="box-card3">
-                            <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+						</div>
+						<div class="top">
+							<el-card class="box-card3">
+								<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
 
-                            <el-image :src="src7" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-
-
-                            </el-image>
-                            <div class="title1"><h3>快捷入口</h3>
-                            </div>
+								<el-image :src="src7" class="pics">
+									<div slot="placeholder" class="image-slot">
+										加载中<span class="dot">...</span>
+									</div>
 
 
-                            <!--用户-->
-                            <div class="all">
-                                <div>
-                                    <el-tooltip content="入库申请" placement="bottom"><a href="../stock-in-apply.html">
-                                        <el-image :src="src2" class="in">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-                                        </el-image>
-                                    </a></el-tooltip><!--订单-->
-                                </div>
-                                <div>
-
-                                    <el-tooltip content="出库申请" placement="bottom"><a href="../stock-out-apply.html">
-                                        <el-image :src="src3" class="out">
-                                            <div slot="placeholder" class="image-slot">
-                                                加载中<span class="dot">...</span>
-                                            </div>
-                                        </el-image>
-                                    </a></el-tooltip>
-                                </div>
+								</el-image>
+								<div class="title1">
+									<h3>快捷入口</h3>
+								</div>
 
 
-                            </div>
-                            </el-card>
+								<!--用户-->
+								<div class="all">
+									<div>
+										<el-tooltip content="入库申请" placement="bottom"><a href="../stock-in-apply.html">
+												<el-image :src="src2" class="in">
+													<div slot="placeholder" class="image-slot">
+														加载中<span class="dot">...</span>
+													</div>
+												</el-image>
+											</a></el-tooltip>
+										<!--订单-->
+									</div>
+									<div>
 
-                        </div>
-                        <div class="report">
-                            <el-card class="box-card4">
-                            <el-image :src="src8" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
+										<el-tooltip content="出库申请" placement="bottom"><a href="../stock-out-apply.html">
+												<el-image :src="src3" class="out">
+													<div slot="placeholder" class="image-slot">
+														加载中<span class="dot">...</span>
+													</div>
+												</el-image>
+											</a></el-tooltip>
+									</div>
 
 
-                            </el-image>
-                            <div class="title1"><h3>系统公告</h3>
-                            </div>
-                            </el-card>
-                        </div>
-                    </div>
-                    <div class="down">
-                    </div>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                src1: '../../assets/pics/head2.jpg',
-                src2: '../../assets/pics/in.jpg',
-                src3: '../../assets/pics/out.jpg',
-                src6: '../../assets/pics/src6.jpg',
-                src7: '../../assets/pics/link.jpg',
-                src8: '../../assets/pics/bell.jpg',
-                tableData: [],
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                formLabelWidth: '120px',
-                isAdd: false,
-                charData: [],
-                nameArr: [],
-                valueArr: []
-            }
-        },
-        created() {
+								</div>
+							</el-card>
 
-        },
-        methods: {}
-    })
-</script>
+						</div>
+						<div class="report">
+							<el-card class="box-card4">
+								<div>
+									<el-image :src="src8" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
+									</el-image>
+									<el-badge :value="msgs.length" class="item">
+										<h3>系统通告</h3>
+									</el-badge>
+								</div>
+								<div class="title1">
+									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+										<el-card style="margin: 15px;">
+											<p>新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+											<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small">
+												已读</el-button>
+										</el-card>
+									</div>
+								</div>
+							</el-card>
+						</div>
+					</div>
+					<div class="down">
+					</div>
+				</el-main>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					src1: '../../assets/pics/head2.jpg',
+					src2: '../../assets/pics/in.jpg',
+					src3: '../../assets/pics/out.jpg',
+					src6: '../../assets/pics/src6.jpg',
+					src7: '../../assets/pics/link.jpg',
+					src8: '../../assets/pics/bell.jpg',
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					formLabelWidth: '120px',
+					isAdd: false,
+					charData: [],
+					nameArr: [],
+					valueArr: [],
+					msgsfig: false,
+					msgs: [],
+					time: null
+				}
+			},
+			created() {
+				setInterval(this.getAll, 5000);
+			},
+			methods: {
+				msgtu(msgsId) {
+					axios.put("http://localhost:8080/orders/putmsg?msgid=" + msgsId).then(rel => {
+						console.log(rel.data);
+						if (rel.data) {
+							this.getAll();
+						} else {
+							alert("失败");
+						}
+					})
+				},
+				getAll() {
+					axios.get("http://localhost:8080/orders/msg/apply").then(resl => {
+						if (resl.data.length > 0) {
+							this.msgs = resl.data;
+							this.msgsfig = true;
+						} else {
+							this.msgsfig = false;
+							// time = setInterval(this.getAll, 1000);
+							// clearInterval(this.time);
+							// console.log("time: "+ time)
+						}
+					});
+				}
+			}
+		})
+	</script>
 </html>

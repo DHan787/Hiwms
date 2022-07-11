@@ -52,26 +52,11 @@
 	display: flex;
 }
 
-/* .el-table .warning-row {
-	background:  #e4f7ef;
-} */
-
-/* .el-table_row td{
-	margin: 100px !important;
-} */
-
-/* .el-table__body tr.current-row > td{
-	background-color: #1d953f !important;
-} */
-
-.el-table--enable-row-hover .el-table__body tr:hover > td{
-	background-color: #ceecfc !important;
-	box-shadow: 10px 5px 5px #c9cdcf;
-	/* box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.05); */
-	padding:20px 15px 15px 0px; 
-	/* border: 2px solID #c9cbfe; */
+.el-table .warning-row {
+	background: #e4f7ef;
 }
 
-
-
-
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+	background-color: #ceecfc !important;
+	box-shadow: 10px 5px 5px #c9cdcf;
+}

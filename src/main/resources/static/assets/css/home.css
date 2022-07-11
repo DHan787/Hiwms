@@ -150,6 +150,7 @@
             margin-right: 50px;
             border: #bcbec2;
             background-color: #d9ecff;
+			border-radius: 10px;
 
         }
 
@@ -229,6 +230,7 @@
 
             background-size: 1600px;
             display: flex;
+			
         }
         .box-card4{
 
