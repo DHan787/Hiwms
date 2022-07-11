@@ -6,13 +6,14 @@
         .el-main {
             background-color: #E9EEF3;
             color: #333;
-
-
+            overflow-scrolling: auto;
         }
+		
         .el-menu-vertical-demo el-menu{
             background-image: url("../pics/6.jpg");
 
         }
+		
         .el-menu-item-group__title{
             background-image: url("../pics/6.jpg");
 

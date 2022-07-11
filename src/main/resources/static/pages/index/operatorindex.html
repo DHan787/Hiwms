@@ -17,9 +17,9 @@
                 <el-breadcrumb style="margin-bottom: 12px;">
                     <el-breadcrumb-item>首页</el-breadcrumb-item>
                 </el-breadcrumb>
-                <el-card class="box-card" style="margin-bottom: 12px;">
                     <div class="card-container">
                         <div >
+                            <el-card class="box-card1">
                             <el-image :src="src1" class="ava" >
                                 <div slot="placeholder" class="image-slot">
                                     加载中<span class="dot">...</span>
@@ -34,10 +34,12 @@
                                     </div>
                                 </div>
                             </div>
+                            </el-card>
                         </div>
                         <br/>
 
                         <div class="data">
+                            <el-card class="box-card2">
                             <el-image :src="src6" class="pics">
                                 <div slot="placeholder" class="image-slot">
                                     加载中<span class="dot">...</span>
@@ -53,24 +55,30 @@
                                 <div>
                                     <div class="bg2">
                                         <h4 style="margin-top: 20px">今日入库订单剩余</h4>
+                                        <h2 align="center">1</h2>
                                     </div>
                                     <div class="bg2" >
                                         <h4 style="margin-top: 20px">今日出库订单剩余</h4>
+                                        <h2 align="center">0</h2>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="bg2">
                                         <h4 style="margin-top: 20px">昨日入库数量</h4>
+                                        <h2 align="center">4</h2>
                                     </div>
                                     <div class="bg2">
                                         <h4 style="margin-top: 20px">昨日出库数量</h4>
+                                        <h2 align="center">1</h2>
                                     </div>
                                 </div>
                             </div>
+                            </el-card>
 
 
                         </div>
                         <div class="top">
+                            <el-card class="box-card3">
                             <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
 
                             <el-image :src="src7" class="pics">
@@ -87,7 +95,7 @@
                             <!--用户-->
                             <div class="all" >
                                 <div>
-                                    <el-tooltip content="入库界面" placement="bottom"><a href="../admin/stock-in.html" > <el-image :src="src2" class="in" >
+                                    <el-tooltip content="入库界面" placement="bottom"><a href="../operator/stock-in.html" > <el-image :src="src2" class="in" >
                                     <div slot="placeholder" class="image-slot">
                                         加载中<span class="dot">...</span>
                                     </div>
@@ -95,7 +103,7 @@
                                 </a></el-tooltip><!--订单-->
                                 </div>
                                 <div>
-                                    <el-tooltip content="出库界面" placement="bottom"><a href="../admin/stock-out.html" > <el-image :src="src3" class="out" >
+                                    <el-tooltip content="出库界面" placement="bottom"><a href="../operator/stock-out.html" > <el-image :src="src3" class="out" >
                                         <div slot="placeholder" class="image-slot">
                                             加载中<span class="dot">...</span>
                                         </div>
@@ -105,9 +113,11 @@
 
 
                             </div>
+                            </el-card>
 
                         </div>
                         <div class="report">
+                            <el-card class="box-card4">
                             <el-image :src="src8" class="pics">
                                 <div slot="placeholder" class="image-slot">
                                     加载中<span class="dot">...</span>
@@ -117,11 +127,12 @@
                             </el-image>
                             <div class="title1"><h3>系统公告</h3>
                             </div>
+                            </el-card>
 
                         </div>
+                    </div>
                     <div class="down">
                     </div>
-                </el-card>
             </el-main>
         </el-container>
     </el-container>

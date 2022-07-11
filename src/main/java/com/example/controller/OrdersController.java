@@ -4,6 +4,9 @@ package com.example.controller;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.dao.MsgsDao;
+import com.example.domain.Msgs;
+import com.example.vo.InventoryVo;
 import com.example.dao.OrdersDao;
 import com.example.domain.Orders;
 import com.example.service.OrdersService;
@@ -16,13 +19,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
- * @author ginger
+ * @author ginger ymm
  */
 @Slf4j
 @CrossOrigin
@@ -33,6 +33,22 @@ public class OrdersController {
     private OrdersService ordersService;
     @Autowired
     private OrdersDao ordersDao;
+    @Autowired
+    public MsgsDao msgsDao;
+    public  boolean saveMsg(){
+        Msgs msgs=new Msgs();
+        msgs.setMsgsCont("有新的入库申请");
+        msgs.setType(1);
+        return msgsDao.insert(msgs)>0;
+    }
+    @PutMapping("/putmsg")
+    public  boolean updatamsg(@RequestParam("msgid") Integer msgid){
+        return msgsDao.updatamsg(msgid)>0;
+    }
+    @GetMapping("/msg")
+    public List<Msgs> getMsgs(){
+        return msgsDao.selectType(1);
+    }
 
     /**
      * 获取订单表
@@ -216,6 +232,9 @@ public class OrdersController {
         //日期去重
         HashSet<String> hashSet = new HashSet<>(orderDate);
         List<String> newDate = new ArrayList<>(hashSet);
+        //日期排序
+        Collections.sort(newDate);
+        log.info("newDate:{}",newDate);
 
         for(String time1 : newDate){
 

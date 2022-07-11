@@ -30,16 +30,28 @@ public class LowWarningController {
 
     List<String> warnList = new ArrayList<>();
 
+    /**
+     * 返回低库存列表
+     * @return 低库存商品列表
+     */
     @GetMapping("/warn")
     public List<String> warningInfo() {
         getWarnInfo();
         return warnList;
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping
     public List<LowWarning> getAll() {
         return lowWarningService.list();
     }
+
+    /**
+     * getWarnInfo
+     */
     private void getWarnInfo() {
         List<Inventory> inventories = inventoryController.getAll();
         List<LowWarning> lowWarnings = this.getAll();
