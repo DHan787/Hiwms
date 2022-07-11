@@ -1,24 +1,49 @@
 @import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
 
-  .el-carousel {
-    margin-top: 0px;
 
-  }
 
-  .el-carousel__item:nth-child(2n) {
-    background-color: #ffffff;
-    border: 1px solid #333333;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #ffffff;
-    border: 1px solid #333333;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
-  }
-  .gauge{
-    margin-left: 0px;
-    margin-top: 0px;
-  }
+
+    .el-carousel__item:nth-child(2n) {
+      background-color: #ffffff;
+      border: 1px solid #333333;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+    }
+    .el-carousel__item el-carousel__item--card is-in-stage{
+      width: 750px;
+      height: 600px;
+
+    }
+    .el-carousel__mask{
+      width: 750px;
+      height: 600px;
+    }
+    .el-carousel__arrow el-carousel__arrow--right{
+      width: 750px;
+      height: 600px;
+    }
+
+
+    .el-carousel__item:nth-child(2n+1) {
+      background-color: #ffffff;
+      border: 1px solid #333333;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+    }
+    .gauge{
+      margin-left: 0px;
+      margin-top: 0px;
+    }
+    .canvas{
+      width: 750px;
+      height: 600px;
+    }
+    .el-container{
+      height: 600px;
+    }
+    .el-carousel el-carousel--horizontal el-carousel--card{
+      height: 600px;
+    }
+    .el-carousel el-carousel--horizontal el-carousel--card{
+      scroll:no;
+    }
