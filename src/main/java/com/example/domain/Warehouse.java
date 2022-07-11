@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+/**
+ * @author ginger
+ */
 @TableName("warehouse")
 @Data
 public class Warehouse {
@@ -13,7 +16,7 @@ public class Warehouse {
     private String warehouseName;
     private String warehouseLocation;
     private String warehouseType;
-    private String warehouseSize;
+    private Integer warehouseSize;
     public Integer getWarehouseId() {
         return warehouseId;
     }

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -23,24 +25,33 @@ public class LowWarningController {
     @Autowired
     private LowWarningService lowWarningService;
 
-    private LowWarningController lowWarningController;
-
     @Autowired
     private InventoryController inventoryController;
 
-    List<String> WarnList = new ArrayList<String>();
+    List<String> warnList = new ArrayList<>();
 
+    /**
+     * 返回低库存列表
+     * @return 低库存商品列表
+     */
     @GetMapping("/warn")
-    public List<String> WarningInfo() {
+    public List<String> warningInfo() {
         getWarnInfo();
-        return WarnList;
+        return warnList;
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping
     public List<LowWarning> getAll() {
         return lowWarningService.list();
     }
 
+    /**
+     * getWarnInfo
+     */
     private void getWarnInfo() {
         List<Inventory> inventories = inventoryController.getAll();
         List<LowWarning> lowWarnings = this.getAll();
@@ -48,18 +59,16 @@ public class LowWarningController {
         ) {
             for (Inventory invent : inventories
             ) {
-//                System.out.println(value.getGoodsId()+"idandid"+invent.getInventoryId());
                 if (value.getGoodsId().equals(invent.getInventoryId())) {
                     System.out.println("in");
-//                    System.out.println(invent.getGoodsName());
                     if (value.getMinNum() >= invent.getGoodsNumber()) {
-                        WarnList.add(invent.getGoodsName());
+                        warnList.add(invent.getGoodsName());
                         System.out.println("inside");
                         break;
                     }
                 }
             }
-            System.out.println(WarnList);
+            System.out.println(warnList);
         }
     }
 }

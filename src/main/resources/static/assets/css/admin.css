@@ -6,6 +6,7 @@
         .el-main {
             background-color: #E9EEF3;
             color: #333;
+            overflow-scrolling: auto;
 
 
         }
@@ -156,7 +157,11 @@
 		    width: 200px;
 		    min-height: 400px;
 		  }
-		  
+         .el-radio-button__inner{
+             size: 100px;
+         }
+
+
 		  #msgs{
 		          width: 200px;
 		          height: 300px;

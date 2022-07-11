@@ -28,9 +28,10 @@
 
         <el-container>
             <!--侧边栏-->
-            <el-aside width="200px">
+            <el-aside width="auto">
                 <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
-                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF">
+                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
+                         @open="handleOpen" @close="handleClose" :collapse="isCollapse">
                     <el-menu-item index="1">
                         <i class="el-icon-menu"></i>
                         <span slot="title" @click="openUrl('./operatorindex.html')">主页</span>
@@ -64,19 +65,22 @@
                         <span slot="title">系统设置</span>
                     </el-menu-item>
 
-                    <a href="../login.html">
                         <el-menu-item index="6">
                             <i class="el-icon-warning-outline"></i>
                             <span slot="title">退出登录</span>
                         </el-menu-item>
-                    </a>
+
+                    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+                        <el-radio-button :label="false">展开</el-radio-button>
+                        <el-radio-button :label="true">收起</el-radio-button>
+                    </el-radio-group>
 
                 </el-menu>
             </el-aside>
             <!-- 主体 -->
             <el-main>
                 <iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
-                        frameborder="0" scrolling="yes"></iframe>
+                        frameborder="0" scrolling="no"></iframe>
             </el-main>
         </el-container>
     </el-container>
@@ -95,19 +99,26 @@
                 editForm: [],
                 datalist: [],
                 FormData: {},
+                isCollapse: true,
                 iframeUrl: './operatorindex.html',
                 fit: 'contain',
                 avatarURL: ' ../../assets/pics/logo3.png'
             }
         },
         created() {
-
+            this.getLowWarnList();
         },
         methods: {
             adjustIframe() {
                 var ifm = document.getElementById("bi_iframe");
                 ifm.height = document.documentElement.clientHeight;
                 ifm.width = document.documentElement.clientWidth;
+            },
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
             },
 
             openUrl(url) {

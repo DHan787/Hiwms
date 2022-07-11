@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+/**
+ * @author ginger
+ */
 @TableName("low_warning")
 @Data
 public class LowWarning {

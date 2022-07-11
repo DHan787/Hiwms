@@ -19,11 +19,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
+/**
+ * @author ginger ymm
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -52,12 +52,10 @@ public class OrdersController {
 
     /**
      * 获取订单表
-     *
-     * @return
+     * @return list
      */
     @GetMapping//访问方式
     public List<Orders> getAll() {
-        //System.out.println(ordersService.list());
         System.out.println("used");
         return ordersService.list();
     }
@@ -65,8 +63,8 @@ public class OrdersController {
     /**
      * 根据id获取订单
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return list
      */
     @GetMapping("/{id}")
     public Orders getById(@PathVariable int id) {
@@ -76,8 +74,8 @@ public class OrdersController {
     /**
      * 删除订单
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return if success
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
@@ -89,8 +87,8 @@ public class OrdersController {
     /**
      * 保存订单
      *
-     * @param orders
-     * @return
+     * @param orders 对象
+     * @return if success
      */
     @PostMapping
     public boolean saveOrders(@RequestBody Orders orders) {
@@ -106,10 +104,8 @@ public class OrdersController {
      * @return 生成的订单id
      */
     public Integer initOrders(int type) {
-        //System.out.println(type);
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        //System.out.println(dateFormat.format(date));
         Orders orders = new Orders();
         orders.setOrderStartTime(dateFormat.format(date));
         orders.setOrderType(type);
@@ -152,22 +148,21 @@ public class OrdersController {
     /**
      * 根据订单类型获取订单 1-入库 2-出库
      *
-     * @param orderType
-     * @return
+     * @param orderType 类型
+     * @return 订单
      */
     @GetMapping("/getByType")
     public List<Orders> getByType(@RequestParam Integer orderType, @RequestParam Integer orderStatus) {
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
         wrapper.eq("order_type", orderType);
         wrapper.eq("order_status", orderStatus);
-        List<Orders> orders = ordersDao.selectList(wrapper);
-        return orders;
+        return ordersDao.selectList(wrapper);
     }
 
     /**
      * 模糊查询
-     * @param ordersId
-     * @return
+     * @param ordersId id
+     * @return order
      */
     @GetMapping("/like")
     public List<Orders> getAllList(@RequestParam String ordersId) {
@@ -177,8 +172,8 @@ public class OrdersController {
 
     /**
      * excel导出
-     * @param response
-     * @throws Exception
+     * @param response 响应
+     * @throws Exception 异常
      */
     @GetMapping("/exportExcel")
     public void exportExcel(HttpServletResponse response) throws Exception {
@@ -213,14 +208,15 @@ public class OrdersController {
 
     /**
      * 获取制作订单图表所需的数据
-     * @return
+     * @return vo
      */
     @GetMapping("/getOrderChar")
     public OrderVo getOrderChar(){
         List<Orders> orders = ordersService.list();
 
         OrderVo orderVo = new OrderVo();
-        List<String> orderDate = new ArrayList<>(); //订单的下单日期
+        //订单的下单日期
+        List<String> orderDate = new ArrayList<>();
         List<Integer> stockInOrders = new ArrayList<>();
         List<Integer> stockOutOrders = new ArrayList<>();
 
@@ -234,16 +230,17 @@ public class OrdersController {
         }
 
         //日期去重
-        HashSet<String> hashSet = new HashSet<String>(orderDate);
-        List<String> newDate = new ArrayList<>();
-        newDate.addAll(hashSet);
+        HashSet<String> hashSet = new HashSet<>(orderDate);
+        List<String> newDate = new ArrayList<>(hashSet);
+        //日期排序
+        Collections.sort(newDate);
+        log.info("newDate:{}",newDate);
 
         for(String time1 : newDate){
 
                 QueryWrapper<Orders> wrapper1 = new QueryWrapper<>();
                 wrapper1.eq("order_type",1).like("order_start_time",time1);
                 List<Orders> orderList1 = ordersDao.selectList(wrapper1);
-                //Integer stockInCount = ordersDao.selectCount(wrapper1);
                 Integer stockInCount = orderList1.size();
                 stockInOrders.add(stockInCount);
 
@@ -251,7 +248,6 @@ public class OrdersController {
                 QueryWrapper<Orders> wrapper2 = new QueryWrapper<>();
                 wrapper2.eq("order_type",2).like("order_start_time",time1);
                 List<Orders> orderList2 = ordersDao.selectList(wrapper2);
-                //Integer stockOutCount = ordersDao.selectCount(wrapper2);
                 Integer stockOutCount = orderList2.size();
                 stockOutOrders.add(stockOutCount);
 

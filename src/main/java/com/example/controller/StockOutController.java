@@ -2,9 +2,7 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.dao.StockInDao;
 import com.example.dao.StockOutDao;
-import com.example.domain.StockIn;
 import com.example.domain.StockOut;
 import com.example.service.StockOutService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author ginger
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -34,8 +35,7 @@ public class StockOutController {
 
     /**
      * 获取全部入库信息
-     *
-     * @return
+     * @return list
      */
     @GetMapping//访问方式
     public List<StockOut> getAll() {
@@ -44,38 +44,35 @@ public class StockOutController {
     }
 
     /**
-     * @param stockOut
+     * @param stockOut 对象
      * @return if success
      */
     @PostMapping("/save")
     public boolean saveStockOut(@RequestBody StockOut stockOut) {
-//        System.out.println(stockOut);
-//        System.out.println("out");
-        stockOut.setOrderId(ordersController.initOrders(2)); //type = 2 入库
-//        System.out.println(stockOut);
+        //type = 2 入库
+        stockOut.setOrderId(ordersController.initOrders(2));
         return stockOutService.save(stockOut);
     }
 
     /**
      * 根据订单ID得到出库货品信息
      *
-     * @param orderId
-     * @return
+     * @param orderId id
+     * @return 出库信息
      */
     @GetMapping("/getByOrderId")
     public List<StockOut> getByOrderId(@RequestParam Integer orderId) {
 
         QueryWrapper<StockOut> wrapper = new QueryWrapper<>();
         wrapper.eq("order_id", orderId);
-        List<StockOut> stockOuts = stockOutDao.selectList(wrapper);
-        return stockOuts;
+        return stockOutDao.selectList(wrapper);
     }
 
     /**
      * 删除出库申请记录
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return if success
      */
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {

@@ -5,6 +5,9 @@ import com.example.domain.UsersInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author ginger
+ */
 @Mapper
 @Component
 public interface UsersInfoDao extends BaseMapper<UsersInfo> {
