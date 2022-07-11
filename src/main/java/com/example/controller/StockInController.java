@@ -1,18 +1,17 @@
 package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.config.StockInEvent;
 import com.example.dao.StockInDao;
 import com.example.domain.StockIn;
 import com.example.service.StockInService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-/**
- * @author ginger
- */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -28,6 +27,9 @@ public class StockInController {
 
     @Autowired
     private StockInDao stockInDao;
+
+    @Autowired
+    private WebApplicationContext webapplicationcontext;
 
     public StockInController(OrdersController ordersController) {
 
@@ -54,8 +56,9 @@ public class StockInController {
      */
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn) {
-        stockIn.setOrderId(ordersController.initOrders(1));
-        // type = 1 入库
+        stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
+        StockInEvent stockInEvent=new StockInEvent("stockIn:",stockIn,"新的入库申请");
+        webapplicationcontext.publishEvent(stockInEvent);
         return stockInService.save(stockIn);
     }
 

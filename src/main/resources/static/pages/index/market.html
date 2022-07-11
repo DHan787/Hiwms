@@ -38,7 +38,7 @@
 
                     <el-menu-item index="2">
                         <i class="el-icon-s-help"></i>
-                        <span slot="title">控制台</span>
+                        <span slot="title" @click="openUrl('./charts.html')">控制台</span>
                     </el-menu-item>
                     <el-submenu index="3">
                         <template slot="title">
@@ -77,7 +77,7 @@
             <!-- 主体 -->
             <el-main>
                 <iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
-                        frameborder="0" scrolling="yes"></iframe>
+                        frameborder="0" scrolling="no"></iframe>
             </el-main>
         </el-container>
     </el-container>
@@ -97,7 +97,7 @@
                 editForm: [],
                 datalist: [],
                 FormData: {},
-                isCollapse: true,
+                isCollapse: false,
                 iframeUrl: './marketindex.html',
                 fit: 'contain',
                 avatarURL: ' ../../assets/pics/logo3.png'
