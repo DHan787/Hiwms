@@ -10,6 +10,7 @@
             display: flex;
             background-color: #FFFFFF;
             height: 900px;
+            overflow-scrolling: auto;
 
 
 
@@ -179,6 +180,18 @@
             margin-left: 850px;
 
 
+        }
+        .report1{
+            position: absolute;
+            margin-top: 250px;
+            margin-left: 670px;
+
+
+        }
+        .top1{
+            position: absolute;
+            margin-top: 0px;
+            margin-left: 670px;
         }
         .in{
             width: 80px;
