@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <script src="../assets/js/vue.js"></script>
@@ -10,7 +10,7 @@
 <div id="app">
     the test
     <ul>
-        {{info}}
+        <p th:text="${msg}"></p>
     </ul>
     <tr>
         <td>
