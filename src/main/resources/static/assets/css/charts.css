@@ -1,19 +1,24 @@
 @import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
 
   .el-carousel {
-    margin-top: 50px;
+    margin-top: 0px;
+
   }
 
   .el-carousel__item:nth-child(2n) {
     background-color: #ffffff;
     border: 1px solid #333333;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: 16px;
   }
   
   .el-carousel__item:nth-child(2n+1) {
     background-color: #ffffff;
     border: 1px solid #333333;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: 16px;
+  }
+  .gauge{
+    margin-left: 0px;
+    margin-top: 0px;
   }
