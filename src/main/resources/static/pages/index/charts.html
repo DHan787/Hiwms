@@ -22,7 +22,7 @@
 					<!--<div class="chart">-->
 						<template>
 							<el-carousel :interval="4000" style="width: 1200px;height:600px;" type="card">
-								<
+
 								<el-carousel-item>
 									<div id="inventoryChart" style="width: 600px;height:500px;"></div>
 								</el-carousel-item>
@@ -78,10 +78,13 @@
 		const inventoryChart = echarts.init(document.getElementById('inventoryChart'));
 		axios.get("http://localhost:8080/inventory/getBarList").then(res => {
 			this.charData = res.data;
+			console.log("inventoryChart.res.data",res.data);
 			for (let i = 0; i < this.charData.name.length; i++) {
 				nameArr[i] = this.charData.name[i];
 				valueArr[i] = this.charData.value[i];
 			}
+			console.log("nameArr",nameArr);
+			console.log("valueArr",valueArr);
 			inventoryChart.setOption({
 				title: {
 					text: '库存商品表'
@@ -106,7 +109,7 @@
 							color: function(params) {
 								var colorList = ['#F9F871','#FFD16F', '#FFAD8A', '#FF96AF',
 									'#EC8ECE','#AC8FDA'];
-								return colorList[params.dataIndex];
+								return colorList[params.dataIndex % colorList.length];
 							}
 						}
 					},
@@ -117,10 +120,10 @@
 				}]
 			})
 		})
-	</script>
+
 
 	<!--订单折线图-->
-	<script>
+
 		let timeArr = [];
 		let stockInArr = [];
 		let stockOutArr = [];
@@ -165,11 +168,9 @@
 				]
 			})
 		})
-	</script>
-
 
 	<!--仓库剩余存放量仪表图-->
-	<script>
+
 		let warehouseNameArr = [];
 		let warehouseValueArr = [];
 		var option;
@@ -177,14 +178,10 @@
 		const warehouseChart = echarts.init(document.getElementById('warehouseChart'));
 		axios.get("http://localhost:8080/warehouse/getCharData").then(res => {
 			this.charData = res.data;
-			console.log("res.data", res.data);
 			for (let i = 0; i < this.charData.name.length; i++) {
 				warehouseNameArr[i] = this.charData.name[i];
 				warehouseValueArr[i] = this.charData.value[i];
 			}
-
-			console.log("warehouseNameArr", warehouseNameArr[0]);
-			console.log("warehouseValueArr", warehouseValueArr[0]);
 			const gaugeData = [
 				{
 					value: warehouseValueArr[0],
@@ -249,6 +246,9 @@
 			];
 
 			option = {
+				title: {
+					text: '各仓库存放量'
+				},
 				color: ['#F9F871','#FFD16F', '#FFAD8A', '#FF96AF',
 					'#EC8ECE','#AC8FDA'],
 				tooltip: {
@@ -296,7 +296,6 @@
 					}
 				]
 			};
-
 
 			warehouseChart.setOption(option);
 		})
