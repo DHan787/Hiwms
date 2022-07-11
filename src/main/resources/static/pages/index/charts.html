@@ -12,24 +12,36 @@
 		<el-container>
 			<!-- 主体 -->
 			<el-main>
-				<el-breadcrumb style="margin-bottom: 12px;">
+				<el-breadcrumb style="margin-bottom: 0px;">
 					<el-breadcrumb-item><a href="../index/index.html">首页</a></el-breadcrumb-item>
 					<el-breadcrumb-item><a href="#">控制台</a> </el-breadcrumb-item>
 				</el-breadcrumb>
 
+				<div class="gauge">
 
-					<div class="chart">
+					<!--<div class="chart">-->
 						<template>
-							<el-carousel :interval="4000" type="card" height="400px" width="600px">
+							<el-carousel :interval="4000" style="width: 800px;height:500px;" type="card">
 								<el-carousel-item>
-									<div id="inventoryChart" style="width: 600px;height:400px;"></div>
+									<div id="inventoryChart" style="width: 600px;height:500px;"></div>
 								</el-carousel-item>
 								<el-carousel-item>
-									<div id="orderChart" style="width: 600px;height:400px;"></div>
+									<div id="orderChart" style="width: 600px;height:500px;"></div>
 								</el-carousel-item>
+								<el-carousel-item>
+									<div id="warehouseChart" style="width: 600px;height: 500px;"></div>
+								</el-carousel-item>
+
 							</el-carousel>
 						</template>
-					</div>
+					<!--</div>
+-->
+
+					<!--<div id="warehouseChart" style="width: 600px;height:400px;margin-left: 700px"></div>-->
+				</div>
+
+
+
 
 			</el-main>
 		</el-container>
@@ -49,7 +61,7 @@
 
 				}
 			},
-			created() {
+			mounted() {
 
 			},
 			methods: {
@@ -69,8 +81,6 @@
 				nameArr[i] = this.charData.name[i];
 				valueArr[i] = this.charData.value[i];
 			}
-			console.log("nameArr:", nameArr);
-			console.log("valueArr", valueArr);
 			inventoryChart.setOption({
 				title: {
 					text: '库存商品表'
@@ -90,6 +100,15 @@
 					name: '货物库存数量',
 					type: 'bar',
 					data: valueArr,
+					itemStyle: {
+						normal: {
+							color: function(params) {
+								var colorList = ['#F9F871','#FFD16F', '#FFAD8A', '#FF96AF',
+									'#EC8ECE','#AC8FDA'];
+								return colorList[params.dataIndex];
+							}
+						}
+					},
 					barWidth: '20%' //柱条占总类目的宽度
 					/* itemStyle: {
 						color: ''
@@ -107,7 +126,6 @@
 		const orderChart = echarts.init(document.getElementById('orderChart'));
 		axios.get("http://localhost:8080/orders/getOrderChar").then(res => {
 			this.charData = res.data;
-			console.log("res.data", res.data);
 			for (let i = 0; i < this.charData.time.length; i++) {
 				timeArr[i] = this.charData.time[i];
 				stockInArr[i] = this.charData.stockInOrder[i];
@@ -133,7 +151,8 @@
 				series: [{
 						name: '入库订单',
 						type: 'line',
-						data: stockInArr
+						data: stockInArr,
+						color: ['#EC8ECE','#AC8FDA'],
 
 					},
 					{
@@ -144,6 +163,141 @@
 					}
 				]
 			})
+		})
+	</script>
+
+
+	<!--仓库剩余存放量仪表图-->
+	<script>
+		let warehouseNameArr = [];
+		let warehouseValueArr = [];
+		var option;
+
+		const warehouseChart = echarts.init(document.getElementById('warehouseChart'));
+		axios.get("http://localhost:8080/warehouse/getCharData").then(res => {
+			this.charData = res.data;
+			console.log("res.data", res.data);
+			for (let i = 0; i < this.charData.name.length; i++) {
+				warehouseNameArr[i] = this.charData.name[i];
+				warehouseValueArr[i] = this.charData.value[i];
+			}
+
+			console.log("warehouseNameArr", warehouseNameArr[0]);
+			console.log("warehouseValueArr", warehouseValueArr[0]);
+			const gaugeData = [
+				{
+					value: warehouseValueArr[0],
+					name: warehouseNameArr[0],
+					title: {
+						offsetCenter: ['-100%', '80%']
+					},
+					detail: {
+						offsetCenter: ['-100%', '95%']
+					}
+				},
+				{
+					value: warehouseValueArr[1],
+					name: warehouseNameArr[1],
+					title: {
+						offsetCenter: ['-60%', '80%']
+					},
+					detail: {
+						offsetCenter: ['-60%', '95%']
+					}
+				},
+				{
+					value: warehouseValueArr[2],
+					name: warehouseNameArr[2],
+					title: {
+						offsetCenter: ['-20%', '80%']
+					},
+					detail: {
+						offsetCenter: ['-20%', '95%']
+					}
+				},
+				{
+					value: warehouseValueArr[3],
+					name: warehouseNameArr[3],
+					title: {
+						offsetCenter: ['20%', '80%']
+					},
+					detail: {
+						offsetCenter: ['20%', '95%']
+					}
+				},
+				{
+					value: warehouseValueArr[4],
+					name: warehouseNameArr[4],
+					title: {
+						offsetCenter: ['60%', '80%']
+					},
+					detail: {
+						offsetCenter: ['60%', '95%']
+					}
+				},
+				{
+					value: warehouseValueArr[5],
+					name: warehouseNameArr[5],
+					title: {
+						offsetCenter: ['100%', '80%']
+					},
+					detail: {
+						offsetCenter: ['100%', '95%']
+					}
+				}
+			];
+
+			option = {
+				color: ['#F9F871','#FFD16F', '#FFAD8A', '#FF96AF',
+					'#EC8ECE','#AC8FDA'],
+				tooltip: {
+					formatter: '{b} : {c}%'
+				},
+				series: [
+					{
+						type: 'gauge',
+						anchor: {
+							show: true,
+							showAbove: true,
+							size: 18,
+							itemStyle: {
+								color: '#FAC858'
+							}
+						},
+						pointer: {
+							icon: 'path://M2.9,0.7L2.9,0.7c1.4,0,2.6,1.2,2.6,2.6v115c0,1.4-1.2,2.6-2.6,2.6l0,0c-1.4,0-2.6-1.2-2.6-2.6V3.3C0.3,1.9,1.4,0.7,2.9,0.7z',
+							width: 6,
+							length: '80%',
+							offsetCenter: [0, '8%']
+						},
+						progress: {
+							show: true,
+							overlap: true,
+							roundCap: true
+						},
+						axisLine: {
+							roundCap: true
+						},
+						data: gaugeData,
+						title: {
+							fontSize: 16
+						},
+						detail: {
+							width: 40,
+							height: 14,
+							fontSize: 14,
+							color: '#ffffff',
+							backgroundColor: 'auto',
+							borderRadius: 10,
+							formatter: '{value}%',
+							valueAnimation: true,
+						}
+					}
+				]
+			};
+
+
+			warehouseChart.setOption(option);
 		})
 	</script>
 </html>

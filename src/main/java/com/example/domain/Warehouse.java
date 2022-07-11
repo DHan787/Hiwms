@@ -16,7 +16,7 @@ public class Warehouse {
     private String warehouseName;
     private String warehouseLocation;
     private String warehouseType;
-    private String warehouseSize;
+    private Integer warehouseSize;
     public Integer getWarehouseId() {
         return warehouseId;
     }

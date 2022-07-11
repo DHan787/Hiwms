@@ -151,3 +151,6 @@
 * 前端页面优化 ch
 * 前端页面美化 wlx
 * 低库存警告Debug login.html debug hj
+
+
+* 增加了仪表盘数据；样式待调整 hxy
