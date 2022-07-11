@@ -7,13 +7,13 @@
             background-color: #E9EEF3;
             color: #333;
             overflow-scrolling: auto;
-
-
         }
+		
         .el-menu-vertical-demo el-menu{
             background-image: url("../pics/6.jpg");
 
         }
+		
         .el-menu-item-group__title{
             background-image: url("../pics/6.jpg");
 
@@ -160,13 +160,3 @@
          .el-radio-button__inner{
              size: 100px;
          }
-
-
-		  #msgs{
-		          width: 200px;
-		          height: 300px;
-		         border: 1px solid palegoldenrod;
-		          position: absolute;
-		          top: 350px;
-		          left: 1320px;
-		      }
