@@ -123,7 +123,7 @@
 .el-menu-vertical-demo {
 	background-image: url("../pics/6.jpg");
 	background-size: 1600px;
-	background-position: left 100px;
+	/* background-position: left 100px; */
 }
 
 .admin-info h3 {
