@@ -52,10 +52,10 @@
 }
 
 .el-table .warning-row {
-	background: #e3f1f7;
+	background: #d7e4f8;
 }
 
 .el-table--enable-row-hover .el-table__body tr:hover>td {
-	background-color: #edfde7 !important;
+	background-color: #fff0e8 !important;
 	box-shadow: 10px 5px 5px #c9cdcf;
 }
