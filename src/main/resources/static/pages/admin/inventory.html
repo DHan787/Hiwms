@@ -22,7 +22,7 @@
                 <div class="card-container">
                     <div class="handle-container">
                         <!--查询表单-->
-                        <el-form :model="search">
+                        <el-form>
                             <el-row>
                                 <el-col :span='12'>
                                     <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号"
@@ -40,6 +40,7 @@
                         <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增库存</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
+                        <el-button  type="primary" @click="getLowWarnList">库 存 测 试</el-button>
                     </el-row>
 
                     <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
@@ -66,6 +67,7 @@
                             <el-button @click="dialogFormVisible = false">取 消</el-button>
                             <el-button v-if="isAdd" type="primary" @click="addInventory">确 定</el-button>
                             <el-button v-else type="primary" @click="updateInventoryById">更 新</el-button>
+
                         </div>
                     </el-dialog>
 
@@ -73,8 +75,8 @@
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" 
-                              style="width: 100%; ">
+                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" stripe
+                              style="width: 100%; " :row-class-name="tableRowClassName">
                         <el-table-column prop="inventoryId" label="库存编号" width="180">
                         </el-table-column>
                         <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -115,12 +117,15 @@
 <script src="../../assets/css/element-ui/index.js"></script>
 <script src="../../assets/js/axios.min.js"></script>
 
+
+
 <script>
     new Vue({
         el: '#app',
         data: function () {
             return {
                 tableData: {},
+                datalist:[],
                 inventoryId: "",
                 goodsName: "",
                 dialogFormVisible: false,
@@ -138,14 +143,16 @@
                 formLabelWidth: '120px',
                 currentPage: 1, // 当前页码
                 total: 20, // 总条数
-                pageSize: 5 // 每页的数据条数
+                pageSize: 5, // 每页的数据条数
+                isLow: 'false'
 
             }
         },
 
         created() {
-            this.getAll()
+            this.getAll();
             this.getWarehouseName()
+            this.getLowWarnList();
         },
 
         methods: {
@@ -298,8 +305,49 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
                 this.currentPage = val;
-            }
-        }
+            },
+
+
+            //低库存标注
+            getLowWarnList(){
+                console.log(12222);
+                    axios.get("http://localhost:8080/warning/warnlist").then(res => {
+                        console.log("res.data",res.data);
+
+                        console.log("res.data[0].ifLow",res.data[0].ifLow);
+                        this.datalist = res.data;
+
+                        /*for(var i = 0; i < this.datalist.length; i++){
+                            if ((this.datalist[i].ifLow == 0) && (this.datalist[i].goodsName == name)) {
+                                return 1;
+                                console.log(this.datalist[i].goodsName);
+                              /!*  if (res.data.goodsName == this.tableData.goodsName) {
+                                    console.log(2);
+                                }*!/
+                            }else {
+                                return 2;
+                            }
+                        }*/
+
+                    });
+
+                },
+
+                /*tableRowClassName({row}) {
+                console.log("row",row);
+                console.log("row.goodsName",row.goodsName);
+
+                console.log("this.datalist:",this.datalist);
+                /!*if ( == 1) {
+                    return 'warning-row';
+                } else {
+                    return '';
+                }*!/
+            },*/
+            },
+
     })
 </script>
+
+
 </html>
