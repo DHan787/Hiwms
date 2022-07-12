@@ -1,7 +1,6 @@
 package com.example.config;
 
 import com.example.domain.Orders;
-import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.springframework.context.ApplicationEvent;
 
 public class OrdersBeginEvent extends ApplicationEvent {
