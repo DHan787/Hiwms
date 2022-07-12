@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="../../assets/css/adminindex.css">
-		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-		<link rel="shortcut icon" href="../../assets/pics/logo2.png">
-		<title>管理员页面</title>
-	</head>
-	<body>
-		<div id="app">
-			<el-container>
-				<el-header style="height: 80px">
-					<div class="head">
-						<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
-						</el-avatar>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/css/adminindex.css">
+    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+    <link rel="shortcut icon" href="../../assets/pics/logo2.png">
+    <title>管理员页面</title>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header style="height: 80px">
+            <!--					TODO: 假的，需要加token后续实现-->
+
+        <!--logo-->
+
+        <div class="head" style="float: left;">
+            <el-avatar :src="avatarURL">
+            </el-avatar>
+        </div>
+        <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
+
+        <!--头像-->
+        <div class="avatar" style="float: right;">
+            <el-button @click="drawer = true" circle >
+                <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+                </el-avatar>
+
+            </el-button>
+
+            <el-drawer
+                    title="个人中心"
+                    :visible.sync="drawer"
+                    size="50%">
+                <div>
+					<div class="id" style="margin-left: 15%">
+						<span>用户名</span>
 					</div>
-					<div class="head" style="float: left;" v-if="!isCollapse">
-						<el-avatar :src="avatarURL">
-						</el-avatar>
+
+					<div class="tele" style="margin-left: 15%">
+						<span>电话</span>
 					</div>
-					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;" v-if="!isCollapse">汇安智能仓储平台</div>
-				</el-header>
-				<el-container>
-					<!--侧边栏-->
-					<el-aside width="auto">
-						<el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
-							background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
-							@open="handleOpen" @close="handleClose" :collapse="isCollapse">
-							<el-radio-group v-model="isCollapse">
-								<el-radio-button :label="false" v-if="isCollapse" size="medium" style="float:left;"><i class="el-icon-d-arrow-right"></i>
-								</el-radio-button>
-								<el-radio-button :label="true" v-else size="medium"><i class="el-icon-d-arrow-left"></i>
-								</el-radio-button>
-							</el-radio-group>
-							<el-menu-item index="1">
-								<i class="el-icon-menu"></i>
-								<span slot="title" @click="openUrl('./index.html')">主页</span>
-							</el-menu-item>
-							<el-menu-item index="2">
+
+					<div class="location" style="margin-left: 15%">
+						<span></span>
+
+					</div>
+
+					<el-button @click="innerDrawer = true">编辑信息</el-button>
+
+                    <el-drawer
+                            title="我是里面的"
+                            :append-to-body="true"
+                            :before-close="close"
+                            :visible.sync="innerDrawer">
+                        <p>_(:зゝ∠)_</p>
+                    </el-drawer>
+                </div>
+            </el-drawer>
+        </div>
+        </el-header>
+
+
+        <el-container>
+            <!--侧边栏-->
+            <el-aside width="auto">
+                <el-menu class="el-menu-vertical-demo" default-active="1" style="height: 110vh;"
+                         background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
+                         @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+                    <el-radio-group v-model="isCollapse">
+                        <el-radio-button :label="false" v-if="isCollapse" size="medium" style="float:left;"><i class="el-icon-d-arrow-right"></i>
+                        </el-radio-button>
+                        <el-radio-button :label="true" v-else size="medium"><i class="el-icon-d-arrow-left"></i>
+                        </el-radio-button>
+                    </el-radio-group>
+
+                    <el-menu-item index="1" >
+                        <i class="el-icon-menu"></i>
+                        <span slot="title" @click="openUrl('./index.html')">主页</span>
+                    </el-menu-item>
+
+
+							<el-menu-item index="2" >
 								<i class="el-icon-s-help"></i>
-								<span slot="title" @click="openUrl('./charts.html')" style="">控制台</span>
+								<span slot="title"  @click="openUrl('./charts.html')" style="">控制台</span>
 							</el-menu-item>
-							<el-submenu index="3">
+							<el-submenu index="3" >
 								<template slot="title">
 									<i class="el-icon-view"></i>
-									<span slot="title">业务流</span>
+									<span slot="title" >业务流</span>
 								</template>
 								<el-menu-item-group>
 									<el-menu-item index="3-1">
@@ -67,6 +111,7 @@
 										<i class="el-icon-takeaway-box"></i>
 										<span slot="title" @click="openUrl('../admin/inventory.html')">库存管理</span>
 									</el-menu-item>
+
 								</el-menu-item-group>
 							</el-submenu>
 							<el-menu-item index="5">
@@ -101,7 +146,9 @@
 			data: function() {
 				return {
 					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-					UserEditVisible: true,
+                    drawer: false,
+                    innerDrawer: false,
+                    UserEditVisible: true,
 					editForm: [],
 					datalist: [],
 					FormData: {},
@@ -112,7 +159,7 @@
 				}
 			},
 			created() {
-
+                this.getLowWarnList()
 			},
 			methods: {
 				//低库存提醒
@@ -127,6 +174,14 @@
 							});
 						}
 					});
+				},
+
+				close(done) {
+					this.$confirm('还有未保存的工作哦确定关闭吗？')
+							.then(_ => {
+								done();
+							})
+							.catch(_ => {});
 				},
 
 				adjustIframe() {
@@ -154,14 +209,6 @@
 		})
 	</script>
 
-	<script>
-		export default {
-			data() {
-				return {
-					drawer: false,
-				};
-			}
-		};
-	</script>
+
 
 </html>
