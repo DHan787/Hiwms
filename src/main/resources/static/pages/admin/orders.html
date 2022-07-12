@@ -221,6 +221,7 @@
 					this.getAll();
 				},
 				tableRowClassName({row}) {
+					console.log("orderStatus:" + row.orderStatus)
 					if (row.orderStatus == 10 || row.orderStatus == 20) {
 						return 'warning-row';
 					} else {
@@ -320,6 +321,7 @@
 					}
 				},
 				formatInit(row) { //二次渲染
+				
 					if (row.orderInit === 11) {
 						return "货物员Anna"
 					} else {

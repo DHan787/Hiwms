@@ -48,7 +48,7 @@
 
 
                             </el-image>
-                            <div class="title1"><h3>数据统计</h3>
+                            <div class="title1-2"><h3>数据统计</h3>
                             </div>
 
 
@@ -89,7 +89,7 @@
 
 
                             </el-image>
-                            <div class="title1"><h3>快捷入口</h3>
+                            <div class="title1-2"><h3>快捷入口</h3>
                             </div>
 
 
@@ -105,7 +105,6 @@
                                     </a></el-tooltip><!--订单-->
                                 </div>
                                 <div>
-
                                     <el-tooltip content="出库申请" placement="bottom"><a href="../stock-out-apply.html">
                                         <el-image :src="src3" class="out">
                                             <div slot="placeholder" class="image-slot">
@@ -129,10 +128,10 @@
 										</div>
 									</el-image>
 									<el-badge :value="msgs.length" class="item">
-										<h3>系统通告</h3>
+										<h3 class="title1-2">系统通告</h3>
 									</el-badge>
 								</div>
-								<div class="title1">
+								<div>
 									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
 										<el-card style="margin: 15px;">
 											<p>新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
