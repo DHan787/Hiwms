@@ -1,0 +1,3 @@
+uploadFile:
+  path: E:\Development\Hiwms\src\main\resources\static\userAvatar
+  maxSize: 40
