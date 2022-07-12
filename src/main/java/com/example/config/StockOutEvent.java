@@ -3,6 +3,10 @@ package com.example.config;
 import com.example.domain.StockOut;
 import org.springframework.context.ApplicationEvent;
 
+/**
+ * @author ymm
+ * 出库申请事件
+ */
 public class StockOutEvent extends ApplicationEvent {
     private StockOut stockOut;
 

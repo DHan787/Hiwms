@@ -1,244 +1,264 @@
 * {
-            margin: 0;
-            padding: 0;
-        }
+	margin: 0;
+	padding: 0;
+}
 
-        .el-main {
+.el-main {
 
-            color: #333;
-            position: relative;
-            display: flex;
-            background-color: #FFFFFF;
-            height: 900px;
-            overflow-scrolling: auto;
-
-
-
-
-        }
-
-        .el-header {
-            background-color: #FFFFFF;
-            color: #333;
-            line-height: 60px;
-            padding-left: 0px;
+	color: #333;
+	position: relative;
+	display: flex;
+	background-color: #FFFFFF;
+	height: 900px;
+	overflow-scrolling: auto;
 
 
 
 
+}
 
-        }
-
-        .logo {
-            width: 200px;
-            line-height: 60px;
-            color: #fff;
-            font-weight: bolder;
-            padding-left: 50px;
-            box-sizing: border-box;
-            color: #409EFF;
-        }
-
-        .card-container {
-
-            display: flex;
-
-
-
-        }
-
-        .ava {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            vertical-align:middle;
-            position:absolute;
-            margin-left: 10px;
-            display:inline-block;
-        }
+.el-header {
+	background-color: #FFFFFF;
+	color: #333;
+	line-height: 60px;
+	padding-left: 0px;
 
 
 
 
 
+}
 
-        .admin-info h3 {
-            margin-left: 24px;
-            padding-top: 12px;
-            margin-bottom: 12px;
+.logo {
+	width: 200px;
+	line-height: 60px;
+	color: #fff;
+	font-weight: bolder;
+	padding-left: 50px;
+	box-sizing: border-box;
+	color: #409EFF;
+}
 
+.card-container {
 
-
-        }
-
-
-        .weather {
-            margin-left: 24px;
-        }
-
-        .cell {
-            display: flex;
-        }
-        .all{
-            align-items: center;
-        }
-
-        .top{
-            position: absolute;
-            margin-top: 0px;
-            margin-left: 650px;
-        }
-        .users {
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            margin-left: 15px;
-            margin-top: 15px;
-        }
-
-        .orders {
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            margin-left: 15px;
-            margin-top: 15px;
-        }
-
-        .goods {
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            margin-left: 15px;
-            margin-top: 15px;
-        }
-        .warehouse {
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            margin-left: 15px;
-            margin-top: 15px;
-        }
-        .pics{
-            width: 40px;
-            height: 45px;
-            vertical-align:middle;
-            position:absolute;
-        }
+	display: flex;
 
 
-        .data{
-            position: absolute;
-            border:solid ;
-            border-left: #f5f5ff;
-            border-top: #f5f5ff;
-            border-bottom: #f5f5ff;
-            border-right: #f5f5ff;
 
-        }
+}
 
-        .bg2{
-
-            width: 200px;
-            height: 100px;
-            align-items: center;
-            margin-bottom: 50px;
-            display:inline-block;
-            margin-right: 50px;
-            border: #bcbec2;
-            background-color: #d9ecff;
-			border-radius: 10px;
-
-        }
+.ava {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	vertical-align: middle;
+	position: absolute;
+	margin-left: 10px;
+	display: inline-block;
+}
 
 
-        .head{
-            float: right;
-            margin-top: 10px;
-        }
-        .h4{
-            display:inline-block;
-            text-align: center;
-
-        }
-        .box{
-            display:inline-block;
-
-        }
-        .title1{
-            display:inline-block;
-        }
-        .down{
-            margin-top: 450px;
-            margin-left: 40px;
-
-        }
-        .report{
-            position: absolute;
-            margin-top: 0px;
-            margin-left: 890px;
-            width: 300px;
 
 
-        }
-        .report1{
-            position: absolute;
-            margin-top: 250px;
-            margin-left: 670px;
 
 
-        }
-        .top1{
-            position: absolute;
-            margin-top: 0px;
-            margin-left: 670px;
-        }
-        .in{
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            margin-top: 100px;
-        }
-        .out{
-            width: 80px;
-            height: 95px;
-            margin-right: 15px;
-            margin-bottom: 100px;
-            margin-top: 50px;
+.admin-info h3 {
+	margin-left: 24px;
+	padding-top: 12px;
+	margin-bottom: 12px;
 
-        }
-        .box-card1{
 
-            background-size: 1600px;
-            display: flex;
-            width: 550px;
-            margin-left: 20px;
 
-        }
-        .box-card2{
+}
 
-            background-size: 1600px;
-            display: flex;
-            width: 550px;
-            margin-left: 20px;
-            margin-top: 180px;
-        }
-        .box-card3{
 
-            background-size: 1600px;
-            display: flex;
-			
-        }
-        .box-card4{
+.weather {
+	margin-left: 24px;
+}
 
-            background-size: 1600px;
-            display: flex;
-        }
-        .el-card__body{
+.cell {
+	display: flex;
+}
 
-        }
+.all {
+	align-items: center;
+}
 
+.top {
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 630px;
+}
+
+.users {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.orders {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.goods {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.warehouse {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.pics {
+	width: 40px;
+	height: 45px;
+	vertical-align: middle;
+	position: absolute;
+}
+
+
+.data {
+	position: absolute;
+	border: solid;
+	border-left: #f5f5ff;
+	border-top: #f5f5ff;
+	border-bottom: #f5f5ff;
+	border-right: #f5f5ff;
+
+}
+
+.bg2 {
+
+	width: 200px;
+	height: 100px;
+	align-items: center;
+	margin-bottom: 50px;
+	display: inline-block;
+	margin-right: 50px;
+	border: #bcbec2;
+	background-color: #d9ecff;
+	border-radius: 10px;
+
+}
+
+
+.head {
+	float: right;
+	margin-top: 10px;
+}
+
+.h4 {
+	display: inline-block;
+	text-align: center;
+
+}
+
+.box {
+	display: inline-block;
+
+}
+
+.title1 {
+	display: inline-block;
+}
+
+.down {
+	margin-top: 450px;
+	margin-left: 40px;
+
+}
+
+.report {
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 850px;
+
+
+}
+
+.report1 {
+	position: absolute;
+	margin-top: 250px;
+	margin-left: 670px;
+
+
+}
+
+.top1 {
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 670px;
+}
+
+.in {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	margin-top: 100px;
+}
+
+.out {
+	width: 80px;
+	height: 95px;
+	margin-right: 15px;
+	margin-bottom: 100px;
+	margin-top: 50px;
+
+}
+
+.box-card1 {
+
+	background-size: 1600px;
+	display: flex;
+	width: 550px;
+	margin-left: 20px;
+
+}
+
+.box-card2 {
+
+	background-size: 1600px;
+	display: flex;
+	width: 550px;
+	margin-left: 20px;
+	margin-top: 180px;
+}
+
+.box-card3 {
+
+	background-size: 1600px;
+	display: flex;
+
+}
+
+.box-card4 {
+
+	background-size: 1600px;
+	display: flex;
+}
+
+/* .type-3-bgcolor {
+	background-color: #1DCFBB;
+	float: left;
+	width: 8px;
+	height: 100px;
+	border-radius: 15px 0 0 15px; 
+} */

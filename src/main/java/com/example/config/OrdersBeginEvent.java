@@ -1,8 +1,12 @@
 package com.example.config;
 
 import com.example.domain.Orders;
-import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.springframework.context.ApplicationEvent;
+
+/**
+ * @author ymm
+ * 订单开始事件
+ */
 
 public class OrdersBeginEvent extends ApplicationEvent {
     private Orders orders;
