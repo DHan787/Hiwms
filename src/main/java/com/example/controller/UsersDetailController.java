@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class UsersDetailController {
 
     /**
      * getAll
+     *
      * @return if sccuess
      */
     @GetMapping
@@ -61,7 +63,8 @@ public class UsersDetailController {
 
     /**
      * 装配用户详情
-     * @param usersList 用户表
+     *
+     * @param usersList     用户表
      * @param usersInfoList 用户信息表
      * @return detail
      */
@@ -84,7 +87,6 @@ public class UsersDetailController {
                     } else {
                         usersDetail.setUserRole("用户");
                     }
-
                     usersDetailsList.add(usersDetail);
                 }
             }
@@ -93,7 +95,6 @@ public class UsersDetailController {
     }
 
     /**
-     *
      * @param id id
      * @return if success
      */
@@ -110,7 +111,7 @@ public class UsersDetailController {
     /**
      * 模糊查询
      *
-     * @param userId id
+     * @param userId   id
      * @param userName name
      * @return usersDetail
      */
@@ -121,4 +122,15 @@ public class UsersDetailController {
         return this.setUsersDetail(usersList, usersInfoList);
     }
 
+    /**
+     * 根据session 获取个人信息
+     *
+     * @param request re
+     * @return detail
+     */
+    @GetMapping("/getDetail")
+    public List<UsersDetail> getDetail(HttpServletRequest request) {
+        Object id = request.getSession().getAttribute("users");
+        return this.getById(Integer.parseInt(id.toString()));
+    }
 }

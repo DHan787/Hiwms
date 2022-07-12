@@ -7,15 +7,15 @@
     background-color: #E9EEF3;
     color: #333;
     overflow-scrolling: auto;
-
-
 }
+
 .el-menu-vertical-demo el-menu{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 
 }
+
 .el-menu-item-group__title{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 
 }
 
@@ -25,30 +25,30 @@
     color: #333;
     line-height: 60px;
     padding-left: 0px;
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
     background-size:1600px;
 
 
 }
 .el-submenu__title{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 
 }
 .el-menu-item{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 }
 
 .el-icon-s-help{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 }
 .el-icon-view{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 }
 .el-icon-setting{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 }
 .el-icon-warning-outline{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
 }
 
 .logo {
@@ -59,7 +59,6 @@
     padding-left: 50px;
     box-sizing: border-box;
     color: #409EFF;
-    display: inline-block;
 }
 
 .card-container {
@@ -114,9 +113,9 @@
 
 }
 .el-menu-vertical-demo{
-    background-image: url("../pics/5.jpg");
+    background-image: url("../pics/7.jpg");
     background-size: 1600px;
-
+    /* background-position:left 100px; */
 }
 
 
@@ -151,33 +150,29 @@
 
 .head{
     float: right;
-    margin-top: 20px;
+    margin-top: 10px;
 }
+
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
 }
-.el-radio-button{
+/* .el-radio-button__inner{
     size: 100px;
-}
-.el-radio-group{
-    width: 200px;
-}
-
+} */
 .el-radio-button__inner {
-	border:none !important;
+	border: none !important;
 	background: transparent !important;
 }
 
-.el-icon-d-arrow-left{
-	font-size:20px ;
+.el-icon-d-arrow-left {
+	font-size: 20px;
 }
 
-.el-icon-d-arrow-right{
-	font-size:20px ;
+.el-icon-d-arrow-right {
+	font-size: 20px;
 }
-.avatar{
-    float: right;
-    margin-top: 10px;
-    display: inline-block;
+
+.el-radio-group {
+    width: 200px;
 }

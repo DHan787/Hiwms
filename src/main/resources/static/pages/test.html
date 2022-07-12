@@ -5,61 +5,29 @@
     <script src="../assets/js/vue.js"></script>
     <script src="../assets/js/axios.min.js"></script>
     <title>Users-test</title>
+    <style>
+        #thp{
+            width: 60px;
+            height: 60px;
+            background-color: antiquewhite;
+            border-radius: 60px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    the test
-    <ul>
-        <p th:text="${msg}"></p>
-    </ul>
-    <tr>
-        <td>
-            <table>商品名：</table>
-            <input type="number" v-model="formData.id">
-        </td>
-        <td>
-            <table>商品数量：</table>
-            <input type="password" v-model="formData.goodsNumber">
-        </td>
-        <td>
-            <input type="button" value="提交" v-on:click="getById">
-        </td>
+    <form action="http://localhost/api/profilePhotoUpload" method="post" enctype="multipart/form-data">
+        <input type="file" value="选择头像" name="files"/>
+        <input type="submit" value="上传">
+    </form>
+
+    <div id="thp" style="">
+        <img th:src="${thps}" style="width:60px;height: 60px;overflow: hidden"/>
+    </div>
 </div>
 
 
-<template>
-    <div class="app-container">
-        ...
-        <div slot="header" class="clearfix">
-            <span>个人信息</span>
-        </div>
-        <div>
-            <div style="text-align: center">
-                <div class="el-upload">
-                    <myUpload
-
-                            v-model="showDialog"
-                            :headers="headers"
-                            :url="baseApi+'/api/user/updateAvatar'"
-                            @crop-upload-success="cropUploadSuccess"
-                    />
-                    <img
-                            :src="
-                    user.avatarUrl
-                      ? baseApi + '/file/' + user.avatarUrl
-                      : Avatar
-                  "
-                            title="点击上传头像"
-                            class="avatar"
-                            @click="toggleShow"
-                    >
-                    ...
-                </div>
-            </div>
-        </div>
-        ..
-    </div>
-</template>
 
 <script>
     new Vue({
@@ -67,22 +35,8 @@
         data: {
             info: {},
             formData: {},
-            lista:[],
-            showDialog: false,
-            Avatar: Avatar,
-            headers: {
-                'Authorization': getToken()
-            },
-            ...
+            lista:[]
         },
-
-        computed: {
-            ...mapGetters([
-                'user',
-                'baseApi'
-            ])
-        },
-
         created() {
              this.getAll();
         },
@@ -90,7 +44,7 @@
         methods: {
             //查询所有
             getAll() {
-                axios.get("http://localhost:8080/warning/warnlist" ).then(res => {
+                axios.get("http://localhost:8080/usersDetail/getDetail" ).then(res => {
                     this.lista = res.data;
                     console.log(this.lista)
                 });
@@ -113,16 +67,7 @@
                     this.info = res.data;
                     console.log(this.info)
                 });
-            },
-            // 点击头像打开上传窗口
-            toggleShow() {
-                this.showDialog = !this.showDialog
-            },
-            // 上传成功后重新载入信息
-            cropUploadSuccess(jsonData, field) {
-                store.dispatch('getInfo').then(() => { })
-            },
-            ...
+            }
         }
     })
 </script>

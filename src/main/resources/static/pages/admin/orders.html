@@ -121,7 +121,7 @@
 										<el-table-column property="goodsNumber" label="货品数量"></el-table-column>
 									</el-table>
 									<div slot="footer" class="dialog-footer">
-										<el-button @click="dialogFormVisible = false">确 认</el-button>
+										<el-button @click="dialogFormVisible = false">取 消</el-button>
 									</div>
 								</el-dialog>
 							</div>
@@ -157,16 +157,7 @@
 						orderInit: '',
 						orderOperator: ''
 					},
-					activities: [{
-						content: '活动按期开始',
-						timestamp: '2018-04-15'
-					}, {
-						content: '通过审核',
-						timestamp: '2018-04-13'
-					}, {
-						content: '创建成功',
-						timestamp: '2018-04-11'
-					}],
+					// activities: [],
 					formLabelWidth: '120px',
 					currentPage: 1, // 当前页码
 					total: 20, // 总条数
@@ -229,8 +220,7 @@
 					}
 					this.getAll();
 				},
-
-				tableRowClassName(row) {
+				tableRowClassName({row}) {
 					if (row.orderStatus == 10 || row.orderStatus == 20) {
 						return 'warning-row';
 					} else {
@@ -331,7 +321,7 @@
 				},
 				formatInit(row) { //二次渲染
 					if (row.orderInit === 11) {
-						return "管理员Anna"
+						return "货物员Anna"
 					} else {
 						return "未知"
 					}
