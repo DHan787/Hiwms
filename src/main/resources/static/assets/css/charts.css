@@ -1,18 +1,25 @@
 @import url("//unpkg.com/element-ui@2.15.7/lib/theme-chalk/index.css");
 
 
+.el-card{
+    box-shadow:  10px 10px 10px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 16px;
+}
 
+.el-row {
+    margin-bottom: 40px;
+}
 
-    .el-carousel__item:nth-child(2n) {
+  /*  .el-carousel__item:nth-child(2n) {
       background-color: #ffffff;
-      /*border: 1px solid #333333;*/
+      !*border: 1px solid #333333;*!
       box-shadow:  10px 10px 10px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
       border-radius: 16px;
     }
 
     .el-carousel__item:nth-child(2n+1) {
         background-color: #ffffff;
-        /*border: 1px solid #333333;*/
+        !*border: 1px solid #333333;*!
         box-shadow:  10px 10px 10px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         border-radius: 16px;
     }
@@ -47,4 +54,4 @@
     }
     .el-carousel el-carousel--horizontal el-carousel--card{
       scroll:no;
-    }
+    }*/
