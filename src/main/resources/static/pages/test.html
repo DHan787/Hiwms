@@ -40,7 +40,7 @@
         methods: {
             //查询所有
             getAll() {
-                axios.get("http://localhost:8080/warning/warnlist" ).then(res => {
+                axios.get("http://localhost:8080/usersDetail/getDetail" ).then(res => {
                     this.lista = res.data;
                     console.log(this.lista)
                 });

@@ -70,7 +70,7 @@ public class UsersController {
         for (Users value : usersList) {
             if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
-                    request.getSession().setAttribute("users", value);
+                    request.getSession().setAttribute("users", value.getUserId());
                     System.out.println("set:" + request.getSession().getAttribute("users"));
                     if (value.getUserRole()==1){
                         return "index/admin.html";

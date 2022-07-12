@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,6 @@ public class UsersDetailController {
                     } else {
                         usersDetail.setUserRole("用户");
                     }
-
                     usersDetailsList.add(usersDetail);
                 }
             }
@@ -121,4 +121,9 @@ public class UsersDetailController {
         return this.setUsersDetail(usersList, usersInfoList);
     }
 
+    @GetMapping("/getDetail")
+    public List<UsersDetail> getDetail(HttpServletRequest request){
+        Object id = request.getSession().getAttribute("users");
+        return this.getById(Integer.parseInt(id.toString()));
+    }
 }
