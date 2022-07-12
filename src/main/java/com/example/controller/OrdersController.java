@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author ginger ymm
+ * @author ginger
  */
 @Slf4j
 @CrossOrigin
@@ -39,6 +39,7 @@ public class OrdersController {
     private WebApplicationContext webapplicationcontext;
 
     /**
+     *
      * 事件监听相关操作
      */
     @Autowired
@@ -77,6 +78,11 @@ public class OrdersController {
         return msgsDao.updatamsg(msgid) > 0;
     }
 
+    /**
+     * type: 1是新的出入库申请，2是新的待出入库订单，3是已完成的申请，0是已读
+     *
+     * @return list
+     */
     @GetMapping("/msg")
     public List<Msgs> getMsgs() {
         return msgsDao.selectType(1);
