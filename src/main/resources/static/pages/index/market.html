@@ -34,10 +34,10 @@
 							background-color="#FFFFFF" text-color="#000000" active-text-color="#409EFF"
 							@open="handleOpen" @close="handleClose" :collapse="isCollapse">
 							<el-radio-group v-model="isCollapse">
-								<el-radio-button :label="false" v-if="isCollapse" size="medium" style="float:left;"><i
+								<el-radio-button :label="false" v-if="isCollapse" size="medium"><i
 										class="el-icon-d-arrow-right"></i>
 								</el-radio-button>
-								<el-radio-button :label="true" v-else size="medium" style="float:right;"><i
+								<el-radio-button :label="true" v-else size="medium"><i
 										class="el-icon-d-arrow-left"></i>
 								</el-radio-button>
 							</el-radio-group>

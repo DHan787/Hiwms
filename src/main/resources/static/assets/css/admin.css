@@ -176,3 +176,7 @@
 .el-icon-d-arrow-right {
 	font-size: 20px;
 }
+
+.el-radio-group {
+    width: 200px;
+}
