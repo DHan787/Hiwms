@@ -7,7 +7,9 @@ import com.example.service.UsersService;
 import com.example.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
 public class UsersController {
     @Autowired
     private UsersService usersService;
-
+    HttpServletRequest requestAll;
     @Autowired
     private UsersDao usersDao;
 
@@ -36,7 +38,8 @@ public class UsersController {
      * @return usersService.list()
      */
     @GetMapping
-    public List<Users> getAll() {
+    public List<Users> getAll(HttpServletRequest request) {
+        this.requestAll = request;
         return usersService.list();
     }
 
@@ -56,6 +59,16 @@ public class UsersController {
     }
 
     /**
+     * 获取当前用户姓名
+     * @return 用户姓名
+     */
+    public String getCurrentUsername(){
+        Object id = requestAll.getSession().getAttribute("users");
+        Users user = usersService.getById(Integer.parseInt(id.toString()));
+        return  user.getUserName();
+    }
+
+    /**
      * 登录
      *
      * @param users 对象
@@ -65,18 +78,28 @@ public class UsersController {
      * 3 登录为操作员
      */
     @PostMapping("/login")
-    private Integer login(@RequestBody Users users, HttpServletRequest request) throws Exception {
+    private String login(@RequestBody Users users, HttpServletRequest request) throws Exception {
         List<Users> usersList = usersService.list();
         for (Users value : usersList) {
             if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
-                    request.getSession().setAttribute("users", value);
+                    this.requestAll = request;
+                    requestAll.getSession().setAttribute("users", value);
                     System.out.println("set:" + request.getSession().getAttribute("users"));
-                    return value.getUserRole();
+                    if (value.getUserRole()==1){
+                        return "index/admin.html";
+                    }else if(value.getUserRole()==2){
+                        return "index/operator.html";
+                    }else if(value.getUserRole()==3){
+                        return "index/market.html";
+                    }else{
+                        return "login.html";
+                    }
                 }
             }
         }
-        return 0;
+        // TODO: 前端没实现
+        return "用户名不存在";
     }
 
     /**
@@ -87,7 +110,8 @@ public class UsersController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "user/login.html";
+        //TODO:前端没实现
+        return "login.html";
     }
 
     /**
@@ -162,4 +186,10 @@ public class UsersController {
         wrapper.eq("user_role", userRole);
         return usersDao.selectList(wrapper);
     }
+
+    @PostMapping(value = "/updateAvatar")
+    public boolean updateAvatar(@RequestParam MultipartFile avatar) {
+        return usersService.updateAvatar(avatar);
+    }
+
 }

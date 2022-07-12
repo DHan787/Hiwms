@@ -30,8 +30,78 @@ public class LowWarningController {
 
     List<String> warnList = new ArrayList<>();
 
+    class LowWarningAll {
+        private Integer inventoryId;
+        private String goodsName;
+        private Integer goodsNumber;
+        private String warehouseName;
+        private Integer ifLow;
+
+        @Override
+        public String toString() {
+            return "LowWarningAll{" +
+                    "inventoryId=" + inventoryId +
+                    ", goodsName='" + goodsName + '\'' +
+                    ", goodsNumber=" + goodsNumber +
+                    ", warehouseName='" + warehouseName + '\'' +
+                    ", ifLow=" + ifLow +
+                    '}';
+        }
+
+        public Integer getInventoryId() {
+            return inventoryId;
+        }
+
+        public void setInventoryId(Integer inventoryId) {
+            this.inventoryId = inventoryId;
+        }
+
+        public String getGoodsName() {
+            return goodsName;
+        }
+
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
+        }
+
+        public Integer getGoodsNumber() {
+            return goodsNumber;
+        }
+
+        public void setGoodsNumber(Integer goodsNumber) {
+            this.goodsNumber = goodsNumber;
+        }
+
+        public String getWarehouseName() {
+            return warehouseName;
+        }
+
+        public void setWarehouseName(String warehouseName) {
+            this.warehouseName = warehouseName;
+        }
+
+        public Integer getIfLow() {
+            return ifLow;
+        }
+
+        public void setIfLow(Integer ifLow) {
+            this.ifLow = ifLow;
+        }
+
+        public void setLowWarningAll(Integer id, String name, Integer num, String wareName, Integer ifLow) {
+            this.inventoryId = id;
+            this.goodsName = name;
+            this.goodsNumber = num;
+            this.warehouseName = wareName;
+            this.ifLow = ifLow;
+        }
+    }
+
+    List<LowWarningAll> lowWarningAllList = new ArrayList<LowWarningAll>();
+
     /**
      * 返回低库存列表
+     *
      * @return 低库存商品列表
      */
     @GetMapping("/warn")
@@ -40,9 +110,14 @@ public class LowWarningController {
         return warnList;
     }
 
+    @GetMapping("/warnlist")
+    public List<LowWarningAll> warningAllList() {
+        getWarnInfo();
+        return lowWarningAllList;
+    }
+
     /**
-     *
-     * @return
+     * @return list
      */
     @GetMapping
     public List<LowWarning> getAll() {
@@ -55,20 +130,30 @@ public class LowWarningController {
     private void getWarnInfo() {
         List<Inventory> inventories = inventoryController.getAll();
         List<LowWarning> lowWarnings = this.getAll();
-        for (LowWarning value : lowWarnings
+        for (Inventory invent : inventories
         ) {
-            for (Inventory invent : inventories
+            for (LowWarning value : lowWarnings
             ) {
+                LowWarningAll lowWarningAll = new LowWarningAll();
                 if (value.getGoodsId().equals(invent.getInventoryId())) {
-                    System.out.println("in");
                     if (value.getMinNum() >= invent.getGoodsNumber()) {
                         warnList.add(invent.getGoodsName());
-                        System.out.println("inside");
-                        break;
+                        lowWarningAll.setLowWarningAll(invent.getInventoryId(),
+                                invent.getGoodsName(),
+                                invent.getGoodsNumber(),
+                                invent.getWarehouseName(),
+                                0);
+                    }else{
+                        lowWarningAll.setLowWarningAll(invent.getInventoryId(),
+                                invent.getGoodsName(),
+                                invent.getGoodsNumber(),
+                                invent.getWarehouseName(),
+                                1);
                     }
+                    lowWarningAllList.add(lowWarningAll);
+                    break;
                 }
             }
-            System.out.println(warnList);
         }
     }
 }

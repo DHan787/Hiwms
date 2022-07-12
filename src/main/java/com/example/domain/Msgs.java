@@ -1,6 +1,12 @@
 package com.example.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+@TableName("msgs")
+@Data
 public class Msgs {
+    @TableId("msgs_id")
     private Integer msgsId;
     private String  msgsCont;
     private Integer type;
