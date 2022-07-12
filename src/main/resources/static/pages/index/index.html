@@ -52,24 +52,34 @@
 									<h3>数据统计</h3>
 								</div>
 								<div class="all">
-									<div>
-										<div class="bg2 bg2-2">
-											<h4 style="margin-top: 20px">仓库数量</h4>
-											<h2 align="center">6</h2>
+									<div class="bg2 bg2-2">
+										<div class="bg2 bg2-left"></div>
+										<div class="text">
+										<h4>仓库数量</h4>
+										<h2 align="center">6</h2>
 										</div>
-										<div class="bg2 bg2-2">
-											<h4 style="margin-top: 20px">商品库存数量</h4>
-											<h2 align="center">207</h2>
+									</div>
+									<div class="bg2 bg2-2">
+										<div class="bg2 bg2-left"></div>
+										<div class="text">
+										<h4>商品库存数量</h4>
+										<h2 align="center">207</h2>
 										</div>
 									</div>
 									<div>
 										<div class="bg2 bg2-2">
-											<h4 style="margin-top: 20px">未处理订单数量</h4>
+											<div class="bg2 bg2-left"></div>
+											<div class="text">
+											<h4>未处理订单数量</h4>
 											<h2 align="center">24</h2>
+											</div>
 										</div>
 										<div class="bg2 bg2-2">
-											<h4 style="margin-top: 20px">已处理订单数量</h4>
+											<div class="bg2 bg2-left"></div>
+											<div class="text">
+											<h4>已处理订单数量</h4>
 											<h2 align="center">11</h2>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -87,7 +97,7 @@
 
 								</el-image>
 								<div class="title1-1">
-									<h3 >快捷入口</h3>
+									<h3>快捷入口</h3>
 								</div>
 
 
@@ -102,7 +112,7 @@
 												</el-image>
 											</a></el-tooltip>
 									</div>
-										<!--订单-->
+									<!--订单-->
 									<div>
 										<el-tooltip content="订单" placement="bottom"><a href="../admin/orders.html">
 												<el-image :src="src3" class="orders">
@@ -126,7 +136,7 @@
 											</a>
 										</el-tooltip>
 									</div>
-										<!--仓库-->
+									<!--仓库-->
 									<div>
 										<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html">
 												<el-image :src="src5" class="warehouse">
@@ -156,7 +166,8 @@
 									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
 										<el-card style="margin: 15px;">
 											<p class="title1-1-content">新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
-											<el-button type="success" plain @click="msgtu(ms.msgsId)" size="small" style="float: right;margin-bottom: 10px;">
+											<el-button type="success" plain @click="msgtu(ms.msgsId)" size="small"
+												style="float: right;margin-bottom: 10px;">
 												已读</el-button>
 										</el-card>
 									</div>

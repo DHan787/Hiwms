@@ -51,6 +51,6 @@
 }
 
 .el-table--enable-row-hover .el-table__body tr:hover > td{
-	background-color: #ceecfc !important;
+	background-color: #edfde7 !important;
 	box-shadow: 10px 5px 5px #c9cdcf;
 	}

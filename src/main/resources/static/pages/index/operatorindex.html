@@ -47,30 +47,42 @@
 
 
 									</el-image>
-									<div class="title1">
+									<div class="title1-3">
 										<h3>数据统计</h3>
 									</div>
 
 
 									<div class="all">
 										<div>
-											<div class="bg2 bg2-1">
-												<h4 style="margin-top: 20px">今日入库订单剩余</h4>
-												<h2 align="center">1</h2>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>今日入库订单剩余</h4>
+													<h2 align="center">1</h2>
+												</div>
 											</div>
-											<div class="bg2 bg2-1">
-												<h4 style="margin-top: 20px">今日出库订单剩余</h4>
-												<h2 align="center">0</h2>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>今日出库订单剩余</h4>
+													<h2 align="center">0</h2>
+												</div>
 											</div>
 										</div>
 										<div>
-											<div class="bg2 bg2-1">
-												<h4 style="margin-top: 20px">昨日入库数量</h4>
-												<h2 align="center">4</h2>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>昨日入库数量</h4>
+													<h2 align="center">4</h2>
+												</div>
 											</div>
-											<div class="bg2 bg2-1">
-												<h4 style="margin-top: 20px">昨日出库数量</h4>
-												<h2 align="center">1</h2>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>昨日出库数量</h4>
+													<h2 align="center">1</h2>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -89,7 +101,7 @@
 
 
 									</el-image>
-									<div class="title1">
+									<div class="title1-3">
 										<h3>快捷入口</h3>
 									</div>
 
@@ -132,14 +144,15 @@
 											</div>
 										</el-image>
 										<el-badge :value="msgs.length" class="item">
-											<h3>系统通告</h3>
+											<h3 class="title1-3" style="font-size: 25px;">系统通告</h3>
 										</el-badge>
 									</div>
-									<div class="title1">
+									<div>
 										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
 											<el-card style="margin: 15px;">
-												<p>新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
-												<el-button type="warning" plain @click="msgtu(ms.msgsId)" size="small">
+												<p class="title1-3-content">新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+												<el-button type="warning" plain @click="msgtu(ms.msgsId)" size="small"
+													style="float: right;margin-bottom: 10px;">
 													已读</el-button>
 											</el-card>
 										</div>

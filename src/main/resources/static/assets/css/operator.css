@@ -54,11 +54,10 @@
 .logo {
     width: 200px;
     line-height: 60px;
-    color: #fff;
     font-weight: bolder;
     padding-left: 50px;
     box-sizing: border-box;
-    color: #409EFF;
+    color: #ff7f00;
 }
 
 .card-container {

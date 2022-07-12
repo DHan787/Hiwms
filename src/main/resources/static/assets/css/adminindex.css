@@ -65,7 +65,7 @@
 	font-weight: bolder;
 	padding-left: 50px;
 	box-sizing: border-box;
-	color: #409EFF;
+	color: #00b46a;
 }
 
 .card-container {
@@ -193,6 +193,3 @@
 	font-size:20px ;
 }
 
-.type-3-bgcolor {
-    background-color: #1DCFBB;
-}

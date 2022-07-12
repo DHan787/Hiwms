@@ -153,17 +153,58 @@
 	border: #bcbec2;
 	background-color: #d9ecff;
 	border-radius: 10px;
+	box-shadow: 5px 5px 5px #e0e4ea;
 }
+
+.bg2-3 {
+	background-color: #fef3db;
+	box-shadow: 5px 5px 5px #e0e4ea;
+}/* 设置操作员页面的样式 */
 
 .bg2-1 {
-	background-color: #fef3db;
-}
+	background-color: #eaeffe;
+	box-shadow: 5px 5px 5px #e0e4ea;
+}/* 设置操作员页面的样式 */
 
 .bg2-2 {
-	background-color: #e9ffe5;
-	box-shadow: 10px 5px 5px #c9cdcf;
-}
+	background-color: #f8fff7;
+	box-shadow: 5px 5px 5px #e0e4ea;
+}/* 设置管理员员页面的样式 */
 
+
+/* .bg2-2:hover {
+	box-shadow: 5px 5px 5px #e0e4ea;
+}/* 设置管理员员页面的悬浮样式 */
+
+
+.bg2-left{
+	background-color: #14b279;
+	width: 8px;
+	height: 100px;
+	border-radius: 20px 0px 0px 20px;
+	float:left;
+}/* 设置管理员员页面的样式 */
+
+.bg2-1-left{
+	background-color: #3879d5;
+	width: 8px;
+	height: 100px;
+	border-radius: 20px 0px 0px 20px;
+	float:left;
+}/* 设置货物员页面的样式 */
+
+.bg2-2-left{
+	background-color: #ed7d2c;
+	width: 8px;
+	height: 100px;
+	border-radius: 20px 0px 0px 20px;
+	float:left;
+}/* 设置操作员页面的样式 */
+
+.text{
+	float:left;
+/* 	padding:10px; */
+}
 
 .head {
 	float: right;
@@ -171,7 +212,7 @@
 }
 
 .h4 {
-	display: inline-block;
+	/* display: inline-block; */
 	text-align: center;
 
 }
@@ -188,19 +229,27 @@
 }
 .title1-1-content{
 	color:#66abab;
-}
+}/* 设置管理员页面文字样式 */
 
 .title1-2 {
 	display: inline-block;
 	color: #175ece;
 	font-size: 22px;
-}
+}/* 设置货物员页面文字样式 */
+
+.title1-2-content{
+	color:#6b82ae;
+}/* 设置货物员页面文字样式 */
 
 .title1-3 {
 	display: inline-block;
 	color: #d27f1d;
 	font-size: 22px;
-}
+}/* 设置操作员页面文字样式 */
+
+.title1-3-content{
+	color:#c4a586;
+}/* 设置操作员页面文字样式 */
 
 .down {
 	margin-top: 450px;
