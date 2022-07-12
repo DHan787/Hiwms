@@ -59,6 +59,7 @@
     padding-left: 50px;
     box-sizing: border-box;
     color: #409EFF;
+    display: inline-block;
 }
 
 .card-container {
@@ -161,4 +162,9 @@
 }
 .el-radio-group{
     width: 200px;
+}
+.avatar{
+    float: right;
+    margin-top: 10px;
+    display: inline-block;
 }

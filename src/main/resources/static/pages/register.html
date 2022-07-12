@@ -37,7 +37,7 @@
                     </el-row>
                 </el-form-item>
                 <el-form-item style="margin-top:5px">
-                    <el-button type="primary" round class="submitBtn" v-on:click="register">下一步
+                    <el-button type="primary" round class="submitBtn" v-on:click="register">返回登录
                     </el-button>
                 </el-form-item>
             </el-form>
@@ -73,7 +73,7 @@
                                     type: 'success',
                                     message: '新增成功!'
                                 });
-                                window.location.href = ("registerInfo.html")
+                                window.location.href = ("login.html")
                             } else {
                                 this.$message.error({
                                     type: 'error',

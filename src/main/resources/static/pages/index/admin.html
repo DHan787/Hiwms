@@ -14,14 +14,7 @@
         <el-header style="height: 80px">
             <!--					TODO: 假的，需要加token后续实现-->
 
-<!--            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">-->
-            <a href="personal.html">
-                <div class="head">
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" @click="change">
-                    </el-avatar>
-                </div>
-<!--            </el-button>-->
-            </a>
+            <!--logo-->
 
             <div class="head" style="float: left;">
                 <el-avatar :src="avatarURL">
@@ -29,6 +22,30 @@
             </div>
             <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
 
+            <!--头像-->
+            <div class="avatar" style="float: right;">
+                <el-button @click="drawer = true" circle >
+                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+                    </el-avatar>
+
+                </el-button>
+
+                <el-drawer
+                    title="个人主页"
+                    :visible.sync="drawer"
+                    size="50%">
+                    <div>
+                        <el-button @click="innerDrawer = true">打开里面的!</el-button>
+                        <el-drawer
+                            title="我是里面的"
+                            :append-to-body="true"
+                            :before-close="handleClose"
+                            :visible.sync="innerDrawer">
+                        <p>_(:зゝ∠)_</p>
+                        </el-drawer>
+                    </div>
+                </el-drawer>
+            </div>
         </el-header>
 
         <el-container>
@@ -123,6 +140,8 @@
 		data: function () {
 			return {
 				/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
+                drawer: false,
+                innerDrawer: false,
 				UserEditVisible: true,
 				editForm: [],
 				datalist: [],
@@ -149,6 +168,15 @@
                         });
                     }
                 });
+            },
+
+
+            handleClose(done) {
+                this.$confirm('还有未保存的工作哦确定关闭吗？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {});
             },
 
 			adjustIframe() {

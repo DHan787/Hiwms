@@ -25,14 +25,64 @@
             <input type="button" value="提交" v-on:click="getById">
         </td>
 </div>
+
+
+<template>
+    <div class="app-container">
+        ...
+        <div slot="header" class="clearfix">
+            <span>个人信息</span>
+        </div>
+        <div>
+            <div style="text-align: center">
+                <div class="el-upload">
+                    <myUpload
+
+                            v-model="showDialog"
+                            :headers="headers"
+                            :url="baseApi+'/api/user/updateAvatar'"
+                            @crop-upload-success="cropUploadSuccess"
+                    />
+                    <img
+                            :src="
+                    user.avatarUrl
+                      ? baseApi + '/file/' + user.avatarUrl
+                      : Avatar
+                  "
+                            title="点击上传头像"
+                            class="avatar"
+                            @click="toggleShow"
+                    >
+                    ...
+                </div>
+            </div>
+        </div>
+        ..
+    </div>
+</template>
+
 <script>
     new Vue({
         el: "#app",
         data: {
             info: {},
             formData: {},
-            lista:[]
+            lista:[],
+            showDialog: false,
+            Avatar: Avatar,
+            headers: {
+                'Authorization': getToken()
+            },
+            ...
         },
+
+        computed: {
+            ...mapGetters([
+                'user',
+                'baseApi'
+            ])
+        },
+
         created() {
              this.getAll();
         },
@@ -63,7 +113,16 @@
                     this.info = res.data;
                     console.log(this.info)
                 });
-            }
+            },
+            // 点击头像打开上传窗口
+            toggleShow() {
+                this.showDialog = !this.showDialog
+            },
+            // 上传成功后重新载入信息
+            cropUploadSuccess(jsonData, field) {
+                store.dispatch('getInfo').then(() => { })
+            },
+            ...
         }
     })
 </script>
