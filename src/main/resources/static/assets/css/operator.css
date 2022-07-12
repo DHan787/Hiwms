@@ -115,7 +115,7 @@
 .el-menu-vertical-demo{
     background-image: url("../pics/7.jpg");
     background-size: 1600px;
-    background-position:left 100px;
+    /* background-position:left 100px; */
 }
 
 
@@ -157,6 +157,22 @@
     width: 200px;
     min-height: 400px;
 }
-.el-radio-button__inner{
+/* .el-radio-button__inner{
     size: 100px;
+} */
+.el-radio-button__inner {
+	border: none !important;
+	background: transparent !important;
+}
+
+.el-icon-d-arrow-left {
+	font-size: 20px;
+}
+
+.el-icon-d-arrow-right {
+	font-size: 20px;
+}
+
+.el-radio-group {
+    width: 200px;
 }

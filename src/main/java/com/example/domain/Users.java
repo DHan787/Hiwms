@@ -15,6 +15,7 @@ public class Users {
     private String userName;
     private String userPassword;
     private Integer userRole;
+    private String avatarUrl;
 
     public Integer getUserId() {
         return userId;
@@ -46,5 +47,9 @@ public class Users {
 
     public void setUserRole(Integer userRole) {
         this.userRole = userRole;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
