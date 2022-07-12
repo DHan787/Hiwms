@@ -115,9 +115,7 @@
 						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
 							frameborder="0" scrolling="no"></iframe>
 					</el-main>
-					<el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
-						<span>我来啦!</span>
-					</el-drawer>
+
 
 				</el-container>
 			</el-container>
@@ -195,14 +193,6 @@
 		})
 	</script>
 
-	<script>
-		export default {
-			data() {
-				return {
-					drawer: false,
-				};
-			}
-		};
-	</script>
+
 
 </html>
