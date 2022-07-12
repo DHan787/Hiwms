@@ -29,10 +29,10 @@ import java.time.format.DateTimeFormatter;
 public class UploadFileToolImpl implements UploadFileTool {
     private final UploadFileDao uploadFileDao;
 
-    @Value("${uploadFile.path}")
+//    @Value("${uploadFile.path}")
     private String path;
 
-    @Value("${uploadFile.maxSize}")
+//    @Value("${uploadFile.maxSize}")
     private long maxSize;
 
     @Override

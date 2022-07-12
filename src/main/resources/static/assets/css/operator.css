@@ -115,6 +115,7 @@
 .el-menu-vertical-demo{
     background-image: url("../pics/7.jpg");
     background-size: 1600px;
+    /* background-position:left 100px; */
 }
 
 
