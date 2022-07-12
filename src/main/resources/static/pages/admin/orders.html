@@ -50,7 +50,6 @@
 						<el-card style="border-radius: 20px;">
 							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
 								style="width: 100%;"  :row-class-name="tableRowClassName" highlight-current-row>
-								<el-table-column type="selection" width="60" :reserve-selection="true"></el-table-column>
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
