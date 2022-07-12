@@ -15,11 +15,13 @@
             <!--					TODO: 假的，需要加token后续实现-->
 
 <!--            <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">-->
+            <a href="personal.html">
                 <div class="head">
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" @click="change">
                     </el-avatar>
                 </div>
 <!--            </el-button>-->
+            </a>
 
             <div class="head" style="float: left;">
                 <el-avatar :src="avatarURL">
@@ -101,12 +103,12 @@
                         frameborder="0" scrolling="no"></iframe>
             </el-main>
 
-            <el-drawer
-                    title="我是标题"
-                    :visible.sync="drawer"
-                    :with-header="false">
-                <span>我来啦!</span>
-            </el-drawer>
+<!--            <el-drawer-->
+<!--                    title="我是标题"-->
+<!--                    :visible.sync="drawer"-->
+<!--                    :with-header="false">-->
+<!--                <span>我来啦!</span>-->
+<!--            </el-drawer>-->
 
         </el-container>
     </el-container>
@@ -169,13 +171,17 @@
             openUrl(url) {
 
                 this.iframeUrl = url;
+            },
+
+            change() {
+                window.location.href("personal.html")
             }
 
         }
     })
 </script>
 
-<script>
+<!--<script>
     export default {
         data() {
             return {
@@ -183,6 +189,6 @@
             };
         }
     };
-</script>
+</script>-->
 
 </html>
