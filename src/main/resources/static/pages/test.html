@@ -5,26 +5,30 @@
     <script src="../assets/js/vue.js"></script>
     <script src="../assets/js/axios.min.js"></script>
     <title>Users-test</title>
+    <style>
+        #thp{
+            width: 60px;
+            height: 60px;
+            background-color: antiquewhite;
+            border-radius: 60px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    the test
-    <ul>
-        <p th:text="${msg}"></p>
-    </ul>
-    <tr>
-        <td>
-            <table>商品名：</table>
-            <input type="number" v-model="formData.id">
-        </td>
-        <td>
-            <table>商品数量：</table>
-            <input type="password" v-model="formData.goodsNumber">
-        </td>
-        <td>
-            <input type="button" value="提交" v-on:click="getById">
-        </td>
+    <form action="http://localhost/api/profilePhotoUpload" method="post" enctype="multipart/form-data">
+        <input type="file" value="选择头像" name="files"/>
+        <input type="submit" value="上传">
+    </form>
+
+    <div id="thp" style="">
+        <img th:src="${thps}" style="width:60px;height: 60px;overflow: hidden"/>
+    </div>
 </div>
+
+
+
 <script>
     new Vue({
         el: "#app",
