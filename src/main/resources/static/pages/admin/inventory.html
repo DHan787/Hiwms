@@ -22,7 +22,7 @@
                 <div class="card-container">
                     <div class="handle-container">
                         <!--查询表单-->
-                        <el-form :model="search">
+                        <el-form>
                             <el-row>
                                 <el-col :span='12'>
                                     <el-input v-model="inventoryId" clearable placeholder="请输⼊货物编号"
@@ -40,7 +40,7 @@
                         <el-button type="primary" plain style="margin:15px 20px;" @click="like()" icon="el-icon-search">查询货物</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增库存</el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
-                    </el-row>
+                         </el-row>
 
                     <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                         <el-form :model="form" ref="form">
@@ -58,7 +58,6 @@
                                                :value="warehouse.warehouseId" :key="warehouse.warehouseId">
                                     </el-option>
                                 </el-select>
-
                             </el-form-item>
 
                         </el-form>
@@ -74,7 +73,7 @@
 
                 <el-card>
                     <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" 
-                              style="width: 100%; ">
+                              style="width: 100%; " :row-class-name="tableRowClassName">
                         <el-table-column prop="inventoryId" label="库存编号" width="180">
                         </el-table-column>
                         <el-table-column prop="goodsName" label="货物名称" width="180">
@@ -88,6 +87,9 @@
                                 <el-button type="primary" plain @click="editClick(scope.$index,scope.row)">编辑
                                 </el-button>
                                 <el-button type="danger" plain @click="removeInventoryById(scope.$index)">删除</el-button>
+                                <el-tooltip content="库存量较低" placement="top">
+                                <i class="el-icon-warning-outline" v-if="getWarnList(scope.$index)" style="color: #c42b1c; font-size: 25px; margin-left: 8px; margin-top: 5px;"></i>
+                                </el-tooltip>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -121,6 +123,7 @@
         data: function () {
             return {
                 tableData: {},
+                isLow: false,
                 inventoryId: "",
                 goodsName: "",
                 dialogFormVisible: false,
@@ -135,17 +138,18 @@
                 formLabelWidth: '120px',
                 isAdd: false,
                 options: [],
-                formLabelWidth: '120px',
                 currentPage: 1, // 当前页码
                 total: 20, // 总条数
-                pageSize: 5 // 每页的数据条数
+                pageSize: 5, // 每页的数据条数
 
             }
         },
 
         created() {
-            this.getAll()
-            this.getWarehouseName()
+            this.getAll();
+            this.getWarehouseName();
+
+
         },
 
         methods: {
@@ -165,7 +169,7 @@
             },
 
             <!--导出excel-->
-            exportExcel(){
+            exportExcel() {
                 window.open("http://localhost:8080/inventory/exportExcel");
             },
 
@@ -288,6 +292,62 @@
                     this.$refs.form.resetFields();
                 })
             },
+
+            //低库存标注
+            getWarnList(index) {
+                console.log(12222);
+                index = ((this.currentPage - 1) * this.pageSize + index);
+                if(this.tableData[index].goodsNumber <= 30){
+                    return true;
+                }
+                /*console.log(12222);
+                var inventoryId = this.tableData[index].inventoryId ;
+                axios.get("http://localhost:8080/warning/warnlist").then((res) => {
+                    console.log("res.data", res.data);
+                    console.log("res.data[0].ifLow", res.data[0].ifLow);
+                    this.datalist = res.data;
+                    console.log("that.datalist inner", this.datalist);
+                    for (let i = 0; i < this.datalist.length; i++) {
+                        if (this.datalist[i].ifLow === 0 && this.datalist[i].inventoryId === inventoryId ) {
+                            console.log("this.datalist.goodsName", this.datalist[i].goodsName);
+                            //this.isLow = true;
+                            //return 'warning-row';
+                            return true;
+                        }
+                    }
+                });*/
+               //console.log("that.datalist outer", this.datalist);
+            },
+
+             /*   tableRowClassName({row}) {
+                console.log(12222);
+                console.log("row",row);
+                var nameList ;
+                axios.get("http://localhost:8080/warning/warnlist").then((res) => {
+                    console.log("res.data", res.data);
+
+                    console.log("res.data[0].ifLow", res.data[0].ifLow);
+                    this.datalist = res.data;
+                    console.log("that.datalist inner", this.datalist);
+                    for (let i = 0; i < this.datalist.length; i++) {
+                        if (this.datalist[i].ifLow === 0 && this.datalist[i].inventoryId === row.inventoryId ) {
+                            console.log("this.datalist.goodsName", this.datalist[i].goodsName);
+                            return 'warning-row';
+                        }else{
+                            return '';
+                        }
+                    }
+                });
+                return '';
+               console.log("that.datalist outer", this.datalist);
+            },*/
+
+            tableRowClassName({row}){
+                if(row.goodsNumber <= 30){
+                    return 'warning-row';
+                }
+            },
+
             //每页条数改变时触发 选择一页显示多少行
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -300,6 +360,7 @@
                 this.currentPage = val;
             }
         }
+
     })
 </script>
 </html>
