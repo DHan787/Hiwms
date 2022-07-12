@@ -1,6 +1,7 @@
 package com.example.utils;
 
 /**
+ * 定义各种常数
  * @author ginger
  */
 public class Constant {
