@@ -30,7 +30,7 @@
 							<el-radio-group v-model="isCollapse">
 								<el-radio-button :label="false" v-if="isCollapse" size="medium" style="float:left;"><i class="el-icon-d-arrow-right"></i>
 								</el-radio-button>
-								<el-radio-button :label="true" v-else size="medium" style="float:right;"><i class="el-icon-d-arrow-left"></i>
+								<el-radio-button :label="true" v-else size="medium"><i class="el-icon-d-arrow-left"></i>
 								</el-radio-button>
 							</el-radio-group>
 							<el-menu-item index="1">
@@ -139,13 +139,12 @@
 						window.location.href = ("../login.html")
 					});
 				},
-				// handleOpen(key, keyPath) {
-				// 	console.log(key, keyPath);
-				// },
-				// handleClose(key, keyPath) {
-				// 	console.log(key, keyPath);
-				// },
-
+				handleOpen(key, keyPath) {
+					console.log(key, keyPath);
+				},
+				handleClose(key, keyPath) {
+					console.log(key, keyPath);
+				},
 				openUrl(url) {
 
 					this.iframeUrl = url;
