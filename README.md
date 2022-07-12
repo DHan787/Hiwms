@@ -176,3 +176,4 @@
 * session 完成 hj
 * 根据登录信息获取detail 完成
 * 删除search 修改个人主页为抽屉 更正注册页面 zls
+* 修复抽屉无法关闭 和 market两个折叠按钮 zls
