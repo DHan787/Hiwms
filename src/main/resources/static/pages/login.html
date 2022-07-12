@@ -131,7 +131,7 @@
                         if (this.loginForm.code !== '') {
                             if (code === this.$refs.getValue.value.toLowerCase()) {
                                 axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
-                                    window.location.href(rel.data);
+                                    document.location=rel.data;
                                 })
                             } else {
                                 alert("验证码错误!")
