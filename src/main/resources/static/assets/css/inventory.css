@@ -49,3 +49,11 @@
 .cell {
     display: flex;
 }
+
+.el-table--enable-row-hover .el-table__body tr:hover > td{
+	background-color: #ceecfc !important;
+	box-shadow: 10px 5px 5px #c9cdcf;
+	/* box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.05); */
+	/* padding:10px 10px 10px 0px; */ 
+	/* border: 2px solID #c9cbfe; */
+	}

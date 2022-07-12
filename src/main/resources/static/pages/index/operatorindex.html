@@ -129,43 +129,68 @@
                             </div>
                             </el-card>
 
-                        </div>
-                    </div>
-                    <div class="down">
-                    </div>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                src1: '../../assets/pics/12.jpg',
-                src2: '../../assets/pics/in.jpg',
-                src3:'../../assets/pics/out.jpg',
-                src6: '../../assets/pics/src6.jpg',
-                src7: '../../assets/pics/link.jpg',
-                src8: '../../assets/pics/bell.jpg',
-                tableData: [],
-                dialogFormVisible: false,
-                dialogFormTitle: "",
-                formLabelWidth: '120px',
-                isAdd: false,
-                charData: [],
-                nameArr: [],
-                valueArr: []
-            }
-        },
-        created() {
-
-        },
-        methods: {
+						</div>
+					</div>
+					<div class="down">
+					</div>
+				</el-main>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					src1: '../../assets/pics/12.jpg',
+					src2: '../../assets/pics/in.jpg',
+					src3: '../../assets/pics/out.jpg',
+					src6: '../../assets/pics/src6.jpg',
+					src7: '../../assets/pics/link.jpg',
+					src8: '../../assets/pics/bell.jpg',
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "",
+					formLabelWidth: '120px',
+					isAdd: false,
+					charData: [],
+					nameArr: [],
+					valueArr: [],
+					msgsfig: false,
+					msgs: [],
+					time: null
+				}
+			},
+			created() {
+				setInterval(this.getAll, 5000);
+			},
+			methods: {
+				msgtu(msgsId) {
+					axios.put("http://localhost:8080/orders/putmsg?msgid=" + msgsId).then(rel => {
+						console.log(rel.data);
+						if (rel.data) {
+							this.getAll();
+						} else {
+							alert("失败");
+						}
+					})
+				},
+				getAll() {
+					axios.get("http://localhost:8080/orders/msg/orders").then(resl => {
+						if (resl.data.length > 0) {
+							this.msgs = resl.data;
+							this.msgsfig = true;
+						} else {
+							this.msgsfig = false;
+							// time = setInterval(this.getAll, 1000);
+							// clearInterval(this.time);
+							// console.log("time: "+ time)
+						}
+					});
+				}
 
         }
     })

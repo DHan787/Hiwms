@@ -146,31 +146,30 @@
 						<div class="report">
 							<el-card class="box-card4">
 								<div>
-								<el-image :src="src8" class="pics">
-									<div slot="placeholder" class="image-slot">
-										加载中<span class="dot">...</span>
-									</div>
-								</el-image>
-								<el-badge :value="msgs.length" class="item">
-									<h3>系统通告</h3>
-								</el-badge>
-								</div>
-									<div class="title1">
-										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
-											<el-card style="margin: 15px;">
-												<p>新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
-												<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small">
-													已读</el-button>
-											</el-card>
+									<el-image :src="src8" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
 										</div>
+									</el-image>
+									<el-badge :value="msgs.length" class="item">
+										<h3>系统通告</h3>
+									</el-badge>
+								</div>
+								<div class="title1">
+									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+										<el-card style="margin: 15px;">
+											<p>新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+											<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small">
+												已读</el-button>
+										</el-card>
 									</div>
+								</div>
 								<!-- </div>-->
 							</el-card>
 						</div>
 					</div>
 					<div class="down">
 					</div>
-
 				</el-main>
 			</el-container>
 		</div>
@@ -200,11 +199,12 @@
 					nameArr: [],
 					valueArr: [],
 					msgsfig: false,
-					msgs: []
+					msgs: [],
+					time: null
 				}
 			},
 			created() {
-				setInterval(this.getAll, 1000);
+				setInterval(this.getAll, 5000);
 			},
 			methods: {
 				msgtu(msgsId) {
@@ -224,9 +224,10 @@
 							this.msgsfig = true;
 						} else {
 							this.msgsfig = false;
-
+							// time = setInterval(this.getAll, 1000);
+							// clearInterval(this.time);
+							// console.log("time: "+ time)
 						}
-
 					});
 				}
 

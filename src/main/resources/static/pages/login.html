@@ -48,7 +48,6 @@
                         <el-col :span='20'>
                             <el-input class="inps" placeholder='请输入下方验证码' v-model="loginForm.code" id="input"
                                       ref="getValue"/>
-                            </el-input>
                         </el-col>
                     </el-row>
                 </el-form-item>
@@ -132,19 +131,7 @@
                         if (this.loginForm.code !== '') {
                             if (code === this.$refs.getValue.value.toLowerCase()) {
                                 axios.post("http://localhost:8080/users/login", this.loginForm).then(rel => {
-                                    console.log(rel.data);
-                                    if (rel.data === 1) {
-                                        alert("欢迎你！管理员")
-                                        window.location.href = ("index/admin.html")
-                                    } else if (rel.data === 2) {
-                                        alert("欢迎你！货物员")
-                                        window.location.href = ("index/market.html")
-                                    } else if (rel.data === 3) {
-                                        window.location.href = ("index/operator.html")
-                                        alert("欢迎你！操作员")
-                                    }else{
-                                        alert("密码错误！")
-                                    }
+                                    window.location.href(rel.data);
                                 })
                             } else {
                                 alert("验证码错误!")
