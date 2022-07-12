@@ -64,7 +64,7 @@
 
                         <el-menu-item index="6">
                             <i class="el-icon-warning-outline"></i>
-                            <span slot="title">退出登录</span>
+                            <span slot="title" @click="logout">退出登录</span>
                         </el-menu-item>
 
                     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px; margin-right: 10px;">
@@ -143,6 +143,11 @@
             getAll() {
                 axios.get("http://localhost:8080/users").then(res => {
                     this.datalist = res.data;
+                });
+            },
+            logout() {
+                axios.request("http://localhost:8080/users/logout").then(res => {
+                    window.location.href = ("../login.html")
                 });
             }
 

@@ -86,7 +86,7 @@
         .top{
             position: absolute;
             margin-top: 0px;
-            margin-left: 630px;
+            margin-left: 650px;
         }
         .users {
             width: 80px;
@@ -150,6 +150,7 @@
             margin-right: 50px;
             border: #bcbec2;
             background-color: #d9ecff;
+			border-radius: 10px;
 
         }
 
@@ -178,7 +179,8 @@
         .report{
             position: absolute;
             margin-top: 0px;
-            margin-left: 850px;
+            margin-left: 890px;
+            width: 300px;
 
 
         }
@@ -229,10 +231,14 @@
 
             background-size: 1600px;
             display: flex;
+			
         }
         .box-card4{
 
             background-size: 1600px;
             display: flex;
+        }
+        .el-card__body{
+
         }
 

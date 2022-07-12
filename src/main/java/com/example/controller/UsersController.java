@@ -65,18 +65,27 @@ public class UsersController {
      * 3 登录为操作员
      */
     @PostMapping("/login")
-    private Integer login(@RequestBody Users users, HttpServletRequest request) throws Exception {
+    private String login(@RequestBody Users users, HttpServletRequest request) throws Exception {
         List<Users> usersList = usersService.list();
         for (Users value : usersList) {
             if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
                     request.getSession().setAttribute("users", value);
                     System.out.println("set:" + request.getSession().getAttribute("users"));
-                    return value.getUserRole();
+                    if (value.getUserRole()==1){
+                        return "index/admin.html";
+                    }else if(value.getUserRole()==2){
+                        return "index/operator.html";
+                    }else if(value.getUserRole()==3){
+                        return "index/market.html";
+                    }else{
+                        return "login.html";
+                    }
                 }
             }
         }
-        return 0;
+        // TODO: 前端没实现
+        return "用户名不存在";
     }
 
     /**
@@ -87,7 +96,8 @@ public class UsersController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "user/login.html";
+        //TODO:前端没实现
+        return "login.html";
     }
 
     /**
