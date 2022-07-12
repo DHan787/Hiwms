@@ -59,13 +59,14 @@
 }
 
 .logo {
-	width: 200px;
-	line-height: 60px;
-	color: #fff;
-	font-weight: bolder;
-	padding-left: 50px;
-	box-sizing: border-box;
-	color: #00b46a;
+    width: 200px;
+    line-height: 60px;
+    color: #fff;
+    font-weight: bolder;
+    padding-left: 50px;
+    box-sizing: border-box;
+    color: #409EFF;
+    display: inline-block;
 }
 
 .card-container {
@@ -192,4 +193,8 @@
 .el-icon-d-arrow-right{
 	font-size:20px ;
 }
-
+.avatar{
+    float: right;
+    margin-top: 10px;
+    display: inline-block;
+}
