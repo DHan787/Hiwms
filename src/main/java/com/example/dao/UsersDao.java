@@ -15,11 +15,27 @@ import java.util.List;
 @Mapper
 @Component
 public interface UsersDao extends BaseMapper<Users> {
-    //模糊查询
+    /**
+     *模糊查询
+     * @param userId id
+     * @param userName name
+     * @return list
+     */
     @Select("select * from users where userId like #{userId} and user_name like #{userName}")
     List<Users> selectUsers(@Param("userId") String userId, @Param("userName") String userName);
 
-    //查询有多少数据
+    /**
+     * 根据名字模糊查询
+     * @param userName name
+     * @return user
+     */
+    @Select("select * from users where user_name like #{userName}")
+    Users selectUserByName(@Param("userName") String userName);
+
+    /**
+     *  查询有多少数据
+     */
     @Select("select count(*) from users")
     int selectCount();
+
 }
