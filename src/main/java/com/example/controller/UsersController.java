@@ -60,12 +60,13 @@ public class UsersController {
 
     /**
      * 获取当前用户姓名
+     *
      * @return 用户姓名
      */
-    public String getCurrentUsername(){
+    public String getCurrentUsername() {
         Object id = requestAll.getSession().getAttribute("users");
         Users user = usersService.getById(Integer.parseInt(id.toString()));
-        return  user.getUserName();
+        return user.getUserName();
     }
 
     /**
@@ -84,15 +85,15 @@ public class UsersController {
             if (value.getUserName().equals(users.getUserName())) {
                 if (value.getUserPassword().equals(EncryptUtil.shaEncode(users.getUserPassword()))) {
                     this.requestAll = request;
-                    requestAll.getSession().setAttribute("users", value);
+                    requestAll.getSession().setAttribute("users", value.getUserId());
                     System.out.println("set:" + request.getSession().getAttribute("users"));
-                    if (value.getUserRole()==1){
+                    if (value.getUserRole() == 1) {
                         return "index/admin.html";
-                    }else if(value.getUserRole()==2){
+                    } else if (value.getUserRole() == 2) {
                         return "index/operator.html";
-                    }else if(value.getUserRole()==3){
+                    } else if (value.getUserRole() == 3) {
                         return "index/market.html";
-                    }else{
+                    } else {
                         return "login.html";
                     }
                 }
@@ -104,6 +105,7 @@ public class UsersController {
 
     /**
      * 登出
+     *
      * @param request 请求
      * @return login地址
      */
