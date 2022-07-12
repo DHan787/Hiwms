@@ -42,14 +42,15 @@
 								</el-button>
 								<el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()"
 									icon="el-icon-download">导出excel</el-button>
+								<el-button @click="clearFilter" style="margin-left: 400px;">清除所有过滤器</el-button>
 							</el-row>
 						</div>
 
 
 						<!--表单区域-->
 						<el-card style="border-radius: 20px;">
-							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-								style="width: 100%;" :row-class-name="tableRowClassName" highlight-current-row>
+							<el-table ref="filterTable" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+								style="width: 100%;"  :row-class-name="tableRowClassName" highlight-current-row>
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
 								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
@@ -70,7 +71,10 @@
 									</template>
 								</el-table-column>
 
-								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
+								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus" column-key="orderStatus"
+												 :filters="[{text: '未入库', value: 10}, {text: '入库中', value: 11}, {text: '已入库', value: 12},
+												 {text: '未出库', value: 20},{text: '出库中', value: 21},{text: '已出库', value: 22}]"
+												 :filter-method="filterHandler">
 								</el-table-column>
 
 								<el-table-column label="操作" width="250" style="display: flex;">
@@ -78,7 +82,7 @@
 										<el-button type="primary" plain icon="el-icon-edit"
 											@click="checkClick(scope.$index,scope.row)">确认订单
 										</el-button>
-										<el-button type="primary" plain @click="viewClick(scope.$index)"
+										<el-button type="success" plain @click="viewClick(scope.$index)"
 											icon="el-icon-info">详情
 										</el-button>
 									</template>
@@ -117,7 +121,7 @@
 										<el-table-column property="goodsNumber" label="货品数量"></el-table-column>
 									</el-table>
 									<div slot="footer" class="dialog-footer">
-										<el-button @click="dialogFormVisible = false">取 消</el-button>
+										<el-button @click="dialogFormVisible = false">确 认</el-button>
 									</div>
 								</el-dialog>
 							</div>
@@ -225,6 +229,7 @@
 					}
 					this.getAll();
 				},
+
 				tableRowClassName({
 					row
 				}) {
@@ -343,6 +348,14 @@
 				handleCurrentChange(val) {
 					console.log(`当前页: ${val}`);
 					this.currentPage = val;
+				},
+				//筛选订单类型
+				filterHandler(value, row, column) {
+					const property = column['property'];
+					return row[property] === value;
+				},
+				clearFilter() {
+					this.$refs.filterTable.clearFilter();
 				}
 			}
 		})
