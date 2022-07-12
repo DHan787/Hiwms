@@ -1,228 +1,228 @@
 <!DOCTYPE html>
 <html lang="">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/goods.css">
-    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
-        <el-container>
-            <!-- 主体 -->
-            <el-main>
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item><a href="../pages/index.html">首页</a></el-breadcrumb-item>
-                    <el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
-                    <el-breadcrumb-item>出库信息</el-breadcrumb-item>
-                </el-breadcrumb>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/goods.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
+				<el-container>
+					<!-- 主体 -->
+					<el-main>
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item><a href="../pages/index.html">首页</a></el-breadcrumb-item>
+							<el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
+							<el-breadcrumb-item>出库信息</el-breadcrumb-item>
+						</el-breadcrumb>
+						<!--表格区域-->
+						<el-card>
+							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+								style="width: 100%; ">
+								<el-table-column prop="orderId" label="订单编号" width="180">
+								</el-table-column>
 
-                <div class="card-container">
-                    <div class="handle-container">
+								<el-table-column prop="orderStartTime" label="订单开始时间">
+								</el-table-column>
+								<el-table-column prop="orderEndTime" label=订单结束时间>
+								</el-table-column>
 
-                        <!-- <el-button type="primary" plain style="margin:15px 20px;"  icon="el-icon-search">查询用户</el-button> -->
-                        <!-- <el-button type="primary" plain style="margin:15px 20px;" @click="addClick" icon="el-icon-plus">新增用户</el-button>
- -->
-                        <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-                            <el-table :data="gridData">
-                                <el-table-column property="stockId" label="库存id" width="150"></el-table-column>
-                                <el-table-column property="goodsName" label="货品名称" width="200"></el-table-column>
-                                <el-table-column property="goodsNumber" label="货品数量"></el-table-column>
-                            </el-table>
-                            <div slot="footer" class="dialog-footer">
-                                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                                <el-button type="primary" style="float: right;" plain @click="handleStockOut"
-                                           icon="el-icon-document-checked">出库
-                                </el-button>
-                            </div>
+								<el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
+								</el-table-column>
+								<el-table-column prop="orderOperator" label="订单操作员">
+								</el-table-column>
+								<el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
+								</el-table-column>
+								<el-table-column label="操作" width="250" style="display: flex;">
+									<template slot-scope="scope" v-for="orders in tableData">
 
-                        </el-dialog>
+										<el-button type="primary" plain @click="viewClick(scope.$index)"
+											icon="el-icon-info">
+											查看详情
+										</el-button>
+										<!--<el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>-->
+									</template>
+								</el-table-column>
+							</el-table>
 
-                    </div>
-                </div>
+							<div class="card-container">
+								<div class="handle-container">
+									<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+										<el-table :data="gridData">
+											<el-table-column property="stockId" label="库存id" width="150">
+											</el-table-column>
+											<el-table-column property="goodsName" label="货品名称" width="200">
+											</el-table-column>
+											<el-table-column property="goodsNumber" label="货品数量"></el-table-column>
+										</el-table>
+										<div slot="footer" class="dialog-footer">
+											<el-button @click="dialogFormVisible = false">取 消</el-button>
+											<el-button type="primary" style="float: right;" plain
+												@click="handleStockOut" icon="el-icon-document-checked">出库
+											</el-button>
+										</div>
 
+									</el-dialog>
 
-                <!--表单区域-->
-                <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-                              style="width: 100%; ">
-                        <el-table-column prop="orderId" label="订单编号" width="180">
-                        </el-table-column>
+								</div>
+							</div>
 
-                        <el-table-column prop="orderStartTime" label="订单开始时间">
-                        </el-table-column>
-                        <el-table-column prop="orderEndTime" label=订单结束时间>
-                        </el-table-column>
+							<!-- 分页器 -->
+							<div class="block" style="text-align: center;">
+								<el-pagination align='center' @size-change="handleSizeChange"
+									@current-change="handleCurrentChange" :current-page="currentPage"
+									:page-sizes="[1,5,10,20]" :page-size="pageSize"
+									layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+								</el-pagination>
+							</div>
+						</el-card>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script src="../../assets/js/vue.js"></script>
+	<script src="../../assets/css/element-ui/index.js"></script>
+	<script src="../../assets/js/axios.min.js"></script>
 
-                        <el-table-column prop="orderInit" label="订单创建人" :formatter="formatInit">
-                        </el-table-column>
-                        <el-table-column prop="orderOperator" label="订单操作员">
-                        </el-table-column>
-                        <el-table-column prop="orderStatus" label="订单状态" :formatter="formatStatus">
-                        </el-table-column>
-                        <el-table-column label="操作" width="250" style="display: flex;">
-                            <template slot-scope="scope" v-for="orders in tableData">
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					tableData: [],
+					dialogFormVisible: false,
+					dialogFormTitle: "查看订单详情",
+					gridData: [],
+					tableIndex: '',
+					currentPage: 1, // 当前页码
+					total: 20, // 总条数
+					pageSize: 5 // 每页的数据条数
+				}
+			},
 
-                                <el-button type="primary" plain @click="viewClick(scope.$index)" icon="el-icon-info">
-                                    查看详情
-                                </el-button>
-                                <!--<el-button type="success" plain @click="handleStockIn(scope.$index)" icon="el-icon-delete">入库</el-button>-->
-                            </template>
-                        </el-table-column>
-                    </el-table>
+			created() {
+				this.getAll();
+			},
 
-                    <!-- 分页器 -->
-                    <div class="block" style="text-align: center;">
-                        <el-pagination align='center' @size-change="handleSizeChange"
-                                       @current-change="handleCurrentChange" :current-page="currentPage"
-                                       :page-sizes="[1,5,10,20]" :page-size="pageSize"
-                                       layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-                        </el-pagination>
-                    </div>
-                </el-card>
-            </el-main>
-        </el-container>
-    </el-container>
-</div>
-</body>
-<script src="../../assets/js/vue.js"></script>
-<script src="../../assets/css/element-ui/index.js"></script>
-<script src="../../assets/js/axios.min.js"></script>
-
-<script>
-    new Vue({
-        el: '#app',
-        data: function () {
-            return {
-                tableData: [],
-                dialogFormVisible: false,
-                dialogFormTitle: "查看订单详情",
-                gridData: [],
-                tableIndex: '',
-                currentPage: 1, // 当前页码
-                total: 20, // 总条数
-                pageSize: 5 // 每页的数据条数
-            }
-        },
-
-        created() {
-            this.getAll();
-        },
-
-        methods: {
-            getAll() {
-                //console.log("orderType:{}",orderType);
-                axios.get("http://localhost:8080/orders/getByType?orderType=2&orderStatus=21").then(res => {
-                    this.tableData = res.data;
-                    /*console.log(this.tableData);*/
-                });
-            },
+			methods: {
+				getAll() {
+					//console.log("orderType:{}",orderType);
+					axios.get("http://localhost:8080/orders/getByType?orderType=2&orderStatus=21").then(res => {
+						this.tableData = res.data;
+						/*console.log(this.tableData);*/
+					});
+				},
 
 
-            viewClick(index) {
-                this.dialogFormVisible = true;
-                var orderId = this.tableData[index].orderId;
-                this.tableIndex = index;
-                axios.get("http://localhost:8080/stockOut/getByOrderId?orderId=" + orderId).then(res => {
-                    this.gridData = res.data;
-                    console.log(this.gridData);
-                });
-            },
+				viewClick(index) {
+					this.dialogFormVisible = true;
+					var orderId = this.tableData[index].orderId;
+					this.tableIndex = index;
+					axios.get("http://localhost:8080/stockOut/getByOrderId?orderId=" + orderId).then(res => {
+						this.gridData = res.data;
+						console.log(this.gridData);
+					});
+				},
 
-            handleStockOut() {
-                var stockId = this.gridData[0].stockId;
-                var goodsName = this.gridData[0].goodsName;
-                var goodsNumber = this.gridData[0].goodsNumber;
-                console.log(goodsNumber);
-                console.log("handleStockIn中的index", this.tableIndex);
-                <!--出库，更新库存-->
-                axios.put("http://localhost:8080/inventory/stockOut?goodsName=" + goodsName + "&goodsNumber=" + goodsNumber).then(res => {
-                    if (res.data) {
-                        // console.log(this.tableData[index]);
-                        this.$message({
-                            type: 'success',
-                            message: '商品库存修改成功!'
-                        });
-                        this.getAll();
-                        this.dialogFormVisible = false;
-                    } else {
-                        this.$message({
-                            type: 'info',
-                            message: '商品库存修改失败'
-                        });
-                    }
+				handleStockOut() {
+					var stockId = this.gridData[0].stockId;
+					var goodsName = this.gridData[0].goodsName;
+					var goodsNumber = this.gridData[0].goodsNumber;
+					console.log(goodsNumber);
+					console.log("handleStockIn中的index", this.tableIndex); 
+					<!--出库， 更新库存-- >
+					axios.put("http://localhost:8080/inventory/stockOut?goodsName=" + goodsName + "&goodsNumber=" +
+						goodsNumber).then(res => {
+						if (res.data) {
+							// console.log(this.tableData[index]);
+							this.$message({
+								type: 'success',
+								message: '商品库存修改成功!'
+							});
+							this.getAll();
+							this.dialogFormVisible = false;
+						} else {
+							this.$message({
+								type: 'info',
+								message: '商品库存修改失败'
+							});
+						}
 
-                });
+					});
 
-                <!--出库，修改订单状态（出库中-已出库）,修改结束时间-->
-                axios.post("http://localhost:8080/orders/endOrders", this.tableData[this.tableIndex]).then(res => {
-                    if (res.data) {
-                        this.$message({
-                            type: 'success',
-                            message: '订单修改成功!'
-                        });
-                        this.getAll();
-                        this.dialogFormVisible = false;
-                    } else {
-                        this.$message({
-                            type: 'info',
-                            message: '订单修改失败'
-                        });
-                    }
-                });
+					
+					<!--出库， 修改订单状态（ 出库中 - 已出库）, 修改结束时间-- >
+						axios.post("http://localhost:8080/orders/endOrders", this.tableData[this.tableIndex]).then(
+							res => {
+								if (res.data) {
+									this.$message({
+										type: 'success',
+										message: '订单修改成功!'
+									});
+									this.getAll();
+									this.dialogFormVisible = false;
+								} else {
+									this.$message({
+										type: 'info',
+										message: '订单修改失败'
+									});
+								}
+							});
 
-            },
+				},
 
 
-            formatStatus(row) {
-                console.log("formatStatus(row)", row);
-                switch (row.orderStatus) {
-                    case 10:
-                        return "未入库"
-                        break
-                    case 11:
-                        return "入库中"
-                        break
-                    case 12:
-                        return "已入库"
-                        break
-                    case 20:
-                        return "未出库"
-                        break
-                    case 21:
-                        return "出库中"
-                        break
-                    case 22:
-                        return "已出库"
-                        break
-                    default:
-                        return "未知"
-                        break
-                }
-            },
+				formatStatus(row) {
+					console.log("formatStatus(row)", row);
+					switch (row.orderStatus) {
+						case 10:
+							return "未入库"
+							break
+						case 11:
+							return "入库中"
+							break
+						case 12:
+							return "已入库"
+							break
+						case 20:
+							return "未出库"
+							break
+						case 21:
+							return "出库中"
+							break
+						case 22:
+							return "已出库"
+							break
+						default:
+							return "未知"
+							break
+					}
+				},
 
-            formatInit(row) {
-                if (row.orderInit === 11) {
-                    return "管理员Anna"
-                } else {
-                    return "未知"
-                }
-            },
+				formatInit(row) {
+					if (row.orderInit === 11) {
+						return "管理员Anna"
+					} else {
+						return "未知"
+					}
+				},
 
-            //每页条数改变时触发 选择一页显示多少行
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-                this.currentPage = 1;
-                this.pageSize = val;
-            },
-            //当前页改变时触发 跳转其他页
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-                this.currentPage = val;
-            }
+				//每页条数改变时触发 选择一页显示多少行
+				handleSizeChange(val) {
+					console.log(`每页 ${val} 条`);
+					this.currentPage = 1;
+					this.pageSize = val;
+				},
+				//当前页改变时触发 跳转其他页
+				handleCurrentChange(val) {
+					console.log(`当前页: ${val}`);
+					this.currentPage = val;
+				}
 
-        }
-    })
-</script>
+			}
+		})
+	</script>
 </html>

@@ -5,20 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author ymm
+ * 监听配置类
+ */
 @Component
 public class StockListener {
 
     @Autowired
     OrdersController ordersController;
-//    @Override
-//    public void onApplicationEvent(StockInEvent event){
-//        Object source = event.getSource();
-//        System.out.println("监听到了……");
-//        /**
-//         * 监听到了就会触发此处，接收到消息
-//         */
-//        ordersController.saveMsg();
-//    }
+
     @EventListener
     public void stockInEvent(StockInEvent event){
         Object source = event.getSource();
