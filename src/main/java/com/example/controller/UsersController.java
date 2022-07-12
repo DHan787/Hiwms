@@ -63,7 +63,6 @@ public class UsersController {
      * @return 用户姓名
      */
     public String getCurrentUsername(){
-        HttpServletRequest request = this.requestAll;
         Object id = requestAll.getSession().getAttribute("users");
         Users user = usersService.getById(Integer.parseInt(id.toString()));
         return  user.getUserName();
