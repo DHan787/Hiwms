@@ -150,7 +150,7 @@ public class UsersInfoController {
      * @param usersInfo info
      * @return if success
      */
-    @PostMapping("/saveInfo")
+    @PutMapping("/saveInfo")
     public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
