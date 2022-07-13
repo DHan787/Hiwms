@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -54,9 +55,9 @@ public class StockOutController {
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockOut(@RequestBody StockOut stockOut) {
+    public boolean saveStockOut(@RequestBody StockOut stockOut, HttpServletRequest request) {
         //type = 2 入库
-        stockOut.setOrderId(ordersController.initOrders(2));
+        stockOut.setOrderId(ordersController.initOrders(2,request));
         StockOutEvent stockOutEvent=new StockOutEvent("stockIn:",stockOut,"新的出库申请");
         webapplicationcontext.publishEvent(stockOutEvent);
         return stockOutService.save(stockOut);
