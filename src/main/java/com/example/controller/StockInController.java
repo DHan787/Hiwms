@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -55,8 +56,8 @@ public class StockInController {
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockIn(@RequestBody StockIn stockIn) {
-        stockIn.setOrderId(ordersController.initOrders(1));// type = 1 入库
+    public boolean saveStockIn(@RequestBody StockIn stockIn, HttpServletRequest request) {
+        stockIn.setOrderId(ordersController.initOrders(1, request));// type = 1 入库
         StockInEvent stockInEvent=new StockInEvent("stockIn:",stockIn,"新的入库申请");
         webapplicationcontext.publishEvent(stockInEvent);
         return stockInService.save(stockIn);
