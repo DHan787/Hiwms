@@ -68,6 +68,10 @@
     color: #409EFF;
     display: inline-block;
 }
+.el-avatar el-avatar--circle{
+	width: 110px;
+	height: 110px;
+}
 
 .card-container {
 	display: flex;
@@ -165,7 +169,7 @@
 
 .head {
 	float: right;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
