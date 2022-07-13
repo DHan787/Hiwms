@@ -102,7 +102,7 @@ public class UsersController {
             }
         }
         // TODO: 前端没实现
-        return "用户名不存在";
+        return "register.html";
     }
 
     /**
@@ -114,7 +114,6 @@ public class UsersController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        //TODO:前端没实现
         return "login.html";
     }
 
