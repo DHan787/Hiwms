@@ -44,7 +44,7 @@ public class StockInController {
      *
      * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<StockIn> getAll() {
         System.out.println(stockInService.list());
         return stockInService.list();

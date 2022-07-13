@@ -154,7 +154,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList
         ) {
-            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
                 return true;
             }
         }
