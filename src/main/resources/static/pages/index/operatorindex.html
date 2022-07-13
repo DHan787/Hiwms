@@ -37,15 +37,17 @@
 								</el-card>
 							</div>
 							<br />
-
-							<div class="data">
+							<div class="data" style="width: 35%;padding-left:5%">
 									<el-image :src="src6" class="pics1">
 										<div slot="placeholder" class="image-slot">
 											加载中<span class="dot">...</span>
 										</div>
 									</el-image>
-							</div>
-
+									<!-- <div id="container"></div>
+									<div id="status"></div>
+									<div id="loop"></div> -->
+								</div>
+						
 							<div class="top">
 								<el-card class="box-card3">
 									<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
@@ -182,6 +184,14 @@
 				}
 
 			}
-		})
+		});
+		// var anim = lottie.loadAnimation({
+		// 	container: document.getElementById("container"), // 容器
+		// 	renderer: "svg",
+		// 	loop: true,
+		// 	autoplay: true,
+		// 	// animationData: {}, //如果使用的是JSON
+		// 	path: "../../assets/pics/Working Day.lottie.json" // the path to the animation json
+		// });
 	</script>
 </html>

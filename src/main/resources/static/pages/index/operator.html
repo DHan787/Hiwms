@@ -12,14 +12,14 @@
 			<el-container>
 				<el-header style="height: 80px">
 
-					<div class="head" style="float: left;" v-if="!isCollapse">
+					<div class="head" style="float: left;">
 						<el-image :src="src1" class="ava">
 							<div slot="placeholder" class="image-slot">
 								加载中<span class="dot">...</span>
 							</div>
 						</el-image>
 					</div>
-					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;" v-if="!isCollapse">汇安智能仓储平台
+					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台
 					</div>
 
 					<!--头像-->
@@ -27,7 +27,6 @@
 						<el-button @click="drawer = true" circle >
 							<el-avatar src="../../assets/pics/ava_red.png">
 							</el-avatar>
-
 						</el-button>
 
 						<el-drawer
@@ -105,10 +104,6 @@
 								<i class="el-icon-menu"></i>
 								<span slot="title" @click="openUrl('./operatorindex.html')">主页</span>
 							</el-menu-item>
-							<el-menu-item index="2">
-								<i class="el-icon-s-help"></i>
-								<span slot="title">控制台</span>
-							</el-menu-item>
 							<el-submenu index="3">
 								<template slot="title">
 									<i class="el-icon-view"></i>
@@ -127,13 +122,7 @@
 
 								</el-menu-item-group>
 							</el-submenu>
-
-							<el-menu-item index="5">
-								<i class="el-icon-setting"></i>
-								<span slot="title">系统设置</span>
-							</el-menu-item>
-
-							<el-menu-item index="6">
+							<el-menu-item index="4">
 								<i class="el-icon-warning-outline"></i>
 								<span slot="title" @click="logout">退出登录</span>
 							</el-menu-item>

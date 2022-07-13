@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../../assets/css/home.css">
 		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<script src="https://gw.alipayobjects.com/os/lib/lottie-web/5.5.6/build/player/lottie.min.js"></script>
 		<script src="../../assets/js/echarts.js"></script>
 		<title></title>
 	</head>
@@ -39,12 +40,15 @@
 							</div>
 							<br />
 
-							<div class="data">
-								<el-image :src="src6" class="pics1">
+							<div class="data" style="width: 35%;padding-left:5%">
+								<!-- <el-image :src="src6" class="pics1">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
-								</el-image>
+								</el-image> -->
+								<div id="container"></div>
+								<div id="status"></div>
+								<div id="loop"></div>
 							</div>
 							<div class="top">
 								<el-card class="box-card3">
@@ -176,6 +180,14 @@
 					});
 				}
 			}
-		})
+		});
+		var anim = lottie.loadAnimation({
+			container: document.getElementById("container"), // 容器
+			renderer: "svg",
+			loop: true,
+			autoplay: true,
+			// animationData: {}, //如果使用的是JSON
+			path: "../../assets/pics/Work Days.lottie.json" // the path to the animation json
+		});
 	</script>
 </html>
