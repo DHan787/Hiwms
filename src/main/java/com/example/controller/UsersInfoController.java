@@ -141,37 +141,24 @@ public class UsersInfoController {
     }
 
     /**
-     * save user info
-     * @param usersInfo info
-     * @return if success
-     */
-    @PostMapping("/saveOrUpdateInfo")
-    public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
-        Object id = request.getSession().getAttribute("users");
-        int userId  = Integer.parseInt(id.toString());
-        try {
-            long timeMillis = System.currentTimeMillis();
-            usersInfo.setUserAltTime(timeMillis);
-            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usersInfoService.saveOrUpdate(usersInfo);
-    }
-    /**
      * 更新个人信息
-     * @param usersInfoAltTime alt time
      * @param usersInfo info 实体
      * @param request null
      * @return if success
      */
     @PutMapping("/updateInfo")
-    public boolean updateUsersInfo( @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo,HttpServletRequest request) {
+    public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
         //得到UserInfoId
-        usersInfo.setUserAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        List<UsersInfo> usersInfoList = this.getAll();
+        for (UsersInfo value: usersInfoList
+        ) {
+            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+                usersInfo.setUserAltTime(value.getUserAltTime());
+                usersInfo.setUsersInfoId(value.getUsersInfoId());
+            }
+        }
         return usersInfoService.updateById(usersInfo);
     }
 
