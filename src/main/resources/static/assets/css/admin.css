@@ -64,6 +64,7 @@
 	font-weight: bolder;
 	padding-left: 50px;
 	color: #409EFF;
+	display: inline-block;
 }
 
 .card-container {
