@@ -12,6 +12,16 @@ public class StockOutEvent extends ApplicationEvent {
 
     private  String content;
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    private Integer orderId;
+
     public String getContent() {
         return content;
     }
@@ -21,10 +31,11 @@ public class StockOutEvent extends ApplicationEvent {
     }
 
 
-    public StockOutEvent(Object source, StockOut stockOut, String content){
+    public StockOutEvent(Object source, StockOut stockOut, String content, Integer orderId){
         super(source);
         this.stockOut = stockOut;
         this.content = content;
+        this.orderId = orderId;
     }
 
     public StockOutEvent(Object source) {

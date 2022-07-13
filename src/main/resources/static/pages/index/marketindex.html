@@ -106,7 +106,7 @@
 									<div>
 										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
 											<el-card style="margin: 15px;">
-												<p class="title1-2-content">新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+												<p class="title1-2-content">新通知: 你的申请{{ms.orderId}}已完成</p>
 												<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small"
 													style="float: right;margin-bottom: 10px;">
 													已读</el-button>
@@ -164,7 +164,7 @@
 			},
 			methods: {
 				msgtu(msgsId) {
-					axios.put("http://localhost:8080/orders/putmsg?msgid=" + msgsId).then(rel => {
+					axios.put("http://localhost:8080/msgs?msgid=" + msgsId).then(rel => {
 						console.log(rel.data);
 						if (rel.data) {
 							this.getAll();
@@ -174,15 +174,12 @@
 					})
 				},
 				getAll() {
-					axios.get("http://localhost:8080/orders/msg/apply").then(resl => {
+					axios.get("http://localhost:8080/msgs/apply").then(resl => {
 						if (resl.data.length > 0) {
 							this.msgs = resl.data;
 							this.msgsfig = true;
 						} else {
 							this.msgsfig = false;
-							// time = setInterval(this.getAll, 1000);
-							// clearInterval(this.time);
-							// console.log("time: "+ time)
 						}
 					});
 				}

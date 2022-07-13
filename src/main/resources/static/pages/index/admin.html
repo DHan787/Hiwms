@@ -26,7 +26,7 @@
 
         <!--头像-->
         <div class="avatar" style="float: right;">
-            <el-button @click="get()" circle >
+            <el-button @click="drawer=true;" circle >
                 <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
@@ -38,11 +38,6 @@
                     size="40%"
 			        background ="#f8fff7">
                 <div>
-
-					<!--<div class="personal-info">
-						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
-					</div>-->
-
 					<div class="personal-info">
 						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
 					</div>
@@ -56,18 +51,16 @@
 					</div>
 
 
-
-
-
 					<el-button @click="innerDrawer = true">编辑信息</el-button>
 
                     <el-drawer
                             title="编辑个人信息"
                             :append-to-body="true"
                             :before-close="close"
-                            :visible.sync="innerDrawer">
+                            :visible.sync="innerDrawer"
+							ref="drawer">
 						<div>
-							<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
+							<!--<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
 								<el-form-item label="" prop="userTele" style="margin-top:10px;">
 									<el-row>
 										<el-col :span='2'>
@@ -105,7 +98,22 @@
 									<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
 									</el-button>
 								</el-form-item>
+							</el-form>-->
+							<el-form :model="userInfoForm" ref="userInfoForm">
+								<el-form-item label="电话号码" :label-width="formLabelWidth">
+									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
+								</el-form-item>
+								<el-form-item label="地址" :label-width="formLabelWidth">
+									<el-input v-model="userInfoForm.userLocation" autocomplete="off"></el-input>
+								</el-form-item>
+								<el-form-item label="单位" :label-width="formLabelWidth">
+									<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
+								</el-form-item>
 							</el-form>
+							<div class="demo-drawer__footer">
+								<el-button round type="primary" @click="EditUserInfo">保存</el-button>
+								<el-button round @click="innerDrawer = false">取 消</el-button>
+							</div>
 						</div>
                     </el-drawer>
                 </div>
@@ -215,12 +223,15 @@
 					iframeUrl: './index.html',
 					fit: 'contain',
 					avatarURL: ' ../../assets/pics/logo_green.png',
-					src1:'../../assets/pics/logo_green.png'
+					src1:'../../assets/pics/logo_green.png',
+					formLabelWidth: '80px',
 				}
 			},
 			created() {
-                this.getLowWarnList()
-				this.getPersonalInfo()
+                this.getLowWarnList();
+				this.getPersonalInfo(); //用户个人信息提醒
+				this.get(); //获取用户个人信息
+
 			},
 			methods: {
 				//低库存提醒
@@ -239,8 +250,8 @@
 
 				//个人信息填写提醒
 				getPersonalInfo() {
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						if (res.data == null) {
+					axios.get("http://localhost:8080/usersInfo/ifNull").then(res => {
+						if (res.data == true) {
 							this.$notify({
 								title: '个人信息提醒',
 								message: '您还未填写个人信息，请抓紧时间填写哦！',
@@ -260,18 +271,19 @@
 							.catch(_ => {});
 				},
 
+
 				//编辑个人信息
 				EditUserInfo() {
-					console.log(0)
 					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
-							this.getAll();
+							// this.$refs.editDrawer.closeDrawer();
+							this.get();
 							this.innerDrawer = false;
-
+							//this.userInfoForm = Object.assign({},row);
 						}else{
 							this.$message({
 								type: 'info',
@@ -300,10 +312,11 @@
 				},
 
 				get() {
-					this.drawer=true;
+					/*this.drawer=true;*/
 					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
 						console.log(res.data);
 						this.dataForm = res.data;
+						this.userInfoForm = Object.assign({},this.dataForm);
 					});
 				},
 
