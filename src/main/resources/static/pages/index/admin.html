@@ -35,7 +35,8 @@
             <el-drawer
                     title="个人主页"
                     :visible.sync="drawer"
-                    size="50%">
+                    size="40%"
+			        background ="#f8fff7">
                 <div>
 
 					<!--<div class="personal-info">
@@ -102,7 +103,7 @@
 									</el-row>
 								</el-form-item>
 								<el-form-item style="margin-top:10px">
-									<el-button type="primary" round class="submitBtn" v-on:click="userInfoForm">保存
+									<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
 									</el-button>
 								</el-form-item>
 							</el-form>
@@ -182,7 +183,6 @@
 							frameborder="0" scrolling="no"></iframe>
 					</el-main>
 
-
 				</el-container>
 			</el-container>
 		</div>
@@ -216,7 +216,8 @@
 				}
 			},
 			created() {
-                this.getLowWarnList()
+                this.getLowWarnList();
+				this.getPersonalInfo();
 			},
 			methods: {
 				//低库存提醒
@@ -233,9 +234,23 @@
 					});
 				},
 
+				//个人信息填写提醒
+				getPersonalInfo() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						if (res.data == null && res.data.length <= 0) {
+							this.$notify({
+								title: '个人信息提醒',
+								message: '您还未填写个人信息，请抓紧时间填写哦！',
+								position: 'bottom-left',
+								type: 'warning'
+							});
+						}
+					});
+				},
+
 				//关闭编辑个人信息
 				close(done) {
-					this.$confirm('确认关闭？')
+					this.$confirm('还有未保存的信息哦确定关闭吗？')
 							.then(_ => {
 								done();
 							})
@@ -243,9 +258,9 @@
 				},
 
 				//编辑个人信息
-				userInfoForm() {
+				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersDetail/getDetail",this.userInfoForm).then(res => {
+					axios.put("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
