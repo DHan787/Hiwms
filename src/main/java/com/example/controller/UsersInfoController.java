@@ -1,10 +1,9 @@
 package com.example.controller;
 
-import com.example.domain.Users;
+import com.example.dao.UsersDao;
+import com.example.dao.UsersInfoDao;
 import com.example.domain.UsersInfo;
 import com.example.service.UsersInfoService;
-import com.example.service.UsersService;
-import com.example.utils.EncryptUtil;
 import com.example.utils.idGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,8 @@ import java.util.List;
 public class UsersInfoController {
     @Autowired
     private UsersInfoService usersInfoService;
+    @Autowired
+    public UsersInfoDao usersInfoDao;
 
 
     /**
@@ -84,7 +85,6 @@ public class UsersInfoController {
         //得到UserInfoId
         usersInfo.setUserAltTime(usersInfoAltTime);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-
         return usersInfoService.updateById(usersInfo);
     }
 
@@ -110,16 +110,13 @@ public class UsersInfoController {
 
 
     /**
+     * 新建空的个人信息
      * @param userId    id
-     * @param usersInfo info
      * @return if success
      */
-    @PostMapping("/init")
-    public boolean intiUserInfo(@RequestParam Integer userId, @RequestBody UsersInfo usersInfo) {
+    public boolean intiUserInfo(@RequestParam Integer userId) {
         long timeMills = System.currentTimeMillis();
-        usersInfo.setUserAltTime(timeMills);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-        return usersInfoService.save(usersInfo);
+        return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills),timeMills) >0;
     }
 
     /**
@@ -130,9 +127,8 @@ public class UsersInfoController {
     @GetMapping("/getPersonalInfo")
     public UsersInfo getPersonalInfo(HttpServletRequest request){
         Object id = request.getSession().getAttribute("users");
-        UsersInfo usersInfo;
         int userId = Integer.parseInt(id.toString());
-        Long infoId = null;
+        Long infoId;
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList
              ) {
@@ -145,40 +141,24 @@ public class UsersInfoController {
     }
 
     /**
-     * save user info
-     * @param usersInfo info
-     * @return if success
-     */
-    @PostMapping("/saveInfo")
-    public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
-        Object id = request.getSession().getAttribute("users");
-        int userId  = Integer.parseInt(id.toString());
-        try {
-            long timeMillis = System.currentTimeMillis();
-            usersInfo.setUserAltTime(timeMillis);
-            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usersInfoService.save(usersInfo);
-    }
-
-    /**
      * 更新个人信息
-     * @param usersInfoAltTime alt time
      * @param usersInfo info 实体
      * @param request null
      * @return if success
      */
-    @PutMapping("/updateInfo")
-    public boolean updateUsersInfo( @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo,HttpServletRequest request) {
+    @PostMapping("/updateInfo")
+    public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
         //得到UserInfoId
-        usersInfo.setUserAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
-
+        List<UsersInfo> usersInfoList = this.getAll();
+        for (UsersInfo value: usersInfoList
+        ) {
+            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+                usersInfo.setUserAltTime(value.getUserAltTime());
+                usersInfo.setUsersInfoId(value.getUsersInfoId());
+            }
+        }
         return usersInfoService.updateById(usersInfo);
     }
 
