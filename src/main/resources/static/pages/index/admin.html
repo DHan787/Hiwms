@@ -39,9 +39,14 @@
 			        background ="#f8fff7">
                 <div>
 
-					<!--<div class="personal-info">
-						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
-					</div>-->
+					<!--<el-col :span="12">
+						<div class="demo-basic&#45;&#45;circle">
+							<div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
+							<div class="block" v-for="size in sizeList" :key="size">
+								<el-avatar :size="size" :src="circleUrl"></el-avatar>
+							</div>
+						</div>
+					</el-col>-->
 
 					<div class="personal-info">
 						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
@@ -54,10 +59,6 @@
 					<div class="personal-info">
 						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
 					</div>
-
-
-
-
 
 					<el-button @click="innerDrawer = true">编辑信息</el-button>
 
@@ -315,6 +316,8 @@
 			}
 		})
 	</script>
+
+
 
 
 

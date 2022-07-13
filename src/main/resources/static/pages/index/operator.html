@@ -24,7 +24,7 @@
 
 					<!--头像-->
 					<div class="avatar" style="float: right;">
-						<el-button @click="drawer = true" circle >
+						<el-button @click="get()" circle >
 							<el-avatar src="../../assets/pics/ava_red.png">
 							</el-avatar>
 
@@ -36,7 +36,20 @@
 								size="50%"
 								background ="#f8fff7">
 							<div>
-								<el-button @click="innerDrawer = true">编辑</el-button>
+
+								<!--<div class="personal-info">
+									<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
+								</div>
+
+								<div class="personal-info">
+									<div class="lo" style="margin-left: 15%">地址：<div style="display: inline">{{dataForm.userLocation}}</div></div>
+								</div>
+
+								<div class="personal-info">
+									<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
+								</div>-->
+
+								<el-button @click="innerDrawer = true">编辑信息</el-button>
 								<el-drawer
 										title="编辑个人信息"
 										:append-to-body="true"
@@ -239,6 +252,14 @@
 				openUrl(url) {
 
 					this.iframeUrl = url;
+				},
+
+				get() {
+					this.drawer=true;
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						console.log(res.data);
+						this.dataForm = res.data;
+					});
 				},
 
 				logout() {
