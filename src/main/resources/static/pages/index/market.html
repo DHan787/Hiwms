@@ -181,7 +181,7 @@
 				}
 			},
 			created() {
-				this.getAll(),
+				this.getAll();
 					this.getLowWarnList();
 			},
 			methods: {
@@ -248,7 +248,7 @@
                 this.iframeUrl = url;
             },
             getAll() {
-                axios.get("http://localhost:8080/users").then(res => {
+                axios.get("http://localhost:8080/orders").then(res => {
                     this.datalist = res.data;
                 });
             },

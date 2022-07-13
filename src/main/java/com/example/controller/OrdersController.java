@@ -108,7 +108,7 @@ public class OrdersController {
      * @return list
      */
     @GetMapping
-    public List<Orders> getAll(    HttpServletRequest request) {
+    public List<Orders> getAll( HttpServletRequest request) {
         this.requestAll = request;
         System.out.println("used");
         return ordersService.list();
