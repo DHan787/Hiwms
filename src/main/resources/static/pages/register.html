@@ -13,7 +13,7 @@
     <div class="register">
         <div class="registerBody" align="center">
             <h4>注册</h4>
-            <el-form :model="registerForm" ref="registerForm" label-width="0px">
+            <el-form :model="registerForm" :rules="rules" ref="registerForm" label-width="0px">
                 <el-form-item label="" prop="userName" style="margin-top:10px;">
                     <el-row>
                         <el-col :span='2'>
@@ -31,13 +31,24 @@
                             <span class="el-icon-lock"></span>
                         </el-col>
                         <el-col :span='20'>
-                            <el-input class="inps" type="userPassword" placeholder='密码'
+                            <el-input class="inps" type="password" placeholder='密码'
                                       v-model="registerForm.userPassword"></el-input>
                         </el-col>
                     </el-row>
                 </el-form-item>
-                <el-form-item style="margin-top:5px">
-                    <el-button type="primary" round class="submitBtn" v-on:click="register">返回登录
+                <el-form-item label="" prop="checkPass">
+                    <el-row>
+                        <el-col :span='2'>
+                            <span class="el-icon-lock"></span>
+                        </el-col>
+                        <el-col :span='20'>
+                            <el-input class="inps" type="password" placeholder='确认密码'
+                                      v-model="registerForm.checkPass"></el-input>
+                        </el-col>
+                    </el-row>
+                </el-form-item>
+                <el-form-item style="margin-top:0px">
+                    <el-button type="primary" round class="submitBtn" v-on:click="register('registerForm')">注册
                     </el-button>
                 </el-form-item>
             </el-form>
@@ -55,18 +66,53 @@
             registerForm: {
                 userName: '',
                 userPassword: '',
+                checkPass: ''
             },
         },
         data() {
+            var validatePass = (rule ,value,callback)=>{
+                if(value === ''){
+                    callback(new Error('请再次输入密码'));
+                }else if(value !== this.registerForm.userPassword){
+                    callback(new Error('两次输入密码不一致'));
+                }else{
+                    callback();
+                }
+            }
+            var validateName = (rule,value,callback)=>{
+                if(/^[\u4E00-\u9FA5A-Za-z0-9]+$/.test(value) === false){
+                    callback(new Error('只能输入中文、英文、数字'));
+                }else{
+                    callback();
+                }
+            }
             return {
                 registerForm: {},
+                rules: {
+                    userName: [
+                        {required: true, message: '请输入用户名', trigger: 'blur'},
+                        {min: 3,max:15,message: '请输入3-15位字符',trigger:'blur'},
+                        {validator: validateName,trigger: 'blur'}
+                    ],
+                    userPassword: [
+                        {required: true, message:'请输入密码',trigger: 'blur'},
+                        {pattern: /^(\w){6,12}$/, message: "只能输入6-12个字母、数字、下划线"},
+
+                    ],
+                    checkPass: [
+                        {required: true, message:'请再次输入密码',trigger: 'blur'},
+                        {validator: validatePass,trigger: 'blur'}
+                    ]
+                }
             }
         },
 
         methods: {
-            register() {
-                if (this.registerForm.userName !== '') {
-                    if (this.registerForm.userPassword !== '') {
+            register(registerForm) {
+               /* if (this.registerForm.userName !== '') {
+                    if (this.registerForm.userPassword !== '') {*/
+                this.$refs[registerForm].validate((valid)=>{
+                    if(valid){
                         axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
                             if (rel.data) {
                                 this.$message({
@@ -81,8 +127,16 @@
                                 });
                             }
                         })
+                    }else{
+                        this.$message.error({
+                            type: 'error',
+                            message: '请重新填写'
+                        });
                     }
-                }
+                })
+
+                /*    }
+                }*/
             }
         }
     })
