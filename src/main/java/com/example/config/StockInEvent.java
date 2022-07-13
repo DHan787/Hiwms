@@ -13,6 +13,8 @@ public class StockInEvent extends ApplicationEvent {
 
     private  String content;
 
+    private Integer orderId;
+
     public String getContent() {
         return content;
     }
@@ -22,10 +24,19 @@ public class StockInEvent extends ApplicationEvent {
     }
 
 
-    public StockInEvent(Object source, StockIn stockIn, String content){
+    public Integer getOrderId(){
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId){
+        this.orderId = orderId;
+    }
+
+    public StockInEvent(Object source, StockIn stockIn, String content, Integer orderId){
         super(source);
         this.stockIn = stockIn;
         this.content = content;
+        this.orderId = orderId;
     }
 
     public StockInEvent(Object source) {

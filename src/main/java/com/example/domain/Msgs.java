@@ -10,6 +10,7 @@ public class Msgs {
     private Integer msgsId;
     private String  msgsCont;
     private Integer type;
+    private Integer orderId;
 
     public Integer getMsgsId() {
         return msgsId;
@@ -33,5 +34,13 @@ public class Msgs {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getOrderId(){
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId){
+        this.orderId = orderId;
     }
 }
