@@ -99,8 +99,8 @@ public class OrdersController {
         orders.setOrderStartTime(dateFormat.format(date));
         orders.setOrderType(type);
         orders.setOrderStatus(type * 10);
-        //设置订单发起人ID 默认为11 需要后续实现
         Object id = request.getSession().getAttribute("users");
+        Integer orderId = Integer.parseInt(id.toString());
         orders.setOrderInit(Integer.parseInt(id.toString()));
         ordersService.save(orders);
         return orders.getOrderId();
