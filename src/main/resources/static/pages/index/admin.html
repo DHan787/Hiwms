@@ -297,7 +297,7 @@
 
 				get() {
 					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						//console.log(res);
+						console.log(res);
 						this.dataForm = res.data;
 					});
 				},
