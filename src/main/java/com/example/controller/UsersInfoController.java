@@ -155,9 +155,10 @@ public class UsersInfoController {
     }
 
     /**
-     * 更新用户信息
-     *
-     * @param usersInfo info
+     * 更新个人信息
+     * @param usersInfoAltTime alt time
+     * @param usersInfo info 实体
+     * @param request null
      * @return if success
      */
     @PutMapping
