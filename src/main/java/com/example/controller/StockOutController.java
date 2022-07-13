@@ -55,12 +55,14 @@ public class StockOutController {
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockOut(@RequestBody StockOut stockOut, HttpServletRequest request) {
+    public boolean saveStockOut(@RequestBody StockOut stockOut, HttpServletRequest request)  {
         //type = 2 入库
         stockOut.setOrderId(ordersController.initOrders(2,request));
-        StockOutEvent stockOutEvent=new StockOutEvent("stockIn:",stockOut,"新的出库申请");
+        boolean ifSuccess = stockOutService.save(stockOut);
+        Integer id = stockOut.getStockId();
+        StockOutEvent stockOutEvent=new StockOutEvent("stockIn:",stockOut,"新的出库申请",id);
         webapplicationcontext.publishEvent(stockOutEvent);
-        return stockOutService.save(stockOut);
+        return ifSuccess;
     }
 
     /**
@@ -71,7 +73,6 @@ public class StockOutController {
      */
     @GetMapping("/getByOrderId")
     public List<StockOut> getByOrderId(@RequestParam Integer orderId) {
-
         QueryWrapper<StockOut> wrapper = new QueryWrapper<>();
         wrapper.eq("order_id", orderId);
         return stockOutDao.selectList(wrapper);

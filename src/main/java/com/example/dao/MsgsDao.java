@@ -19,6 +19,6 @@ public interface MsgsDao extends BaseMapper<Msgs> {
     public List<Msgs> selectType(@Param("type") Integer tyep);
 
     @Update("update msgs set type=0  where msgs_id=#{msgid}")
-    public  Integer updatamsg(@Param("msgid") Integer msgid);
+    public  Integer updatemsg(@Param("msgid") Integer msgid);
 
 }
