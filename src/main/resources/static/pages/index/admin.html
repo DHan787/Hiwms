@@ -56,11 +56,6 @@
 					</div>
 
 
-
-
-
-					<el-button @click="innerDrawer = true">编辑信息</el-button>
-
                     <el-button @click="innerDrawer = true">编辑</el-button>
                     <el-drawer
                             title="编辑个人信息"
@@ -260,12 +255,13 @@
 				//编辑个人信息
 				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
+							this.getAll();
 							this.innerDrawer = false;
 
 						}else{
