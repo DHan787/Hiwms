@@ -216,12 +216,12 @@
 					iframeUrl: './index.html',
 					fit: 'contain',
 					avatarURL: ' ../../assets/pics/logo_green.png',
-					src1:'../../assets/pics/logo_green.png',
+					src1:'../../assets/pics/logo_green.png'
 				}
 			},
 			created() {
-                this.getLowWarnList();
-				this.getPersonalInfo();
+                this.getLowWarnList()
+				this.getPersonalInfo()
 			},
 			methods: {
 				//低库存提醒
@@ -241,7 +241,7 @@
 				//个人信息填写提醒
 				getPersonalInfo() {
 					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						if (res.data == null && res.data.length <= 0) {
+						if (res.data == null) {
 							this.$notify({
 								title: '个人信息提醒',
 								message: '您还未填写个人信息，请抓紧时间填写哦！',

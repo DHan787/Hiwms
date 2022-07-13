@@ -184,11 +184,11 @@
 					isCollapse: true,
 					iframeUrl: './operatorindex.html',
 					fit: 'contain',
-					src1:'../../assets/pics/logo_red.png',
+					src1:'../../assets/pics/logo_red.png'
 				}
 			},
 			created() {
-				/*this.getLowWarnList();*/
+
 				this.getPersonalInfo()
 			},
 			methods: {
@@ -218,7 +218,7 @@
 				//编辑个人信息
 				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
