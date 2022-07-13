@@ -1,7 +1,7 @@
 * {
-	margin: 0;
-	padding: 0;
-}
+            margin: 0;
+            padding: 0;
+        }
 
 .el-main {
 	background-color: #E9EEF3;
@@ -12,12 +12,12 @@
 .el-menu-vertical-demo el-menu {
 	background-image: url("../pics/6.jpg");
 
-}
+        }
+		
+        .el-menu-item-group__title{
+            background-image: url("../pics/6.jpg");
 
-.el-menu-item-group__title {
-	background-image: url("../pics/6.jpg");
-
-}
+        }
 
 
 .el-header {
