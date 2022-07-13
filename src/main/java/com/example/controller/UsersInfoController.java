@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -120,6 +121,54 @@ public class UsersInfoController {
         usersInfo.setUserAltTime(timeMills);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
         return usersInfoService.save(usersInfo);
+    }
+
+    /**
+     * 获取个人信息
+     * @param request re
+     * @return UsersInfo
+     */
+    @GetMapping("/getPersonalInfo")
+    public UsersInfo getPersonalInfo(HttpServletRequest request){
+        Object id = request.getSession().getAttribute("users");
+        return this.usersInfoService.getById(Integer.parseInt(id.toString()));
+    }
+
+    /**
+     * save user info
+     * @param usersInfo info
+     * @return if success
+     */
+    @PostMapping("/saveInfo")
+    public boolean saveUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
+        Object id = request.getSession().getAttribute("users");
+        int userId  = Integer.parseInt(id.toString());
+        try {
+            long timeMillis = System.currentTimeMillis();
+            usersInfo.setUserAltTime(timeMillis);
+            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usersInfoService.save(usersInfo);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param usersInfo info
+     * @return if success
+     */
+    @PutMapping
+    public boolean updateUsersInfo( @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo,HttpServletRequest request) {
+        Object id = request.getSession().getAttribute("users");
+        int userId  = Integer.parseInt(id.toString());
+        //得到UserInfoId
+        usersInfo.setUserAltTime(usersInfoAltTime);
+        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+
+        return usersInfoService.updateById(usersInfo);
     }
 
 }
