@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
@@ -37,6 +38,9 @@ public class OrdersController {
     private OrdersDao ordersDao;
     @Autowired
     private WebApplicationContext webapplicationcontext;
+
+    HttpServletRequest requestAll;
+
 
     /**
      *
@@ -103,8 +107,9 @@ public class OrdersController {
      *
      * @return list
      */
-    @GetMapping//访问方式
-    public List<Orders> getAll() {
+    @GetMapping
+    public List<Orders> getAll(    HttpServletRequest request) {
+        this.requestAll = request;
         System.out.println("used");
         return ordersService.list();
     }
@@ -160,7 +165,8 @@ public class OrdersController {
         orders.setOrderType(type);
         orders.setOrderStatus(type * 10);
         //设置订单发起人ID 默认为11 需要后续实现
-        orders.setOrderInit(11);
+        Object id = requestAll.getSession().getAttribute("users");
+        orders.setOrderInit(Integer.parseInt(id.toString()));
         ordersService.save(orders);
         return orders.getOrderId();
     }
