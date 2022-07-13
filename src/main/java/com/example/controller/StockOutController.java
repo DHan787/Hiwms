@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -54,7 +55,7 @@ public class StockOutController {
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockOut(@RequestBody StockOut stockOut, HttpServletRequest request) {
+    public boolean saveStockOut(@RequestBody StockOut stockOut, HttpServletRequest request)  {
         //type = 2 入库
         stockOut.setOrderId(ordersController.initOrders(2,request));
         Integer id = stockOut.getStockId();
@@ -71,7 +72,6 @@ public class StockOutController {
      */
     @GetMapping("/getByOrderId")
     public List<StockOut> getByOrderId(@RequestParam Integer orderId) {
-
         QueryWrapper<StockOut> wrapper = new QueryWrapper<>();
         wrapper.eq("order_id", orderId);
         return stockOutDao.selectList(wrapper);

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -91,7 +92,7 @@ public class OrdersController {
      * @param type 订单类型
      * @return 生成的订单id
      */
-    public Integer initOrders(int type,HttpServletRequest request) {
+    public Integer initOrders(int type, HttpServletRequest request) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Orders orders = new Orders();

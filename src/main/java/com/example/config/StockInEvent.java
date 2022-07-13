@@ -13,8 +13,6 @@ public class StockInEvent extends ApplicationEvent {
 
     private  String content;
 
-    private Integer Id;
-
     private Integer orderId;
 
     public String getContent() {
@@ -25,9 +23,6 @@ public class StockInEvent extends ApplicationEvent {
         this.content = content;
     }
 
-    public Integer getId(){return  Id;}
-
-    public void setId(Integer Id){this.Id = Id;}
 
     public Integer getOrderId(){
         return orderId;
