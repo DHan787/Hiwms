@@ -126,6 +126,7 @@ public class UsersInfoController {
      */
     @GetMapping("/getPersonalInfo")
     public UsersInfo getPersonalInfo(HttpServletRequest request){
+        System.out.println("Info");
         Object id = request.getSession().getAttribute("users");
         int userId = Integer.parseInt(id.toString());
         Long infoId;

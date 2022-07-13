@@ -26,7 +26,7 @@
 
         <!--头像-->
         <div class="avatar" style="float: right;">
-            <el-button @click="drawer = true" circle >
+            <el-button @click="get()" circle >
                 <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
@@ -56,7 +56,11 @@
 					</div>
 
 
-                    <el-button @click="innerDrawer = true">编辑</el-button>
+
+
+
+					<el-button @click="innerDrawer = true">编辑信息</el-button>
+
                     <el-drawer
                             title="编辑个人信息"
                             :append-to-body="true"
@@ -202,7 +206,11 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					dataForm: {},
+					dataForm: {
+                    	userTele:'',
+						userLocation: '',
+						userRetailer: '',
+					},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
@@ -292,8 +300,9 @@
 				},
 
 				get() {
+					this.drawer=true;
 					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						//console.log(res);
+						console.log(res.data);
 						this.dataForm = res.data;
 					});
 				},
