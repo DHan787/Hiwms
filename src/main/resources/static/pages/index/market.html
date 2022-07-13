@@ -13,8 +13,11 @@
         <el-header style="height: 80px">
 
             <div class="head" style="float: left;">
-                <el-avatar :src="avatarURL">
-                </el-avatar>
+				<el-image :src="src1" class="ava">
+					<div slot="placeholder" class="image-slot">
+						加载中<span class="dot">...</span>
+					</div>
+				</el-image>
             </div>
             <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
 			<!--头像-->
@@ -121,6 +124,10 @@
 										<i class="el-icon-upload2"></i>
 										<span slot="title" @click="openUrl('../stock-out-apply.html')">出库申请</span>
 									</el-menu-item>
+									<el-menu-item index="3-3">
+										<i class="el-icon-document"></i>
+										<span slot="title" @click="openUrl('../apply-info.html')">申请详情</span>
+									</el-menu-item>
 								</el-menu-item-group>
 							</el-submenu>
 
@@ -170,7 +177,7 @@
 					isCollapse: true,
 					iframeUrl: './marketindex.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo3.png'
+					src1:'../../assets/pics/bg2.jpg',
 				}
 			},
 			created() {

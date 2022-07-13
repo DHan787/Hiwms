@@ -12,9 +12,18 @@
 			<el-container>
 				<el-header style="height: 80px">
 
+					<a href="personal.html">
+						<div class="head">
+							<el-avatar src="../../assets/pics/ava_red.png">
+							</el-avatar>
+						</div>
+					</a>
 					<div class="head" style="float: left;" v-if="!isCollapse">
-						<el-avatar :src="avatarURL">
-						</el-avatar>
+						<el-image :src="src1" class="ava">
+							<div slot="placeholder" class="image-slot">
+								加载中<span class="dot">...</span>
+							</div>
+						</el-image>
 					</div>
 					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;" v-if="!isCollapse">汇安智能仓储平台
 					</div>
@@ -168,7 +177,7 @@
 					isCollapse: true,
 					iframeUrl: './operatorindex.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo_red.png'
+					src1:'../../assets/pics/logo_red.png',
 				}
 			},
 			created() {

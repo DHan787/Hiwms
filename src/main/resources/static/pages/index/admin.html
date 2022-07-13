@@ -16,15 +16,18 @@
         <!--logo-->
 
         <div class="head" style="float: left;">
-            <el-avatar :src="avatarURL">
-            </el-avatar>
+			<el-image :src="src1" class="ava">
+				<div slot="placeholder" class="image-slot">
+					加载中<span class="dot">...</span>
+				</div>
+			</el-image>
         </div>
         <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;color: #14b279">汇安智能仓储平台</div>
 
         <!--头像-->
         <div class="avatar" style="float: right;">
             <el-button @click="drawer = true" circle >
-                <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+                <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
             </el-button>
@@ -35,6 +38,29 @@
                     size="40%"
 			        background ="#f8fff7">
                 <div>
+
+					<!--<div class="personal-info">
+						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
+					</div>-->
+
+					<div class="personal-info">
+						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="lo" style="margin-left: 15%">地址：<div style="display: inline">{{dataForm.userLocation}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
+					</div>
+
+
+
+
+
+					<el-button @click="innerDrawer = true">编辑信息</el-button>
+
                     <el-button @click="innerDrawer = true">编辑</el-button>
                     <el-drawer
                             title="编辑个人信息"
@@ -181,10 +207,12 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
+					dataForm: {},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo_green.png'
+					avatarURL: ' ../../assets/pics/logo_green.png',
+					src1:'../../assets/pics/logo_green.png',
 				}
 			},
 			created() {
@@ -266,6 +294,14 @@
 				handleClose(key, keyPath) {
 					console.log(key, keyPath);
 				},
+
+				get() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						//console.log(res);
+						this.dataForm = res.data;
+					});
+				},
+
 				openUrl(url) {
 
 					this.iframeUrl = url;

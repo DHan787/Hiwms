@@ -30,6 +30,8 @@ public class UsersController {
     private UsersService usersService;
     HttpServletRequest requestAll;
     @Autowired
+    private UsersInfoController usersInfoController;
+    @Autowired
     private UsersDao usersDao;
 
     /**
@@ -161,7 +163,11 @@ public class UsersController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return usersService.save(users);
+        String name = users.getUserName();
+        boolean ifSuccess = usersService.save(users);
+        Integer id = usersDao.selectUserByName(name).getUserId();
+        ifSuccess = ifSuccess && usersInfoController.intiUserInfo(id);
+        return ifSuccess;
     }
 
     /**

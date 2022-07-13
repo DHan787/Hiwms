@@ -18,4 +18,5 @@ public interface UsersService extends IService<Users> {
      * @return json
      */
      boolean updateAvatar(MultipartFile file);
+
 }
