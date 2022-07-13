@@ -240,8 +240,8 @@
 
 				//个人信息填写提醒
 				getPersonalInfo() {
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						if (res.data == null) {
+					axios.get("http://localhost:8080/usersInfo/ifNull").then(res => {
+						if (res.data == true) {
 							this.$notify({
 								title: '个人信息提醒',
 								message: '您还未填写个人信息，请抓紧时间填写哦！',
