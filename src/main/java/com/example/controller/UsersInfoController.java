@@ -141,6 +141,26 @@ public class UsersInfoController {
     }
 
     /**
+     * 判断个人信息是否填写
+     * @param request re
+     * @return true 已经填写 FALSE 没有
+     */
+    @GetMapping("/ifNull")
+    public boolean getInfoIfNull(HttpServletRequest request){
+        Object id = request.getSession().getAttribute("users");
+        int userId = Integer.parseInt(id.toString());
+        Long infoId;
+        List<UsersInfo> usersInfoList = this.getAll();
+        for (UsersInfo value: usersInfoList
+        ) {
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 更新个人信息
      * @param usersInfo info 实体
      * @param request null

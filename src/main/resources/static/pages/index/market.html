@@ -181,6 +181,7 @@
 				}
 			},
 			created() {
+				this.getAll();
 				this.getAll()
 				this.getLowWarnList()
 				this.getPersonalInfo()
@@ -261,7 +262,7 @@
                 this.iframeUrl = url;
             },
             getAll() {
-                axios.get("http://localhost:8080/users").then(res => {
+                axios.get("http://localhost:8080/orders").then(res => {
                     this.datalist = res.data;
                 });
             },
