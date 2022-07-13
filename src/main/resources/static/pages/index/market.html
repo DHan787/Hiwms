@@ -23,7 +23,7 @@
 			<!--头像-->
 			<div class="avatar" style="float: right;">
 				<el-button @click="drawer = true" circle >
-					<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+					<el-avatar src="../../assets/pics/ava_blue.png">
 					</el-avatar>
 
 				</el-button>
@@ -182,7 +182,9 @@
 			},
 			created() {
 				this.getAll();
-					this.getLowWarnList();
+				this.getAll()
+				this.getLowWarnList()
+				this.getPersonalInfo()
 			},
 			methods: {
 
@@ -200,6 +202,21 @@
                 });
             },
 
+				//个人信息填写提醒
+				getPersonalInfo() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						if (res.data == null) {
+							this.$notify({
+								title: '个人信息提醒',
+								message: '您还未填写个人信息，请抓紧时间填写哦！',
+								position: 'bottom-left',
+								type: 'warning'
+							});
+						}
+					});
+				},
+
+
 				//关闭编辑个人信息
 				close(done) {
 					this.$confirm('还有未保存的信息哦确定关闭吗？')
@@ -212,12 +229,13 @@
 				//编辑个人信息
 				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
+							this.getAll();
 							this.innerDrawer = false;
 
 						}else{

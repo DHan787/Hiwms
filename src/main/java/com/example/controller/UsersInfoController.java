@@ -126,13 +126,14 @@ public class UsersInfoController {
      */
     @GetMapping("/getPersonalInfo")
     public UsersInfo getPersonalInfo(HttpServletRequest request){
+        System.out.println("Info");
         Object id = request.getSession().getAttribute("users");
         int userId = Integer.parseInt(id.toString());
         Long infoId;
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList
              ) {
-            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
                 infoId = value.getUsersInfoId();
                 return this.usersInfoService.getById(infoId);
             }
@@ -166,15 +167,16 @@ public class UsersInfoController {
      * @param request null
      * @return if success
      */
-    @PutMapping("/updateInfo")
+    @PostMapping("/updateInfo")
     public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
+        System.out.println(userId);
         //得到UserInfoId
         List<UsersInfo> usersInfoList = this.getAll();
-        for (UsersInfo value: usersInfoList
-        ) {
-            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+
+        for (UsersInfo value: usersInfoList) {
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
                 usersInfo.setUserAltTime(value.getUserAltTime());
                 usersInfo.setUsersInfoId(value.getUsersInfoId());
             }
