@@ -44,7 +44,7 @@ public class StockInController {
      *
      * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<StockIn> getAll() {
         System.out.println(stockInService.list());
         return stockInService.list();
@@ -55,13 +55,12 @@ public class StockInController {
      * @return if success
      */
     @PostMapping("/save")
-    public boolean saveStockIn(@RequestBody StockIn stockIn) {
-        stockIn.setOrderId(ordersController.initOrders(1));
-        boolean ifSuccess = stockInService.save(stockIn);// type = 1 入库
+    public boolean saveStockIn(@RequestBody StockIn stockIn, HttpServletRequest request) {
+        stockIn.setOrderId(ordersController.initOrders(1, request));// type = 1 入库
         Integer id = stockIn.getStockId();
         StockInEvent stockInEvent=new StockInEvent("stockIn:",stockIn,"新的入库申请", id);
         webapplicationcontext.publishEvent(stockInEvent);
-        return ifSuccess;
+        return stockInService.save(stockIn);
     }
 
     /**
@@ -72,6 +71,7 @@ public class StockInController {
      */
     @GetMapping("/getByOrderId")
     public List<StockIn> getByOrderId(@RequestParam Integer orderId) {
+
         QueryWrapper<StockIn> wrapper = new QueryWrapper<>();
         wrapper.eq("order_id", orderId);
         return stockInDao.selectList(wrapper);

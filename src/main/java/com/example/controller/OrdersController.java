@@ -44,10 +44,8 @@ public class OrdersController {
      *
      * @return list
      */
-    @GetMapping//访问方式
-    public List<Orders> getAll() {
-        System.out.println("used");
-        return ordersService.list();
+    @GetMapping
+    public List<Orders> getAll() {return ordersService.list();
     }
 
     /**
@@ -93,7 +91,7 @@ public class OrdersController {
      * @param type 订单类型
      * @return 生成的订单id
      */
-    public Integer initOrders(int type) {
+    public Integer initOrders(int type,HttpServletRequest request) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Orders orders = new Orders();
@@ -101,7 +99,8 @@ public class OrdersController {
         orders.setOrderType(type);
         orders.setOrderStatus(type * 10);
         //设置订单发起人ID 默认为11 需要后续实现
-        orders.setOrderInit(11);
+        Object id = request.getSession().getAttribute("users");
+        orders.setOrderInit(Integer.parseInt(id.toString()));
         ordersService.save(orders);
         return orders.getOrderId();
     }

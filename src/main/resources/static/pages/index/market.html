@@ -12,16 +12,79 @@
     <el-container>
         <el-header style="height: 80px">
 
-            <a href="personal.html">
-                <div class="head">
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                </div>
-            </a>
             <div class="head" style="float: left;">
-                <el-avatar :src="avatarURL" >
-                </el-avatar>
+				<el-image :src="src1" class="ava">
+					<div slot="placeholder" class="image-slot">
+						加载中<span class="dot">...</span>
+					</div>
+				</el-image>
             </div>
             <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台</div>
+			<!--头像-->
+			<div class="avatar" style="float: right;">
+				<el-button @click="drawer = true" circle >
+					<el-avatar src="../../assets/pics/ava_blue.png">
+					</el-avatar>
+
+				</el-button>
+
+				<el-drawer
+						title="个人主页"
+						:visible.sync="drawer"
+						size="50%"
+						background ="#f8fff7">
+					<div>
+						<el-button @click="innerDrawer = true">编辑</el-button>
+						<el-drawer
+								title="编辑个人信息"
+								:append-to-body="true"
+								:before-close="close"
+								:visible.sync="innerDrawer">
+							<div>
+								<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
+									<el-form-item label="" prop="userTele" style="margin-top:10px;">
+										<el-row>
+											<el-col :span='2'>
+												<span class="el-icon-s-custom"></span>
+											</el-col>
+											<el-col :span='20'>
+												<el-input class="inps" placeholder='电话号码' v-model="userInfoForm.userTele">
+												</el-input>
+											</el-col>
+										</el-row>
+									</el-form-item>
+									<el-form-item label="" prop="userLocation" style="margin-top:10px;">
+										<el-row>
+											<el-col :span='2'>
+												<span class="el-icon-s-custom"></span>
+											</el-col>
+											<el-col :span='20'>
+												<el-input class="inps" placeholder='地址' v-model="userInfoForm.userLocation">
+												</el-input>
+											</el-col>
+										</el-row>
+									</el-form-item>
+									<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
+										<el-row>
+											<el-col :span='2'>
+												<span class="el-icon-s-custom"></span>
+											</el-col>
+											<el-col :span='20'>
+												<el-input class="inps" placeholder='单位' v-model="userInfoForm.userRetailer">
+												</el-input>
+											</el-col>
+										</el-row>
+									</el-form-item>
+									<el-form-item style="margin-top:10px">
+										<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
+										</el-button>
+									</el-form-item>
+								</el-form>
+							</div>
+						</el-drawer>
+					</div>
+				</el-drawer>
+			</div>
 
         </el-header>
 
@@ -99,20 +162,29 @@
 			el: '#app',
 			data: function() {
 				return {
-					src: '../pics/head.jpg',
+					// src: '../pics/head.jpg',
+					drawer: false,
+					innerDrawer: false,
 					UserEditVisible: false,
+					userInfoForm: {
+						userTele: '',
+						userLocation: '',
+						userRetailer: '',
+					},
 					editForm: [],
 					datalist: [],
 					FormData: {},
 					isCollapse: true,
 					iframeUrl: './marketindex.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo3.png'
+					src1:'../../assets/pics/bg2.jpg',
 				}
 			},
 			created() {
-				this.getAll(),
-					this.getLowWarnList();
+				this.getAll();
+				this.getAll()
+				this.getLowWarnList()
+				this.getPersonalInfo()
 			},
 			methods: {
 
@@ -129,6 +201,52 @@
                     }
                 });
             },
+
+				//个人信息填写提醒
+				getPersonalInfo() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						if (res.data == null) {
+							this.$notify({
+								title: '个人信息提醒',
+								message: '您还未填写个人信息，请抓紧时间填写哦！',
+								position: 'bottom-left',
+								type: 'warning'
+							});
+						}
+					});
+				},
+
+
+				//关闭编辑个人信息
+				close(done) {
+					this.$confirm('还有未保存的信息哦确定关闭吗？')
+							.then(_ => {
+								done();
+							})
+							.catch(_ => {});
+				},
+
+				//编辑个人信息
+				EditUserInfo() {
+					console.log(0)
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+						if(res.data){
+							this.$message({
+								type: 'success',
+								message: '修改成功!'
+							});
+							this.getAll();
+							this.innerDrawer = false;
+
+						}else{
+							this.$message({
+								type: 'info',
+								message: '修改失败'
+							});
+						}
+						// this.$refs.userInfoForm.resetFields();
+					});
+				},
 
 
             adjustIframe() {
@@ -148,7 +266,7 @@
                 this.iframeUrl = url;
             },
             getAll() {
-                axios.get("http://localhost:8080/users").then(res => {
+                axios.get("http://localhost:8080/orders").then(res => {
                     this.datalist = res.data;
                 });
             },

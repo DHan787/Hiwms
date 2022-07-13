@@ -26,7 +26,7 @@
 
         <!--头像-->
         <div class="avatar" style="float: right;">
-            <el-button @click="drawer = true" circle >
+            <el-button @click="get()" circle >
                 <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
@@ -35,9 +35,32 @@
             <el-drawer
                     title="个人主页"
                     :visible.sync="drawer"
-                    size="50%">
+                    size="40%"
+			        background ="#f8fff7">
                 <div>
-                    <el-button @click="innerDrawer = true">编辑</el-button>
+
+					<!--<div class="personal-info">
+						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
+					</div>-->
+
+					<div class="personal-info">
+						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="lo" style="margin-left: 15%">地址：<div style="display: inline">{{dataForm.userLocation}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
+					</div>
+
+
+
+
+
+					<el-button @click="innerDrawer = true">编辑信息</el-button>
+
                     <el-drawer
                             title="编辑个人信息"
                             :append-to-body="true"
@@ -79,7 +102,7 @@
 									</el-row>
 								</el-form-item>
 								<el-form-item style="margin-top:10px">
-									<el-button type="primary" round class="submitBtn" v-on:click="userInfoForm">保存
+									<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
 									</el-button>
 								</el-form-item>
 							</el-form>
@@ -183,15 +206,21 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
+					dataForm: {
+                    	userTele:'',
+						userLocation: '',
+						userRetailer: '',
+					},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
 					avatarURL: ' ../../assets/pics/logo_green.png',
-					src1:'../../assets/pics/logo_green.png',
+					src1:'../../assets/pics/logo_green.png'
 				}
 			},
 			created() {
                 this.getLowWarnList()
+				this.getPersonalInfo()
 			},
 			methods: {
 				//低库存提醒
@@ -208,9 +237,23 @@
 					});
 				},
 
+				//个人信息填写提醒
+				getPersonalInfo() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						if (res.data == null) {
+							this.$notify({
+								title: '个人信息提醒',
+								message: '您还未填写个人信息，请抓紧时间填写哦！',
+								position: 'bottom-left',
+								type: 'warning'
+							});
+						}
+					});
+				},
+
 				//关闭编辑个人信息
 				close(done) {
-					this.$confirm('还有未保存的工作哦确定关闭吗？')
+					this.$confirm('还有未保存的信息哦确定关闭吗？')
 							.then(_ => {
 								done();
 							})
@@ -218,14 +261,15 @@
 				},
 
 				//编辑个人信息
-				userInfoForm() {
+				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersDetail/getDetail",this.userInfoForm).then(res => {
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
+							this.getAll();
 							this.innerDrawer = false;
 
 						}else{
@@ -254,6 +298,15 @@
 				handleClose(key, keyPath) {
 					console.log(key, keyPath);
 				},
+
+				get() {
+					this.drawer=true;
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						console.log(res.data);
+						this.dataForm = res.data;
+					});
+				},
+
 				openUrl(url) {
 
 					this.iframeUrl = url;

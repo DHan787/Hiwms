@@ -131,6 +131,12 @@
 	vertical-align: middle;
 	position: absolute;
 }
+.pics1 {
+	width: 600px;
+	height: 400px;
+	vertical-align: middle;
+	position: absolute;
+}
 
 
 .data {
@@ -140,6 +146,7 @@
 	border-top: #f5f5ff;
 	border-bottom: #f5f5ff;
 	border-right: #f5f5ff;
+	margin-top: 200px;
 
 }
 

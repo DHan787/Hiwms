@@ -13,7 +13,7 @@
 	background-color: #0a450a;
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/bg1.jpg");
+	background-image: url("../pics/2.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -75,7 +75,7 @@
 	right: 0;
 	bottom: 0;
 	margin: auto;
-	padding: 50px 40px 40px 40px;
+	padding: 30px 40px 70px 40px;
 	box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
 	opacity: 1;
 	background: linear-gradient(
