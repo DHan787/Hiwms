@@ -89,27 +89,17 @@
             return {
                 loginForm: {},
                 loginRules: {
-                    userName: [{
-                        required: true,
-                        message: '请输入账号',
-                        trigger: 'blur'
-                    },
-                        {
-                            min: 3,
-                            max: 15,
-                            message: '请输入3-15位账号'
-                        }
+                    userName: [
+                        {required: true, message: '请输入账号', trigger: 'blur'},
+                        {min: 3, max: 15, message: '请输入3-15位账号'}
                     ],
-                    userPassword: [{
-                        required: true,
-                        message: '请输入密码',
-                        trigger: 'blur'
-                    }],
-                    code: [{
-                        required: true,
-                        message: '请输入验证码',
-                        trigger: 'blur'
-                    }]
+                    userPassword: [
+                        {required: true, message: '请输入密码', trigger: 'blur'},
+                        {pattern: /^(\w){6,12}$/, message: "只能输入6-12个字母、数字、下划线"},
+                    ],
+                    code: [
+                        {required: true, message: '请输入验证码', trigger: 'blur'}
+                    ]
                 }
             };
         },

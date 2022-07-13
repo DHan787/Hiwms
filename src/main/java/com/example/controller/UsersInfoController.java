@@ -111,12 +111,13 @@ public class UsersInfoController {
 
     /**
      * @param userId    id
-     * @param usersInfo info
+     * @param
      * @return if success
      */
     @PostMapping("/init")
-    public boolean intiUserInfo(@RequestParam Integer userId, @RequestBody UsersInfo usersInfo) {
+    public boolean intiUserInfo(@RequestParam Integer userId) {
         long timeMills = System.currentTimeMillis();
+        UsersInfo usersInfo = new UsersInfo();
         usersInfo.setUserAltTime(timeMills);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
         return usersInfoService.save(usersInfo);
