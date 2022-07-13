@@ -38,65 +38,6 @@ public class OrdersController {
     @Autowired
     private WebApplicationContext webapplicationcontext;
 
-    /**
-     *
-     * 事件监听相关操作
-     */
-    @Autowired
-    public MsgsDao msgsDao;
-
-    public boolean saveInMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的入库申请");
-        msgs.setType(1);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveOutMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的出库申请");
-        msgs.setType(1);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveOrdersMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的待处理操作");
-        msgs.setType(2);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveApplyMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("申请已完成");
-        msgs.setType(3);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    @PutMapping("/putmsg")
-    public boolean updatamsg(@RequestParam("msgid") Integer msgid) {
-        return msgsDao.updatamsg(msgid) > 0;
-    }
-
-    /**
-     * type: 1是新的出入库申请，2是新的待出入库订单，3是已完成的申请，0是已读
-     *
-     * @return list
-     */
-    @GetMapping("/msg")
-    public List<Msgs> getMsgs() {
-        return msgsDao.selectType(1);
-    }
-
-    @GetMapping("/msg/orders")
-    public List<Msgs> getOrdersMsgs() {
-        return msgsDao.selectType(2);
-    }
-
-    @GetMapping("/msg/apply")
-    public List<Msgs> getApplyMsgs() {
-        return msgsDao.selectType(3);
-    }
 
     /**
      * 获取订单表
@@ -178,7 +119,8 @@ public class OrdersController {
         System.out.println(dateFormat.format(date));
         orders.setOrderEndTime(dateFormat.format(date));
         orders.setOrderStatus(orders.getOrderStatus() + 1);
-        ApplyOverEvent applyOverEvent = new ApplyOverEvent("orders:", orders, "申请已完成");
+        Integer id = orders.getOrderId();
+        ApplyOverEvent applyOverEvent = new ApplyOverEvent("orders:", orders, "申请已完成",id);
         webapplicationcontext.publishEvent(applyOverEvent);
         return ordersService.updateById(orders);
     }
@@ -193,7 +135,8 @@ public class OrdersController {
     public boolean checkById(@RequestBody Orders orders) {
         orders.setOrderStatus(orders.getOrderStatus() + 1);
         System.out.println(orders);
-        OrdersBeginEvent ordersBeginEvent = new OrdersBeginEvent("orders:", orders, "新的待操作订单");
+        Integer id = orders.getOrderId();
+        OrdersBeginEvent ordersBeginEvent = new OrdersBeginEvent("orders:", orders, "新的待操作订单",id);
         webapplicationcontext.publishEvent(ordersBeginEvent);
         return ordersService.updateById(orders);
     }
