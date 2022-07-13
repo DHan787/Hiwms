@@ -65,7 +65,8 @@
                             title="编辑个人信息"
                             :append-to-body="true"
                             :before-close="close"
-                            :visible.sync="innerDrawer">
+                            :visible.sync="innerDrawer"
+							ref="editDrawer">
 						<div>
 							<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
 								<el-form-item label="" prop="userTele" style="margin-top:10px;">
@@ -239,8 +240,8 @@
 
 				//个人信息填写提醒
 				getPersonalInfo() {
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						if (res.data == null) {
+					axios.get("http://localhost:8080/usersInfo/ifNull").then(res => {
+						if (res.data == true) {
 							this.$notify({
 								title: '个人信息提醒',
 								message: '您还未填写个人信息，请抓紧时间填写哦！',
@@ -260,17 +261,19 @@
 							.catch(_ => {});
 				},
 
+
 				//编辑个人信息
 				EditUserInfo() {
-					console.log(0)
+
 					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
-							this.getAll();
-							this.innerDrawer = false;
+							// this.$refs.editDrawer.closeDrawer();
+							// this.innerDrawer = false;
+
 
 						}else{
 							this.$message({
