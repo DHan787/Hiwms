@@ -13,7 +13,7 @@
 					<!-- 主体 -->
 					<el-main>
 						<el-breadcrumb style="margin-bottom: 12px;">
-							<el-breadcrumb-item><a href="../pages/index.html">首页</a></el-breadcrumb-item>
+							<el-breadcrumb-item><a href="../index/operatorindex.html">首页</a></el-breadcrumb-item>
 							<el-breadcrumb-item><a href="#">业务流</a></el-breadcrumb-item>
 							<el-breadcrumb-item>出库信息</el-breadcrumb-item>
 						</el-breadcrumb>
@@ -133,7 +133,7 @@
 					var goodsNumber = this.gridData[0].goodsNumber;
 					console.log(goodsNumber);
 					console.log("handleStockIn中的index", this.tableIndex); 
-					<!--出库， 更新库存-- >
+
 					axios.put("http://localhost:8080/inventory/stockOut?goodsName=" + goodsName + "&goodsNumber=" +
 						goodsNumber).then(res => {
 						if (res.data) {
@@ -154,7 +154,7 @@
 					});
 
 					
-					<!--出库， 修改订单状态（ 出库中 - 已出库）, 修改结束时间-- >
+
 						axios.post("http://localhost:8080/orders/endOrders", this.tableData[this.tableIndex]).then(
 							res => {
 								if (res.data) {

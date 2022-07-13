@@ -16,15 +16,18 @@
         <!--logo-->
 
         <div class="head" style="float: left;">
-            <el-avatar :src="avatarURL">
-            </el-avatar>
+			<el-image :src="src1" class="ava">
+				<div slot="placeholder" class="image-slot">
+					加载中<span class="dot">...</span>
+				</div>
+			</el-image>
         </div>
         <div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;color: #14b279">汇安智能仓储平台</div>
 
         <!--头像-->
         <div class="avatar" style="float: right;">
             <el-button @click="drawer = true" circle >
-                <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
+                <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
             </el-button>
@@ -208,7 +211,8 @@
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo_green.png'
+					avatarURL: ' ../../assets/pics/logo_green.png',
+					src1:'../../assets/pics/logo_green.png',
 				}
 			},
 			created() {
