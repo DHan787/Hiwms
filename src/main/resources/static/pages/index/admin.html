@@ -30,7 +30,7 @@
             </el-button>
 
             <el-drawer
-                    title="个人中心"
+                    title="个人主页"
                     :visible.sync="drawer"
                     size="50%">
                 <div>
@@ -57,12 +57,53 @@
 
 					<el-button @click="innerDrawer = true">编辑信息</el-button>
 
+                    <el-button @click="innerDrawer = true">编辑</el-button>
                     <el-drawer
-                            title="我是里面的"
+                            title="编辑个人信息"
                             :append-to-body="true"
                             :before-close="close"
                             :visible.sync="innerDrawer">
-                        <p>_(:зゝ∠)_</p>
+						<div>
+							<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
+								<el-form-item label="" prop="userTele" style="margin-top:10px;">
+									<el-row>
+										<el-col :span='2'>
+											<span class="el-icon-s-custom"></span>
+										</el-col>
+										<el-col :span='20'>
+											<el-input class="inps" placeholder='电话号码' v-model="userInfoForm.userTele">
+											</el-input>
+										</el-col>
+									</el-row>
+								</el-form-item>
+								<el-form-item label="" prop="userLocation" style="margin-top:10px;">
+									<el-row>
+										<el-col :span='2'>
+											<span class="el-icon-s-custom"></span>
+										</el-col>
+										<el-col :span='20'>
+											<el-input class="inps" placeholder='地址' v-model="userInfoForm.userLocation">
+											</el-input>
+										</el-col>
+									</el-row>
+								</el-form-item>
+								<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
+									<el-row>
+										<el-col :span='2'>
+											<span class="el-icon-s-custom"></span>
+										</el-col>
+										<el-col :span='20'>
+											<el-input class="inps" placeholder='单位' v-model="userInfoForm.userRetailer">
+											</el-input>
+										</el-col>
+									</el-row>
+								</el-form-item>
+								<el-form-item style="margin-top:10px">
+									<el-button type="primary" round class="submitBtn" v-on:click="userInfoForm">保存
+									</el-button>
+								</el-form-item>
+							</el-form>
+						</div>
                     </el-drawer>
                 </div>
             </el-drawer>
@@ -154,6 +195,11 @@
 					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
                     drawer: false,
                     innerDrawer: false,
+					userInfoForm: {
+						userTele: '',
+						userLocation: '',
+						userRetailer: '',
+					},
                     UserEditVisible: true,
 					editForm: [],
 					datalist: [],
@@ -167,7 +213,7 @@
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
-					avatarURL: ' ../../assets/pics/logo3.png'
+					avatarURL: ' ../../assets/pics/logo_green.png'
 				}
 			},
 			created() {
@@ -188,12 +234,34 @@
 					});
 				},
 
+				//关闭编辑个人信息
 				close(done) {
 					this.$confirm('确认关闭？')
 							.then(_ => {
 								done();
 							})
 							.catch(_ => {});
+				},
+
+				//编辑个人信息
+				userInfoForm() {
+					console.log(0)
+					axios.put("http://localhost:8080/usersDetail/getDetail",this.userInfoForm).then(res => {
+						if(res.data){
+							this.$message({
+								type: 'success',
+								message: '修改成功!'
+							});
+							this.innerDrawer = false;
+
+						}else{
+							this.$message({
+								type: 'info',
+								message: '修改失败'
+							});
+						}
+						// this.$refs.userInfoForm.resetFields();
+					});
 				},
 
 				adjustIframe() {
@@ -227,6 +295,7 @@
 			}
 		})
 	</script>
+
 
 
 </html>

@@ -1,142 +1,172 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../assets/css/home.css">
-    <link rel="stylesheet" href="../../assets/css/element-ui/index.css">
-    <script src="../../assets/js/echarts.js"></script>
-    <title></title>
-</head>
-<body>
-<div id="app">
-    <el-container>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../assets/css/home.css">
+		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
+		<script src="../../assets/js/echarts.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<el-container>
 
-        <el-container>
-            <!-- 主体 -->
-            <el-main >
-                <el-breadcrumb style="margin-bottom: 12px;">
-                    <el-breadcrumb-item>首页</el-breadcrumb-item>
-                </el-breadcrumb>
-                    <div class="card-container">
-                        <div >
-                            <el-card class="box-card13">
-                            <el-image :src="src1" class="ava" >
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-                            </el-image>
-                            <div class="box">
-                                <div class="admin-info">
-                                    <h3 >早安，汇安人，开始您一天的工作吧！</h3>
-                                    <div class="weather">
-                                        <i class="el-icon-heavy-rain"></i>
-                                        <span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
-                                    </div>
-                                </div>
-                            </div>
-                            </el-card>
-                        </div>
-                        <br/>
+				<el-container>
+					<!-- 主体 -->
+					<el-main>
+						<el-breadcrumb style="margin-bottom: 12px;">
+							<el-breadcrumb-item>首页</el-breadcrumb-item>
+						</el-breadcrumb>
+						<div class="card-container">
+							<div>
+								<el-card class="box-card13">
+									<el-image :src="src1" class="ava">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
+									</el-image>
+									<div class="box">
+										<div class="admin-info">
+											<h3>早安，汇安人，开始您一天的工作吧！</h3>
+											<div class="weather">
+												<i class="el-icon-heavy-rain"></i>
+												<span>今日阴转小雨，22℃ - 32℃，出门记得带伞哦。</span>
+											</div>
+										</div>
+									</div>
+								</el-card>
+							</div>
+							<br />
 
-                        <div class="data">
-                            <el-card class="box-card2">
-                            <el-image :src="src6" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-
-
-                            </el-image>
-                            <div class="title1"><h3 >数据统计</h3>
-                            </div>
+							<div class="data">
+								<el-card class="box-card2">
+									<el-image :src="src6" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
 
 
-                            <div class="all">
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">今日入库订单剩余</h4>
-                                        <h2 align="center">1</h2>
-                                    </div>
-                                    <div class="bg2" >
-                                        <h4 style="margin-top: 20px">今日出库订单剩余</h4>
-                                        <h2 align="center">0</h2>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">昨日入库数量</h4>
-                                        <h2 align="center">4</h2>
-                                    </div>
-                                    <div class="bg2">
-                                        <h4 style="margin-top: 20px">昨日出库数量</h4>
-                                        <h2 align="center">1</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            </el-card>
+									</el-image>
+									<div class="title1-3">
+										<h3>数据统计</h3>
+									</div>
 
 
-                        </div>
-                        <div class="top">
-                            <el-card class="box-card3">
-                            <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-
-                            <el-image :src="src7" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
-
-
-                            </el-image>
-                            <div class="title1"><h3>快捷入口</h3>
-                            </div>
-
-
-                            <!--用户-->
-                            <div class="all" >
-                                <div>
-                                    <el-tooltip content="入库界面" placement="bottom"><a href="../operator/stock-in.html" > <el-image :src="src2" class="in" >
-                                    <div slot="placeholder" class="image-slot">
-                                        加载中<span class="dot">...</span>
-                                    </div>
-                                </el-image>
-                                </a></el-tooltip><!--订单-->
-                                </div>
-                                <div>
-                                    <el-tooltip content="出库界面" placement="bottom"><a href="../operator/stock-out.html" > <el-image :src="src3" class="out" >
-                                        <div slot="placeholder" class="image-slot">
-                                            加载中<span class="dot">...</span>
-                                        </div>
-                                    </el-image>
-                                    </a></el-tooltip>
-                                </div>
-
-
-                            </div>
-                            </el-card>
-
-                        </div>
-                        <div class="report">
-                            <el-card class="box-card4">
-                            <el-image :src="src8" class="pics">
-                                <div slot="placeholder" class="image-slot">
-                                    加载中<span class="dot">...</span>
-                                </div>
+									<div class="all">
+										<div>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>今日入库订单剩余</h4>
+													<h2 align="center">1</h2>
+												</div>
+											</div>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>今日出库订单剩余</h4>
+													<h2 align="center">0</h2>
+												</div>
+											</div>
+										</div>
+										<div>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>昨日入库数量</h4>
+													<h2 align="center">4</h2>
+												</div>
+											</div>
+											<div class="bg2 bg2-3">
+												<div class="bg2 bg2-2-left"></div>
+												<div class="text">
+													<h4>昨日出库数量</h4>
+													<h2 align="center">1</h2>
+												</div>
+											</div>
+										</div>
+									</div>
+								</el-card>
 
 
-                            </el-image>
-                            <div class="title1"><h3>系统公告</h3>
-                            </div>
-                            </el-card>
+							</div>
+							<div class="top">
+								<el-card class="box-card3">
+									<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
 
+									<el-image :src="src7" class="pics">
+										<div slot="placeholder" class="image-slot">
+											加载中<span class="dot">...</span>
+										</div>
+
+
+									</el-image>
+									<div class="title1-3">
+										<h3>快捷入口</h3>
+									</div>
+
+
+									<!--用户-->
+									<div class="all">
+										<div>
+											<el-tooltip content="入库界面" placement="bottom"><a
+													href="../operator/stock-in.html">
+													<el-image :src="src2" class="in">
+														<div slot="placeholder" class="image-slot">
+															加载中<span class="dot">...</span>
+														</div>
+													</el-image>
+												</a></el-tooltip>
+											<!--订单-->
+										</div>
+										<div>
+											<el-tooltip content="出库界面" placement="bottom"><a
+													href="../operator/stock-out.html">
+													<el-image :src="src3" class="out">
+														<div slot="placeholder" class="image-slot">
+															加载中<span class="dot">...</span>
+														</div>
+													</el-image>
+												</a></el-tooltip>
+										</div>
+
+
+									</div>
+								</el-card>
+
+							</div>
+							<div class="report">
+								<el-card class="box-card4">
+									<div>
+										<el-image :src="src8" class="pics">
+											<div slot="placeholder" class="image-slot">
+												加载中<span class="dot">...</span>
+											</div>
+										</el-image>
+										<el-badge :value="msgs.length" class="item">
+											<h3 class="title1-3" style="font-size: 25px;">系统通告</h3>
+										</el-badge>
+									</div>
+									<div>
+										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+											<el-card style="margin: 15px;">
+												<p class="title1-3-content">新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+												<el-button type="warning" plain @click="msgtu(ms.msgsId)" size="small"
+													style="float: right;margin-bottom: 10px;">
+													已读</el-button>
+											</el-card>
+										</div>
+									</div>
+								</el-card>
+
+							</div>
 						</div>
-					</div>
-					<div class="down">
-					</div>
-				</el-main>
-			</el-container>
-            </el-container>
-		</div>
+						<div class="down">
+						</div>
+					</el-main>
+				</el-container>
+						</div>
+
 	</body>
 	<script src="../../assets/js/vue.js"></script>
 	<script src="../../assets/css/element-ui/index.js"></script>

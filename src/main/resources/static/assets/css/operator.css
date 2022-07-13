@@ -54,11 +54,10 @@
 .logo {
     width: 200px;
     line-height: 60px;
-    color: #fff;
     font-weight: bolder;
     padding-left: 50px;
     box-sizing: border-box;
-    color: #409EFF;
+    color: #ff7f00;
 }
 
 .card-container {
@@ -118,10 +117,6 @@
     /* background-position:left 100px; */
 }
 
-
-
-
-
 .admin-info h3 {
     margin-left: 24px;
     padding-top: 12px;
@@ -157,22 +152,6 @@
     width: 200px;
     min-height: 400px;
 }
-/* .el-radio-button__inner{
+.el-radio-button__inner{
     size: 100px;
-} */
-.el-radio-button__inner {
-	border: none !important;
-	background: transparent !important;
-}
-
-.el-icon-d-arrow-left {
-	font-size: 20px;
-}
-
-.el-icon-d-arrow-right {
-	font-size: 20px;
-}
-
-.el-radio-group {
-    width: 200px;
 }
