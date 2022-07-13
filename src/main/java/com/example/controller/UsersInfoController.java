@@ -131,7 +131,18 @@ public class UsersInfoController {
     @GetMapping("/getPersonalInfo")
     public UsersInfo getPersonalInfo(HttpServletRequest request){
         Object id = request.getSession().getAttribute("users");
-        return this.usersInfoService.getById(Integer.parseInt(id.toString()));
+        UsersInfo usersInfo;
+        int userId = Integer.parseInt(id.toString());
+        Long infoId = null;
+        List<UsersInfo> usersInfoList = this.getAll();
+        for (UsersInfo value: usersInfoList
+             ) {
+            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+                infoId = value.getUsersInfoId();
+                return this.usersInfoService.getById(infoId);
+            }
+        }
+        return null;
     }
 
     /**
@@ -161,7 +172,7 @@ public class UsersInfoController {
      * @param request null
      * @return if success
      */
-    @PutMapping
+    @PutMapping("/updateInfo")
     public boolean updateUsersInfo( @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
