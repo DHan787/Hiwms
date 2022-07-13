@@ -227,15 +227,12 @@
 
 				//编辑个人信息
 				EditUserInfo() {
-					console.log(0)
 					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
-							this.getAll();
-							this.innerDrawer = false;
 
 						}else{
 							this.$message({
@@ -243,7 +240,6 @@
 								message: '修改失败'
 							});
 						}
-						// this.$refs.userInfoForm.resetFields();
 					});
 				},
 
