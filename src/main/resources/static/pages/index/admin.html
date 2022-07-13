@@ -35,20 +35,20 @@
                     size="50%">
                 <div>
 
+					<!--<div class="personal-info">
+						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
+					</div>-->
+
 					<div class="personal-info">
-						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.userLocation}}</div></div>
+						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
 					</div>
 
 					<div class="personal-info">
-						<div class="tele" style="margin-left: 15%">手机号：<div>{{dataForm.userLocation}}</div></div>
+						<div class="lo" style="margin-left: 15%">地址：<div style="display: inline">{{dataForm.userLocation}}</div></div>
 					</div>
 
 					<div class="personal-info">
-						<div class="lo" style="margin-left: 15%">地址：<div>{{dataForm.userLocation}}</div></div>
-					</div>
-
-					<div class="personal-info">
-						<div class="retailer" style="margin-left: 15%">店铺：<div>{{dataForm.userRetailer}}</div></div>
+						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
 					</div>
 
 
@@ -204,12 +204,7 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
-					dataForm: {
-						// userTele,
-						// userLocation,
-						// userRetailer,
-						// userRole,
-					},
+					dataForm: {},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
@@ -282,7 +277,8 @@
 				},
 
 				get() {
-					axios.get("http://localhost:8080/usersDetail").then(res => {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						//console.log(res);
 						this.dataForm = res.data;
 					});
 				},
