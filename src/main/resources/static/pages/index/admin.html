@@ -34,18 +34,26 @@
                     :visible.sync="drawer"
                     size="50%">
                 <div>
-					<div class="id" style="margin-left: 15%">
-						<span>用户名</span>
+
+					<div class="personal-info">
+						<div class="role" style="margin-left: 10%">职位：<div>{{dataForm.userRole}}</div></div>
 					</div>
 
-					<div class="tele" style="margin-left: 15%">
-						<span>电话</span>
+					<div class="personal-info">
+						<div class="tele" style="margin-left: 10%">手机号：<div>{{dataForm.userTele}}</div></div>
 					</div>
 
-					<div class="location" style="margin-left: 15%">
-						<span></span>
-
+					<div class="personal-info">
+						<div class="lo" style="margin-left: 10%">地址：<div>{{dataForm.userLocation}}</div></div>
 					</div>
+
+					<div class="personal-info">
+						<div class="retailer" style="margin-left: 10%">店铺：<div>{{dataForm.userRetailer}}</div></div>
+					</div>
+
+
+
+
 
 					<el-button @click="innerDrawer = true">编辑信息</el-button>
 
@@ -129,9 +137,7 @@
 						<iframe id="mainIframe" class="mainFrame" :src="iframeUrl" width="100%" height="100%"
 							frameborder="0" scrolling="no"></iframe>
 					</el-main>
-					<el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
-						<span>我来啦!</span>
-					</el-drawer>
+
 
 				</el-container>
 			</el-container>
@@ -152,6 +158,12 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
+					dataForm: {
+						// userTele,
+						// userLocation,
+						// userRetailer,
+						// userRole,
+					},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
@@ -177,7 +189,7 @@
 				},
 
 				close(done) {
-					this.$confirm('还有未保存的工作哦确定关闭吗？')
+					this.$confirm('确认关闭？')
 							.then(_ => {
 								done();
 							})
@@ -200,6 +212,13 @@
 				handleClose(key, keyPath) {
 					console.log(key, keyPath);
 				},
+
+				get() {
+					axios.get("http://localhost:8080/usersDetail").then(res => {
+						this.dataForm = res.data;
+					});
+				},
+
 				openUrl(url) {
 
 					this.iframeUrl = url;
