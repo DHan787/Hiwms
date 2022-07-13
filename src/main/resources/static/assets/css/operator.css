@@ -67,10 +67,9 @@
 }
 
 .ava {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    vertical-align:middle;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
 }
 .users {
     width: 150px;
@@ -152,6 +151,25 @@
     width: 200px;
     min-height: 400px;
 }
-.el-radio-button__inner{
-    size: 100px;
+
+.el-radio-group {
+	width: 200px;
+}
+
+.el-radio-button__inner {
+	border:none !important;
+	background: transparent !important;
+}
+
+.el-icon-d-arrow-left{
+	font-size:20px ;
+}
+
+.el-icon-d-arrow-right{
+	font-size:20px ;
+}
+.ava {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
 }
