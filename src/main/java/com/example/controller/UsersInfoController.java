@@ -132,7 +132,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList
              ) {
-            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
                 infoId = value.getUsersInfoId();
                 return this.usersInfoService.getById(infoId);
             }
@@ -150,11 +150,12 @@ public class UsersInfoController {
     public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
+        System.out.println(userId);
         //得到UserInfoId
         List<UsersInfo> usersInfoList = this.getAll();
-        for (UsersInfo value: usersInfoList
-        ) {
-            if(value.getUserAltTime() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+
+        for (UsersInfo value: usersInfoList) {
+            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
                 usersInfo.setUserAltTime(value.getUserAltTime());
                 usersInfo.setUsersInfoId(value.getUsersInfoId());
             }

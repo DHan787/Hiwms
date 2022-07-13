@@ -181,8 +181,9 @@
 				}
 			},
 			created() {
-				this.getAll(),
-					this.getLowWarnList();
+				this.getAll()
+				this.getLowWarnList()
+				this.getPersonalInfo()
 			},
 			methods: {
 
@@ -199,6 +200,21 @@
                     }
                 });
             },
+
+				//个人信息填写提醒
+				getPersonalInfo() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						if (res.data == null) {
+							this.$notify({
+								title: '个人信息提醒',
+								message: '您还未填写个人信息，请抓紧时间填写哦！',
+								position: 'bottom-left',
+								type: 'warning'
+							});
+						}
+					});
+				},
+
 
 				//关闭编辑个人信息
 				close(done) {
