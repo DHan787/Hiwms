@@ -263,12 +263,13 @@
 				//编辑个人信息
 				EditUserInfo() {
 					console.log(0)
-					axios.put("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
+							this.getAll();
 							this.innerDrawer = false;
 
 						}else{
@@ -300,7 +301,6 @@
 
 				get() {
 					this.drawer=true;
-					console.log(1);
 					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
 						console.log(res.data);
 						this.dataForm = res.data;

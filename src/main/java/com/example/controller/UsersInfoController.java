@@ -147,7 +147,7 @@ public class UsersInfoController {
      * @param request null
      * @return if success
      */
-    @PutMapping("/updateInfo")
+    @PostMapping("/updateInfo")
     public boolean updateUsersInfo(@RequestBody UsersInfo usersInfo,HttpServletRequest request) {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
