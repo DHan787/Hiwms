@@ -82,7 +82,6 @@ public class UsersInfoController {
      */
     @PutMapping
     public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo) {
-
         //得到UserInfoId
         usersInfo.setUserAltTime(usersInfoAltTime);
         usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));

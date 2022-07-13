@@ -37,6 +37,29 @@
                     :visible.sync="drawer"
                     size="50%">
                 <div>
+
+					<!--<div class="personal-info">
+						<div class="role" style="margin-left: 15%">职位：<div style="display: inline">{{dataForm.users_Info_role}}</div></div>
+					</div>-->
+
+					<div class="personal-info">
+						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="lo" style="margin-left: 15%">地址：<div style="display: inline">{{dataForm.userLocation}}</div></div>
+					</div>
+
+					<div class="personal-info">
+						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
+					</div>
+
+
+
+
+
+					<el-button @click="innerDrawer = true">编辑信息</el-button>
+
                     <el-button @click="innerDrawer = true">编辑</el-button>
                     <el-drawer
                             title="编辑个人信息"
@@ -159,6 +182,7 @@
 							frameborder="0" scrolling="no"></iframe>
 					</el-main>
 
+
 				</el-container>
 			</el-container>
 		</div>
@@ -183,6 +207,7 @@
 					editForm: [],
 					datalist: [],
 					FormData: {},
+					dataForm: {},
 					isCollapse: true,
 					iframeUrl: './index.html',
 					fit: 'contain',
@@ -210,7 +235,7 @@
 
 				//关闭编辑个人信息
 				close(done) {
-					this.$confirm('还有未保存的工作哦确定关闭吗？')
+					this.$confirm('确认关闭？')
 							.then(_ => {
 								done();
 							})
@@ -254,6 +279,14 @@
 				handleClose(key, keyPath) {
 					console.log(key, keyPath);
 				},
+
+				get() {
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						//console.log(res);
+						this.dataForm = res.data;
+					});
+				},
+
 				openUrl(url) {
 
 					this.iframeUrl = url;
