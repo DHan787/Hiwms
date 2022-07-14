@@ -33,10 +33,24 @@
             </el-button>
 
             <el-drawer
-                    title="个人主页"
                     :visible.sync="drawer"
-                    size="40%"
+                    size="30%"
 			        background ="#f8fff7">
+				<div style="background-color: #748992;
+							float: top;
+							height: 38%;
+							float: top">
+					<el-row class="demo-avatar demo-basic">
+						<el-col :span="12">
+							<div class="demo-basic--circle">
+								<div class="block"><el-avatar :size="80" :src="circleUrl"></el-avatar></div>
+								<div class="block" v-for="size in sizeList" :key="size">
+									<el-avatar :size="size" :src="circleUrl"></el-avatar>
+								</div>
+							</div>
+						</el-col>
+					</el-row>
+				</div>
                 <div>
 
 					<!--<el-col :span="12">
@@ -316,6 +330,7 @@
 			}
 		})
 	</script>
+
 
 
 

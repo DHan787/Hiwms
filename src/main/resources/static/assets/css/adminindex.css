@@ -212,8 +212,10 @@
 	left: 0;
 	overflow: hidden;
 	margin: 0;
+	background: #748992 !important;
 }
 .el-drawer__header {
+	background-color: #748992 !important;
 	color: #009e75;
 	font-size: 52px;
 	font-family: "Microsoft YaHei";
