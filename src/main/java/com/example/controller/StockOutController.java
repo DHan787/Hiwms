@@ -59,7 +59,7 @@ public class StockOutController {
         //type = 2 入库
         stockOut.setOrderId(ordersController.initOrders(2,request));
         boolean ifSuccess = stockOutService.save(stockOut);
-        Integer id = stockOut.getStockId();
+        Integer id = stockOut.getOrderId();
         StockOutEvent stockOutEvent=new StockOutEvent("stockIn:",stockOut,"新的出库申请",id);
         webapplicationcontext.publishEvent(stockOutEvent);
         return ifSuccess;

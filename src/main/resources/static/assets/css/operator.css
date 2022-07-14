@@ -174,3 +174,8 @@
     height: 50px;
     vertical-align: middle;
 }
+.avatar{
+    float: right;
+    margin-top: 10px;
+    display: inline-block;
+}

@@ -13,7 +13,7 @@
 	background-color: #0a450a;
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/2.jpg");
+	/*background-image: url("../pics/2.jpg");*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -27,7 +27,7 @@
 
 .loginBody{
 	width: 280px;
-	height: 480px;
+	height: 380px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -75,7 +75,7 @@
 	right: 0;
 	bottom: 0;
 	margin: auto;
-	padding: 30px 40px 70px 40px;
+	padding: 30px 40px 100px 40px;
 	box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
 	opacity: 1;
 	background: linear-gradient(
@@ -84,6 +84,11 @@
 			rgb(0, 0, 0) 100%
 	);
 }
+
+.el-form-item__content {
+	line-height: 48px !important;
+}
+
 .registerInfo{
 	width: 100vw;
 	padding: 0;
