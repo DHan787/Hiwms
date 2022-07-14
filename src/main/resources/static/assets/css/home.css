@@ -10,7 +10,7 @@
 	display: flex;
 	background-color: #FFFFFF;
 	height: 900px;
-	overflow-scrolling: auto;
+
 
 
 
@@ -94,7 +94,7 @@
 	height: 95px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	margin-left: 10px;
+	margin-left: 25px;
 	margin-top: 10px;
 }
 
@@ -103,7 +103,7 @@
 	height: 95px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	margin-left: 10px;
+	margin-left: 25px;
 	margin-top: 10px;
 }
 
@@ -112,7 +112,7 @@
 	height: 95px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	margin-left: 10px;
+	margin-left: 25px;
 	margin-top: 10px;
 }
 
@@ -121,7 +121,7 @@
 	height: 95px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	margin-left: 10px;
+	margin-left: 25px;
 	margin-top: 15px;
 }
 
@@ -299,6 +299,7 @@
 	margin-right: 15px;
 	margin-bottom: 15px;
 	margin-top: 100px;
+	margin-left: 25px;
 }
 
 .out {
@@ -307,6 +308,7 @@
 	margin-right: 15px;
 	margin-bottom: 100px;
 	margin-top: 50px;
+	margin-left: 25px;
 
 }
 
