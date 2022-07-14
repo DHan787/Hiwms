@@ -18,6 +18,10 @@
     background-image: url("../pics/7.jpg");
 
 }
+.el-drawer.rtl {
+    /*background: linear-gradient(to bottom, #748992 0%,#748992 32%,#f8fff7 33%,#f8fff7 100%);*/
+    background-image: url("../pics/bg5.jpg");
+}
 
 
 .el-header {
