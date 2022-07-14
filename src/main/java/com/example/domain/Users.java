@@ -12,9 +12,21 @@ import lombok.Data;
 public class Users {
     @TableId("userId")
     private Integer userId;
+    /**
+     *用户名称
+     */
     private String userName;
+    /**
+     * 密码 SHA加密
+     */
     private String userPassword;
+    /**
+     *用户角色
+     */
     private Integer userRole;
+    /**
+     * 头像地址
+     */
     private String avatarUrl;
 
     public Integer getUserId() {

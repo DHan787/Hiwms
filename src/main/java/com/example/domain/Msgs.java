@@ -7,9 +7,21 @@ import lombok.Data;
 @Data
 public class Msgs {
     @TableId("msgs_id")
+    /**
+     * 消息id
+     */
     private Integer msgsId;
+    /**
+     *消息内容
+     */
     private String  msgsCont;
+    /**
+     * 消息类型
+     */
     private Integer type;
+    /**
+     * 订单id
+     */
     private Integer orderId;
 
     public Integer getMsgsId() {

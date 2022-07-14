@@ -11,9 +11,21 @@ import lombok.Data;
 @Data
 public class Inventory {
     @TableId("inventory_id")
+    /**
+     *库存id
+     */
     private Integer inventoryId;
+    /**
+     *库存名称
+     */
     private String goodsName;
+    /**
+     *库存数量
+     */
     private Integer goodsNumber;
+    /**
+     *仓库名称
+     */
     private String warehouseName;
 
 

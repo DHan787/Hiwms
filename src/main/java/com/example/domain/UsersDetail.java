@@ -6,14 +6,37 @@ import lombok.Data;
  * @author ginger
  */
 @Data
+/**
+ * DTO类 组合user 和 userinfo
+ */
 public class UsersDetail {
+    /**
+     * 用户id
+     */
     private Integer userId;
+    /**
+     * 用户名
+     */
     private String userName;
+    /**
+     * 用户电话号码
+     */
     private Long userTele;
+    /**
+     * 用户地址
+     */
     private String userLocation;
+    /**
+     * 用户所在零售商、
+     */
     private String userRetailer;
+    /**
+     * 用户角色
+     */
     private String userRole;
-    //    用户信息修改时间
+    /**
+     *用户信息创建时间
+     */
     private Long usersInfoAltTime;
 
     public Integer getUserId() {
