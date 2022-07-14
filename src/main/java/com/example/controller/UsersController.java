@@ -89,11 +89,11 @@ public class UsersController {
                     requestAll.getSession().setAttribute("users", value.getUserId());
                     System.out.println("set:" + request.getSession().getAttribute("users"));
                     if (value.getUserRole() == 1) {
-                        return "index/admin.html";
+                        return "pages/index/admin.html";
                     } else if (value.getUserRole() == 2) {
-                        return "index/operator.html";
+                        return "pages/index/operator.html";
                     } else if (value.getUserRole() == 3) {
-                        return "index/market.html";
+                        return "pages/index/market.html";
                     } else {
                         return "login.html";
                     }
@@ -101,7 +101,7 @@ public class UsersController {
             }
         }
         // TODO: 前端没实现
-        return "register.html";
+        return "pages/register.html";
     }
 
     /**
