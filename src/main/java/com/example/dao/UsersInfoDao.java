@@ -17,8 +17,9 @@ public interface UsersInfoDao extends BaseMapper<UsersInfo> {
      * 初始化用户信息
      * @param infoId id
      * @param time time
+     * @param role 角色
      * @return 数量
      */
-    @Insert("INSERT into users_info (users_Info_id,user_alt_time) values (#{infoId},#{time})")
-    public int init(@Param("infoId") Long infoId, @Param("time") Long time);
+    @Insert("INSERT into users_info (users_Info_id,user_alt_time,user_info_role) values (#{infoId},#{time},#{role})")
+    public int init(@Param("infoId") Long infoId, @Param("time") Long time,@Param("role") String role);
 }

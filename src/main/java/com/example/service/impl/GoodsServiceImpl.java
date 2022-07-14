@@ -6,6 +6,9 @@ import com.example.domain.Goods;
 import com.example.service.GoodsService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author ginger
+ */
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao,Goods> implements GoodsService {
 }

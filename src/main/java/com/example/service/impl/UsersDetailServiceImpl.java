@@ -6,6 +6,9 @@ import com.example.domain.UsersDetail;
 import com.example.service.UsersDetailService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author ginger
+ */
 @Service
 public class UsersDetailServiceImpl extends ServiceImpl<UsersDetailDao,UsersDetail> implements UsersDetailService {
 

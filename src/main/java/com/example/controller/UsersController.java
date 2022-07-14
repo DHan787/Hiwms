@@ -7,7 +7,6 @@ import com.example.service.UsersService;
 import com.example.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -90,19 +89,19 @@ public class UsersController {
                     requestAll.getSession().setAttribute("users", value.getUserId());
                     System.out.println("set:" + request.getSession().getAttribute("users"));
                     if (value.getUserRole() == 1) {
-                        return "index/admin.html";
+                        return "pages/index/admin.html";
                     } else if (value.getUserRole() == 2) {
-                        return "index/operator.html";
+                        return "pages/index/operator.html";
                     } else if (value.getUserRole() == 3) {
-                        return "index/market.html";
+                        return "pages/index/market.html";
                     } else {
                         return "login.html";
                     }
                 }
             }
         }
-        // TODO: 前端没实现
-        return "register.html";
+        // TODO: 前端还可以优化
+        return "pages/register.html";
     }
 
     /**
@@ -144,8 +143,6 @@ public class UsersController {
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
         System.out.println("the id is :" + id);
-
-        //usersInfoService.removeById(id);  //有bug，记得改 前端要传alttime，这里再生成infoId，再删除
         return usersService.removeById(id);
     }
 
@@ -162,10 +159,11 @@ public class UsersController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Integer role = users.getUserRole();
         String name = users.getUserName();
         boolean ifSuccess = usersService.save(users);
         Integer id = usersDao.selectUserByName(name).getUserId();
-        ifSuccess = ifSuccess && usersInfoController.intiUserInfo(id);
+        ifSuccess = ifSuccess && usersInfoController.intiUserInfo(id,role);
         return ifSuccess;
     }
 
@@ -194,6 +192,11 @@ public class UsersController {
         return usersDao.selectList(wrapper);
     }
 
+    /**
+     * 头像上传
+     * @param avatar 头像文件
+     * @return if success
+     */
     @PostMapping(value = "/updateAvatar")
     public boolean updateAvatar(@RequestParam MultipartFile avatar) {
         return usersService.updateAvatar(avatar);

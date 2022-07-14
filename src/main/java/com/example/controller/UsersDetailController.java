@@ -45,17 +45,20 @@ public class UsersDetailController {
     UsersDao usersDao;
     @Autowired
     UsersInfoDao usersInfoDao;
+    private final static Integer ADMIN_ROLE_NUMBER = 1;
+    private final static Integer OPERATOR_ROLE_NUMBER = 2;
+    private final static Integer MARKET_ROLE_NUMBER = 3;
+
 
     /**
      * getAll
      *
-     * @return if sccuess
+     * @return if success
      */
     @GetMapping
     public List<UsersDetail> getAll() {
 
         List<Users> usersList = usersDao.selectList(null);
-
         List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
         return this.setUsersDetail(usersList, usersInfoList);
     }
@@ -73,7 +76,7 @@ public class UsersDetailController {
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
-                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
+                if (idGenerator.userInfoIdGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
                     UsersDetail usersDetail = new UsersDetail();
                     System.out.println(value.getUserName());
                     usersDetail.setUserId(value.getUserId());
@@ -82,10 +85,14 @@ public class UsersDetailController {
                     usersDetail.setUserTele(info.getUserTele());
                     usersDetail.setUserRetailer(info.getUserRetailer());
                     usersDetail.setUsersInfoAltTime(info.getUserAltTime());
-                    if (value.getUserRole() == 1) {
+                    if (value.getUserRole().equals(ADMIN_ROLE_NUMBER)) {
                         usersDetail.setUserRole("管理员");
-                    } else {
-                        usersDetail.setUserRole("用户");
+                    } else if(value.getUserRole().equals(OPERATOR_ROLE_NUMBER)){
+                        usersDetail.setUserRole("操作员");
+                    }else if(value.getUserRole().equals(MARKET_ROLE_NUMBER)){
+                        usersDetail.setUserRole("货物员");
+                    }else{
+                        usersDetail.setUserRole("临时用户");
                     }
                     usersDetailsList.add(usersDetail);
                 }

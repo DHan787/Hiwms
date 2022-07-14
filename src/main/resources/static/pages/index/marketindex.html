@@ -41,11 +41,6 @@
 							<br />
 
 							<div class="data" style="width: 35%;padding-left:5%">
-								<!-- <el-image :src="src6" class="pics1">
-									<div slot="placeholder" class="image-slot">
-										加载中<span class="dot">...</span>
-									</div>
-								</el-image> -->
 								<div id="container"></div>
 								<div id="status"></div>
 								<div id="loop"></div>
@@ -78,8 +73,7 @@
 													</el-image>
 												</a></el-tooltip>
 											<!--订单-->
-										</div>
-										<div>
+
 											<el-tooltip content="出库申请" placement="bottom"><a
 													href="../stock-out-apply.html">
 													<el-image :src="src3" class="out">
@@ -95,7 +89,7 @@
 								</el-card>
 
 							</div>
-							<div class="report">
+							<div class="report" >
 								<el-card class="box-card4">
 									<div>
 										<el-image :src="src8" class="pics">
@@ -108,7 +102,7 @@
 										</el-badge>
 									</div>
 									<div>
-										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+										<div id="msgs" v-if="msgsfig" v-for="ms in msgs" style="width: 140%;">
 											<el-card style="margin: 15px;">
 												<p class="title1-2-content">新通知: 你的申请{{ms.orderId}}已完成</p>
 												<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small"
@@ -119,13 +113,13 @@
 									</div>
 								</el-card>
 							</div>
-							<div class="right">
-								<el-image :src="src10" class="pics2">
-									<div slot="placeholder" class="image-slot">
-										加载中<span class="dot">...</span>
-									</div>
-								</el-image>
-							</div>
+<!--							<div class="right">-->
+<!--								<el-image :src="src10" class="pics2">-->
+<!--									<div slot="placeholder" class="image-slot">-->
+<!--										加载中<span class="dot">...</span>-->
+<!--									</div>-->
+<!--								</el-image>-->
+<!--							</div>-->
 						</div>
 						<div class="down">
 						</div>
