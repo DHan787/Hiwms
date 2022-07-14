@@ -10,10 +10,10 @@
 	height: 100vh;
 	font-size: 16px;
 	background-position: left top;
-	background-color: #0a450a;
+	/* background-color: #0a450a; */
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/2.jpg");
+	/*background-image: url("../../assets/pics/Dashboard Detailed Green.lottie.json");*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -57,10 +57,10 @@
 	height: 100vh;
 	font-size: 16px;
 	background-position: left top;
-	background-color: #0a450a;
+	/*background-color: #0a450a;*/
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/bg1.jpg");
+	/* background-image: url("../pics/16.jpg"); */
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -68,7 +68,7 @@
 
 .registerBody{
 	width: 280px;
-	height: 300px;
+	height: 350px;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -94,7 +94,7 @@
 	background-color: #0a450a;
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/bg1.jpg");
+	/*background-image: url("../pics/bg1.jpg");*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }

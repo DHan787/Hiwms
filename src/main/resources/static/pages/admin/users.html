@@ -72,7 +72,7 @@
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+                    <el-table ref="filterTable" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                               style="width: 100%; ">
                         <el-table-column prop="userId" label="用户ID" width="180">
                         </el-table-column>
@@ -84,7 +84,9 @@
                         </el-table-column>
                         <el-table-column prop="userRetailer" label="用户商家名">
                         </el-table-column>
-                        <el-table-column prop="userRole" label="用户权限">
+                        <el-table-column prop="userRole" label="用户权限" :formatter="formatRole" column-key="userRole"
+                                         :filters="[{text: '管理员', value: 1},{text: '货物员', value: 2},{text: '操作员', value: 3}]"
+                                         :filter-method="filterHandler">
                         </el-table-column>
 
                         <el-table-column label="操作" width="250" style="display: flex;">
@@ -274,6 +276,15 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
                 this.currentPage = val;
+            },
+
+            //筛选订单类型
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] === value;
+            },
+            clearFilter() {
+                this.$refs.filterTable.clearFilter();
             }
         }
     })

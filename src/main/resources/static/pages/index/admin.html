@@ -59,7 +59,7 @@
                             :before-close="close"
                             :visible.sync="innerDrawer">
 						<div>
-							<el-form :model="userInfoForm" ref="userInfoForm">
+							<el-form :model="userInfoForm" :rules="userInfoRules"ref="userInfoForm">
 								<el-form-item label="电话号码" :label-width="formLabelWidth">
 									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
 								</el-form-item>
@@ -159,19 +159,19 @@
 			data: function() {
 				return {
 					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-                    drawer: false,
-                    innerDrawer: false,
+					drawer: false,
+					innerDrawer: false,
 					userInfoForm: {
 						userTele: '',
 						userLocation: '',
 						userRetailer: '',
 					},
-                    UserEditVisible: true,
+					UserEditVisible: true,
 					editForm: [],
 					datalist: [],
 					FormData: {},
 					dataForm: {
-                    	userTele:'',
+						userTele: '',
 						userLocation: '',
 						userRetailer: '',
 					},
@@ -179,10 +179,29 @@
 					iframeUrl: './index.html',
 					fit: 'contain',
 					avatarURL: ' ../../assets/pics/logo_green.png',
-					src1:'../../assets/pics/logo_green.png',
+					src1: '../../assets/pics/logo_green.png',
 					formLabelWidth: '80px',
 				}
 			},
+			// data() {
+			// 	return {
+			// 		userInfoForm:{},
+			// 		userInfoRules:{
+			// 			userTele: [
+			// 				{required: true, message: '请输入电话号码', trigger: 'blur'},
+			// 				{pattern:/^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/, message: '请输入手机号码或固定电话'}
+			// 			],
+			// 			userLocation: [
+			// 				{required: true, message: '请输入地址', trigger: 'blur'},
+			// 				{pattern: /[^\w\u4E00-\u9FA5]*$/, message: "只能输入中文、数字、英文"},
+			// 			],
+			// 			userRetailer: [
+			// 				{required: true, message: '请输入单位名称', trigger: 'blur'},
+			// 				{pattern: /[^\w\u4E00-\u9FA5]*$/, message: "只能输入中文、数字、英文"},
+			// 			]
+			// 		},
+			// 	}
+			// },
 			created() {
                 this.getLowWarnList();
 				this.getPersonalInfo(); //用户个人信息提醒

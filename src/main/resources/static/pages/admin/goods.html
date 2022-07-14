@@ -86,13 +86,18 @@
 
 
 						<el-card>
-							<el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+							<el-table  ref="filterTable" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
 								style="width: 100%; ">
 								<el-table-column prop="goodsId" label="货物编号">
 								</el-table-column>
 								<el-table-column prop="goodsName" label="货物名称">
 								</el-table-column>
-								<el-table-column prop="goodsType" label="货物类别" :formatter="formatType">
+								<el-table-column prop="goodsType" label="货物类别" :formatter="formatType" column-key="goodsType"
+												 :filters="[{text: '母婴产品', value: 1}, {text: '零食速食', value: 2}, {text: '个人护理', value: 3},
+												 {text: '粮油调味', value: 4},{text: '纸品清洁', value: 5},{text: '乳饮酒水', value: 6},
+												 {text: '电器数码', value: 7},{text: '日用百货', value: 8},{text: '美容护肤', value: 9},
+												 {text: '水果蔬菜', value: 10}]"
+												 :filter-method="filterHandler">
 								</el-table-column>
 								<!-- <el-table-column prop="goodsSize" label="货物尺寸">
 								</el-table-column> -->
@@ -312,8 +317,17 @@
 							return "未选择"
 							break
 					}
+				},
+
+				//筛选订单类型
+				filterHandler(value, row, column) {
+					const property = column['property'];
+					return row[property] === value;
+				},
+				clearFilter() {
+					this.$refs.filterTable.clearFilter();
 				}
-			},
+			}
 
 
 		})
