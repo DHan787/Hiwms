@@ -15,8 +15,9 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/users/login"
-                        , "/users/register",
-                        "/pages/login.html"
+                        , "/users/register"
+                        ,"/"
+                        ,"/pages/login.html"
                         , "/pages/register.html"
                         , "/assets/**");
     }
