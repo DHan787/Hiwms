@@ -113,7 +113,7 @@ public class UsersController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "login.html";
+        return "/";
     }
 
     /**

@@ -14,15 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 public class UserInterceptor implements HandlerInterceptor {
     @Override
     /**
-      拦截器
-     **/
+     * 拦截器
+     */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        Object users = request.getSession().getAttribute("users");
-//        if (users != null) {
-//            return true;
-//        }
-//        response.sendRedirect("/pages/login.html");
-//        return false;
-        return true;
+        Object users = request.getSession().getAttribute("users");
+        if (users != null) {
+            return true;
+        }
+        response.sendRedirect("/");
+        return false;
     }
 }
