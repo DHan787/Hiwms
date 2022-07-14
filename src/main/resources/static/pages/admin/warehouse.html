@@ -43,6 +43,7 @@
                         </el-button>
                         <el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()" icon="el-icon-download">导出excel</el-button>
                     </el-row>
+                </div>
 
                     <el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
                         <el-form :model="form" ref="form">
@@ -73,7 +74,7 @@
                         </div>
                     </el-dialog>
 
-                </div>
+
 
                 <el-card>
                     <el-table ref="filterTable" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"

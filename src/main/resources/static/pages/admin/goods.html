@@ -50,38 +50,38 @@
 							</el-row>
 
 
-						<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
-							<el-form :model="form" ref="form">
-								<el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodsName">
-									<el-input v-model="form.goodsName" autocomplete="off"></el-input>
-								</el-form-item>
-								<el-form-item label="货物类型" :label-width="formLabelWidth" prop="goodsType">
-									<el-select v-model="form.goodsType" placeholder="请选择货物类型">
-										<el-option label="母婴用品" value="1"></el-option>
-										<el-option label="零食速食" value="2"></el-option>
-										<el-option label="个人护理" value="3"></el-option>
-										<el-option label="粮食调味" value="4"></el-option>
-										<el-option label="纸品清洁" value="5"></el-option>
-										<el-option label="乳饮酒水" value="6"></el-option>
-										<el-option label="电器数码" value="7"></el-option>
-										<el-option label="日用百货" value="8"></el-option>
-										<el-option label="美容护肤" value="9"></el-option>
-										<el-option label="水果蔬菜" value="10"></el-option>
-									</el-select>
-								</el-form-item>
-								<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodsSize">
-									<el-input v-model="form.goodsSize" autocomplete="off"></el-input>
-								</el-form-item>
-								<el-form-item label="价格" :label-width="formLabelWidth" prop="goodsValue">
-									<el-input v-model="form.goodsValue" autocomplete="off"></el-input>
-								</el-form-item>
-							</el-form>
-							<div slot="footer" class="dialog-footer">
-								<el-button @click="dialogFormVisible = false">取 消</el-button>
-								<el-button v-if="isAdd" type="primary" @click="addGoods">确 定</el-button>
-								<el-button v-else type="primary" @click="updateGoodsById">更 新</el-button>
-							</div>
-						</el-dialog>
+							<el-dialog :title="dialogFormTitle" :visible.sync="dialogFormVisible">
+								<el-form :model="form" ref="form">
+									<el-form-item label="货物名称" :label-width="formLabelWidth" prop="goodsName">
+										<el-input v-model="form.goodsName" autocomplete="off"></el-input>
+									</el-form-item>
+									<el-form-item label="货物类型" :label-width="formLabelWidth" prop="goodsType">
+										<el-select v-model="form.goodsType" placeholder="请选择货物类型">
+											<el-option label="母婴用品" value="1"></el-option>
+											<el-option label="零食速食" value="2"></el-option>
+											<el-option label="个人护理" value="3"></el-option>
+											<el-option label="粮食调味" value="4"></el-option>
+											<el-option label="纸品清洁" value="5"></el-option>
+											<el-option label="乳饮酒水" value="6"></el-option>
+											<el-option label="电器数码" value="7"></el-option>
+											<el-option label="日用百货" value="8"></el-option>
+											<el-option label="美容护肤" value="9"></el-option>
+											<el-option label="水果蔬菜" value="10"></el-option>
+										</el-select>
+									</el-form-item>
+									<el-form-item label="尺寸" :label-width="formLabelWidth" prop="goodsSize">
+										<el-input v-model="form.goodsSize" autocomplete="off"></el-input>
+									</el-form-item>
+									<el-form-item label="价格" :label-width="formLabelWidth" prop="goodsValue">
+										<el-input v-model="form.goodsValue" autocomplete="off"></el-input>
+									</el-form-item>
+								</el-form>
+								<div slot="footer" class="dialog-footer">
+									<el-button @click="dialogFormVisible = false">取 消</el-button>
+									<el-button v-if="isAdd" type="primary" @click="addGoods">确 定</el-button>
+									<el-button v-else type="primary" @click="updateGoodsById">更 新</el-button>
+								</div>
+							</el-dialog>
 						</div>
 
 
