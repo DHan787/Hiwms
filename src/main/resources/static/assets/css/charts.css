@@ -26,15 +26,7 @@
 .title1{
     display:inline-block;
 }
-.bg2{
-    width: 100px;
-    height: 70px;
-    display:inline-block;
-    margin-right: 25px;
-    border: #bcbec2;
-    background-color: #d9ecff;
-    border-radius: 10px;
-}
+
 .pics{
     width: 40px;
     height: 45px;
@@ -69,3 +61,37 @@
         border-radius: 16px;
 }
 
+.bg2 {
+	width: 100px;
+	height: 70px;
+	align-items: center;
+	margin-bottom: 50px;
+	margin-left: 20px;
+	display: inline-block;
+	border: #bcbec2;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px #e0e4ea;
+	background-color: #fafeff;
+}
+/* 
+1 为管理员
+2 为货物员
+3 为操作员 */
+
+.bg2-1-left{
+	background-color: #14b279;
+	width: 1.5%;
+	height: 90px;
+	border-radius: 20px 0px 0px 20px;
+	float:left;
+	
+}/* 设置管理员员页面的样式 */
+
+.text{
+	float:left;
+	padding-top: 20px;
+/* 	padding-right: 10px; */
+	padding-left: 5%;
+	margin-left: 0px;
+/* 	padding:10px; */
+}
