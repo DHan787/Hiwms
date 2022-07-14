@@ -32,12 +32,12 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao,Users> implements Use
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateAvatar(MultipartFile file) {
-        Users Users = findByUserName(usersController.getCurrentUsername());
+        Users users = findByUserName(usersController.getCurrentUsername());
         // 调用上传文件服务保存头像
-        UploadFile uploadFile = uploadFileTool.upload(Users.getUserName(), file.getOriginalFilename(), file);
+        UploadFile uploadFile = uploadFileTool.upload(users.getUserName(), file.getOriginalFilename(), file);
         // 将头像路径保存到个人信息中
-        Users.setAvatarUrl(uploadFile.getType() + File.separator  + uploadFile.getFileName());
-        return update(Users);
+        users.setAvatarUrl(uploadFile.getType() + File.separator  + uploadFile.getFileName());
+        return update(users);
 
     }
 
