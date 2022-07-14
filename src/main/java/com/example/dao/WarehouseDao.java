@@ -16,11 +16,18 @@ import java.util.List;
 @Mapper
 @Component
 public interface WarehouseDao extends BaseMapper<Warehouse> {
-    //模糊查询
+    /**
+     * 模糊查询
+     * @param warehouseName name
+     * @return list
+     */
     @Select("select * from warehouse where warehouse_name like #{warehouseName}")
     List<Warehouse> selectWarehouseName(@Param("warehouseName") String warehouseName);
 
-    //查询有多少数据
+    /**
+     * 查询有多少数据
+     * @return int
+     */
     @Select("select count(*) from warehouse")
     int selectCount();
 }
