@@ -1,7 +1,5 @@
 package com.example.utils;
 
-import java.util.Date;
-
 /**
  * info id生成工具类
  * @author ginger
@@ -16,7 +14,7 @@ public class idGenerator {
      * @param time alt time
      * @return user info id
      */
-    public static long UserInfoIDGenerator(int oriId,long time){
+    public static long userInfoIdGenerator(int oriId, long time){
        String value1 = time+""+oriId;
         return Long.parseLong(value1);
     }
@@ -25,7 +23,7 @@ public class idGenerator {
 
     public static void main(String[] args) throws Exception{
 
-        System.out.println(UserInfoIDGenerator(11,11));
+        System.out.println(userInfoIdGenerator(11,11));
 
     }
 }

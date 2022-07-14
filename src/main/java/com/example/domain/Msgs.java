@@ -8,11 +8,11 @@ import lombok.Data;
 public class Msgs {
     @TableId("msgs_id")
     /**
-     * 消息id
+     * id
      */
     private Integer msgsId;
     /**
-     *消息内容
+     * 消息内容
      */
     private String  msgsCont;
     /**
