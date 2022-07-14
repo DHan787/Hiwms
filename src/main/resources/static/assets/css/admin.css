@@ -27,6 +27,7 @@
 	padding-left: 0px;
 	background-image: url("../pics/6.jpg");
 	background-size: 1600px;
+	display: inline-block;
 
 
 }
@@ -183,4 +184,10 @@
 
 .el-radio-group {
     width: 200px;
+}
+
+.avatar{
+	float: right;
+	margin-top: 10px;
+	display: inline-block;
 }
