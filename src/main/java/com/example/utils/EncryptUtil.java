@@ -8,12 +8,14 @@ import java.security.MessageDigest;
  */
 public class EncryptUtil {
 
-    /***
+
+    /**
      * SHA加密 生成40位SHA码
-     * @inStr 待加密字符串
+     * @param Str 待加密字符串
      * @return 返回40位SHA码
+     * @throws Exception e
      */
-    public static String shaEncode(String inStr) throws Exception {
+    public static String shaEncode(String Str) throws Exception {
         MessageDigest sha = null;
         try {
             sha = MessageDigest.getInstance("SHA");
@@ -23,7 +25,7 @@ public class EncryptUtil {
             return "";
         }
 
-        byte[] byteArray = inStr.getBytes("UTF-8");
+        byte[] byteArray = Str.getBytes("UTF-8");
         byte[] md5Bytes = sha.digest(byteArray);
         StringBuffer hexValue = new StringBuffer();
         for (byte md5Byte : md5Bytes) {
