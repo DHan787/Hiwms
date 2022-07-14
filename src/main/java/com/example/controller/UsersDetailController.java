@@ -59,7 +59,6 @@ public class UsersDetailController {
     public List<UsersDetail> getAll() {
 
         List<Users> usersList = usersDao.selectList(null);
-
         List<UsersInfo> usersInfoList = usersInfoDao.selectList(null);
         return this.setUsersDetail(usersList, usersInfoList);
     }

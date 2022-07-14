@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class UserInterceptor implements HandlerInterceptor {
     @Override
+    /**
+      拦截器
+     **/
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        Object users = request.getSession().getAttribute("users");
 //        if (users != null) {

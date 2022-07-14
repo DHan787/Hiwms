@@ -8,8 +8,13 @@ import org.springframework.context.ApplicationEvent;
  * 申请完成事件
  */
 public class ApplyOverEvent extends ApplicationEvent {
+    /**
+     * 申请是否完成
+     */
     private Orders applyOver;
-
+    /**
+     * 内容
+     */
     private  String content;
 
     public Integer getOrderId() {
