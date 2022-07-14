@@ -27,13 +27,25 @@
 						<el-button @click="drawer = true" circle >
 							<el-avatar src="../../assets/pics/ava_red.png">
 							</el-avatar>
+
 						</el-button>
 
 						<el-drawer
-								title="个人主页"
 								:visible.sync="drawer"
 								size="30%"
 								background ="#f8fff7">
+
+							<el-row class="demo-avatar demo-basic" style="margin-left: 43%;margin-top: 6%">
+								<el-col :span="12">
+									<div class="demo-basic--circle">
+										<div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
+										<div class="block" v-for="size in sizeList" :key="size">
+											<el-avatar :size="size" :src="circleUrl"></el-avatar>
+										</div>
+									</div>
+								</el-col>
+							</el-row>
+
 							<div>
 								<div class="personal-info">
 									<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>

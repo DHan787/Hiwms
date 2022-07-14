@@ -57,7 +57,8 @@ public class StockInController {
      */
     @PostMapping("/save")
     public boolean saveStockIn(@RequestBody StockIn stockIn, HttpServletRequest request) {
-        stockIn.setOrderId(ordersController.initOrders(1, request));// type = 1 入库
+        //type = 1 入库
+        stockIn.setOrderId(ordersController.initOrders(1, request));
         boolean ifSuccess = stockInService.save(stockIn);
         Integer id = stockIn.getOrderId();
         StockInEvent stockInEvent=new StockInEvent("stockIn:",stockIn,"新的入库申请", id);

@@ -53,7 +53,7 @@ public class UsersDetailController {
     /**
      * getAll
      *
-     * @return if sccuess
+     * @return if success
      */
     @GetMapping
     public List<UsersDetail> getAll() {
