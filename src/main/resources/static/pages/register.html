@@ -47,6 +47,12 @@
                         </el-col>
                     </el-row>
                 </el-form-item>
+                <el-form-item label="" >
+                    <el-radio-group v-model="registerForm.userRole">
+                        <el-radio :label="2">操作员</el-radio>
+                        <el-radio :label="3">货物员</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item style="margin-top:0px">
                     <el-button type="primary" round class="submitBtn" v-on:click="register('registerForm')">注册
                     </el-button>
@@ -66,7 +72,8 @@
             registerForm: {
                 userName: '',
                 userPassword: '',
-                checkPass: ''
+                checkPass: '',
+                userRole: 2
             },
         },
         data() {
@@ -88,6 +95,12 @@
             }
             return {
                 registerForm: {},
+                registerForm: {
+                    userName: '',
+                    userPassword: '',
+                    checkPass: '',
+                    userRole: 2
+                },
                 rules: {
                     userName: [
                         {required: true, message: '请输入用户名', trigger: 'blur'},
@@ -113,6 +126,7 @@
                     if (this.registerForm.userPassword !== '') {*/
                 this.$refs[registerForm].validate((valid)=>{
                     if(valid){
+                        console.log(this.registerForm);
                         axios.post("http://localhost:8080/users/register", this.registerForm).then(rel => {
                             if (rel.data) {
                                 this.$message({

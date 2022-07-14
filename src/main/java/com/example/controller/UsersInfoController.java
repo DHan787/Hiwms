@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.dao.UsersDao;
 import com.example.dao.UsersInfoDao;
 import com.example.domain.UsersInfo;
 import com.example.service.UsersInfoService;
@@ -30,7 +29,7 @@ public class UsersInfoController {
     @Autowired
     public UsersInfoDao usersInfoDao;
 
-
+    private static final Integer OPERATOR_ROLE_NUMBER = 2;
     /**
      * 获取所有用户信息
      *
@@ -114,9 +113,13 @@ public class UsersInfoController {
      * @param userId    id
      * @return if success
      */
-    public boolean intiUserInfo(@RequestParam Integer userId) {
+    public boolean intiUserInfo(@RequestParam Integer userId,Integer role) {
         long timeMills = System.currentTimeMillis();
-        return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills),timeMills) >0;
+        if(role.equals(OPERATOR_ROLE_NUMBER)) {
+            return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills), timeMills,"操作员") > 0;
+        }else{
+            return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills), timeMills,"货物员") > 0;
+        }
     }
 
     /**
@@ -149,7 +152,6 @@ public class UsersInfoController {
     public boolean getInfoIfNull(HttpServletRequest request){
         Object id = request.getSession().getAttribute("users");
         int userId = Integer.parseInt(id.toString());
-        Long infoId;
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList) {
             if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
@@ -174,7 +176,6 @@ public class UsersInfoController {
         Object id = request.getSession().getAttribute("users");
         int userId  = Integer.parseInt(id.toString());
         System.out.println(userId);
-        //得到UserInfoId
         List<UsersInfo> usersInfoList = this.getAll();
 
         for (UsersInfo value: usersInfoList) {
