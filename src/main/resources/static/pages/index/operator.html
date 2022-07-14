@@ -12,19 +12,19 @@
 			<el-container>
 				<el-header style="height: 80px">
 
-					<div class="head" style="float: left;" v-if="!isCollapse">
+					<div class="head" style="float: left;">
 						<el-image :src="src1" class="ava">
 							<div slot="placeholder" class="image-slot">
 								加载中<span class="dot">...</span>
 							</div>
 						</el-image>
 					</div>
-					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;" v-if="!isCollapse">汇安智能仓储平台
+					<div class="logo" style="font-size: 25px;width: 300px;padding-top:5px;">汇安智能仓储平台
 					</div>
 
 					<!--头像-->
 					<div class="avatar" style="float: right;">
-						<el-button @click="get()" circle >
+						<el-button @click="drawer = true" circle >
 							<el-avatar src="../../assets/pics/ava_red.png">
 							</el-avatar>
 
@@ -33,11 +33,10 @@
 						<el-drawer
 								title="个人主页"
 								:visible.sync="drawer"
-								size="50%"
+								size="30%"
 								background ="#f8fff7">
 							<div>
-
-								<!--<div class="personal-info">
+								<div class="personal-info">
 									<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
 								</div>
 
@@ -47,54 +46,29 @@
 
 								<div class="personal-info">
 									<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
-								</div>-->
-
-								<el-button @click="innerDrawer = true">编辑信息</el-button>
+								</div>
+								<el-button @click="innerDrawer = true">编辑</el-button>
 								<el-drawer
 										title="编辑个人信息"
 										:append-to-body="true"
 										:before-close="close"
 										:visible.sync="innerDrawer">
 									<div>
-										<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
-											<el-form-item label="" prop="userTele" style="margin-top:10px;">
-												<el-row>
-													<el-col :span='2'>
-														<span class="el-icon-s-custom"></span>
-													</el-col>
-													<el-col :span='20'>
-														<el-input class="inps" placeholder='电话号码' v-model="userInfoForm.userTele">
-														</el-input>
-													</el-col>
-												</el-row>
+										<el-form :model="userInfoForm" ref="userInfoForm">
+											<el-form-item label="电话号码" :label-width="formLabelWidth">
+												<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
 											</el-form-item>
-											<el-form-item label="" prop="userLocation" style="margin-top:10px;">
-												<el-row>
-													<el-col :span='2'>
-														<span class="el-icon-s-custom"></span>
-													</el-col>
-													<el-col :span='20'>
-														<el-input class="inps" placeholder='地址' v-model="userInfoForm.userLocation">
-														</el-input>
-													</el-col>
-												</el-row>
+											<el-form-item label="地址" :label-width="formLabelWidth">
+												<el-input v-model="userInfoForm.userLocation" autocomplete="off"></el-input>
 											</el-form-item>
-											<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
-												<el-row>
-													<el-col :span='2'>
-														<span class="el-icon-s-custom"></span>
-													</el-col>
-													<el-col :span='20'>
-														<el-input class="inps" placeholder='单位' v-model="userInfoForm.userRetailer">
-														</el-input>
-													</el-col>
-												</el-row>
-											</el-form-item>
-											<el-form-item style="margin-top:10px">
-												<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
-												</el-button>
+											<el-form-item label="单位" :label-width="formLabelWidth">
+												<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
 											</el-form-item>
 										</el-form>
+										<div class="demo-drawer__footer">
+											<el-button round type="primary" @click="EditUserInfo">保存</el-button>
+											<el-button round @click="innerDrawer = false">取 消</el-button>
+										</div>
 									</div>
 								</el-drawer>
 							</div>
@@ -118,10 +92,6 @@
 								<i class="el-icon-menu"></i>
 								<span slot="title" @click="openUrl('./operatorindex.html')">主页</span>
 							</el-menu-item>
-							<el-menu-item index="2">
-								<i class="el-icon-s-help"></i>
-								<span slot="title">控制台</span>
-							</el-menu-item>
 							<el-submenu index="3">
 								<template slot="title">
 									<i class="el-icon-view"></i>
@@ -140,13 +110,7 @@
 
 								</el-menu-item-group>
 							</el-submenu>
-
-							<el-menu-item index="5">
-								<i class="el-icon-setting"></i>
-								<span slot="title">系统设置</span>
-							</el-menu-item>
-
-							<el-menu-item index="6">
+							<el-menu-item index="4">
 								<i class="el-icon-warning-outline"></i>
 								<span slot="title" @click="logout">退出登录</span>
 							</el-menu-item>
@@ -184,18 +148,25 @@
 					isCollapse: true,
 					iframeUrl: './operatorindex.html',
 					fit: 'contain',
-					src1:'../../assets/pics/logo_red.png'
+					src1:'../../assets/pics/logo_red.png',
+					dataForm: {
+						userTele:'',
+						userLocation: '',
+						userRetailer: '',
+					},
 				}
 			},
-			created() {
 
+			created() {
 				this.getPersonalInfo()
+				this.get()
 			},
+
 			methods: {
 				//个人信息填写提醒
 				getPersonalInfo() {
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						if (res.data == null) {
+					axios.get("http://localhost:8080/usersInfo/ifNull").then(res => {
+						if (res.data == true) {
 							this.$notify({
 								title: '个人信息提醒',
 								message: '您还未填写个人信息，请抓紧时间填写哦！',
@@ -217,13 +188,14 @@
 
 				//编辑个人信息
 				EditUserInfo() {
-					console.log(0)
 					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
 						if(res.data){
 							this.$message({
 								type: 'success',
 								message: '修改成功!'
 							});
+							// this.innerDrawer = false;
+							this.get();
 							this.innerDrawer = false;
 
 						}else{
@@ -233,6 +205,15 @@
 							});
 						}
 						// this.$refs.userInfoForm.resetFields();
+					});
+				},
+
+				get() {
+					/*this.drawer=true;*/
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						console.log(res.data);
+						this.dataForm = res.data;
+						this.userInfoForm = Object.assign({},this.dataForm);
 					});
 				},
 
@@ -252,14 +233,6 @@
 				openUrl(url) {
 
 					this.iframeUrl = url;
-				},
-
-				get() {
-					this.drawer=true;
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						console.log(res.data);
-						this.dataForm = res.data;
-					});
 				},
 
 				logout() {

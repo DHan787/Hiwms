@@ -58,6 +58,7 @@
     padding-left: 50px;
     box-sizing: border-box;
     color: #ff7f00;
+    display: inline-block;
 }
 
 .card-container {
@@ -172,4 +173,9 @@
     width: 50px;
     height: 50px;
     vertical-align: middle;
+}
+.avatar{
+    float: right;
+    margin-top: 10px;
+    display: inline-block;
 }

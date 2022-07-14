@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="../../assets/css/home.css">
 		<link rel="stylesheet" href="../../assets/css/element-ui/index.css">
 		<script src="../../assets/js/echarts.js"></script>
+		<script src="https://gw.alipayobjects.com/os/lib/lottie-web/5.5.6/build/player/lottie.min.js"></script>
 		<title></title>
 	</head>
 	<body>
@@ -39,13 +40,16 @@
 						</div>
 						<br />
 
-						<div class="data">
-								<el-image :src="src6" class="pics1">
+						<div class="data" style="width: 35%;padding-left:5%">
+								<!-- <el-image :src="src6" class="pics1">
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
-								</el-image>
-						</div>
+								</el-image> -->
+								<div id="container"></div>
+								<div id="status"></div>
+								<div id="loop"></div>
+							</div>
 
 						<div class="top">
 							<el-card class="box-card3">
@@ -54,13 +58,11 @@
 									<div slot="placeholder" class="image-slot">
 										加载中<span class="dot">...</span>
 									</div>
-
-
 								</el-image>
+								
 								<div class="title1-1">
 									<h3>快捷入口</h3>
 								</div>
-
 
 								<!--用户-->
 								<div class="all">
@@ -126,7 +128,7 @@
 								<div>
 									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
 										<el-card style="margin: 15px;">
-											<p class="title1-1-content">新通知 {{ms.msgsId}}：{{ms.msgsCont}}</p>
+											<p class="title1-1-content">新通知: 你有新的待处理订单{{ms.orderId}}</p>
 											<el-button type="success" plain @click="msgtu(ms.msgsId)" size="small"
 												style="float: right;margin-bottom: 10px;">
 												已读</el-button>
@@ -136,6 +138,14 @@
 								<!-- </div>-->
 							</el-card>
 						</div>
+						<div class="right">
+							<el-image :src="src9" class="pics2">
+								<div slot="placeholder" class="image-slot">
+									加载中<span class="dot">...</span>
+								</div>
+							</el-image>
+						</div>
+
 					</div>
 					<div class="down">
 					</div>
@@ -159,6 +169,7 @@
 					src6: '../../assets/pics/bg4.jpg',
 					src7: '../../assets/pics/link.jpg',
 					src8: '../../assets/pics/bell.jpg',
+					src9: '../../assets/pics/16.jpg',
 					tableData: [],
 					dialogFormVisible: false,
 					dialogFormTitle: "",
@@ -173,13 +184,13 @@
 				}
 			},
 			created() {
-				setInterval(this.getAll, 5000);
+				 setInterval(this.getAll, 5000);
 			},
 			methods: {
 				msgtu(msgsId) {
-					axios.put("http://localhost:8080/orders/putmsg?msgid=" + msgsId).then(rel => {
-						console.log(rel.data);
-						if (rel.data) {
+					axios.put("http://localhost:8080/msgs?msgid=" + msgsId).then(res => {
+						console.log(res.data);
+						if (res.data) {
 							this.getAll();
 						} else {
 							alert("失败");
@@ -187,20 +198,25 @@
 					})
 				},
 				getAll() {
-					axios.get("http://localhost:8080/orders/msg").then(resl => {
-						if (resl.data.length > 0) {
-							this.msgs = resl.data;
+					axios.get("http://localhost:8080/msgs").then(res => {
+						if (res.data.length > 0) {
+							this.msgs = res.data;
 							this.msgsfig = true;
 						} else {
 							this.msgsfig = false;
-							// time = setInterval(this.getAll, 1000);
-							// clearInterval(this.time);
-							// console.log("time: "+ time)
 						}
 					});
 				}
 
 			}
-		})
+		});
+		var anim = lottie.loadAnimation({
+			container: document.getElementById("container"), // 容器
+			renderer: "svg",
+			loop: true,
+			autoplay: true,
+			// animationData: {}, //如果使用的是JSON
+			path: "../../assets/pics/Lecture.lottie.json" // the path to the animation json
+		});
 	</script>
 </html>

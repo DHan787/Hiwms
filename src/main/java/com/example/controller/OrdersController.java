@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -39,68 +39,6 @@ public class OrdersController {
     @Autowired
     private WebApplicationContext webapplicationcontext;
 
-    HttpServletRequest requestAll;
-
-
-    /**
-     *
-     * 事件监听相关操作
-     */
-    @Autowired
-    public MsgsDao msgsDao;
-
-    public boolean saveInMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的入库申请");
-        msgs.setType(1);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveOutMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的出库申请");
-        msgs.setType(1);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveOrdersMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("有新的待处理操作");
-        msgs.setType(2);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    public boolean saveApplyMsg() {
-        Msgs msgs = new Msgs();
-        msgs.setMsgsCont("申请已完成");
-        msgs.setType(3);
-        return msgsDao.insert(msgs) > 0;
-    }
-
-    @PutMapping("/putmsg")
-    public boolean updatamsg(@RequestParam("msgid") Integer msgid) {
-        return msgsDao.updatamsg(msgid) > 0;
-    }
-
-    /**
-     * type: 1是新的出入库申请，2是新的待出入库订单，3是已完成的申请，0是已读
-     *
-     * @return list
-     */
-    @GetMapping("/msg")
-    public List<Msgs> getMsgs() {
-        return msgsDao.selectType(1);
-    }
-
-    @GetMapping("/msg/orders")
-    public List<Msgs> getOrdersMsgs() {
-        return msgsDao.selectType(2);
-    }
-
-    @GetMapping("/msg/apply")
-    public List<Msgs> getApplyMsgs() {
-        return msgsDao.selectType(3);
-    }
 
     /**
      * 获取订单表
@@ -154,15 +92,15 @@ public class OrdersController {
      * @param type 订单类型
      * @return 生成的订单id
      */
-    public Integer initOrders(int type,HttpServletRequest request) {
+    public Integer initOrders(int type, HttpServletRequest request) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Orders orders = new Orders();
         orders.setOrderStartTime(dateFormat.format(date));
         orders.setOrderType(type);
         orders.setOrderStatus(type * 10);
-        //设置订单发起人ID 默认为11 需要后续实现
         Object id = request.getSession().getAttribute("users");
+        Integer orderId = Integer.parseInt(id.toString());
         orders.setOrderInit(Integer.parseInt(id.toString()));
         ordersService.save(orders);
         return orders.getOrderId();
@@ -181,7 +119,8 @@ public class OrdersController {
         System.out.println(dateFormat.format(date));
         orders.setOrderEndTime(dateFormat.format(date));
         orders.setOrderStatus(orders.getOrderStatus() + 1);
-        ApplyOverEvent applyOverEvent = new ApplyOverEvent("orders:", orders, "申请已完成");
+        Integer id = orders.getOrderId();
+        ApplyOverEvent applyOverEvent = new ApplyOverEvent("orders:", orders, "申请已完成",id);
         webapplicationcontext.publishEvent(applyOverEvent);
         return ordersService.updateById(orders);
     }
@@ -196,7 +135,8 @@ public class OrdersController {
     public boolean checkById(@RequestBody Orders orders) {
         orders.setOrderStatus(orders.getOrderStatus() + 1);
         System.out.println(orders);
-        OrdersBeginEvent ordersBeginEvent = new OrdersBeginEvent("orders:", orders, "新的待操作订单");
+        Integer id = orders.getOrderId();
+        OrdersBeginEvent ordersBeginEvent = new OrdersBeginEvent("orders:", orders, "新的待操作订单",id);
         webapplicationcontext.publishEvent(ordersBeginEvent);
         return ordersService.updateById(orders);
     }

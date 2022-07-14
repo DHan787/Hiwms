@@ -27,6 +27,7 @@
 	padding-left: 0px;
 	background-image: url("../pics/6.jpg");
 	background-size: 1600px;
+	display: inline-block;
 
 
 }
@@ -64,6 +65,7 @@
 	font-weight: bolder;
 	padding-left: 50px;
 	color: #409EFF;
+	display: inline-block;
 }
 
 .card-container {
@@ -182,4 +184,10 @@
 
 .el-radio-group {
     width: 200px;
+}
+
+.avatar{
+	float: right;
+	margin-top: 10px;
+	display: inline-block;
 }
