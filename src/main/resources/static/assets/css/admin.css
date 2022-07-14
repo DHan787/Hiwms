@@ -194,7 +194,8 @@
 
 .el-drawer.rtl {
 	/*background: linear-gradient(to bottom, #748992 0%,#748992 32%,#f8fff7 33%,#f8fff7 100%);*/
-	background-image: url("../pics/bg6.jpg");
+	background-image: url("../pics/bg66.jpg");
+	background-size: 300%;
 }
 
 
@@ -218,5 +219,5 @@
 
 .personal-info {
 	font-family: "Microsoft YaHei";
-
+	font-size: x-large;
 }
