@@ -9,8 +9,13 @@ import org.springframework.context.ApplicationEvent;
  */
 
 public class OrdersBeginEvent extends ApplicationEvent {
+    /**
+     * 订单对象
+     */
     private Orders orders;
-
+    /**
+     * 公告内容
+     */
     private  String content;
 
     public Integer getOrderId() {

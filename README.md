@@ -196,3 +196,12 @@
 * 事件监听获取对应订单id ymm
 * index页面添加Lottie动图 ymm
 * 其他页面的个人信息显示 zls
+* 用户角色选择后端 hj
+
+
+## 7.14
+* 注册界面增加身份单选框 hxy
+* 用户角色选择后端 hj
+* 设置主页 hj
+* 修改主页侧边栏收起后无法啊点击跳转的bug hxy
+* UsersDetailController 的用户角色判断完善 hj
