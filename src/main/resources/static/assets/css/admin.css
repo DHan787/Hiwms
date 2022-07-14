@@ -191,3 +191,32 @@
 	margin-top: 10px;
 	display: inline-block;
 }
+
+.el-drawer.rtl {
+	/*background: linear-gradient(to bottom, #748992 0%,#748992 32%,#f8fff7 33%,#f8fff7 100%);*/
+	background-image: url("../pics/bg5.jpg");
+}
+
+
+.drawer_pwd {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	margin: 0;
+;
+}
+.el-drawer__header {;
+	color: #009e75;
+	font-family: "Microsoft YaHei";
+}
+
+/*.square {
+	box-shadow: #a1a1a1 !important;
+}*/
+
+.personal-info {
+	font-family: "Microsoft YaHei";
+
+}

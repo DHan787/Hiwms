@@ -204,3 +204,4 @@
 * 用户角色选择后端 hj
 * 设置主页 hj
 * 修改主页侧边栏收起后无法啊点击跳转的bug hxy
+* UsersDetailController 的用户角色判断完善 hj

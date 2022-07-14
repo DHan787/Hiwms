@@ -155,11 +155,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList) {
             if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
-                if(value.getUserLocation()==null) {
-                    return true;
-                }else {
-                    return false;
-                }
+                return value.getUserLocation() == null;
             }
         }
         return true;

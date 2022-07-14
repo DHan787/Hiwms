@@ -100,7 +100,7 @@ public class UsersController {
                 }
             }
         }
-        // TODO: 前端没实现
+        // TODO: 前端还可以优化
         return "pages/register.html";
     }
 
@@ -143,8 +143,6 @@ public class UsersController {
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable int id) {
         System.out.println("the id is :" + id);
-
-        //usersInfoService.removeById(id);  //有bug，记得改 前端要传alttime，这里再生成infoId，再删除
         return usersService.removeById(id);
     }
 
@@ -194,6 +192,11 @@ public class UsersController {
         return usersDao.selectList(wrapper);
     }
 
+    /**
+     * 头像上传
+     * @param avatar 头像文件
+     * @return if success
+     */
     @PostMapping(value = "/updateAvatar")
     public boolean updateAvatar(@RequestParam MultipartFile avatar) {
         return usersService.updateAvatar(avatar);

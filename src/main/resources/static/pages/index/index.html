@@ -126,7 +126,7 @@
 									</el-badge>
 								</div>
 								<div>
-									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+									<div id="msgs" v-if="msgsfig" v-for="ms in msgs" style="width: 123%;">
 										<el-card style="margin: 15px;">
 											<p class="title1-1-content">新通知: 你有新的待处理订单{{ms.orderId}}</p>
 											<el-button type="success" plain @click="msgtu(ms.msgsId)" size="small"
@@ -184,7 +184,7 @@
 				}
 			},
 			created() {
-				 setInterval(this.getAll, 5000);
+				 setInterval(this.getAll, 1000);
 			},
 			methods: {
 				msgtu(msgsId) {

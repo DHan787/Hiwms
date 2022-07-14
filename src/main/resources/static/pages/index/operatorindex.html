@@ -106,9 +106,9 @@
 										</el-badge>
 									</div>
 									<div>
-										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+										<div id="msgs" v-if="msgsfig" v-for="ms in msgs" style="width: 148%;">
 											<el-card style="margin: 15px;">
-												<p class="title1-3-content">新通知: 你有新的待处理操作{{ms.orderId}}</p>
+												<p class="title1-3-content">新通知: 你有新的任务{{ms.orderId}}</p>
 												<el-button type="warning" plain @click="msgtu(ms.msgsId)" size="small"
 													style="float: right;margin-bottom: 10px;">
 													已读</el-button>
@@ -132,7 +132,6 @@
 				</el-container>
 			</el-container>
 		</div>
-						</div>
 
 	</body>
 	<script src="../../assets/js/vue.js"></script>
@@ -164,7 +163,7 @@
 				}
 			},
 			created() {
-				setInterval(this.getAll, 5000);
+				setInterval(this.getAll, 500);
 			},
 			methods: {
 				msgtu(msgsId) {
