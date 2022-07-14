@@ -44,7 +44,7 @@ public class StockOutController {
      * 获取全部入库信息
      * @return list
      */
-    @GetMapping//访问方式
+    @GetMapping
     public List<StockOut> getAll() {
         System.out.println(stockOutService.list());
         return stockOutService.list();
