@@ -90,37 +90,37 @@
 }
 
 .users {
-	width: 80px;
-	height: 95px;
+	width: 60px;
+	height: 75px;
 	margin-right: 10px;
-	margin-bottom: 10px;
+
 	margin-left: 25px;
 	margin-top: 10px;
 }
 
 .orders {
-	width: 80px;
-	height: 95px;
+	width: 60px;
+	height: 75px;
 	margin-right: 10px;
-	margin-bottom: 10px;
+
 	margin-left: 25px;
 	margin-top: 10px;
 }
 
 .goods {
-	width: 80px;
-	height: 95px;
+	width: 60px;
+	height: 75px;
 	margin-right: 10px;
-	margin-bottom: 10px;
+
 	margin-left: 25px;
 	margin-top: 10px;
 }
 
 .warehouse {
-	width: 80px;
-	height: 95px;
+	width: 60px;
+	height: 75px;
 	margin-right: 10px;
-	margin-bottom: 10px;
+
 	margin-left: 25px;
 	margin-top: 15px;
 }
@@ -270,12 +270,19 @@
 
 .report {
 	position: absolute;
-	margin-top: 0px;
-	margin-left: 890px;
+	margin-top: 20%;
+	margin-left: 60%;
 	width: 30%;
-	height: 567px;
+	height: 20%;
 
 
+}
+.top {
+	position: absolute;
+	margin-top: 1%;
+	margin-left: 60%;
+	height: 20%;
+	display: inline-block;
 }
 
 .report1 {
@@ -325,10 +332,10 @@
 
 .box-card12 {
 
-	background-size: 1600px;
 	display: flex;
-	width: 550px;
-	margin-left: 20px;
+	width:100%;
+	height: 100%;
+	margin-left: 10%;
 	background-image: url("../pics/5.jpg");
 	background-size: 1200px 200px;
 
@@ -363,6 +370,7 @@
 
 .box-card4 {
 
+
 	background-size: 1600px;
 	display: flex;
 }
@@ -371,12 +379,12 @@
 	
 }
 .pics2{
-	width: 300px;
+	width: 250px;
 	height: 200px;
 	vertical-align: middle;
 	position: absolute;
 }
 .right{
 	margin-top: 350px;
-	margin-left: 300px;
+	margin-left: 350px;
 }
