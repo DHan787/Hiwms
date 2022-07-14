@@ -17,11 +17,19 @@ import java.util.List;
 @Mapper
 @Component
 public interface InventoryDao extends BaseMapper<Inventory> {
-    //模糊查询
+    /**
+     * 模糊查询
+     * @param inventoryId id
+     * @param goodsName name
+     * @return list
+     */
     @Select("select * from inventory where inventory_id like #{inventoryId} and goods_name like #{goodsName}")
     List<Inventory> selectInventory(@Param("inventoryId") String inventoryId,@Param("goodsName") String goodsName);
 
-    //查询有多少数据
+    /**
+     * 查询有多少数据
+     * @return int
+     */
     @Select("select count(*) from inventory")
     int selectCount();
 }

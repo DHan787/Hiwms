@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public interface MsgsDao extends BaseMapper<Msgs> {
     @Select("select * from msgs where type=#{type}")
-    public List<Msgs> selectType(@Param("type") Integer tyep);
+    public List<Msgs> selectType(@Param("type") Integer type);
 
     @Update("update msgs set type=0  where msgs_id=#{msgid}")
     public  Integer updatemsg(@Param("msgid") Integer msgid);

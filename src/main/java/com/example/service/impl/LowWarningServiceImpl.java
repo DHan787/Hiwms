@@ -6,6 +6,9 @@ import com.example.domain.LowWarning;
 import com.example.service.LowWarningService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author ginger
+ */
 @Service
 public class LowWarningServiceImpl extends ServiceImpl<LowWarningDao, LowWarning> implements LowWarningService{
 }

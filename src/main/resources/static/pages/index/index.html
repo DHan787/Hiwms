@@ -77,9 +77,7 @@
 													</div>
 												</el-image>
 											</a></el-tooltip>
-									</div>
-									<!--订单-->
-									<div>
+
 										<el-tooltip content="订单" placement="bottom"><a href="../admin/orders.html">
 												<el-image :src="src3" class="orders">
 													<div slot="placeholder" class="image-slot">
@@ -90,8 +88,7 @@
 										</el-tooltip>
 
 										<!--商品-->
-									</div>
-									<div>
+
 										<el-tooltip content="商品" placement="bottom"><a href="../admin/goods.html">
 												<el-image :src="src4" class="goods">
 													<div slot="placeholder" class="image-slot">
@@ -101,9 +98,7 @@
 												</el-image>
 											</a>
 										</el-tooltip>
-									</div>
-									<!--仓库-->
-									<div>
+
 										<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html">
 												<el-image :src="src5" class="warehouse">
 													<div slot="placeholder" class="image-slot">
@@ -129,7 +124,7 @@
 									</el-badge>
 								</div>
 								<div>
-									<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+									<div id="msgs" v-if="msgsfig" v-for="ms in msgs" style="width: 123%;">
 										<el-card style="margin: 15px;">
 											<p class="title1-1-content">新通知: 你有新的待处理订单{{ms.orderId}}</p>
 											<el-button type="success" plain @click="msgtu(ms.msgsId)" size="small"
@@ -141,13 +136,13 @@
 								<!-- </div>-->
 							</el-card>
 						</div>
-						<div class="right">
-							<el-image :src="src9" class="pics2">
-								<div slot="placeholder" class="image-slot">
-									加载中<span class="dot">...</span>
-								</div>
-							</el-image>
-						</div>
+<!--						<div class="right">-->
+<!--							<el-image :src="src9" class="pics2">-->
+<!--								<div slot="placeholder" class="image-slot">-->
+<!--									加载中<span class="dot">...</span>-->
+<!--								</div>-->
+<!--							</el-image>-->
+<!--						</div>-->
 
 					</div>
 					<div class="down">
@@ -187,7 +182,7 @@
 				}
 			},
 			created() {
-				 setInterval(this.getAll, 5000);
+				 setInterval(this.getAll, 1000);
 			},
 			methods: {
 				msgtu(msgsId) {

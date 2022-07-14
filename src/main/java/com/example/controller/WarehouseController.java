@@ -141,7 +141,7 @@ public class WarehouseController {
 
     /**
      * 获取仓库剩余库存仪表盘的数据
-     * @return
+     * @return vo
      */
     @GetMapping("/getCharData")
     public WarehouseVo getCharData(){

@@ -30,7 +30,10 @@ public class LowWarningController {
 
     List<String> warnList = new ArrayList<>();
 
-    class LowWarningAll {
+    /**
+     *内部类 包含是否是低库存商品字段
+     */
+    static class LowWarningAll {
         private Integer inventoryId;
         private String goodsName;
         private Integer goodsNumber;
@@ -97,7 +100,7 @@ public class LowWarningController {
         }
     }
 
-    List<LowWarningAll> lowWarningAllList = new ArrayList<LowWarningAll>();
+    List<LowWarningAll> lowWarningAllList = new ArrayList<>();
 
     /**
      * 返回低库存列表

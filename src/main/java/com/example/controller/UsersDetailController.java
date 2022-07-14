@@ -53,7 +53,7 @@ public class UsersDetailController {
     /**
      * getAll
      *
-     * @return if sccuess
+     * @return if success
      */
     @GetMapping
     public List<UsersDetail> getAll() {
@@ -76,7 +76,7 @@ public class UsersDetailController {
         for (Users value : usersList) {
             System.out.println("id is :" + value.getUserId());
             for (UsersInfo info : usersInfoList) {
-                if (idGenerator.UserInfoIDGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
+                if (idGenerator.userInfoIdGenerator((value.getUserId()), info.getUserAltTime()) == info.getUsersInfoId()) {
                     UsersDetail usersDetail = new UsersDetail();
                     System.out.println(value.getUserName());
                     usersDetail.setUserId(value.getUserId());
