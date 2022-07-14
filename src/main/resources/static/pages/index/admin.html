@@ -35,7 +35,7 @@
             <el-drawer
                     title="个人主页"
                     :visible.sync="drawer"
-                    size="40%"
+                    size="30%"
 			        background ="#f8fff7">
                 <div>
 					<div class="personal-info">
@@ -57,48 +57,8 @@
                             title="编辑个人信息"
                             :append-to-body="true"
                             :before-close="close"
-                            :visible.sync="innerDrawer"
-							ref="drawer">
+                            :visible.sync="innerDrawer">
 						<div>
-							<!--<el-form :model="userInfoForm" ref="userInfoForm" label-width="0px">
-								<el-form-item label="" prop="userTele" style="margin-top:10px;">
-									<el-row>
-										<el-col :span='2'>
-											<span class="el-icon-s-custom"></span>
-										</el-col>
-										<el-col :span='20'>
-											<el-input class="inps" placeholder='电话号码' v-model="userInfoForm.userTele">
-											</el-input>
-										</el-col>
-									</el-row>
-								</el-form-item>
-								<el-form-item label="" prop="userLocation" style="margin-top:10px;">
-									<el-row>
-										<el-col :span='2'>
-											<span class="el-icon-s-custom"></span>
-										</el-col>
-										<el-col :span='20'>
-											<el-input class="inps" placeholder='地址' v-model="userInfoForm.userLocation">
-											</el-input>
-										</el-col>
-									</el-row>
-								</el-form-item>
-								<el-form-item label="" prop="userRetailer" style="margin-top:10px;">
-									<el-row>
-										<el-col :span='2'>
-											<span class="el-icon-s-custom"></span>
-										</el-col>
-										<el-col :span='20'>
-											<el-input class="inps" placeholder='单位' v-model="userInfoForm.userRetailer">
-											</el-input>
-										</el-col>
-									</el-row>
-								</el-form-item>
-								<el-form-item style="margin-top:10px">
-									<el-button type="primary" round class="submitBtn" v-on:click="EditUserInfo">保存
-									</el-button>
-								</el-form-item>
-							</el-form>-->
 							<el-form :model="userInfoForm" ref="userInfoForm">
 								<el-form-item label="电话号码" :label-width="formLabelWidth">
 									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
@@ -290,6 +250,15 @@
 					});
 				},
 
+				get() {
+					/*this.drawer=true;*/
+					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
+						console.log(res.data);
+						this.dataForm = res.data;
+						this.userInfoForm = Object.assign({},this.dataForm);
+					});
+				},
+
 				adjustIframe() {
 					var ifm = document.getElementById("bi_iframe");
 					ifm.height = document.documentElement.clientHeight;
@@ -307,14 +276,6 @@
 					console.log(key, keyPath);
 				},
 
-				get() {
-					/*this.drawer=true;*/
-					axios.get("http://localhost:8080/usersInfo/getPersonalInfo").then(res => {
-						console.log(res.data);
-						this.dataForm = res.data;
-						this.userInfoForm = Object.assign({},this.dataForm);
-					});
-				},
 
 				openUrl(url) {
 

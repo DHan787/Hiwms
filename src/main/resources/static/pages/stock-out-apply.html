@@ -111,7 +111,13 @@
                                 confirmButtonText: '确定',
                                 type: 'warning'
                             })
-                        } else {
+                        } else if(this.tableDataSelections[i].stockOutNumber > this.tableDataSelections[i].goodsNumber){
+							this.$confirm('出库数量不能大于库存数量！','提示',{
+								confirmButtonText:'确定',
+								type:'warning'
+							})	
+						}
+						else{
                             //console.log('name:' + this.tableDataSelections[i].goodsName);
                             this.tableDataSelections[i].goodsNumber = this.tableDataSelections[i].stockOutNumber;
                             item = this.tableDataSelections[i];
