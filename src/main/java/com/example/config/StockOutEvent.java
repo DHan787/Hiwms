@@ -8,8 +8,13 @@ import org.springframework.context.ApplicationEvent;
  * 出库申请事件
  */
 public class StockOutEvent extends ApplicationEvent {
+    /**
+     * 出库订单对象
+     */
     private StockOut stockOut;
-
+    /**
+     * 内容
+     */
     private  String content;
 
     public Integer getOrderId() {

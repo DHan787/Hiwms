@@ -9,10 +9,17 @@ import org.springframework.context.ApplicationEvent;
  * 入库申请事件
  */
 public class StockInEvent extends ApplicationEvent {
+    /**
+     * 入库对象
+     */
     private StockIn stockIn;
-
+    /**
+     * 内容
+     */
     private  String content;
-
+    /**
+     * 订单ID
+     */
     private Integer orderId;
 
     public String getContent() {

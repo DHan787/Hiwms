@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class DefaultConfig implements WebMvcConfigurer {
+    /**
+     * 主页设置
+     * @param registry re
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
         registry.addViewController("/").setViewName("pages/login.html");
