@@ -52,19 +52,19 @@
 								:before-close="close"
 								:visible.sync="innerDrawer">
 							<div>
-								<el-form :model="userInfoForm" ref="userInfoForm">
-									<el-form-item label="电话号码" :label-width="formLabelWidth">
+								<el-form :model="userInfoForm" ref="userInfoForm" :rules="rules">
+									<el-form-item label="电话号码" :label-width="formLabelWidth" prop="userTele">
 										<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
 									</el-form-item>
-									<el-form-item label="地址" :label-width="formLabelWidth">
+									<el-form-item label="地址" :label-width="formLabelWidth" prop="userLocation">
 										<el-input v-model="userInfoForm.userLocation" autocomplete="off"></el-input>
 									</el-form-item>
-									<el-form-item label="单位" :label-width="formLabelWidth">
+									<el-form-item label="单位" :label-width="formLabelWidth" prop="userRetailer">
 										<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
 									</el-form-item>
 								</el-form>
 								<div class="demo-drawer__footer">
-									<el-button round type="primary" @click="EditUserInfo">保存</el-button>
+									<el-button round type="primary" @click="EditUserInfo('userInfoForm')">保存</el-button>
 									<el-button round @click="innerDrawer = false">取 消</el-button>
 								</div>
 							</div>
@@ -138,6 +138,16 @@
 		new Vue({
 			el: '#app',
 			data: function() {
+				let validatePhone = (rule,value,callback)=>{
+					if (!value){
+						callback(new Error('手机号不能为空！'));
+					}
+					//使用正则表达式进行验证手机号码
+					if (!/^1[3456789]\d{9}$/.test(value)){
+						callback(new Error('手机号不正确！'));
+					}
+					callback();
+				}
 				return {
 					// src: '../pics/head.jpg',
 					drawer: false,
@@ -160,7 +170,19 @@
 						userLocation: '',
 						userRetailer: '',
 					},
-					formLabelWidth: '80px'
+					formLabelWidth: '80px',
+					rules: {
+						userTele: [
+							{validator: validatePhone,trigger: 'blur'}
+						],
+						userLocation: [
+							{required: true, message:'请输入地址',trigger: 'blur'},
+							{max:15,message: '最多输入15位字符',trigger:'blur'},
+						],
+						userRetailer: [
+							{required: true, message:'请输入单位',trigger: 'blur'}
+						]
+					}
 				}
 			},
 			created() {
@@ -210,22 +232,34 @@
 				},
 
 				//编辑个人信息
-				EditUserInfo() {
-					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
-						if(res.data){
-							this.$message({
-								type: 'success',
-								message: '修改成功!'
+				EditUserInfo(userInfoForm) {
+					this.$refs[userInfoForm].validate((valid)=>{
+						if(valid){
+							axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+								if(res.data){
+									this.$message({
+										type: 'success',
+										message: '修改成功!'
+									});
+									// this.$refs.editDrawer.closeDrawer();
+									this.get();
+									this.innerDrawer = false;
+									//this.userInfoForm = Object.assign({},row);
+								}else{
+									this.$message({
+										type: 'info',
+										message: '修改失败'
+									});
+								}
+								// this.$refs.userInfoForm.resetFields();
 							});
-							this.get();
-							this.innerDrawer = false;
-						}else{
-							this.$message({
-								type: 'info',
+						}else {
+							this.$message.error({
+								type: 'error',
 								message: '修改失败'
 							});
 						}
-					});
+					})
 				},
 
 				get() {
