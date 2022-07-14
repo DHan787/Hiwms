@@ -30,6 +30,7 @@
             </el-button>
 
             <el-drawer
+                    title="个人主页"
                     :visible.sync="drawer"
                     size="30%"
 			        background ="#f8fff7">
@@ -67,20 +68,20 @@
                             :before-close="close"
                             :visible.sync="innerDrawer">
 						<div>
-							<el-form :model="userInfoForm" :rules="userInfoRules"ref="userInfoForm">
-								<el-form-item label="电话号码" :label-width="formLabelWidth">
+							<el-form :model="userInfoForm" ref="editForm" :rules="rules">
+								<el-form-item label="电话号码" :label-width="formLabelWidth" prop="userTele">
 									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
 								</el-form-item>
-								<el-form-item label="地址" :label-width="formLabelWidth">
+								<el-form-item label="地址" :label-width="formLabelWidth" prop="userLocation">
 									<el-input v-model="userInfoForm.userLocation" autocomplete="off"></el-input>
 								</el-form-item>
-								<el-form-item label="单位" :label-width="formLabelWidth">
+								<el-form-item label="单位" :label-width="formLabelWidth" prop="userRetailer">
 									<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
 								</el-form-item>
 							</el-form>
 							<div class="demo-drawer__footer">
-								<el-button round type="primary" @click="EditUserInfo">保存</el-button>
-								<el-button round @click="innerDrawer = false">取消</el-button>
+								<el-button round type="primary" @click="EditUserInfo('editForm')">保存</el-button>
+								<el-button round @click="innerDrawer = false">取 消</el-button>
 							</div>
 						</div>
                     </el-drawer>
@@ -127,8 +128,8 @@
 										<i class="el-icon-s-home" ></i>
 										<span slot="title" >仓库管理</span>
 									</el-menu-item>
-									<el-menu-item index="3-3">
-										<i class="el-icon-goods"  @click="openUrl('../admin/goods.html')"></i>
+									<el-menu-item index="3-3" @click="openUrl('../admin/goods.html')">
+										<i class="el-icon-goods"  ></i>
 										<span slot="title">货物管理</span>
 									</el-menu-item>
 									<el-menu-item index="3-4" @click="openUrl('../admin/orders.html')">
@@ -165,16 +166,26 @@
 		new Vue({
 			el: '#app',
 			data: function() {
+				let validatePhone = (rule,value,callback)=>{
+					if (!value){
+						callback(new Error('手机号不能为空！'));
+					}
+					//使用正则表达式进行验证手机号码
+					if (!/^1[3456789]\d{9}$/.test(value)){
+						callback(new Error('手机号不正确！'));
+					}
+					callback();
+				}
 				return {
 					/* src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', */
-					drawer: false,
-					innerDrawer: false,
+                    drawer: false,
+                    innerDrawer: false,
 					userInfoForm: {
 						userTele: '',
 						userLocation: '',
 						userRetailer: '',
 					},
-					UserEditVisible: true,
+                    UserEditVisible: true,
 					editForm: [],
 					datalist: [],
 					FormData: {},
@@ -187,29 +198,23 @@
 					iframeUrl: './index.html',
 					fit: 'contain',
 					avatarURL: ' ../../assets/pics/logo_green.png',
-					src1: '../../assets/pics/logo_green.png',
+					src1:'../../assets/pics/logo_green.png',
 					formLabelWidth: '80px',
+					rules: {
+						userTele: [
+							{required: true, message:'请输入地址',trigger: 'blur'},
+							{validator: validatePhone,trigger: 'blur'}
+						],
+						userLocation: [
+							{required: true, message:'请输入地址',trigger: 'blur'},
+							{max:15,message: '最多输入15位字符',trigger:'blur'},
+						],
+						userRetailer: [
+							{required: true, message:'请输入单位',trigger: 'blur'}
+						]
+					}
 				}
 			},
-			// data() {
-			// 	return {
-			// 		userInfoForm:{},
-			// 		userInfoRules:{
-			// 			userTele: [
-			// 				{required: true, message: '请输入电话号码', trigger: 'blur'},
-			// 				{pattern:/^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/, message: '请输入手机号码或固定电话'}
-			// 			],
-			// 			userLocation: [
-			// 				{required: true, message: '请输入地址', trigger: 'blur'},
-			// 				{pattern: /[^\w\u4E00-\u9FA5]*$/, message: "只能输入中文、数字、英文"},
-			// 			],
-			// 			userRetailer: [
-			// 				{required: true, message: '请输入单位名称', trigger: 'blur'},
-			// 				{pattern: /[^\w\u4E00-\u9FA5]*$/, message: "只能输入中文、数字、英文"},
-			// 			]
-			// 		},
-			// 	}
-			// },
 			created() {
                 this.getLowWarnList();
 				this.getPersonalInfo(); //用户个人信息提醒
@@ -256,20 +261,27 @@
 
 
 				//编辑个人信息
-				EditUserInfo() {
-					axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
-						if(res.data){
-							this.$message({
-								type: 'success',
-								message: '修改成功!'
+				EditUserInfo(formName) {
+					this.$refs[formName].validate((valid)=>{
+						if(valid){
+							axios.post("http://localhost:8080/usersInfo/updateInfo",this.userInfoForm).then(res => {
+								if(res.data){
+									this.$message({
+										type: 'success',
+										message: '修改成功!'
+									});
+									this.get();
+									this.innerDrawer = false;
+								}else{
+									this.$message({
+										type: 'info',
+										message: '修改失败'
+									});
+								}
 							});
-							// this.$refs.editDrawer.closeDrawer();
-							this.get();
-							this.innerDrawer = false;
-							//this.userInfoForm = Object.assign({},row);
-						}else{
-							this.$message({
-								type: 'info',
+						}else {
+							this.$message.error({
+								type: 'error',
 								message: '修改失败'
 							});
 						}
