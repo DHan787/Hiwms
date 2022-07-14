@@ -114,7 +114,7 @@
 								</el-menu-item-group>
 							</el-submenu>
                         <el-menu-item index="3">
-                            <i class="el-icon-warning-outline"></i>
+                            <i class="el-icon-warning-outline" @click="logout"></i>
                             <span slot="title" @click="logout">退出登录</span>
                         </el-menu-item>
 
@@ -160,6 +160,7 @@
 						userLocation: '',
 						userRetailer: '',
 					},
+					formLabelWidth: '80px'
 				}
 			},
 			created() {

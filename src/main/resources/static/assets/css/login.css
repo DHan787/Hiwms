@@ -13,7 +13,7 @@
 	background-color: #0a450a;
 	color: #fff;
 	position: relative;
-	background-image: url("../pics/2.jpg");
+	/*background-image: url("../pics/2.jpg");*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -27,7 +27,7 @@
 
 .loginBody{
 	width: 280px;
-	height: 480px;
+	height: 380px;
 	position: absolute;
 	top: 0;
 	left: 0;
