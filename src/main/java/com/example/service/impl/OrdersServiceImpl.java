@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 
 
+/**
+ * @author ginger
+ */
 @Service
 public class OrdersServiceImpl extends ServiceImpl<OrdersDao,Orders> implements OrdersService {
 

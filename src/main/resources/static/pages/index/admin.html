@@ -11,10 +11,7 @@
 <div id="app">
     <el-container>
         <el-header style="height: 80px">
-            <!--					TODO: 假的，需要加token后续实现-->
-
         <!--logo-->
-
         <div class="head" style="float: left;">
 			<el-image :src="src1" class="ava">
 				<div slot="placeholder" class="image-slot">
@@ -26,7 +23,7 @@
 
         <!--头像-->
         <div class="avatar" style="float: right;">
-            <el-button @click="drawer=true;" circle >
+            <el-button @click="drawer = true" circle >
                 <el-avatar src="../../assets/pics/ava_green.png">
                 </el-avatar>
 
@@ -37,7 +34,18 @@
                     :visible.sync="drawer"
                     size="30%"
 			        background ="#f8fff7">
+				<div style=";
+							float: top;
+							height: 25%;
+							float: top">
+					<el-row class="demo-avatar demo-basic" style="margin-left: 43%;margin-top: 6%">
+						<div>
+							<el-avatar src="../../assets/pics/ava_green.png" :size="100"></el-avatar>
+						</div>
+					</el-row>
+				</div>
                 <div>
+
 					<div class="personal-info">
 						<div class="tele" style="margin-left: 15%">手机号：<div style="display: inline">{{dataForm.userTele}}</div></div>
 					</div>
@@ -246,6 +254,8 @@
 							})
 							.catch(_ => {});
 				},
+
+
 				//编辑个人信息
 				EditUserInfo(formName) {
 					this.$refs[formName].validate((valid)=>{

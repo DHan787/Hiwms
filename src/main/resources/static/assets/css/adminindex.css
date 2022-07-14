@@ -6,7 +6,6 @@
 .el-main {
 	background-color: #E9EEF3;
 	color: #333;
-	overflow-scrolling: auto;
 
 
 }
@@ -44,6 +43,7 @@
 
 .el-icon-s-help {
 	background-image: url("../pics/5.jpg");
+
 }
 
 .el-icon-view {
@@ -61,11 +61,9 @@
 .logo {
     width: 200px;
     line-height: 60px;
-    color: #fff;
     font-weight: bolder;
     padding-left: 50px;
     box-sizing: border-box;
-    color: #409EFF;
     display: inline-block;
 }
 .el-avatar el-avatar--circle{
@@ -203,8 +201,11 @@
 }
 
 .el-drawer.rtl {
-	background: #f8fff7;
+	/*background: linear-gradient(to bottom, #748992 0%,#748992 32%,#f8fff7 33%,#f8fff7 100%);*/
+	background-image: url("../pics/bg4.jpg");
 }
+
+
 .drawer_pwd {
 	top: 0;
 	right: 0;
@@ -212,9 +213,18 @@
 	left: 0;
 	overflow: hidden;
 	margin: 0;
+	;
 }
-.el-drawer__header {
+.el-drawer__header {;
 	color: #009e75;
-	font-size: 52px;
 	font-family: "Microsoft YaHei";
+}
+
+/*.square {
+	box-shadow: #a1a1a1 !important;
+}*/
+
+.personal-info {
+	font-family: "Microsoft YaHei";
+
 }

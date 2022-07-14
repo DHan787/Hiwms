@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * @author ymm
+ */
 @Slf4j
 @CrossOrigin
 @RestController
@@ -15,7 +18,11 @@ public class MsgsController {
     @Autowired
     private MsgsDao msgsDao;
 
-
+    /**
+     * 保存msg
+     * @param id orderId
+     * @return if success
+     */
     public boolean saveInMsg(int id) {
         Msgs msgs = new Msgs();
         msgs.setMsgsCont("有新的入库申请");
@@ -26,6 +33,11 @@ public class MsgsController {
         return ifSuccess;
     }
 
+    /**
+     * 保存msg
+     * @param id orderId
+     * @return if success
+     */
     public boolean saveOutMsg(int id) {
         Msgs msgs = new Msgs();
         msgs.setMsgsCont("有新的出库申请");
@@ -34,6 +46,11 @@ public class MsgsController {
         return msgsDao.insert(msgs) > 0;
     }
 
+    /**
+     * 待处理提醒
+     * @param id orderId
+     * @return if success
+     */
     public boolean saveOrdersMsg(int id) {
         Msgs msgs = new Msgs();
         msgs.setMsgsCont("有新的待处理操作");
@@ -41,7 +58,11 @@ public class MsgsController {
         msgs.setOrderId(id);
         return msgsDao.insert(msgs) > 0;
     }
-
+    /**
+     * 申请完成提醒
+     * @param id orderId
+     * @return if success
+     */
     public boolean saveApplyMsg(int id) {
         Msgs msgs = new Msgs();
         msgs.setMsgsCont("申请已完成");
@@ -50,6 +71,11 @@ public class MsgsController {
         return msgsDao.insert(msgs) > 0;
     }
 
+    /**
+     * 更新msg
+     * @param msgid id
+     * @return if success
+     */
     @PutMapping
     public boolean updatemsg(@RequestParam("msgid") Integer msgid) {
         return msgsDao.updatemsg(msgid) > 0;

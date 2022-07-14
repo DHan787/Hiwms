@@ -12,11 +12,27 @@ import lombok.Data;
 public class Warehouse {
 
     @TableId("warehouse_id")
+    /**
+     *仓库id
+     */
     private Integer warehouseId;
+    /**
+     *仓库名称
+     */
     private String warehouseName;
+    /**
+     * 仓库地址
+     */
     private String warehouseLocation;
+    /**
+     * 仓库类型
+     */
     private String warehouseType;
+    /**
+     *仓库大小
+     */
     private Integer warehouseSize;
+
     public Integer getWarehouseId() {
         return warehouseId;
     }

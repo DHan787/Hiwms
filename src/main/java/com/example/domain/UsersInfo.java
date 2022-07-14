@@ -13,13 +13,21 @@ import lombok.Data;
 public class UsersInfo{
     @TableId("users_info_id")
     private Long usersInfoId;
-//    用户电话号码
+    /**
+     *用户电话号码
+     */
     private Long userTele;
-//    用户地址
+    /**
+     *用户地址
+     */
     private String userLocation;
-//    用户商家名
+    /**
+     *用户商家名
+     */
     private String userRetailer;
-//    用户信息修改时间
+    /**
+     *用户信息修改时间
+     */
     private Long userAltTime;
 
     @Override
