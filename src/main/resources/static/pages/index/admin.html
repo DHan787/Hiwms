@@ -62,20 +62,27 @@
 
 
                     <el-drawer
-                            title="编辑个人信息"
                             :append-to-body="true"
                             :before-close="close"
                             :visible.sync="innerDrawer">
-						<div class="personal-info1">
+						<div class="title" align="center">编辑个人信息</div>
+						<div class="personal-info1" align="center">
 							<el-form :model="userInfoForm" ref="editForm" :rules="rules">
+								<el-form-item></el-form-item>
 								<el-form-item label="电话号码" :label-width="formLabelWidth" prop="userTele">
+									<el-col :span="20">
 									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
+									</el-col>
 								</el-form-item>
 								<el-form-item label="地址" :label-width="formLabelWidth" prop="userLocation">
+									<el-col :span="20">
 									<el-input v-model="userInfoForm.userLocation" autocomplete="off"></el-input>
+									</el-col>
 								</el-form-item>
 								<el-form-item label="单位" :label-width="formLabelWidth" prop="userRetailer">
+									<el-col :span="20">
 									<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
+									</el-col>
 								</el-form-item>
 							</el-form>
 							<div class="demo-drawer__footer" align="center">
