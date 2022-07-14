@@ -59,7 +59,9 @@
 								<div class="personal-info">
 									<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
 								</div>
-								<el-button @click="innerDrawer = true">编辑</el-button>
+								<div class="demo-drawer__footer" align="center">
+								<el-button round type="warning" plain @click="innerDrawer = true">编辑</el-button>
+								</div>
 								<el-drawer
 										title="编辑个人信息"
 										:append-to-body="true"
@@ -77,9 +79,9 @@
 												<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
 											</el-form-item>
 										</el-form>
-										<div class="demo-drawer__footer">
-											<el-button round type="primary" @click="EditUserInfo('userInfoForm')">保存</el-button>
-											<el-button round @click="innerDrawer = false">取 消</el-button>
+										<div class="demo-drawer__footer" align="center">
+											<el-button round type="warning" plain type="primary" @click="EditUserInfo('userInfoForm')">保存</el-button>
+											<el-button round type="warning" plain @click="innerDrawer = false">取 消</el-button>
 										</div>
 									</div>
 								</el-drawer>
@@ -281,7 +283,7 @@
 
 				logout() {
 					axios.request("http://localhost:8080/users/logout").then(res => {
-						window.location.href = ("../login.html")
+						window.location.href = ("/")
 					});
 				}
 

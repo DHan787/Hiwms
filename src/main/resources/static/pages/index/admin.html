@@ -30,7 +30,6 @@
             </el-button>
 
             <el-drawer
-                    title="个人主页"
                     :visible.sync="drawer"
                     size="30%"
 			        background ="#f8fff7">
@@ -57,9 +56,9 @@
 					<div class="personal-info">
 						<div class="retailer" style="margin-left: 15%">单位：<div style="display: inline">{{dataForm.userRetailer}}</div></div>
 					</div>
-
-					<el-button @click="innerDrawer = true">编辑信息</el-button>
-
+					<div class="demo-drawer__footer" align="center">
+					<el-button round type="success" plain @click="innerDrawer = true">编辑信息</el-button>
+					</div>
 
 
                     <el-drawer
@@ -79,9 +78,9 @@
 									<el-input v-model="userInfoForm.userRetailer" autocomplete="off"></el-input>
 								</el-form-item>
 							</el-form>
-							<div class="demo-drawer__footer">
-								<el-button round type="primary" @click="EditUserInfo('editForm')">保存</el-button>
-								<el-button round @click="innerDrawer = false">取 消</el-button>
+							<div class="demo-drawer__footer" align="center">
+								<el-button round type="success" plain @click="EditUserInfo('editForm')">保存</el-button>
+								<el-button round type="success" plain @click="innerDrawer = false">取 消</el-button>
 							</div>
 						</div>
                     </el-drawer>
@@ -304,7 +303,7 @@
 				},
 				logout() {
 					axios.request("http://localhost:8080/users/logout").then(res => {
-						window.location.href = ("../login.html")
+						window.location.href = ("/")
 					});
 				},
 				handleOpen(key, keyPath) {
