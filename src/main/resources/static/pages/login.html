@@ -5,11 +5,17 @@
     <title></title>
     <link rel="stylesheet" href="../assets/css/login.css"/>
     <link rel="stylesheet" href="../assets/css/element-ui/index.css"/>
+    <script src="https://gw.alipayobjects.com/os/lib/lottie-web/5.5.6/build/player/lottie.min.js"></script>
     <link rel="shortcut icon" href="../assets/pics/logo2.png">
 </head>
 <body>
 <div id="app" class="outerDiv">
     <div class="login">
+        <div class="data" align="center" style="width: 100%;height: 90%"  >
+            <div id="container"></div>
+            <div id="status"></div>
+            <div id="loop"></div>
+        </div>
         <div class="loginBody" align="center">
             <h4>登录</h4>
 
@@ -238,5 +244,14 @@
     }
 
     new Verification()
+
+    var anim = lottie.loadAnimation({
+        container: document.getElementById("container"), // 容器
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        // animationData: {}, //如果使用的是JSON
+        path: "../../assets/pics/Dashboard Detailed Green.lottie.json" // the path to the animation json
+    });
 </script>
 </html>

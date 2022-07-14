@@ -42,7 +42,7 @@
 								</el-button>
 								<el-button type="primary" plain style="margin:15px 20px;" @click="exportExcel()"
 									icon="el-icon-download">导出excel</el-button>
-								<el-button @click="clearFilter" style="margin-left: 400px;">清除所有过滤器</el-button>
+								<el-button @click="clearFilter" style="margin-left: 400px;" type="primary" plain>清除所有过滤器</el-button>
 							</el-row>
 						</div>
 
@@ -53,7 +53,9 @@
 								style="width: 100%;"  :row-class-name="tableRowClassName" >
 								<el-table-column prop="orderId" label="订单编号" width="80">
 								</el-table-column>
-								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType">
+								<el-table-column prop="orderType" label="订单类型" width="100" :formatter="formatType" column-key="orderType"
+												 :filters="[{text: '入库', value: 1},{text: '出库', value: 2}]"
+												 :filter-method="filterHandler">
 								</el-table-column>
 								<el-table-column prop="orderStartTime" label="订单开始时间">
 								</el-table-column>
@@ -162,6 +164,12 @@
 					currentPage: 1, // 当前页码
 					total: 20, // 总条数
 					pageSize: 5 // 每页的数据条数
+					// listQuery: {
+					// 	curPage: 1,
+					// 	pageSize: 5,
+					// 	page: 1,
+					// 	orderStatus: undefined,
+					// },
 				}
 			},
 
@@ -344,6 +352,12 @@
 					const property = column['property'];
 					return row[property] === value;
 				},
+				// filterChange(filters){
+				// 	if(filters.orderStatus){
+				// 	this.listQuery.orderStatus = filters.orderStatus[0] == undefined ? '':filters.orderStatus[0]
+				// 	}
+				// 	this.getAll(this.listQuery); // 通过接口获取数据的方法
+				// },
 				clearFilter() {
 					this.$refs.filterTable.clearFilter();
 				}

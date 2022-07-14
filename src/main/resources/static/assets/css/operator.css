@@ -6,7 +6,7 @@
 .el-main {
     background-color: #E9EEF3;
     color: #333;
-    overflow-scrolling: auto;
+
 }
 
 .el-menu-vertical-demo el-menu{
@@ -17,6 +17,10 @@
 .el-menu-item-group__title{
     background-image: url("../pics/7.jpg");
 
+}
+.el-drawer.rtl {
+    /*background: linear-gradient(to bottom, #748992 0%,#748992 32%,#f8fff7 33%,#f8fff7 100%);*/
+    background-image: url("../pics/bg5.jpg");
 }
 
 

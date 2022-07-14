@@ -7,6 +7,9 @@
 		<script src="../../assets/js/echarts.js"></script>
 		<script src="https://gw.alipayobjects.com/os/lib/lottie-web/5.5.6/build/player/lottie.min.js"></script>
 		<title></title>
+		<style>
+			html{overflow: hidden}
+		</style>
 	</head>
 	<body>
 		<div id="app">
@@ -74,9 +77,7 @@
 													</div>
 												</el-image>
 											</a></el-tooltip>
-									</div>
-									<!--订单-->
-									<div>
+
 										<el-tooltip content="订单" placement="bottom"><a href="../admin/orders.html">
 												<el-image :src="src3" class="orders">
 													<div slot="placeholder" class="image-slot">
@@ -87,8 +88,7 @@
 										</el-tooltip>
 
 										<!--商品-->
-									</div>
-									<div>
+
 										<el-tooltip content="商品" placement="bottom"><a href="../admin/goods.html">
 												<el-image :src="src4" class="goods">
 													<div slot="placeholder" class="image-slot">
@@ -98,9 +98,7 @@
 												</el-image>
 											</a>
 										</el-tooltip>
-									</div>
-									<!--仓库-->
-									<div>
+
 										<el-tooltip content="仓库" placement="bottom"><a href="../admin/warehouse.html">
 												<el-image :src="src5" class="warehouse">
 													<div slot="placeholder" class="image-slot">
@@ -138,13 +136,13 @@
 								<!-- </div>-->
 							</el-card>
 						</div>
-						<div class="right">
-							<el-image :src="src9" class="pics2">
-								<div slot="placeholder" class="image-slot">
-									加载中<span class="dot">...</span>
-								</div>
-							</el-image>
-						</div>
+<!--						<div class="right">-->
+<!--							<el-image :src="src9" class="pics2">-->
+<!--								<div slot="placeholder" class="image-slot">-->
+<!--									加载中<span class="dot">...</span>-->
+<!--								</div>-->
+<!--							</el-image>-->
+<!--						</div>-->
 
 					</div>
 					<div class="down">

@@ -53,7 +53,13 @@
                                 <el-input v-model="form.warehouseLocation" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="类别" :label-width="formLabelWidth" prop="warehouseType">
-                                <el-input v-model="form.warehouseType" autocomplete="off"></el-input>
+<!--                                <el-input v-model="form.warehouseType" autocomplete="off"></el-input>-->
+                                <el-select v-model="form.warehouseType" placeholder="请选择仓库类型">
+                                    <el-option label="普通" value="1"></el-option>
+                                    <el-option label="冷藏" value="2"></el-option>
+                                    <el-option label="冷冻" value="3"></el-option>
+                                    <el-option label="恒温" value="4"></el-option>
+                                </el-select>
                             </el-form-item>
                             <el-form-item label="大小" :label-width="formLabelWidth" prop="warehouseSize">
                                 <el-input v-model="form.warehouseSize" autocomplete="off"></el-input>
@@ -70,7 +76,7 @@
                 </div>
 
                 <el-card>
-                    <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" 
+                    <el-table ref="filterTable" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                               style="width: 100%; ">
                         <el-table-column prop="warehouseId" label="仓库编号" width="180">
                         </el-table-column>
@@ -78,7 +84,10 @@
                         </el-table-column>
                         <el-table-column prop="warehouseLocation" label="仓库位置">
                         </el-table-column>
-                        <el-table-column prop="warehouseType" label="仓库类别">
+                        <el-table-column prop="warehouseType" label="仓库类别" :formatter="formatType" column-key="warehouseType"
+                                         :filters="[{text: '普通', value: 1}, {text: '冷藏', value: 2}, {text: '冷冻', value: 3},
+												 {text: '恒温', value: 4}]"
+                                         :filter-method="filterHandler">
                         </el-table-column>
                         <el-table-column prop="warehouseSize" label="仓库大小">
                         </el-table-column>
@@ -240,6 +249,28 @@
                     this.$refs.form.resetFields();
                 })
             },
+
+            formatType(row) { //二次渲染表格
+                switch (row.warehouseType) {
+                    case "1":
+                        return "普通"
+                        break
+                    case "2":
+                        return "冷藏"
+                        break
+                    case "3":
+                        return "冷冻"
+                        break
+                    case "4":
+                        return "恒温"
+                        break
+                    default:
+                        return "未选择"
+                        break
+                }
+            },
+
+
             //每页条数改变时触发 选择一页显示多少行
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -250,6 +281,16 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
                 this.currentPage = val;
+            },
+
+
+            //筛选订单类型
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] === value;
+            },
+            clearFilter() {
+                this.$refs.filterTable.clearFilter();
             }
         }
     })

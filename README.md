@@ -205,3 +205,4 @@
 * 设置主页 hj
 * 修改主页侧边栏收起后无法啊点击跳转的bug hxy
 * UsersDetailController 的用户角色判断完善 hj
+* 其他属性的筛选 暂时改了登陆注册背景 zls
