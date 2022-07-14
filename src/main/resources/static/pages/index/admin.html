@@ -66,7 +66,7 @@
                             :append-to-body="true"
                             :before-close="close"
                             :visible.sync="innerDrawer">
-						<div>
+						<div class="personal-info1">
 							<el-form :model="userInfoForm" ref="editForm" :rules="rules">
 								<el-form-item label="电话号码" :label-width="formLabelWidth" prop="userTele">
 									<el-input v-model="userInfoForm.userTele" autocomplete= "off"></el-input>
