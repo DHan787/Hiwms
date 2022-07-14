@@ -11,12 +11,21 @@ import lombok.Data;
 @Data
 public class StockIn {
     @TableId("stock_id")
-//    库存id
+    /**
+     *库存id
+     */
     private Integer stockId;
-//    货品名称
+    /**
+     *货品名称
+     */
+
     private String goodsName;
-//    货品数量
+    /**
+     *货品数量
+     */
     private Integer goodsNumber;
-//    所属订单id
+    /**
+     *所属订单id
+     */
     private Integer orderId;
 }

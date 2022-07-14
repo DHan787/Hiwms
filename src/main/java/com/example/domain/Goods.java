@@ -14,11 +14,30 @@ import lombok.ToString;
 public class Goods {
 
     @TableId("goods_id")
+
+    /**
+     * 商品名称
+     */
     private Integer goodsId;
+    /**
+     * 商品名称
+     */
     private String goodsName;
+    /**
+     * 商品类型
+     */
     private String goodsType;
+    /**
+     * 商品尺寸
+     */
     private String goodsSize;
+    /**
+     * 商品价值
+     */
     private String goodsValue;
+    /**
+     * 商品数量
+     */
     private Integer goodsNumber;
 
     public Integer getGoodsId() {

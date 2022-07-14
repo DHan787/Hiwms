@@ -65,7 +65,7 @@ public class UsersInfoController {
 
             long timeMillis = System.currentTimeMillis();
             usersInfo.setUserAltTime(timeMillis);
-            usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+            usersInfo.setUsersInfoId(idGenerator.userInfoIdGenerator(userId, usersInfo.getUserAltTime()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class UsersInfoController {
     public boolean updateUsersInfo(@RequestParam Integer userId, @RequestParam Long usersInfoAltTime, @RequestBody UsersInfo usersInfo) {
         //得到UserInfoId
         usersInfo.setUserAltTime(usersInfoAltTime);
-        usersInfo.setUsersInfoId(idGenerator.UserInfoIDGenerator(userId, usersInfo.getUserAltTime()));
+        usersInfo.setUsersInfoId(idGenerator.userInfoIdGenerator(userId, usersInfo.getUserAltTime()));
         return usersInfoService.updateById(usersInfo);
     }
 
@@ -100,7 +100,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = usersInfoService.list();
         for (UsersInfo value : usersInfoList
         ) {
-            if (value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId, value.getUserAltTime())) {
+            if (value.getUsersInfoId() == idGenerator.userInfoIdGenerator(userId, value.getUserAltTime())) {
                 id = value.getUsersInfoId();
             }
         }
@@ -116,9 +116,9 @@ public class UsersInfoController {
     public boolean intiUserInfo(@RequestParam Integer userId,Integer role) {
         long timeMills = System.currentTimeMillis();
         if(role.equals(OPERATOR_ROLE_NUMBER)) {
-            return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills), timeMills,"操作员") > 0;
+            return usersInfoDao.init(idGenerator.userInfoIdGenerator(userId, timeMills), timeMills,"操作员") > 0;
         }else{
-            return usersInfoDao.init(idGenerator.UserInfoIDGenerator(userId, timeMills), timeMills,"货物员") > 0;
+            return usersInfoDao.init(idGenerator.userInfoIdGenerator(userId, timeMills), timeMills,"货物员") > 0;
         }
     }
 
@@ -135,7 +135,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList
              ) {
-            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.userInfoIdGenerator(userId,value.getUserAltTime())){
                 infoId = value.getUsersInfoId();
                 return this.usersInfoService.getById(infoId);
             }
@@ -154,7 +154,7 @@ public class UsersInfoController {
         int userId = Integer.parseInt(id.toString());
         List<UsersInfo> usersInfoList = this.getAll();
         for (UsersInfo value: usersInfoList) {
-            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.userInfoIdGenerator(userId,value.getUserAltTime())){
                 return value.getUserLocation() == null;
             }
         }
@@ -175,7 +175,7 @@ public class UsersInfoController {
         List<UsersInfo> usersInfoList = this.getAll();
 
         for (UsersInfo value: usersInfoList) {
-            if(value.getUsersInfoId() == idGenerator.UserInfoIDGenerator(userId,value.getUserAltTime())){
+            if(value.getUsersInfoId() == idGenerator.userInfoIdGenerator(userId,value.getUserAltTime())){
                 usersInfo.setUserAltTime(value.getUserAltTime());
                 usersInfo.setUsersInfoId(value.getUsersInfoId());
             }

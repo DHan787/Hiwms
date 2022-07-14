@@ -6,6 +6,9 @@ import com.example.domain.Warehouse;
 import com.example.service.WarehouseService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author ginger
+ */
 @Service
 public class WarehouseServiceImpl extends ServiceImpl<WarehouseDao, Warehouse> implements WarehouseService {
 }
