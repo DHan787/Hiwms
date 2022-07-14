@@ -7,7 +7,6 @@ import com.example.service.UsersService;
 import com.example.utils.EncryptUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -162,10 +161,11 @@ public class UsersController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Integer role = users.getUserRole();
         String name = users.getUserName();
         boolean ifSuccess = usersService.save(users);
         Integer id = usersDao.selectUserByName(name).getUserId();
-        ifSuccess = ifSuccess && usersInfoController.intiUserInfo(id);
+        ifSuccess = ifSuccess && usersInfoController.intiUserInfo(id,role);
         return ifSuccess;
     }
 
