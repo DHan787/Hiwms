@@ -90,7 +90,7 @@
 								</el-card>
 
 							</div>
-							<div class="report">
+							<div class="report" >
 								<el-card class="box-card4">
 									<div>
 										<el-image :src="src8" class="pics">
@@ -103,7 +103,7 @@
 										</el-badge>
 									</div>
 									<div>
-										<div id="msgs" v-if="msgsfig" v-for="ms in msgs">
+										<div id="msgs" v-if="msgsfig" v-for="ms in msgs" style="width: 140%;">
 											<el-card style="margin: 15px;">
 												<p class="title1-2-content">新通知: 你的申请{{ms.orderId}}已完成</p>
 												<el-button type="primary" plain @click="msgtu(ms.msgsId)" size="small"
