@@ -251,7 +251,7 @@
 
 
 				getOperatorName() {
-					axios.get("http://localhost:8080/users/getByRole?userRole=3").then(res => {
+					axios.get("http://localhost:8080/users/getByRole?userRole=2").then(res => {
 						//console.log("res:",res);
 						this.options = res.data;
 					}); //仅获取操作员
